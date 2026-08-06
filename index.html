@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JinjaGames — Game Studio from Ankara</title>
+<meta name="description" content="JinjaGames is an independent game studio from Ankara, Turkey. Founded by Eren Oğur. Making games for PC and mobile." />
+<meta property="og:title" content="JinjaGames" />
+<meta property="og:description" content="Independent game studio from Ankara. Making games for PC and mobile." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   JinjaGames — orange & white, bold, playful, motion-first
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --o:#FF6A1F;          /* signature orange */
+  --o2:#FF9A3D;         /* light orange */
+  --o3:#FFD9C2;         /* tint */
+  --ink:#171310;        /* near-black warm */
+  --ink2:#4A423C;       /* body text */
+  --ink3:#8C8078;       /* muted */
+  --bg:#FFFFFF;
+  --bg2:#FFF7F2;        /* warm off-white */
+  --line:#F0E4DA;
+  --r:18px;
+  --max:1180px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{line-height:1.06;letter-spacing:-.03em;margin:0}
+.grad{background:linear-gradient(100deg,var(--o),var(--o2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ── floating blobs ── */
+.blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
+.b1{width:520px;height:520px;background:#FFCBA8;top:-160px;left:-140px;animation:float1 18s ease-in-out infinite}
+.b2{width:440px;height:440px;background:#FFE1B8;top:22%;right:-160px;animation:float2 22s ease-in-out infinite}
+.b3{width:380px;height:380px;background:#FFD9C2;bottom:6%;left:8%;animation:float1 26s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,50px) scale(1.12)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,60px) scale(1.08)}}
+
+header,main,footer{position:relative;z-index:2}
+
+/* ── nav ── */
+nav{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;max-width:var(--max);margin:0 auto;
+  backdrop-filter:blur(14px);background:rgba(255,255,255,.72);
+  border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s
+}
+nav.stuck{border-color:var(--line);box-shadow:0 6px 30px rgba(23,19,16,.05)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:21px;letter-spacing:-.02em}
+.mark{
+  width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:21px;
+  background:linear-gradient(135deg,var(--o),var(--o2));box-shadow:0 8px 22px rgba(255,106,31,.34);
+  transition:transform .5s var(--ease)
+}
+.brand:hover .mark{transform:rotate(-12deg) scale(1.08)}
+.navlinks{display:flex;gap:8px;align-items:center}
+.navlinks a{
+  position:relative;padding:9px 15px;border-radius:10px;font-size:14.5px;font-weight:600;color:var(--ink2);
+  transition:color .2s,background .2s
+}
+.navlinks a:hover{color:var(--o);background:var(--bg2)}
+.navlinks .cta-sm{background:var(--ink);color:#fff}
+.navlinks .cta-sm:hover{background:var(--o);color:#fff}
+@media(max-width:760px){.navlinks a:not(.cta-sm){display:none}}
+
+/* ── buttons ── */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:14px;
+  font-weight:800;font-size:15.5px;border:2px solid transparent;cursor:pointer;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s,color .2s
+}
+.btn.p{background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;box-shadow:0 10px 30px rgba(255,106,31,.32)}
+.btn.p:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(255,106,31,.42)}
+.btn.g{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn.g:hover{transform:translateY(-4px);border-color:var(--o);color:var(--o)}
+.btn .arw{transition:transform .3s var(--ease)}
+.btn:hover .arw{transform:translateX(5px)}
+
+/* ── hero ── */
+.hero{padding:86px 0 56px;text-align:center;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--o);background:#fff;border:2px solid var(--o3);border-radius:999px;padding:8px 18px;margin-bottom:26px;
+  animation:pop .8s var(--ease) both
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--o);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+h1{font-size:clamp(44px,8.4vw,92px);font-weight:900;margin-bottom:22px}
+h1 .l{display:block;opacity:0;animation:rise .9s var(--ease) forwards}
+h1 .l:nth-child(1){animation-delay:.05s}
+h1 .l:nth-child(2){animation-delay:.18s}
+@keyframes rise{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+.lead{max-width:640px;margin:0 auto 34px;color:var(--ink2);font-size:clamp(17px,2.3vw,21px);animation:rise .9s .3s var(--ease) both}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:rise .9s .42s var(--ease) both}
+
+/* ── marquee ── */
+.marquee{margin:64px 0 0;padding:18px 0;background:var(--ink);overflow:hidden;transform:rotate(-1.2deg);width:106%;margin-left:-3%}
+.mtrack{display:flex;gap:44px;width:max-content;animation:slide 26s linear infinite}
+.mtrack span{color:#fff;font-weight:900;font-size:22px;letter-spacing:-.02em;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.mtrack span::after{content:"◆";color:var(--o);font-size:15px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── sections ── */
+section{padding:92px 0;position:relative}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--o);margin-bottom:14px}
+h2{font-size:clamp(34px,5.4vw,58px);font-weight:900;margin-bottom:18px}
+.sub{color:var(--ink2);font-size:18px;max-width:600px}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ── featured game ── */
+.game{
+  background:var(--bg2);border:2px solid var(--line);border-radius:30px;overflow:hidden;
+  transition:border-color .35s,box-shadow .35s,transform .35s var(--ease)
+}
+.game:hover{border-color:var(--o3);box-shadow:0 30px 70px rgba(255,106,31,.14);transform:translateY(-5px)}
+.video{
+  position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#2A211C,#171310);
+  display:grid;place-items:center;overflow:hidden;cursor:pointer
+}
+.video::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(255,106,31,.32),transparent 70%);
+  animation:glow 5s ease-in-out infinite
+}
+@keyframes glow{0%,100%{opacity:.55}50%{opacity:1}}
+.play{
+  position:relative;width:86px;height:86px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--o),var(--o2));box-shadow:0 12px 40px rgba(255,106,31,.5);
+  transition:transform .35s var(--ease)
+}
+.video:hover .play{transform:scale(1.13)}
+.play::after{content:"";border-left:24px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:6px}
+.play-ring{position:absolute;inset:-16px;border:2px solid rgba(255,106,31,.45);border-radius:50%;animation:ring 2.6s ease-out infinite}
+@keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.4);opacity:0}}
+.vlabel{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.62);font-size:13.5px;font-weight:700;letter-spacing:.04em}
+.ginfo{padding:38px}
+@media(min-width:900px){.ginfo{padding:46px 52px}}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--o);background:#fff;border:2px solid var(--o3);border-radius:999px;padding:7px 16px;margin-bottom:18px}
+.game h3{font-size:clamp(30px,4.4vw,46px);font-weight:900;margin-bottom:14px}
+.game p{color:var(--ink2);font-size:17px;max-width:660px;margin:0 0 22px}
+.tags{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
+.tag{font-size:13px;font-weight:700;color:var(--ink2);background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:7px 13px;transition:border-color .2s,color .2s,transform .2s}
+.tag:hover{border-color:var(--o);color:var(--o);transform:translateY(-2px)}
+
+/* ── upcoming cards ── */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:26px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+.card{
+  background:#fff;border:2px solid var(--line);border-radius:22px;padding:32px;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease),border-color .3s,box-shadow .3s
+}
+.card:hover{transform:translateY(-6px);border-color:var(--o3);box-shadow:0 22px 50px rgba(23,19,16,.07)}
+.card .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:27px;background:linear-gradient(135deg,#FFF1E8,#FFE3D0);margin-bottom:18px;transition:transform .4s var(--ease)}
+.card:hover .ic{transform:rotate(-9deg) scale(1.07)}
+.card h4{font-size:21px;font-weight:900;margin-bottom:7px}
+.card p{color:var(--ink3);font-size:15px;margin:0}
+
+/* ── studio / stats ── */
+.studio{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:880px){.studio{grid-template-columns:1fr;gap:34px}}
+.founder{
+  background:linear-gradient(135deg,var(--o),var(--o2));border-radius:28px;padding:44px;color:#fff;
+  box-shadow:0 26px 60px rgba(255,106,31,.28);position:relative;overflow:hidden
+}
+.founder::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.14);top:-70px;right:-70px}
+.founder .role{font-size:12.5px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:10px}
+.founder .name{font-size:38px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
+.founder .loc{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:700;background:rgba(255,255,255,.2);border-radius:999px;padding:8px 16px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.stat{background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 24px;flex:1;min-width:130px}
+.stat .n{font-size:32px;font-weight:900;color:var(--o);letter-spacing:-.03em;line-height:1}
+.stat .t{font-size:13.5px;color:var(--ink3);font-weight:700;margin-top:5px}
+
+/* ── platforms ── */
+.plats{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.plat{
+  display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;
+  padding:17px 24px;font-weight:800;font-size:16px;transition:transform .3s var(--ease),border-color .3s
+}
+.plat:hover{transform:translateY(-4px);border-color:var(--o)}
+.plat em{font-style:normal;color:var(--ink3);font-weight:600;font-size:13.5px}
+
+/* ── contact ── */
+.contact{
+  background:var(--ink);border-radius:32px;padding:64px 44px;text-align:center;color:#fff;position:relative;overflow:hidden
+}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 50% 0%,rgba(255,106,31,.35),transparent 65%)}
+.contact>*{position:relative}
+.contact h2{color:#fff;margin-bottom:14px}
+.contact p{color:rgba(255,255,255,.72);font-size:18px;margin:0 0 30px}
+.mailbtn{
+  display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--ink);font-weight:900;font-size:17px;
+  padding:17px 30px;border-radius:15px;transition:transform .3s var(--ease),box-shadow .3s
+}
+.mailbtn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 44px rgba(255,106,31,.35)}
+
+/* ── footer ── */
+footer{border-top:2px solid var(--line);padding:44px 0;margin-top:40px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.copy{color:var(--ink3);font-size:14px}
+.fl{display:flex;gap:22px}
+.fl a{color:var(--ink3);font-size:14px;font-weight:600;transition:color .2s}
+.fl a:hover{color:var(--o)}
+</style>
+</head>
+<body>
+<div class="blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<header>
+  <nav id="nav">
+    <a class="brand" href="#top"><span class="mark">J</span>JinjaGames</a>
+    <div class="navlinks">
+      <a href="#games">Games</a>
+      <a href="#studio">Studio</a>
+      <a href="#platforms">Platforms</a>
+      <a class="cta-sm" href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- ══ HERO ══ -->
+  <div class="wrap">
+    <div class="hero">
+      <span class="pill"><span class="dot"></span>Independent Game Studio · Ankara</span>
+      <h1><span class="l">We make games</span><span class="l grad">worth mastering.</span></h1>
+      <p class="lead">JinjaGames is an independent studio from Ankara, Turkey — building deep, hand-crafted games for <strong>PC</strong> and <strong>mobile</strong>.</p>
+      <div class="cta">
+        <a class="btn p" href="#games">See our games <span class="arw">→</span></a>
+        <a class="btn g" href="#studio">About the studio</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div class="mtrack">
+      <span>PC &amp; MOBILE<span></span></span><span>MADE IN ANKARA</span><span>INDIE STUDIO</span><span>DEEP SYSTEMS</span>
+      <span>PC &amp; MOBILE</span><span>MADE IN ANKARA</span><span>INDIE STUDIO</span><span>DEEP SYSTEMS</span>
+    </div>
+  </div>
+
+  <!-- ══ GAMES ══ -->
+  <section id="games">
+    <div class="wrap">
+      <div class="rv">
+        <span class="eyebrow">Our games</span>
+        <h2>Now in the <span class="grad">workshop</span></h2>
+        <p class="sub" style="margin-bottom:40px">One title in the spotlight, more on the way.</p>
+      </div>
+
+      <div class="game rv">
+        <!-- Tanıtım videosu buraya gelecek: aşağıdaki .video bloğunu
+             <video src="trailer.mp4" controls poster="poster.jpg"></video> ile değiştir. -->
+        <div class="video" id="video">
+          <span class="play-ring"></span>
+          <div class="play"></div>
+          <div class="vlabel">Trailer coming soon</div>
+        </div>
+        <div class="ginfo">
+          <span class="chip">◷ Coming soon to Steam</span>
+          <h3>Cyber Academy</h3>
+          <p>Learn to think like a hacker — and defend like a pro. A cybersecurity game built on real concepts: hands-on puzzles, a living sandbox, attack &amp; defense chains, and an economy with honest rules. No fake terminals, no hand-holding.</p>
+          <div class="tags">
+            <span class="tag">Simulation</span><span class="tag">Strategy</span><span class="tag">Hacking</span>
+            <span class="tag">Educational</span><span class="tag">Singleplayer</span><span class="tag">Online PvP</span>
+          </div>
+          <div style="display:flex;gap:13px;flex-wrap:wrap">
+            <a class="btn p" href="#" id="wishlist">Wishlist on Steam <span class="arw">→</span></a>
+            <a class="btn g" href="#contact">Press kit</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card rv">
+          <div class="ic">📱</div>
+          <h4>Untitled Mobile</h4>
+          <p>A new mobile title in early development.</p>
+        </div>
+        <div class="card rv">
+          <div class="ic">✨</div>
+          <h4>More coming</h4>
+          <p>New worlds are being built. Stay tuned.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STUDIO ══ -->
+  <section id="studio">
+    <div class="wrap">
+      <div class="studio">
+        <div class="rv">
+          <span class="eyebrow">The studio</span>
+          <h2>Small team.<br><span class="grad">Big ambition.</span></h2>
+          <p class="sub">JinjaGames is an independent game studio based in Ankara, Turkey. We believe games should respect the player: real systems, honest rules, and depth you can actually master. Every title is built here, by hand, from the first line of code to the last pixel.</p>
+          <div class="stats">
+            <div class="stat"><div class="n" data-c="1">0</div><div class="t">Studio</div></div>
+            <div class="stat"><div class="n" data-c="2">0</div><div class="t">Platforms</div></div>
+            <div class="stat"><div class="n" data-c="25">0</div><div class="t">Modules built</div></div>
+          </div>
+        </div>
+        <div class="founder rv">
+          <div class="role">Founder &amp; Developer</div>
+          <div class="name">Eren Oğur</div>
+          <p style="opacity:.92;margin:0 0 22px;font-size:16px">Sole developer and founder of JinjaGames — designing, coding and shipping every title.</p>
+          <span class="loc">📍 Ankara, Türkiye</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PLATFORMS ══ -->
+  <section id="platforms">
+    <div class="wrap rv">
+      <span class="eyebrow">Where to play</span>
+      <h2>PC &amp; Mobile</h2>
+      <div class="plats">
+        <div class="plat">🖥️ PC <em>· Steam</em></div>
+        <div class="plat">🤖 Android <em>· Google Play</em></div>
+        <div class="plat">🍎 iOS <em>· App Store</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact rv">
+        <span class="eyebrow" style="color:var(--o2)">Say hello</span>
+        <h2>Let's talk.</h2>
+        <p>Business, press or support — we read every message.</p>
+        <a class="mailbtn" href="mailto:jinjagamesofficial@gmail.com">✉️ jinjagamesofficial@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" style="font-size:18px"><span class="mark" style="width:32px;height:32px;font-size:17px;border-radius:10px">J</span>JinjaGames</a>
+      <div class="fl">
+        <a href="#games">Games</a><a href="#studio">Studio</a><a href="#contact">Contact</a>
+      </div>
+      <div class="copy">© <span id="yr"></span> JinjaGames · Ankara, Türkiye</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* sticky nav shadow */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 12));
+
+/* scroll reveal */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .14 });
+document.querySelectorAll('.rv').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 90 + 'ms';
+  io.observe(el);
+});
+
+/* count-up stats */
+const co = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = +el.dataset.c;
+  let n = 0;
+  const step = () => { n += Math.max(1, target / 26);
+    if (n >= target) { el.textContent = target; return; }
+    el.textContent = Math.floor(n); requestAnimationFrame(step); };
+  step(); co.unobserve(el);
+}), { threshold: .5 });
+document.querySelectorAll('[data-c]').forEach(el => co.observe(el));
+
+/* video placeholder note */
+document.getElementById('video').addEventListener('click', () => {
+  alert('Tanıtım videosu yakında eklenecek.');
+});
+</script>
+</body>
+</html>
