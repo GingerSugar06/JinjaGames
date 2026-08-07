@@ -149,12 +149,17 @@ h2{font-size:clamp(32px,5.2vw,52px);font-weight:900;margin-bottom:16px;line-heig
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(6%,4%)}}
 .stage .glow{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,rgba(var(--sh),.26),transparent 70%);animation:pglow 5s ease-in-out infinite}
 @keyframes pglow{0%,100%{opacity:.5}50%{opacity:.95}}
-.play{position:relative;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--o),var(--o2));box-shadow:0 12px 36px rgba(var(--sh),.45);transition:transform .35s var(--ease)}
+.stagevid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.stage .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,18,.12),rgba(20,16,18,.55));z-index:1}
+.play{position:relative;z-index:2;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--o),var(--o2));box-shadow:0 12px 36px rgba(var(--sh),.45);transition:transform .35s var(--ease)}
 .stage:hover .play{transform:scale(1.1)}
 .play::after{content:"";border-left:22px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px}
 .pr{position:absolute;inset:-16px;border:2px solid rgba(var(--sh),.4);border-radius:50%;animation:ring 2.6s ease-out infinite}
 @keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.4);opacity:0}}
-.vlabel{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:rgba(255,255,255,.6);font-size:13px;font-weight:700}
+.vlabel{position:absolute;z-index:2;bottom:16px;left:0;right:0;text-align:center;color:rgba(255,255,255,.75);font-size:13px;font-weight:700}
+.gtitle{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.glogo{width:52px;height:52px;flex-shrink:0;border-radius:14px;background:var(--ink);padding:7px;object-fit:contain;box-shadow:0 8px 20px rgba(36,27,26,.18)}
+.gtitle h3{margin:0}
 .ginfo{padding:36px}
 @media(min-width:900px){.ginfo{padding:44px 50px}}
 .chip{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--o);background:var(--bg2);border:2px solid var(--o3);border-radius:999px;padding:7px 15px;margin-bottom:16px}
@@ -312,12 +317,14 @@ footer{border-top:2px solid var(--line);padding:36px 0}
       </div>
       <div class="game rv">
         <a href="cyberacademy/index.html" class="stage" aria-label="Cyber Academy">
+          <video class="stagevid" src="trailer.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="scrim"></div>
           <div class="glow"></div><span class="pr"></span><div class="play"></div>
-          <div class="vlabel"><span class="en i">Trailer coming soon</span><span class="tr i">Fragman yakında</span></div>
+          <div class="vlabel"><span class="en i">Watch on the game page</span><span class="tr i">Oyun sayfasında izle</span></div>
         </a>
         <div class="ginfo">
           <span class="chip"><span class="en i">Coming soon to Steam</span><span class="tr i">Steam'de yakında</span></span>
-          <h3>Cyber Academy</h3>
+          <div class="gtitle"><img class="glogo" src="app_icon.png" alt="Cyber Academy"><h3>Cyber Academy</h3></div>
           <div class="two">
             <div class="mini">
               <h4><span class="en i">The academy</span><span class="tr i">Akademi</span></h4>
@@ -455,7 +462,9 @@ function setLang(l){
   try{localStorage.setItem('jg_lang',l);}catch(e){}
 }
 try{const sv=localStorage.getItem('jg_lang');if(sv)setLang(sv);}catch(e){}
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('intro').classList.add('hide');document.getElementById('main').classList.add('show');},1900);});
+/* Girişi HER koşulda kapat (load takılsa/bir kaynak asılsa bile sayfa
+   tıklanabilir kalsın — aksi hâlde intro katmanı üst bar dâhil her tıkı yutar). */
+setTimeout(function(){document.getElementById('intro').classList.add('hide');document.getElementById('main').classList.add('show');},1900);
 document.getElementById('yr').textContent=new Date().getFullYear();
 
 /* nav: hide on scroll down, show on scroll up, opaque when scrolled */
