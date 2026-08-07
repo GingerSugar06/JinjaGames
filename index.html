@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>JinjaGames</title>
-<meta name="description" content="JinjaGames is an independent game studio from Ankara, Turkey, founded by Eren Oğur. We build deep, honest, hand crafted games." />
+<meta name="description" content="JinjaGames is an indie game studio from Ankara, Turkey, founded by Eren Oğur. We build deep, honest, hand crafted games." />
 <meta name="theme-color" content="#FFFCFB" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0F0C0D" media="(prefers-color-scheme: dark)" />
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
-<link rel="apple-touch-icon" href="favicon-180.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-j-shuriken-32.png?v=2" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-j-shuriken-48.png?v=2" />
+<link rel="apple-touch-icon" href="favicon-j-shuriken-180.png?v=2" />
 <meta property="og:title" content="JinjaGames" />
-<meta property="og:description" content="Independent game studio from Ankara. We build deep, honest, hand crafted games." />
+<meta property="og:description" content="Indie game studio from Ankara. We build deep, honest, hand crafted games." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jinjagames.com" />
 <meta property="og:image" content="https://jinjagames.com/icon-512.png" />
@@ -195,11 +195,6 @@ html[data-theme="dark"] .blob{opacity:.16}
 @keyframes shine{to{background-position:220% center}}
 .tagline{max-width:580px;margin:20px auto 34px;color:var(--ink-2);font-size:clamp(16px,2.1vw,19.5px);opacity:0;animation:rise .8s var(--ease) .44s forwards}
 .hero .cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;opacity:0;animation:rise .8s var(--ease) .58s forwards}
-.scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:rise .8s ease 1s forwards}
-.scrollcue span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
-.scrollcue .m{width:22px;height:34px;border:1.5px solid var(--line-2);border-radius:12px;position:relative}
-.scrollcue .m::after{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:7px;background:var(--brand);border-radius:2px;animation:wheel 1.7s ease-in-out infinite}
-@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,10px)}}
 
 /* ---------------- MARQUEE ---------------- */
 .marquee{padding:17px 0;background:var(--invert);overflow:hidden;transform:rotate(-1.1deg);width:112%;margin-left:-6%}
@@ -311,6 +306,54 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
 .fcol a:hover{color:var(--brand)}
 .fbot{max-width:var(--W);margin:0 auto;padding:22px 24px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-3);font-size:13.5px}
 
+/* ---------------- DAHA AKIŞKAN YÜZEYLER ---------------- */
+section.blk{isolation:isolate}
+section.blk::before{content:"";position:absolute;z-index:-1;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(var(--brand-rgb),.10),transparent 68%);filter:blur(10px);pointer-events:none;opacity:.7}
+section.blk:nth-of-type(odd)::before{top:-230px;right:-260px}
+section.blk:nth-of-type(even)::before{bottom:-250px;left:-260px}
+.band{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 46%,var(--bg-soft))}
+.game{border-radius:30px;background:linear-gradient(135deg,var(--surface),var(--surface-2));position:relative}
+.game::before,.pcard::before,.founder::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.15) 45%,transparent 62%);transform:translateX(-120%);transition:transform .9s var(--ease)}
+.game:hover::before,.pcard:hover::before,.founder:hover::before{transform:translateX(120%)}
+.stage::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(var(--brand-rgb),.13),transparent 40%,rgba(var(--brand-rgb),.12));mix-blend-mode:screen;pointer-events:none}
+.pcard{border-radius:24px;background:linear-gradient(145deg,var(--surface),var(--surface-2));box-shadow:none}
+.pcard::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2),transparent);transform:scaleX(.22);transform-origin:left;transition:transform .35s var(--ease)}
+.pcard:hover::after{transform:scaleX(1)}
+.founder{border-radius:30px;transform:rotate(1.2deg);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.founder:hover{transform:rotate(0) translateY(-5px);box-shadow:0 24px 54px rgba(var(--brand-rgb),.3)}
+.fitem{box-shadow:none;background:linear-gradient(100deg,var(--surface),var(--surface-2))}
+.contact{background:radial-gradient(80% 120% at 8% 0%,rgba(var(--brand-rgb),.4),transparent 58%),var(--invert);border-radius:36px}
+
+/* Oyun kartı: bilgi kutusu yerine canlı oyun yayını hissi */
+.game{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(370px,.92fr);min-height:520px;border-color:rgba(var(--brand-rgb),.24);overflow:visible;background:var(--surface)}
+.stage{aspect-ratio:auto;min-height:100%;border-radius:29px 0 0 29px}
+.stage::before{content:"CYBER ACADEMY / LIVE BUILD";position:absolute;top:22px;left:22px;z-index:3;color:#fff;background:rgba(10,8,10,.6);border:1px solid rgba(255,255,255,.26);backdrop-filter:blur(8px);padding:7px 11px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.12em}
+.ginfo{position:relative;display:flex;flex-direction:column;justify-content:center;padding:44px 42px!important;background:radial-gradient(circle at 100% 0,rgba(var(--brand-rgb),.18),transparent 38%),var(--surface);overflow:hidden}
+.ginfo::before{content:"// 01";position:absolute;right:-12px;top:-22px;font-size:105px;line-height:1;font-weight:900;letter-spacing:-.08em;color:rgba(var(--brand-rgb),.07);pointer-events:none}
+.gtitle{position:relative}.glogo{border-radius:16px;background:transparent;padding:0;box-shadow:none}.game h3{font-size:clamp(30px,3.2vw,42px)}
+.two{gap:32px;margin:26px 0 20px}.mini{position:relative;padding-left:14px}.mini::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--brand),transparent)}
+.gstats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin:0 0 19px;padding:0;border:0;background:var(--surface-2);border-radius:15px;overflow:hidden}.gstat{padding:13px 15px;min-width:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.gstat:nth-child(2n){border-right:0}.gstat:nth-last-child(-n+2){border-bottom:0}.gstat b{font-size:23px}
+.tags{margin-bottom:24px}.tag{border-radius:999px}.game .btn{align-self:flex-start}
+@media(max-width:860px){.game{display:block;min-height:0;overflow:hidden}.stage{aspect-ratio:16/9;min-height:0;border-radius:29px 29px 0 0}.ginfo{padding:32px 26px!important}.two{gap:18px}}
+
+/* Çizim ikonları yerine daha belirgin sistem işaretleri */
+.feat{counter-reset:feature}.fcard{counter-increment:feature}.fcard .fi{background:transparent;width:auto;height:auto;margin-bottom:22px;border-radius:0}.fcard .fi svg{display:none}.fcard .fi::before{content:"MODULE";display:block;color:var(--ink-3);font-size:10px;font-weight:900;letter-spacing:.16em}.fcard .fi::after{content:counter(feature,decimal-leading-zero);display:inline-block;margin-top:2px;font-size:30px;line-height:1;font-weight:900;color:var(--brand);letter-spacing:-.06em}
+
+/* Steam durumu: kart değil, canlı yayın çizgisi */
+.release-line{display:flex;align-items:center;gap:9px;margin:0 0 22px;color:var(--brand);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}.release-dot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--brand);box-shadow:0 0 0 0 rgba(var(--brand-rgb),.5);animation:steamSignal 2.2s infinite}.release-rule{height:1px;flex:1;max-width:118px;background:linear-gradient(90deg,rgba(var(--brand-rgb),.5),transparent)}@keyframes steamSignal{70%{box-shadow:0 0 0 8px rgba(var(--brand-rgb),0)}100%{box-shadow:0 0 0 0 rgba(var(--brand-rgb),0)}}
+
+/* Sayfanın kalan alanları için daha sinematik, yaşayan katmanlar */
+.hero{background:radial-gradient(58% 85% at 10% 7%,rgba(var(--brand-rgb),.16),transparent 67%),radial-gradient(45% 65% at 92% 72%,rgba(var(--brand-rgb),.11),transparent 70%)}
+.hero-bg::before{content:"";position:absolute;inset:0;opacity:.36;background-image:linear-gradient(rgba(var(--brand-rgb),.08) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--brand-rgb),.08) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(65% 80% at 50% 46%,#000,transparent);animation:gridDrift 18s linear infinite}
+.hero-bg::after{content:"";position:absolute;width:38vw;height:38vw;min-width:360px;min-height:360px;left:50%;top:50%;border:1px solid rgba(var(--brand-rgb),.16);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 42px rgba(var(--brand-rgb),.025),0 0 0 84px rgba(var(--brand-rgb),.02);animation:haloBreathe 7s ease-in-out infinite}
+@keyframes gridDrift{to{background-position:72px 72px}}@keyframes haloBreathe{50%{transform:translate(-50%,-50%) scale(1.08);opacity:.5}}
+.studio{position:relative;padding:34px 0}.studio::before{content:"";position:absolute;left:45%;top:12%;bottom:12%;width:1px;background:linear-gradient(transparent,var(--line-2),transparent)}
+.studio>div:first-child{padding:26px 24px 26px 0}.studio .sub{max-width:580px}.founder{background:linear-gradient(135deg,#cf3e3b,#ff8b79 56%,#d94743);padding:38px 42px}.founder::before{opacity:.75}.founder::after{width:290px;height:290px}.founder .avatar{width:82px;height:82px;border-radius:50%;border-color:rgba(255,255,255,.8)}
+.faq{position:relative}.faq::before{content:"";position:absolute;left:-100px;right:-100px;top:50%;height:1px;background:var(--line);z-index:-1}.fitem{position:relative;border-radius:18px}.fitem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--brand),var(--brand-2));transform:scaleY(0);transition:transform .3s var(--ease);transform-origin:center}.fitem:hover::before,.fitem.open::before{transform:scaleY(1)}.fitem:hover{transform:translateX(7px);border-color:rgba(var(--brand-rgb),.4)}.fq{padding:23px 26px}.fitem.open{box-shadow:0 16px 38px rgba(var(--brand-rgb),.09)}
+.contact{min-height:355px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-color:rgba(255,255,255,.12)}.contact::after{content:"";position:absolute;width:320px;height:320px;right:-100px;bottom:-160px;border:1px solid rgba(255,255,255,.16);border-radius:50%;box-shadow:0 0 0 34px rgba(255,255,255,.035),0 0 0 68px rgba(255,255,255,.025);animation:contactOrbit 10s linear infinite}.contact .socials{position:relative;z-index:1}.contact .mailbtn{position:relative;z-index:1}.contact h2,.contact p,.contact .eyebrow{z-index:1}@keyframes contactOrbit{to{transform:rotate(360deg) scale(1.08)}}
+footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-soft));position:relative;overflow:hidden}footer::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--brand),var(--brand-2),transparent)}.fgrid,.fbot{position:relative}
+@media(max-width:860px){.studio::before{display:none}.studio>div:first-child{padding:0}.founder{padding:32px}.contact{min-height:0}.faq::before{left:0;right:0}}
+
 /* ---------------- RESPONSIVE ---------------- */
 @media(max-width:1000px){
   .nav-links{display:none}
@@ -330,7 +373,6 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
   .hero-logo{width:96px;margin-bottom:20px}
   .hero .cta{flex-direction:column;width:100%}
   .hero .cta .btn{width:100%}
-  .scrollcue{display:none}
   .two{grid-template-columns:1fr;gap:16px}
   .ginfo{padding:26px 22px}
   .contact{padding:44px 22px;border-radius:24px}
@@ -357,7 +399,6 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
 
 <div class="mmenu" id="mmenu">
   <a href="#games" data-close><span class="en i">Games</span><span class="tr i">Oyunlar</span></a>
-  <a href="#craft" data-close><span class="en i">Craft</span><span class="tr i">Yaklaşımımız</span></a>
   <a href="#studio" data-close><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
   <a href="#faq" data-close>FAQ</a>
   <a href="#contact" data-close><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
@@ -377,13 +418,12 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
   <nav id="nav">
     <div class="nav-in">
       <a class="brand" href="#top" aria-label="JinjaGames">
-        <img class="brand-logo" src="logo-256.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <img class="brand-logo" src="brand-mark.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
         <span class="mark" style="display:none">J</span>
         JinjaGames
       </a>
       <ul class="nav-links">
         <li><a href="#games"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a></li>
-        <li><a href="#craft"><span class="en i">Craft</span><span class="tr i">Yaklaşımımız</span></a></li>
         <li><a href="#studio"><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact"><span class="en i">Contact</span><span class="tr i">İletişim</span></a></li>
@@ -415,14 +455,13 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
     <div class="hero-in">
       <img class="hero-logo" src="logo-512.png" alt="" onerror="this.style.display='none'">
       <h1 class="brandword"><span class="w1">Jinja</span><span class="w2">Games</span></h1>
-      <p class="tagline en">Independent game studio from Ankara. Deep, honest games worth mastering.</p>
-      <p class="tagline tr">Ankara merkezli bağımsız oyun stüdyosu. Ustalaşmaya değer, dürüst ve derin oyunlar.</p>
+      <p class="tagline en">Indie game studio from Ankara. Deep, honest games worth mastering.</p>
+      <p class="tagline tr">Ankara merkezli indie oyun stüdyosu. Ustalaşmaya değer, dürüst ve derin oyunlar.</p>
       <div class="cta">
         <a class="btn p" href="#games"><span class="en i">See our games</span><span class="tr i">Oyunlarımız</span> <span class="arw">&rarr;</span></a>
         <a class="btn g" href="#studio"><span class="en i">About the studio</span><span class="tr i">Stüdyo hakkında</span></a>
       </div>
     </div>
-    <a class="scrollcue" href="#games" aria-hidden="true"><div class="m"></div><span>Scroll</span></a>
   </section>
 
   <div class="marquee" aria-hidden="true">
@@ -450,7 +489,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
           <div class="vlabel"><span class="en i">Watch on the game page</span><span class="tr i">Oyun sayfasında izle</span></div>
         </a>
         <div class="ginfo">
-          <span class="chip"><span class="en i">Coming soon to Steam</span><span class="tr i">Steam'de yakında</span></span>
+          <div class="release-line"><span class="release-dot" aria-hidden="true"></span><span class="en i">Coming soon to Steam</span><span class="tr i">Steam'de yakında</span><span class="release-rule" aria-hidden="true"></span></div>
           <div class="gtitle">
             <img class="glogo" src="app_icon.png" alt="" onerror="this.style.display='none'">
             <h3>Cyber Academy</h3>
@@ -469,54 +508,15 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
           </div>
           <div class="gstats">
             <div class="gstat"><b>25+</b><span class="en i">Modules</span><span class="tr i">Modül</span></div>
-            <div class="gstat"><b>2</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
-            <div class="gstat"><b>PC</b><span class="en i">Windows</span><span class="tr i">Windows</span></div>
+            <div class="gstat"><b>9</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
+            <div class="gstat"><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
             <div class="gstat"><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
           </div>
           <div class="tags">
             <span class="tag">Simulation</span><span class="tag">Strategy</span><span class="tag">Hacking</span>
-            <span class="tag">Educational</span><span class="tag">Singleplayer</span><span class="tag">Online PvP</span>
+            <span class="tag">9 Languages</span><span class="tag">Windows · macOS · Linux</span>
           </div>
           <a class="btn p" href="cyberacademy/index.html"><span class="en i">Explore Cyber Academy</span><span class="tr i">Cyber Academy'yi keşfet</span> <span class="arw">&rarr;</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- YAKLAŞIM -->
-  <section id="craft" class="blk">
-    <div class="wrap">
-      <div class="rv">
-        <span class="eyebrow"><span class="en i">How we build</span><span class="tr i">Nasıl üretiyoruz</span></span>
-        <h2 class="en">Three rules we <span class="grad">never break.</span></h2>
-        <h2 class="tr">Asla <span class="grad">bozmadığımız</span> üç kural.</h2>
-        <p class="sub en">Small studio, long horizon. These are the promises behind every system we ship.</p>
-        <p class="sub tr">Küçük stüdyo, uzun vade. Ürettiğimiz her sistemin arkasındaki sözler bunlar.</p>
-      </div>
-      <div class="grid3">
-        <div class="pcard rv">
-          <div class="pico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.9 8 10 4.6-1.1 8-5 8-10V6l-8-3z"/><path d="M9 12.2l2 2 4.2-4.4"/></svg></div>
-          <div class="pnum">01</div>
-          <h4 class="en">Honest systems</h4>
-          <h4 class="tr">Dürüst sistemler</h4>
-          <p class="en">No dark patterns, no fake difficulty, no numbers that lie. Rules you can learn, and systems you are allowed to break.</p>
-          <p class="tr">Karanlık desen yok, sahte zorluk yok, yalan söyleyen sayılar yok. Öğrenebileceğin kurallar ve kırmana izin verilen sistemler.</p>
-        </div>
-        <div class="pcard rv">
-          <div class="pico"><svg viewBox="0 0 24 24"><path d="M3 17.5 12 21l9-3.5"/><path d="M3 12.5 12 16l9-3.5"/><path d="M12 3 3 7.5 12 11l9-3.5L12 3z"/></svg></div>
-          <div class="pnum">02</div>
-          <h4 class="en">Depth that rewards</h4>
-          <h4 class="tr">Ödüllendiren derinlik</h4>
-          <p class="en">Easy to enter, hard to master. The closer you look, the more there is to find, and mastery is always earned.</p>
-          <p class="tr">Girmesi kolay, ustalaşması zor. Yakından baktıkça bulunacak daha çok şey çıkar; ustalık her zaman kazanılır.</p>
-        </div>
-        <div class="pcard rv">
-          <div class="pico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3 17 4l3 3-2.3 2.3"/><path d="M17.7 9.3 8 19l-4 1 1-4 9.7-9.7z"/><path d="M12 8l4 4"/></svg></div>
-          <div class="pnum">03</div>
-          <h4 class="en">Crafted by hand</h4>
-          <h4 class="tr">Elle üretilir</h4>
-          <p class="en">Every mechanic is designed, tested and tuned by hand. We ship when it feels right, not when a calendar says so.</p>
-          <p class="tr">Her mekanik elle tasarlanır, test edilir ve dengelenir. Takvim öyle dediği için değil, doğru hissettirdiğinde yayınlarız.</p>
         </div>
       </div>
     </div>
@@ -530,8 +530,8 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
           <span class="eyebrow"><span class="en i">The studio</span><span class="tr i">Stüdyo</span></span>
           <h2 class="en">Games with <span class="grad">real depth.</span></h2>
           <h2 class="tr">Gerçek <span class="grad">derinlikli</span> oyunlar.</h2>
-          <p class="sub en">JinjaGames is an independent studio from Ankara, Turkey. We are not chasing trends or shortcuts. We make games with honest systems, thoughtful design, and depth that rewards curiosity. Every title is crafted by hand, with the long game in mind: worlds worth coming back to.</p>
-          <p class="sub tr">JinjaGames, Ankara merkezli bağımsız bir stüdyodur. Trendlerin veya kestirmelerin peşinde değiliz. Dürüst sistemleri, özenli tasarımı ve merakı ödüllendiren derinliği olan oyunlar yapıyoruz. Her oyun elle, uzun vadeyi düşünerek üretilir: geri dönmeye değer dünyalar.</p>
+          <p class="sub en">JinjaGames is an indie game studio from Ankara, Turkey. We are not chasing trends or shortcuts. We make games with honest systems, thoughtful design, and depth that rewards curiosity. Every title is crafted by hand, with the long game in mind: worlds worth coming back to.</p>
+          <p class="sub tr">JinjaGames, Ankara merkezli bir indie oyun stüdyosudur. Trendlerin veya kestirmelerin peşinde değiliz. Dürüst sistemleri, özenli tasarımı ve merakı ödüllendiren derinliği olan oyunlar yapıyoruz. Her oyun elle, uzun vadeyi düşünerek üretilir: geri dönmeye değer dünyalar.</p>
         </div>
         <div class="founder rv">
           <img class="avatar" src="linkedinphoto.jpg" alt="Eren Oğur" loading="lazy" onerror="this.style.display='none'">
@@ -561,7 +561,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
       <div class="faq">
         <div class="fitem rv">
           <button class="fq" data-faq><span><span class="en i">What is JinjaGames?</span><span class="tr i">JinjaGames nedir?</span></span><span class="fi"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-          <div class="fa"><div><span class="en i">JinjaGames is an independent game studio based in Ankara, Turkey. We build games with honest systems and real depth, designed to respect the player.</span><span class="tr i">JinjaGames, Ankara merkezli bağımsız bir oyun stüdyosudur. Dürüst sistemleri ve gerçek derinliği olan, oyuncuya saygı gösteren oyunlar geliştiriyoruz.</span></div></div>
+          <div class="fa"><div><span class="en i">JinjaGames is an indie game studio based in Ankara, Turkey. We build games with honest systems and real depth, designed to respect the player.</span><span class="tr i">JinjaGames, Ankara merkezli bir indie oyun stüdyosudur. Dürüst sistemleri ve gerçek derinliği olan, oyuncuya saygı gösteren oyunlar geliştiriyoruz.</span></div></div>
         </div>
         <div class="fitem rv">
           <button class="fq" data-faq><span><span class="en i">What kind of games do you make?</span><span class="tr i">Nasıl oyunlar yapıyorsunuz?</span></span><span class="fi"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
@@ -569,7 +569,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
         </div>
         <div class="fitem rv">
           <button class="fq" data-faq><span><span class="en i">Where are you based?</span><span class="tr i">Nerede kuruluşunuz?</span></span><span class="fi"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
-          <div class="fa"><div><span class="en i">Ankara, Türkiye. JinjaGames is a fully independent studio founded and run by Eren Oğur.</span><span class="tr i">Ankara, Türkiye. JinjaGames, Eren Oğur tarafından kurulan ve yürütülen tamamen bağımsız bir stüdyodur.</span></div></div>
+          <div class="fa"><div><span class="en i">Ankara, Türkiye. JinjaGames is an indie studio founded and run by Eren Oğur.</span><span class="tr i">Ankara, Türkiye. JinjaGames, Eren Oğur tarafından kurulan ve yürütülen bir indie stüdyodur.</span></div></div>
         </div>
         <div class="fitem rv">
           <button class="fq" data-faq><span><span class="en i">Can I join the team?</span><span class="tr i">Ekibinize katılabilir miyim?</span></span><span class="fi"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
@@ -614,17 +614,16 @@ footer{border-top:1px solid var(--line);padding:52px 0 34px;background:var(--bg-
   <div class="fgrid">
     <div class="fbrand">
       <a class="brand" href="#top">
-        <img class="brand-logo" src="logo-256.png" alt="" style="height:30px" onerror="this.style.display='none'">
+        <img class="brand-logo" src="brand-mark.png" alt="" style="height:30px" onerror="this.style.display='none'">
         JinjaGames
       </a>
-      <p class="en">Independent game studio from Ankara, Türkiye. Deep, honest games worth mastering.</p>
-      <p class="tr">Ankara, Türkiye merkezli bağımsız oyun stüdyosu. Ustalaşmaya değer, dürüst ve derin oyunlar.</p>
+      <p class="en">Indie game studio from Ankara, Türkiye. Deep, honest games worth mastering.</p>
+      <p class="tr">Ankara, Türkiye merkezli indie oyun stüdyosu. Ustalaşmaya değer, dürüst ve derin oyunlar.</p>
     </div>
     <div class="fcol">
       <h5><span class="en i">Explore</span><span class="tr i">Keşfet</span></h5>
       <a href="#games"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a>
       <a href="cyberacademy/index.html">Cyber Academy</a>
-      <a href="#craft"><span class="en i">Craft</span><span class="tr i">Yaklaşımımız</span></a>
       <a href="#studio"><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
     </div>
     <div class="fcol">

@@ -7,9 +7,9 @@
 <meta name="description" content="Cyber Academy is a cybersecurity game that teaches you to hack and defend for real. Learn by playing, then raid a living dark web sandbox." />
 <meta name="theme-color" content="#FFFCFB" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0F0C0D" media="(prefers-color-scheme: dark)" />
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
-<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png" />
-<link rel="apple-touch-icon" href="../favicon-180.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-j-shuriken-32.png?v=2" />
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-j-shuriken-48.png?v=2" />
+<link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
 <meta property="og:title" content="Cyber Academy" />
 <meta property="og:description" content="Learn to hack and defend, for real. A cybersecurity game by JinjaGames." />
 <meta property="og:type" content="website" />
@@ -181,6 +181,56 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
 .foot2 a{color:var(--ink-3);font-weight:600}
 .foot2 a:hover{color:var(--brand)}
 
+/* ---------------- CANLI SİBER KATMAN ---------------- */
+.hero{min-height:min(760px,92vh);display:flex;align-items:center}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 0 49.8%,rgba(56,199,180,.16) 50%,transparent 50.2%),linear-gradient(0deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 100%,100% 5px;opacity:.6}
+.hero .wrap{width:100%}
+.herologo{animation:floatIcon 5s ease-in-out infinite}
+@keyframes floatIcon{50%{transform:translateY(-8px) rotate(-2deg)}}
+.hero h1{max-width:760px;text-wrap:balance}
+.hero p.lead{position:relative;padding-left:18px;border-left:2px solid var(--cy)}
+.statusline{display:flex;gap:10px;align-items:center;margin-top:30px;font-size:11px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.62);text-transform:uppercase}
+.statusline::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 0 rgba(56,199,180,.55);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(56,199,180,0)}100%{box-shadow:0 0 0 0 rgba(56,199,180,0)}}
+.cyber-ribbon{position:relative;z-index:3;background:#090a0f;color:#e9ffff;overflow:hidden;border-top:1px solid rgba(56,199,180,.24);border-bottom:1px solid rgba(56,199,180,.24);transform:rotate(-.7deg);width:104%;margin:-18px -2% 0}
+.cyber-track{display:flex;width:max-content;animation:cyberScroll 32s linear infinite}
+.cyber-unit{display:flex;flex:0 0 auto;align-items:center;gap:18px;padding:13px 22px;font-size:12px;font-weight:900;letter-spacing:.14em;white-space:nowrap}
+.cyber-unit::after{content:"◆";color:var(--cy);font-size:9px}
+@keyframes cyberScroll{to{transform:translateX(-50%)}}
+section.blk{isolation:isolate}
+section.blk::before{content:"";position:absolute;z-index:-1;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(56,199,180,.10),transparent 68%);pointer-events:none}
+section.blk:nth-of-type(odd)::before{right:-250px;top:-170px}
+section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
+.band{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 48%,var(--bg-soft))}
+.story,.fcard{box-shadow:none;background:linear-gradient(145deg,var(--surface),var(--surface-2));position:relative;overflow:hidden}
+.story::after,.fcard::after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,var(--cy),var(--brand),transparent);transform:scaleX(.18);transform-origin:left;transition:transform .35s var(--ease)}
+.story:hover::after,.fcard:hover::after{transform:scaleX(1)}
+.story:hover,.fcard:hover{border-color:rgba(56,199,180,.55);box-shadow:0 20px 46px rgba(20,64,60,.12)}
+.trailerbox{border-radius:26px;position:relative}
+.trailerbox::before{content:"LIVE FEED";position:absolute;z-index:2;top:16px;left:16px;padding:6px 10px;border-radius:999px;background:rgba(5,8,11,.72);border:1px solid rgba(56,199,180,.55);color:var(--cy);font-size:10px;font-weight:900;letter-spacing:.12em}
+.shot{border-radius:18px}
+.cta-big{background:radial-gradient(70% 100% at 12% 0%,rgba(56,199,180,.20),transparent 55%),var(--invert);border-radius:34px}
+
+/* Fragman kapağı ve oynatma odağı */
+.trailerbox{isolation:isolate}.trailerbox::after{content:"OFFICIAL TRAILER · PLAY VIDEO";pointer-events:none}.trailerbox video{background:#0c1116}.trailer-play{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:104px;height:104px;border-radius:50%;border:1px solid rgba(255,255,255,.42);background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 12px rgba(var(--brand-rgb),.13),0 22px 54px rgba(0,0,0,.38);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}.trailer-play span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.trailer-play::before{content:"";margin-left:6px;border-left:24px solid currentColor;border-top:15px solid transparent;border-bottom:15px solid transparent}.trailer-play:hover{transform:translate(-50%,-50%) scale(1.1);box-shadow:0 0 0 18px rgba(var(--brand-rgb),.11),0 26px 60px rgba(0,0,0,.46)}.trailer-play:focus-visible{outline-color:#fff}.trailerbox.playing .trailer-play{opacity:0;transform:translate(-50%,-50%) scale(.85);pointer-events:none}.trailerbox.playing:hover .trailer-play{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+
+/* İkon yerine oyun arayüzünü çağrıştıran iki güçlü sinyal bloğu */
+.duo{gap:28px;perspective:1100px}.story{min-height:292px;padding:38px 40px;background:linear-gradient(145deg,rgba(56,199,180,.055),var(--surface) 45%,var(--surface-2));border-radius:26px;box-shadow:none;transform-style:preserve-3d}.story:first-child{border-color:rgba(56,199,180,.36)}
+.story .ic{width:auto;height:auto;margin:0 0 30px;padding:0;background:none;border-radius:0;display:block}.story .ic svg{display:none}.story .ic::before{content:"TRAINING NODE";display:block;color:var(--cy);font-size:10px;font-weight:900;letter-spacing:.16em}.story .ic::after{content:"01";display:block;margin-top:4px;font-size:44px;line-height:.9;color:var(--brand);font-weight:900;letter-spacing:-.08em}.story:nth-child(2) .ic::before{content:"LIVE NETWORK"}.story:nth-child(2) .ic::after{content:"02"}.story h3{font-size:clamp(25px,3vw,32px);margin-bottom:12px}.story p{max-width:470px;line-height:1.78}.story:hover{transform:translateY(-8px) rotateX(2deg);border-color:var(--cy);box-shadow:0 25px 55px rgba(20,64,60,.16)}
+.language-grid{display:flex;flex-wrap:wrap;gap:7px;margin-top:19px}.language-grid span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2);font-size:11px;font-weight:800}.language-grid span:first-child{border-color:rgba(56,199,180,.48);color:var(--cy);background:rgba(56,199,180,.08)}
+@media(max-width:640px){.story{min-height:0;padding:30px 26px}.story .ic{margin-bottom:22px}.story h3{font-size:27px}}
+
+/* Özellik kartları: çizim ikonları yerine modül terminali dili */
+.feat{counter-reset:module;gap:16px}.fcard{counter-increment:module;min-height:188px;padding:26px 26px 24px;background:linear-gradient(145deg,rgba(56,199,180,.05),var(--surface) 42%,var(--surface-2));box-shadow:none}.fcard .fi{width:auto;height:auto;margin:0 0 21px;border-radius:0;background:none;display:block}.fcard .fi svg{display:none}.fcard .fi::before{content:"SYSTEM MODULE";display:block;color:var(--ink-3);font-size:9px;font-weight:900;letter-spacing:.16em}.fcard .fi::after{content:counter(module,decimal-leading-zero);display:block;margin-top:3px;color:var(--cy);font-size:31px;font-weight:900;letter-spacing:-.07em;line-height:1}.fcard h4{font-size:18px;margin-bottom:8px}.fcard p{line-height:1.65}.fcard:hover{transform:translateY(-7px);background:linear-gradient(145deg,rgba(56,199,180,.13),var(--surface) 48%,var(--surface-2))}
+
+/* İlk bakış: fragman merkezi, ekran görüntüleri keşif yüzeyi */
+.trailerbox{margin-top:38px;border-color:rgba(56,199,180,.32);box-shadow:0 30px 70px rgba(0,0,0,.32)}.trailerbox::after{content:"CLICK TO EXPLORE";position:absolute;z-index:2;right:16px;bottom:16px;color:rgba(255,255,255,.76);background:rgba(5,8,11,.72);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.12em}.trailerbox video{transition:transform .8s var(--ease)}.trailerbox:hover video{transform:scale(1.025)}
+.shots{grid-template-columns:1.25fr 1fr 1fr;grid-auto-rows:150px;gap:16px;margin-top:22px}.shot{aspect-ratio:auto;border-radius:20px}.shot:first-child{grid-column:span 2;grid-row:span 2}.shot::before{content:"OPEN SCREEN ↗";position:absolute;z-index:2;left:14px;bottom:12px;color:#fff;font-size:10px;font-weight:900;letter-spacing:.11em;opacity:0;transform:translateY(8px);transition:.3s}.shot:hover::before{opacity:1;transform:none}.shot:hover img{transform:scale(1.08)}.shot img{transition:transform .55s var(--ease)}
+
+/* Hero'ya sabit grid yerine derinlik, sinyal ve tarama katmanı */
+.hero{background:radial-gradient(80% 90% at 88% 2%,rgba(197,50,58,.3),transparent 60%),radial-gradient(60% 90% at 3% 88%,rgba(56,199,180,.14),transparent 60%),linear-gradient(125deg,#0d0c14,#161016 58%,#251416)}.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 78px,rgba(255,255,255,.025) 79px 80px),linear-gradient(90deg,transparent 0 49.8%,rgba(56,199,180,.4) 50%,transparent 50.2%);mask-image:linear-gradient(90deg,transparent,#000 28%,#000 72%,transparent);opacity:.45;animation:signalSweep 9s ease-in-out infinite}.hero::after{background:linear-gradient(90deg,transparent 0 49.8%,rgba(56,199,180,.16) 50%,transparent 50.2%),linear-gradient(0deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 100%,100% 5px;animation:scanLines 5s linear infinite}@keyframes signalSweep{50%{transform:translateX(3%);opacity:.8}}@keyframes scanLines{to{background-position:0 0,0 5px}}
+@media(max-width:900px){.shots{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.shot:first-child{grid-column:span 2;grid-row:span 1}}@media(max-width:640px){.shots{grid-template-columns:1fr;grid-auto-rows:210px}.shot:first-child{grid-column:span 1}.trailerbox::after{display:none}.trailer-play{width:76px;height:76px}.trailer-play::before{border-left-width:19px;border-top-width:12px;border-bottom-width:12px}.fcard{min-height:0}}
+
 @media(max-width:900px){
   .duo{grid-template-columns:1fr}
   .feat{grid-template-columns:1fr 1fr}
@@ -197,6 +247,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
   .cta-big{padding:44px 22px;border-radius:24px}
   .story{padding:26px}
   .back{display:none}
+  .statusline{font-size:10px}
 }
 </style>
 </head>
@@ -205,7 +256,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
 <nav id="nav">
   <div class="nav-in">
     <a class="brand" href="../index.html">
-      <img src="../logo-256.png" alt="" onerror="this.style.display='none'">
+      <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
       JinjaGames
     </a>
     <div class="nav-end">
@@ -221,6 +272,13 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
     </div>
   </div>
 </nav>
+
+<div class="cyber-ribbon" aria-hidden="true">
+  <div class="cyber-track">
+    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div>
+    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -238,9 +296,10 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
       <a class="btn d" href="#trailer"><span class="en i">Watch the trailer</span><span class="tr i">Fragmanı izle</span></a>
     </div>
     <div class="meta">
-      <span class="en i">On <b>Windows</b>, <b>macOS</b> and <b>Linux</b> &nbsp;&middot;&nbsp; Singleplayer and Online PvP</span>
-      <span class="tr i"><b>Windows</b>, <b>macOS</b> ve <b>Linux</b>'ta &nbsp;&middot;&nbsp; Tek oyunculu ve Çevrimiçi PvP</span>
+      <span class="en i">Launching on <b>Windows</b>, <b>macOS</b> and <b>Linux</b> &nbsp;&middot;&nbsp; Singleplayer and Online PvP</span>
+      <span class="tr i"><b>Windows</b>, <b>macOS</b> ve <b>Linux</b> için çıkacak &nbsp;&middot;&nbsp; Tek oyunculu ve Çevrimiçi PvP</span>
     </div>
+    <div class="statusline"><span class="en i">Network ready · training protocol active</span><span class="tr i">Ağ hazır · eğitim protokolü aktif</span></div>
   </div>
 </div>
 
@@ -260,6 +319,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
           <h3 class="tr">Akademi</h3>
           <p class="en">Twenty five hands on modules teach real cybersecurity: phishing, passwords, networks, malware, incident response, cryptography and more. You do not read about it, you do it. Every concept is a puzzle you solve inside a realistic tool, so the knowledge sticks.</p>
           <p class="tr">Yirmi beş uygulamalı modül gerçek siber güvenliği öğretir: kimlik avı, parolalar, ağlar, zararlı yazılım, olay müdahale, kriptografi ve daha fazlası. Okumuyorsun, yapıyorsun. Her kavram gerçekçi bir aracın içinde çözdüğün bir bulmaca, böylece bilgi kalıcı oluyor.</p>
+          <div class="language-grid" aria-label="Supported languages"><span>9 Languages</span><span>English</span><span>Türkçe</span><span>Deutsch</span><span>简体中文</span><span>Русский</span><span>Español</span><span>한국어</span><span>日本語</span><span>Italiano</span></div>
         </div>
         <div class="story rv">
           <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg></div>
@@ -334,7 +394,8 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
         <p class="sub tr">Oyunun hareket hâlinden erken bir bakış.</p>
       </div>
       <div class="trailerbox rv">
-        <video src="../trailer.mp4" controls playsinline preload="metadata" poster="../ss2_attack_chain.png"></video>
+        <video src="../trailer.mp4" controls playsinline preload="metadata" poster="../CyberAcademy_Font.png"></video>
+        <button class="trailer-play" type="button" aria-label="Play trailer"><span class="en">Play trailer</span><span class="tr">Fragmanı oynat</span></button>
       </div>
       <div class="shots">
         <div class="shot rv" data-shot="../ss1_darknet_desktop.png"><img src="../ss1_darknet_desktop.png" alt="The Dark Net desktop" loading="lazy"></div>
@@ -420,6 +481,14 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
   $('#lbx').addEventListener('click',closeLb);
   lb.addEventListener('click',function(e){ if(e.target===lb) closeLb(); });
   d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
+
+  /* fragman: kapakta da net bir oynatma eylemi */
+  var trailer=d.querySelector('.trailerbox video'), trailerBox=d.querySelector('.trailerbox'), trailerPlay=d.querySelector('.trailer-play');
+  if(trailer&&trailerPlay){
+    trailerPlay.addEventListener('click',function(){ if(trailer.paused) trailer.play(); else trailer.pause(); });
+    trailer.addEventListener('play',function(){ trailerBox.classList.add('playing'); trailerPlay.setAttribute('aria-label','Pause trailer'); });
+    trailer.addEventListener('pause',function(){ trailerBox.classList.remove('playing'); trailerPlay.setAttribute('aria-label','Play trailer'); });
+  }
 
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
 })();
