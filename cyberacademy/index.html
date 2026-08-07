@@ -113,8 +113,6 @@ html[data-theme="dark"] .ic-moon{display:none}
 .hero .grid{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(rgba(56,199,180,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(56,199,180,.5) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(80% 70% at 60% 30%,#000,transparent)}
 .hero .wrap{position:relative;z-index:2}
 .herologo{width:82px;height:82px;border-radius:21px;object-fit:contain;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:10px;margin-bottom:22px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
-.tagpill{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#FF8E7C;border:1px solid rgba(232,92,78,.45);border-radius:999px;padding:7px 16px;margin-bottom:22px}
-.tagpill::before{content:"";width:7px;height:7px;border-radius:50%;background:#FF8E7C;box-shadow:0 0 0 0 rgba(255,142,124,.7);animation:pulse 2.4s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,142,124,0)}100%{box-shadow:0 0 0 0 rgba(255,142,124,0)}}
 .hero h1{font-size:clamp(42px,7.6vw,82px);margin-bottom:20px;letter-spacing:-.04em}
 .hero h1 .cy{background:linear-gradient(100deg,#E85C4E,#FF9279);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -125,8 +123,7 @@ html[data-theme="dark"] .ic-moon{display:none}
 
 section.blk{padding:92px 0;position:relative}
 .band{background:var(--bg-soft)}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:15px}
-.eyebrow::before{content:"";width:22px;height:2px;background:var(--brand);border-radius:2px}
+.eyebrow{display:inline-flex;align-items:center;font-size:14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:17px}
 h2{font-size:clamp(30px,4.8vw,48px);margin-bottom:15px}
 .sub{color:var(--ink-2);font-size:17.5px;max-width:660px}
 .rv{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -189,8 +186,6 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg-soft)
 @keyframes floatIcon{50%{transform:translateY(-8px) rotate(-2deg)}}
 .hero h1{max-width:760px;text-wrap:balance}
 .hero p.lead{position:relative;padding-left:18px;border-left:2px solid var(--cy)}
-.statusline{display:flex;gap:10px;align-items:center;margin-top:30px;font-size:11px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.62);text-transform:uppercase}
-.statusline::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 0 rgba(56,199,180,.55);animation:ping 2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 9px rgba(56,199,180,0)}100%{box-shadow:0 0 0 0 rgba(56,199,180,0)}}
 .cyber-ribbon{position:relative;z-index:3;background:#090a0f;color:#e9ffff;overflow:hidden;border-top:1px solid rgba(56,199,180,.24);border-bottom:1px solid rgba(56,199,180,.24);transform:rotate(-.7deg);width:104%;margin:-18px -2% 0}
 .cyber-track{display:flex;width:max-content;animation:cyberScroll 32s linear infinite}
@@ -207,7 +202,6 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
 .story:hover::after,.fcard:hover::after{transform:scaleX(1)}
 .story:hover,.fcard:hover{border-color:rgba(56,199,180,.55);box-shadow:0 20px 46px rgba(20,64,60,.12)}
 .trailerbox{border-radius:26px;position:relative}
-.trailerbox::before{content:"LIVE FEED";position:absolute;z-index:2;top:16px;left:16px;padding:6px 10px;border-radius:999px;background:rgba(5,8,11,.72);border:1px solid rgba(56,199,180,.55);color:var(--cy);font-size:10px;font-weight:900;letter-spacing:.12em}
 .shot{border-radius:18px}
 .cta-big{background:radial-gradient(70% 100% at 12% 0%,rgba(56,199,180,.20),transparent 55%),var(--invert);border-radius:34px}
 
@@ -215,13 +209,18 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
 .trailerbox{isolation:isolate}.trailerbox::after{content:"OFFICIAL TRAILER · PLAY VIDEO";pointer-events:none}.trailerbox video{background:#0c1116}.trailer-play{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:104px;height:104px;border-radius:50%;border:1px solid rgba(255,255,255,.42);background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 12px rgba(var(--brand-rgb),.13),0 22px 54px rgba(0,0,0,.38);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}.trailer-play span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.trailer-play::before{content:"";margin-left:6px;border-left:24px solid currentColor;border-top:15px solid transparent;border-bottom:15px solid transparent}.trailer-play:hover{transform:translate(-50%,-50%) scale(1.1);box-shadow:0 0 0 18px rgba(var(--brand-rgb),.11),0 26px 60px rgba(0,0,0,.46)}.trailer-play:focus-visible{outline-color:#fff}.trailerbox.playing .trailer-play{opacity:0;transform:translate(-50%,-50%) scale(.85);pointer-events:none}.trailerbox.playing:hover .trailer-play{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 
 /* İkon yerine oyun arayüzünü çağrıştıran iki güçlü sinyal bloğu */
-.duo{gap:28px;perspective:1100px}.story{min-height:292px;padding:38px 40px;background:linear-gradient(145deg,rgba(56,199,180,.055),var(--surface) 45%,var(--surface-2));border-radius:26px;box-shadow:none;transform-style:preserve-3d}.story:first-child{border-color:rgba(56,199,180,.36)}
-.story .ic{width:auto;height:auto;margin:0 0 30px;padding:0;background:none;border-radius:0;display:block}.story .ic svg{display:none}.story .ic::before{content:"TRAINING NODE";display:block;color:var(--cy);font-size:10px;font-weight:900;letter-spacing:.16em}.story .ic::after{content:"01";display:block;margin-top:4px;font-size:44px;line-height:.9;color:var(--brand);font-weight:900;letter-spacing:-.08em}.story:nth-child(2) .ic::before{content:"LIVE NETWORK"}.story:nth-child(2) .ic::after{content:"02"}.story h3{font-size:clamp(25px,3vw,32px);margin-bottom:12px}.story p{max-width:470px;line-height:1.78}.story:hover{transform:translateY(-8px) rotateX(2deg);border-color:var(--cy);box-shadow:0 25px 55px rgba(20,64,60,.16)}
-.language-grid{display:flex;flex-wrap:wrap;gap:7px;margin-top:19px}.language-grid span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2);font-size:11px;font-weight:800}.language-grid span:first-child{border-color:rgba(56,199,180,.48);color:var(--cy);background:rgba(56,199,180,.08)}
+.duo{gap:28px;perspective:1100px}.story{min-height:292px;padding:38px 40px;background:linear-gradient(145deg,rgba(56,199,180,.055),var(--surface) 45%,var(--surface-2));border-radius:26px;box-shadow:none;transform-style:preserve-3d}
+.story .ic{display:none}.story h3{font-size:clamp(28px,3vw,34px);margin-bottom:14px;color:var(--brand)}.story p{max-width:470px;line-height:1.78}.story:hover{transform:translateY(-8px) rotateX(2deg);border-color:var(--cy);box-shadow:0 25px 55px rgba(20,64,60,.16)}
+/* Çıkış desteği: içerik kartı değil, ayrı ve görünür sistem bandı */
+.support-zone{position:relative;z-index:4;margin:-26px 0 0;padding:0 0 28px;background:linear-gradient(180deg,#100d14 0%,var(--bg) 100%)}
+.support-panel{position:relative;display:grid;grid-template-columns:.9fr 1.1fr 1.4fr;align-items:stretch;overflow:hidden;border-top:1px solid rgba(56,199,180,.38);border-bottom:1px solid rgba(var(--brand-rgb),.34);background:linear-gradient(105deg,rgba(56,199,180,.08),rgba(var(--brand-rgb),.08) 60%,transparent);box-shadow:0 20px 45px rgba(0,0,0,.22)}
+.support-panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);transform:translateX(-100%);animation:supportSweep 6s ease-in-out infinite}.support-panel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--cy),var(--brand),transparent);background-size:200% 100%;animation:supportLine 4s linear infinite}@keyframes supportSweep{50%,100%{transform:translateX(100%)}}@keyframes supportLine{to{background-position:200% 0}}
+.support-panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);transform:translateX(-100%);animation:supportSweep 6s ease-in-out infinite}.support-panel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--cy),var(--brand),transparent);background-size:200% 100%;animation:supportLine 4s linear infinite}@keyframes supportSweep{50%,100%{transform:translateX(100%)}}@keyframes supportLine{to{background-position:200% 0}}@keyframes steamSignal{70%{box-shadow:0 0 0 8px rgba(var(--brand-rgb),0)}100%{box-shadow:0 0 0 0 rgba(var(--brand-rgb),0)}}
+.support-intro,.platform-set,.language-set{position:relative;padding:24px 26px}.platform-set,.language-set{border-left:1px solid rgba(255,255,255,.1)}.support-kicker{display:block;color:var(--cy);font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin-bottom:7px}.support-title{font-size:clamp(20px,2.3vw,29px);line-height:1.04;letter-spacing:-.035em;color:#fff}.support-title b{color:var(--brand-2)}.support-label{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px}.support-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 0 rgba(var(--brand-rgb),.5);animation:steamSignal 2.2s infinite}.platform-list{display:flex;flex-wrap:wrap;gap:8px}.platform-list span{color:#fff;font-size:15px;font-weight:900;letter-spacing:-.02em}.platform-list span+span::before{content:"/";margin-right:8px;color:var(--cy)}.language-list{display:flex;flex-wrap:wrap;gap:7px}.language-list span{color:var(--ink-2);font-size:12px;font-weight:750}.language-list span:not(:last-child)::after{content:"·";color:var(--brand);margin-left:7px}
 @media(max-width:640px){.story{min-height:0;padding:30px 26px}.story .ic{margin-bottom:22px}.story h3{font-size:27px}}
 
 /* Özellik kartları: çizim ikonları yerine modül terminali dili */
-.feat{counter-reset:module;gap:16px}.fcard{counter-increment:module;min-height:188px;padding:26px 26px 24px;background:linear-gradient(145deg,rgba(56,199,180,.05),var(--surface) 42%,var(--surface-2));box-shadow:none}.fcard .fi{width:auto;height:auto;margin:0 0 21px;border-radius:0;background:none;display:block}.fcard .fi svg{display:none}.fcard .fi::before{content:"SYSTEM MODULE";display:block;color:var(--ink-3);font-size:9px;font-weight:900;letter-spacing:.16em}.fcard .fi::after{content:counter(module,decimal-leading-zero);display:block;margin-top:3px;color:var(--cy);font-size:31px;font-weight:900;letter-spacing:-.07em;line-height:1}.fcard h4{font-size:18px;margin-bottom:8px}.fcard p{line-height:1.65}.fcard:hover{transform:translateY(-7px);background:linear-gradient(145deg,rgba(56,199,180,.13),var(--surface) 48%,var(--surface-2))}
+.feat{gap:16px}.fcard{min-height:188px;padding:30px 26px 24px;background:linear-gradient(145deg,rgba(56,199,180,.05),var(--surface) 42%,var(--surface-2));box-shadow:none}.fcard .fi{display:none}.fcard h4{font-size:20px;margin-bottom:10px;color:var(--brand)}.fcard p{line-height:1.65}.fcard:hover{transform:translateY(-7px);background:linear-gradient(145deg,rgba(56,199,180,.13),var(--surface) 48%,var(--surface-2))}
 
 /* İlk bakış: fragman merkezi, ekran görüntüleri keşif yüzeyi */
 .trailerbox{margin-top:38px;border-color:rgba(56,199,180,.32);box-shadow:0 30px 70px rgba(0,0,0,.32)}.trailerbox::after{content:"CLICK TO EXPLORE";position:absolute;z-index:2;right:16px;bottom:16px;color:rgba(255,255,255,.76);background:rgba(5,8,11,.72);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.12em}.trailerbox video{transition:transform .8s var(--ease)}.trailerbox:hover video{transform:scale(1.025)}
@@ -235,6 +234,7 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
   .duo{grid-template-columns:1fr}
   .feat{grid-template-columns:1fr 1fr}
   .shots{grid-template-columns:1fr 1fr}
+  .support-panel{grid-template-columns:1fr 1fr}.language-set{grid-column:1/-1;border-left:0;border-top:1px solid rgba(255,255,255,.1)}
 }
 @media(max-width:640px){
   :root{--navh:60px}
@@ -247,8 +247,12 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
   .cta-big{padding:44px 22px;border-radius:24px}
   .story{padding:26px}
   .back{display:none}
-  .statusline{font-size:10px}
+  .support-zone{margin-top:-14px;padding-bottom:18px}.support-panel{grid-template-columns:1fr}.support-intro,.platform-set,.language-set{padding:20px}.platform-set,.language-set{border-left:0;border-top:1px solid rgba(255,255,255,.1)}.language-set{grid-column:auto}.support-title{font-size:25px}
 }
+/* Çıkış desteği: iki taraf kartlarıyla aynı görsel dil */
+.support-zone{z-index:1;margin:0;padding:72px 0 40px;background:linear-gradient(180deg,#100d14 0%,var(--bg) 100%)}
+.support-panel{display:none}.support-heading{margin-bottom:28px}.support-heading h2{margin-bottom:10px}.support-heading p{max-width:630px;color:var(--ink-2);font-size:17px}.support-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px}.support-card{position:relative;min-height:206px;padding:36px 40px;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,rgba(56,199,180,.055),var(--surface) 45%,var(--surface-2));transition:transform .35s var(--ease),border-color .3s,box-shadow .3s}.support-card::after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,var(--cy),var(--brand),transparent);transform:scaleX(.18);transform-origin:left;transition:transform .35s var(--ease)}.support-card:hover{transform:translateY(-8px);border-color:var(--cy);box-shadow:0 25px 55px rgba(20,64,60,.16)}.support-card:hover::after{transform:scaleX(1)}.support-card h3{margin:0 0 20px;color:var(--brand);font-size:clamp(25px,3vw,32px)}.support-card .platform-list,.support-card .language-list{display:flex;flex-wrap:wrap;align-items:center;gap:0}.support-card .platform-list span{color:var(--ink);font-size:18px;font-weight:900;letter-spacing:-.025em}.support-card .platform-list span+span::before{content:"/";display:inline;margin:0 11px;color:var(--brand)}.support-card .language-list span{color:var(--ink);font-size:14px;font-weight:750;line-height:1.9}.support-card .language-list span:not(:last-child)::after{content:"·";display:inline;color:var(--brand);margin:0 8px}.support-card .language-list span:first-child{color:var(--ink)}
+@media(max-width:900px){.support-cards{gap:22px}}@media(max-width:640px){.support-zone{margin:0;padding:54px 0 22px}.support-cards{grid-template-columns:1fr}.support-card{min-height:0;padding:30px 26px}}
 </style>
 </head>
 <body>
@@ -286,7 +290,6 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
   <div class="orb o1"></div><div class="orb o2"></div>
   <div class="wrap">
     <img class="herologo" src="../app_icon.png" alt="Cyber Academy" onerror="this.style.display='none'">
-    <span class="tagpill"><span class="en i">Coming soon to Steam</span><span class="tr i">Steam'de yakında</span></span>
     <h1 class="en">Learn to hack.<br><span class="cy">Learn to defend.</span></h1>
     <h1 class="tr">Saldırmayı öğren.<br><span class="cy">Savunmayı öğren.</span></h1>
     <p class="lead en">Cyber Academy is a cybersecurity game built on real concepts. Study the craft through hands on puzzles, then step into a living dark web where you attack, defend, and outsmart other players.</p>
@@ -295,13 +298,30 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
       <a class="btn p dis" href="#" title="Steam"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
       <a class="btn d" href="#trailer"><span class="en i">Watch the trailer</span><span class="tr i">Fragmanı izle</span></a>
     </div>
-    <div class="meta">
-      <span class="en i">Launching on <b>Windows</b>, <b>macOS</b> and <b>Linux</b> &nbsp;&middot;&nbsp; Singleplayer and Online PvP</span>
-      <span class="tr i"><b>Windows</b>, <b>macOS</b> ve <b>Linux</b> için çıkacak &nbsp;&middot;&nbsp; Tek oyunculu ve Çevrimiçi PvP</span>
-    </div>
-    <div class="statusline"><span class="en i">Network ready · training protocol active</span><span class="tr i">Ağ hazır · eğitim protokolü aktif</span></div>
   </div>
 </div>
+
+<section class="support-zone" aria-label="Platforms and languages">
+  <div class="wrap">
+    <div class="support-heading rv">
+      <span class="eyebrow"><span class="en i">Launch support</span><span class="tr i">Çıkış desteği</span></span>
+      <h2 class="en">Ready for your <span class="grad">world.</span></h2>
+      <h2 class="tr">Senin <span class="grad">dünyan için hazır.</span></h2>
+      <p class="en">Cyber Academy launches across desktop platforms, with nine supported languages from day one.</p>
+      <p class="tr">Cyber Academy, çıkış gününde masaüstü platformları ve dokuz desteklenen dille hazır olacak.</p>
+    </div>
+    <div class="support-cards">
+      <div class="support-card rv">
+        <h3><span class="en i">Play at launch</span><span class="tr i">Çıkışta oyna</span></h3>
+        <div class="platform-list"><span>Windows</span><span>macOS</span><span>Linux</span></div>
+      </div>
+      <div class="support-card rv">
+        <h3><span class="en i">9 languages</span><span class="tr i">9 dil</span></h3>
+        <div class="language-list"><span>English</span><span>Türkçe</span><span>Deutsch</span><span>简体中文</span><span>Русский</span><span>Español</span><span>한국어</span><span>日本語</span><span>Italiano</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <main>
   <!-- İKİ TARAF -->
@@ -319,7 +339,6 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
           <h3 class="tr">Akademi</h3>
           <p class="en">Twenty five hands on modules teach real cybersecurity: phishing, passwords, networks, malware, incident response, cryptography and more. You do not read about it, you do it. Every concept is a puzzle you solve inside a realistic tool, so the knowledge sticks.</p>
           <p class="tr">Yirmi beş uygulamalı modül gerçek siber güvenliği öğretir: kimlik avı, parolalar, ağlar, zararlı yazılım, olay müdahale, kriptografi ve daha fazlası. Okumuyorsun, yapıyorsun. Her kavram gerçekçi bir aracın içinde çözdüğün bir bulmaca, böylece bilgi kalıcı oluyor.</p>
-          <div class="language-grid" aria-label="Supported languages"><span>9 Languages</span><span>English</span><span>Türkçe</span><span>Deutsch</span><span>简体中文</span><span>Русский</span><span>Español</span><span>한국어</span><span>日本語</span><span>Italiano</span></div>
         </div>
         <div class="story rv">
           <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg></div>
@@ -435,6 +454,9 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
 (function(){
   'use strict';
   var d=document, root=d.documentElement;
+  if(location.protocol!=='file:'&&location.pathname.endsWith('/cyberacademy/index.html')){
+    history.replaceState(null,'',location.pathname.replace(/index\.html$/,'')+location.search+location.hash);
+  }
   function $(s){return d.querySelector(s);}
   function $$(s){return Array.prototype.slice.call(d.querySelectorAll(s));}
   function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}

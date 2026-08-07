@@ -208,8 +208,7 @@ html[data-theme="dark"] .blob{opacity:.16}
 section.blk{padding:96px 0;position:relative}
 .band{background:var(--bg-soft)}
 .sep{border-top:1px solid var(--line)}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:15px}
-.eyebrow::before{content:"";width:22px;height:2px;background:var(--brand);border-radius:2px}
+.eyebrow{display:inline-flex;align-items:center;font-size:14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:17px}
 h2{font-size:clamp(31px,4.9vw,50px);margin-bottom:16px;padding-bottom:.04em}
 .sub{color:var(--ink-2);font-size:17.5px;max-width:640px}
 .rv{opacity:0;transform:translateY(34px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -221,12 +220,6 @@ h2{font-size:clamp(31px,4.9vw,50px);margin-bottom:16px;padding-bottom:.04em}
 .stage{position:relative;aspect-ratio:16/9;background:#141012;overflow:hidden;display:grid;place-items:center}
 .stagevid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .stage .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(16,12,14,.18),rgba(16,12,14,.62))}
-.play{position:relative;z-index:2;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 12px 36px rgba(var(--brand-rgb),.45);transition:transform .35s var(--ease)}
-.stage:hover .play{transform:scale(1.09)}
-.play::after{content:"";border-left:21px solid #fff;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
-.pr{position:absolute;inset:-15px;border:2px solid rgba(var(--brand-rgb),.4);border-radius:50%;animation:ring 2.6s ease-out infinite}
-@keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.42);opacity:0}}
-.vlabel{position:absolute;z-index:2;bottom:15px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-size:12.5px;font-weight:700;letter-spacing:.02em}
 .ginfo{padding:34px}
 @media(min-width:900px){.ginfo{padding:44px 50px}}
 .chip{display:inline-block;font-size:11.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);background:var(--brand-soft);border:1px solid var(--line-2);border-radius:999px;padding:7px 14px;margin-bottom:18px}
@@ -327,9 +320,9 @@ section.blk:nth-of-type(even)::before{bottom:-250px;left:-260px}
 /* Oyun kartı: bilgi kutusu yerine canlı oyun yayını hissi */
 .game{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(370px,.92fr);min-height:520px;border-color:rgba(var(--brand-rgb),.24);overflow:visible;background:var(--surface)}
 .stage{aspect-ratio:auto;min-height:100%;border-radius:29px 0 0 29px}
-.stage::before{content:"CYBER ACADEMY / LIVE BUILD";position:absolute;top:22px;left:22px;z-index:3;color:#fff;background:rgba(10,8,10,.6);border:1px solid rgba(255,255,255,.26);backdrop-filter:blur(8px);padding:7px 11px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.12em}
+.stage::before{display:none}
 .ginfo{position:relative;display:flex;flex-direction:column;justify-content:center;padding:44px 42px!important;background:radial-gradient(circle at 100% 0,rgba(var(--brand-rgb),.18),transparent 38%),var(--surface);overflow:hidden}
-.ginfo::before{content:"// 01";position:absolute;right:-12px;top:-22px;font-size:105px;line-height:1;font-weight:900;letter-spacing:-.08em;color:rgba(var(--brand-rgb),.07);pointer-events:none}
+.ginfo::before{display:none}
 .gtitle{position:relative}.glogo{border-radius:16px;background:transparent;padding:0;box-shadow:none}.game h3{font-size:clamp(30px,3.2vw,42px)}
 .two{gap:32px;margin:26px 0 20px}.mini{position:relative;padding-left:14px}.mini::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--brand),transparent)}
 .gstats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin:0 0 19px;padding:0;border:0;background:var(--surface-2);border-radius:15px;overflow:hidden}.gstat{padding:13px 15px;min-width:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.gstat:nth-child(2n){border-right:0}.gstat:nth-last-child(-n+2){border-bottom:0}.gstat b{font-size:23px}
@@ -340,7 +333,6 @@ section.blk:nth-of-type(even)::before{bottom:-250px;left:-260px}
 .feat{counter-reset:feature}.fcard{counter-increment:feature}.fcard .fi{background:transparent;width:auto;height:auto;margin-bottom:22px;border-radius:0}.fcard .fi svg{display:none}.fcard .fi::before{content:"MODULE";display:block;color:var(--ink-3);font-size:10px;font-weight:900;letter-spacing:.16em}.fcard .fi::after{content:counter(feature,decimal-leading-zero);display:inline-block;margin-top:2px;font-size:30px;line-height:1;font-weight:900;color:var(--brand);letter-spacing:-.06em}
 
 /* Steam durumu: kart değil, canlı yayın çizgisi */
-.release-line{display:flex;align-items:center;gap:9px;margin:0 0 22px;color:var(--brand);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}.release-dot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--brand);box-shadow:0 0 0 0 rgba(var(--brand-rgb),.5);animation:steamSignal 2.2s infinite}.release-rule{height:1px;flex:1;max-width:118px;background:linear-gradient(90deg,rgba(var(--brand-rgb),.5),transparent)}@keyframes steamSignal{70%{box-shadow:0 0 0 8px rgba(var(--brand-rgb),0)}100%{box-shadow:0 0 0 0 rgba(var(--brand-rgb),0)}}
 
 /* Sayfanın kalan alanları için daha sinematik, yaşayan katmanlar */
 .hero{background:radial-gradient(58% 85% at 10% 7%,rgba(var(--brand-rgb),.16),transparent 67%),radial-gradient(45% 65% at 92% 72%,rgba(var(--brand-rgb),.11),transparent 70%)}
@@ -482,14 +474,11 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
         <p class="sub tr" style="margin-bottom:38px">İlk oyunumuz, yolda daha çok dünya var.</p>
       </div>
       <div class="game rv">
-        <a href="cyberacademy/index.html" class="stage" aria-label="Cyber Academy">
+        <div class="stage">
           <video class="stagevid" src="trailer.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <div class="scrim"></div>
-          <span class="pr"></span><div class="play"></div>
-          <div class="vlabel"><span class="en i">Watch on the game page</span><span class="tr i">Oyun sayfasında izle</span></div>
-        </a>
+        </div>
         <div class="ginfo">
-          <div class="release-line"><span class="release-dot" aria-hidden="true"></span><span class="en i">Coming soon to Steam</span><span class="tr i">Steam'de yakında</span><span class="release-rule" aria-hidden="true"></span></div>
           <div class="gtitle">
             <img class="glogo" src="app_icon.png" alt="" onerror="this.style.display='none'">
             <h3>Cyber Academy</h3>
@@ -511,10 +500,6 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
             <div class="gstat"><b>9</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
             <div class="gstat"><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
             <div class="gstat"><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
-          </div>
-          <div class="tags">
-            <span class="tag">Simulation</span><span class="tag">Strategy</span><span class="tag">Hacking</span>
-            <span class="tag">9 Languages</span><span class="tag">Windows · macOS · Linux</span>
           </div>
           <a class="btn p" href="cyberacademy/index.html"><span class="en i">Explore Cyber Academy</span><span class="tr i">Cyber Academy'yi keşfet</span> <span class="arw">&rarr;</span></a>
         </div>
