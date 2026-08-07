@@ -169,17 +169,25 @@ h2{font-size:clamp(32px,5.2vw,52px);font-weight:900;margin-bottom:16px;line-heig
 .studio{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .founder{background:linear-gradient(135deg,var(--o),var(--o2));border-radius:28px;padding:44px;color:#fff;box-shadow:0 22px 50px rgba(var(--sh),.22);position:relative;overflow:hidden}
 .founder::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.13);top:-70px;right:-70px}
+.founder .avatar{width:96px;height:96px;border-radius:24px;object-fit:cover;border:3px solid rgba(255,255,255,.55);box-shadow:0 12px 30px rgba(0,0,0,.22);margin-bottom:20px;display:block;position:relative}
+.founder .fmeta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px}
+.founder .flink{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:#fff;background:rgba(255,255,255,.18);border-radius:999px;padding:8px 15px;transition:background .2s,transform .2s}
+.founder .flink:hover{background:rgba(255,255,255,.32);transform:translateY(-2px)}
+.founder .flink svg{width:16px;height:16px;fill:currentColor}
 .founder .role{font-size:12.5px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:10px}
 .founder .name{font-size:38px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
 .founder .loc{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:700;background:rgba(255,255,255,.2);border-radius:999px;padding:8px 16px}
 
 .faq{max-width:820px;margin:26px auto 0;display:flex;flex-direction:column;gap:12px}
-.fitem{background:#fff;border:2px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .22s}
-.fitem.open{border-color:var(--o3)}
-.fq{width:100%;background:none;border:none;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;cursor:pointer;text-align:left}
-.fq>span{font-weight:800;font-size:16px;color:var(--ink)}
-.fi{width:24px;height:24px;flex-shrink:0;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;transition:.22s;color:var(--ink3);font-weight:900;font-size:14px}
-.fitem.open .fi{transform:rotate(45deg);background:var(--o);border-color:var(--o);color:#fff}
+.fitem{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .22s,box-shadow .22s,transform .22s;box-shadow:0 4px 14px rgba(var(--sh),.05)}
+.fitem:hover{box-shadow:0 10px 26px rgba(var(--sh),.1);transform:translateY(-1px)}
+.fitem.open{border-color:var(--o3);box-shadow:0 14px 34px rgba(var(--sh),.12)}
+.fq{width:100%;background:none;border:none;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;text-align:left}
+.fq>span{font-weight:800;font-size:16.5px;color:var(--ink)}
+.fi{width:34px;height:34px;flex-shrink:0;border-radius:11px;background:var(--o3);display:grid;place-items:center;transition:background .25s,color .25s}
+.fi svg{width:16px;height:16px;stroke:var(--o);stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .28s var(--ease)}
+.fitem.open .fi{background:var(--o)}
+.fitem.open .fi svg{stroke:#fff;transform:rotate(180deg)}
 .fa{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .fitem.open .fa{max-height:400px}
 .fa>div{padding:0 22px 20px;color:var(--ink2);font-size:15px;line-height:1.8}
@@ -192,6 +200,10 @@ h2{font-size:clamp(32px,5.2vw,52px);font-weight:900;margin-bottom:16px;line-heig
 .contact p{color:rgba(255,255,255,.7);font-size:18px;margin:0 0 28px}
 .mailbtn{display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--ink);font-weight:900;font-size:16px;padding:16px 28px;border-radius:15px;transition:transform .3s var(--ease),box-shadow .3s}
 .mailbtn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 40px rgba(var(--sh),.3)}
+.socials{display:flex;justify-content:center;gap:14px;margin-top:28px}
+.socials a{width:50px;height:50px;border-radius:15px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:#fff;transition:background .22s,transform .22s,border-color .22s}
+.socials a:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.3);transform:translateY(-4px)}
+.socials svg{width:22px;height:22px;fill:currentColor}
 
 footer{border-top:2px solid var(--line);padding:36px 0}
 .foot{max-width:var(--W);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -341,10 +353,17 @@ footer{border-top:2px solid var(--line);padding:36px 0}
           <p class="sub tr">JinjaGames, Ankara merkezli bağımsız bir stüdyodur. Trendlerin veya kestirmelerin peşinde değiliz. Dürüst sistemleri, özenli tasarımı ve merakı ödüllendiren derinliği olan oyunlar yapıyoruz. Her oyun elle, uzun vadeyi düşünerek üretilir: geri dönmeye değer dünyalar.</p>
         </div>
         <div class="founder rv">
+          <img class="avatar" src="linkedinphoto.jpg" alt="Eren Oğur" loading="lazy">
           <div class="role"><span class="en i">Founder and Developer</span><span class="tr i">Kurucu ve Geliştirici</span></div>
           <div class="name">Eren Oğur</div>
           <p style="opacity:.92;margin:0 0 22px;font-size:16px"><span class="en i">Designs, builds and ships every JinjaGames title.</span><span class="tr i">Her JinjaGames oyununu tasarlar, geliştirir ve yayınlar.</span></p>
-          <span class="loc">Ankara, Türkiye</span>
+          <div class="fmeta">
+            <span class="loc">Ankara, Türkiye</span>
+            <a class="flink" href="https://www.linkedin.com/in/eren-o%C4%9Fur-850643295/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -359,27 +378,27 @@ footer{border-top:2px solid var(--line);padding:36px 0}
       </div>
       <div class="faq">
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">What is JinjaGames?</span><span class="tr i">JinjaGames nedir?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">What is JinjaGames?</span><span class="tr i">JinjaGames nedir?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">JinjaGames is an independent game studio based in Ankara, Turkey. We build games with honest systems and real depth, designed to respect the player.</span><span class="tr i">JinjaGames, Ankara merkezli bağımsız bir oyun stüdyosudur. Dürüst sistemleri ve gerçek derinliği olan, oyuncuya saygı gösteren oyunlar geliştiriyoruz.</span></div></div>
         </div>
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">What kind of games do you make?</span><span class="tr i">Nasıl oyunlar yapıyorsunuz?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">What kind of games do you make?</span><span class="tr i">Nasıl oyunlar yapıyorsunuz?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">Games that are easy to enter and hard to master. We care about thoughtful design, systems you can learn and break, and experiences that stay with you. We avoid trends, shortcuts and dishonest mechanics.</span><span class="tr i">Girmesi kolay, ustalaşması zor oyunlar. Özenli tasarıma, öğrenip kırabileceğin sistemlere ve akılda kalan deneyimlere önem veriyoruz. Trendlerden, kestirmelerden ve dürüst olmayan mekaniklerden kaçınırız.</span></div></div>
         </div>
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">Where are you based?</span><span class="tr i">Nerede kuruluşunuz?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">Where are you based?</span><span class="tr i">Nerede kuruluşunuz?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">Ankara, Türkiye. JinjaGames is a fully independent studio founded and run by Eren Oğur.</span><span class="tr i">Ankara, Türkiye. JinjaGames, Eren Oğur tarafından kurulan ve yürütülen tamamen bağımsız bir stüdyodur.</span></div></div>
         </div>
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">Can I join the team?</span><span class="tr i">Ekibinize katılabilir miyim?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">Can I join the team?</span><span class="tr i">Ekibinize katılabilir miyim?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">When new roles open, we will announce them here and on social media. If you would like to work with JinjaGames, send your portfolio or resume to </span><span class="tr i">Yeni pozisyonlar açıldığında burada ve sosyal medyada duyuracağız. JinjaGames ile çalışmak istiyorsan portföyünü veya özgeçmişini </span><a href="mailto:jinjagamesofficial@gmail.com">jinjagamesofficial@gmail.com</a><span class="tr i"> adresine gönder.</span></div></div>
         </div>
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">Can I send feedback or a suggestion?</span><span class="tr i">Geri bildirim veya öneri gönderebilir miyim?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">Can I send feedback or a suggestion?</span><span class="tr i">Geri bildirim veya öneri gönderebilir miyim?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">Absolutely. Every message from players matters to us. Send your feedback, ideas or bug reports to </span><span class="tr i">Kesinlikle. Oyunculardan gelen her mesaj bizim için değerli. Geri bildirimlerini, fikirlerini veya hata raporlarını </span><a href="mailto:jinjagamesofficial@gmail.com">jinjagamesofficial@gmail.com</a><span class="tr i"> adresine gönderebilirsin.</span></div></div>
         </div>
         <div class="fitem rv">
-          <button class="fq" onclick="tf(this)"><span><span class="en i">How can I follow your news?</span><span class="tr i">Haberlerinizi nasıl takip ederim?</span></span><span class="fi">+</span></button>
+          <button class="fq" onclick="tf(this)"><span><span class="en i">How can I follow your news?</span><span class="tr i">Haberlerinizi nasıl takip ederim?</span></span><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
           <div class="fa"><div><span class="en i">Follow us on social media and check this site. Announcements about new games and updates are posted here first.</span><span class="tr i">Bizi sosyal medyada takip et ve bu siteyi kontrol et. Yeni oyunlar ve güncellemelerle ilgili duyurular önce burada paylaşılır.</span></div></div>
         </div>
       </div>
@@ -395,6 +414,14 @@ footer{border-top:2px solid var(--line);padding:36px 0}
         <p class="en">Business, press or support. We read every message.</p>
         <p class="tr">İş, basın veya destek. Her mesajı okuyoruz.</p>
         <a class="mailbtn" href="mailto:jinjagamesofficial@gmail.com">jinjagamesofficial@gmail.com</a>
+        <div class="socials">
+          <a href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.36 2.67.95 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/jinjagamesofficial" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
