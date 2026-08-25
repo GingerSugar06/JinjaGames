@@ -132,10 +132,12 @@ nav.down{transform:translateY(-100%)}
 .nav-links a:hover{color:var(--ink);background:var(--brand-soft)}
 .nav-links a.active{color:var(--brand);background:var(--brand-soft)}
 .nav-end{display:flex;align-items:center;gap:9px;flex-shrink:0}
-.seg{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:3px}
-.seg button{background:none;border:none;cursor:pointer;font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:6px 11px;border-radius:8px;color:var(--ink-3);transition:.2s}
-.seg button.on{background:var(--brand);color:#fff}
-.seg button:hover:not(.on){color:var(--ink)}
+.lang-menu{position:relative}
+.lang-trigger{min-width:82px;height:38px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;cursor:pointer;color:var(--ink);font-size:11.5px;font-weight:900;letter-spacing:.05em;transition:.22s}
+.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--brand);border-color:var(--brand);transform:translateY(-2px);box-shadow:0 8px 20px rgba(var(--brand-rgb),.13)}
+.lang-globe{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8}.lang-chev{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}.lang-menu.open .lang-chev{transform:rotate(180deg)}
+.lang-popover{position:absolute;right:0;top:calc(100% + 10px);width:230px;padding:8px;background:color-mix(in srgb,var(--surface) 94%,transparent);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-2);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:220}
+.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}.lang-menu-title{padding:6px 9px 8px;color:var(--ink-3);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.lang-option{width:100%;display:flex;align-items:center;gap:10px;padding:10px 9px;border:0;border-radius:10px;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:13px;font-weight:800;transition:.2s}.lang-option:hover,.lang-option.on{background:var(--brand-soft);color:var(--ink)}.lang-code{min-width:24px;color:var(--brand);font-size:10px;font-weight:900;letter-spacing:.08em}.lang-option.on::after{content:"✓";margin-left:auto;color:var(--brand);font-weight:900}.lang-game-note{margin:6px 2px 1px;padding:10px 8px 3px;border-top:1px solid var(--line);color:var(--ink-3);font-size:10.5px;font-weight:700;line-height:1.35}.lang-game-note b{color:var(--brand)}
 .iconbtn{width:38px;height:38px;border-radius:11px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
 .iconbtn:hover{color:var(--brand);border-color:var(--brand);transform:translateY(-2px)}
 .iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -349,7 +351,7 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
 /* ---------------- RESPONSIVE ---------------- */
 @media(max-width:1000px){
   .nav-links{display:none}
-  .seg.deskonly{display:none}
+  .lang-menu.deskonly{display:none}
   .burger{display:flex}
 }
 @media(max-width:860px){
@@ -395,9 +397,14 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
   <a href="#faq" data-close>FAQ</a>
   <a href="#contact" data-close><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
   <div class="mrow">
-    <div class="seg">
-      <button data-lang-set="en">EN</button>
-      <button data-lang-set="tr">TR</button>
+    <div class="lang-menu">
+      <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="mobile-language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+      <div class="lang-popover" id="mobile-language-menu" role="menu">
+        <div class="lang-menu-title">Site language</div>
+        <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+        <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+        <p class="lang-game-note"><b>Cyber Academy</b> supports 13 game languages.</p>
+      </div>
     </div>
     <button class="iconbtn" data-theme-toggle aria-label="Theme">
       <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -421,9 +428,14 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
         <li><a href="#contact"><span class="en i">Contact</span><span class="tr i">İletişim</span></a></li>
       </ul>
       <div class="nav-end">
-        <div class="seg deskonly">
-          <button data-lang-set="en">EN</button>
-          <button data-lang-set="tr">TR</button>
+        <div class="lang-menu deskonly">
+          <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="desktop-language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+          <div class="lang-popover" id="desktop-language-menu" role="menu">
+            <div class="lang-menu-title">Site language</div>
+            <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+            <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+            <p class="lang-game-note"><b>Cyber Academy</b> supports 13 game languages.</p>
+          </div>
         </div>
         <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
           <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -480,7 +492,7 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
         </div>
         <div class="ginfo">
           <div class="gtitle">
-            <img class="glogo" src="app_icon.png" alt="" onerror="this.style.display='none'">
+            <img class="glogo" src="app_icon.png?v=20260825" alt="Cyber Academy" onerror="this.style.display='none'">
             <h3>Cyber Academy</h3>
           </div>
           <div class="two">
@@ -497,7 +509,7 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
           </div>
           <div class="gstats">
             <div class="gstat"><b>25+</b><span class="en i">Modules</span><span class="tr i">Modül</span></div>
-            <div class="gstat"><b>9</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
+            <div class="gstat"><b>13</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
             <div class="gstat"><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
             <div class="gstat"><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
           </div>
@@ -640,16 +652,30 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
     $$('[data-lang-set]').forEach(function(b){
       b.classList.toggle('on', b.getAttribute('data-lang-set')===l);
     });
+    $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); });
   }
   function setLang(l){
     if(l!=='tr'&&l!=='en') l='en';
     root.setAttribute('data-lang',l); root.lang=l;
-    store('jg_lang',l); paintLang(l);
+    store('jg_lang',l); paintLang(l); closeLangMenus();
   }
   $$('[data-lang-set]').forEach(function(b){
     b.addEventListener('click',function(){ setLang(b.getAttribute('data-lang-set')); closeMenu(); });
   });
   paintLang(root.getAttribute('data-lang')||'en');
+
+  /* ---------- DİL MENÜSÜ ---------- */
+  function closeLangMenus(){
+    $$('.lang-menu.open').forEach(function(menu){ menu.classList.remove('open'); var trigger=$('[data-lang-toggle]',menu); if(trigger) trigger.setAttribute('aria-expanded','false'); });
+  }
+  $$('[data-lang-toggle]').forEach(function(trigger){
+    trigger.addEventListener('click',function(e){
+      var menu=trigger.closest('.lang-menu'), opening=!menu.classList.contains('open');
+      closeLangMenus(); if(opening){ menu.classList.add('open'); trigger.setAttribute('aria-expanded','true'); }
+      e.stopPropagation();
+    });
+  });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
 
   /* ---------- TEMA ---------- */
   function setTheme(t){

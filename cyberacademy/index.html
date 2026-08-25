@@ -7,13 +7,12 @@
 <meta name="description" content="Cyber Academy is a cybersecurity game that teaches you to hack and defend for real. Learn by playing, then raid a living dark web sandbox." />
 <meta name="theme-color" content="#FFFCFB" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0F0C0D" media="(prefers-color-scheme: dark)" />
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-j-shuriken-32.png?v=2" />
-<link rel="icon" type="image/png" sizes="48x48" href="../favicon-j-shuriken-48.png?v=2" />
-<link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
+<link rel="icon" type="image/png" href="../app_icon.png?v=20260825" />
+<link rel="apple-touch-icon" href="../app_icon.png?v=20260825" />
 <meta property="og:title" content="Cyber Academy" />
 <meta property="og:description" content="Learn to hack and defend, for real. A cybersecurity game by JinjaGames." />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="https://jinjagames.com/ss2_attack_chain.png" />
+<meta property="og:image" content="https://jinjagames.com/app_icon.png?v=20260825" />
 
 <script>
 /* Tema + dil, ana siteyle AYNI anahtarlardan okunur → sayfalar arası tutarlı. */
@@ -85,9 +84,7 @@ nav.stuck{background:var(--nav-bg-solid);border-color:var(--line);box-shadow:0 6
 .nav-end{display:flex;align-items:center;gap:9px}
 .back{font-size:14px;font-weight:700;color:var(--ink-2);padding:8px 13px;border-radius:10px;transition:.2s;white-space:nowrap}
 .back:hover{color:var(--brand);background:var(--brand-soft)}
-.seg{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:3px}
-.seg button{background:none;border:none;cursor:pointer;font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:6px 11px;border-radius:8px;color:var(--ink-3);transition:.2s}
-.seg button.on{background:var(--brand);color:#fff}
+.lang-menu{position:relative}.lang-trigger{min-width:82px;height:38px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;cursor:pointer;color:var(--ink);font-size:11.5px;font-weight:900;letter-spacing:.05em;transition:.22s}.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--brand);border-color:var(--brand);transform:translateY(-2px);box-shadow:0 8px 20px rgba(var(--brand-rgb),.13)}.lang-globe{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8}.lang-chev{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}.lang-menu.open .lang-chev{transform:rotate(180deg)}.lang-popover{position:absolute;right:0;top:calc(100% + 10px);width:230px;padding:8px;background:color-mix(in srgb,var(--surface) 94%,transparent);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-2);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:220}.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}.lang-menu-title{padding:6px 9px 8px;color:var(--ink-3);font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.lang-option{width:100%;display:flex;align-items:center;gap:10px;padding:10px 9px;border:0;border-radius:10px;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:13px;font-weight:800;transition:.2s}.lang-option:hover,.lang-option.on{background:var(--brand-soft);color:var(--ink)}.lang-code{min-width:24px;color:var(--brand);font-size:10px;font-weight:900;letter-spacing:.08em}.lang-option.on::after{content:"✓";margin-left:auto;color:var(--brand);font-weight:900}.lang-game-note{margin:6px 2px 1px;padding:10px 8px 3px;border-top:1px solid var(--line);color:var(--ink-3);font-size:10.5px;font-weight:700;line-height:1.35}.lang-game-note b{color:var(--brand)}
 .iconbtn{width:38px;height:38px;border-radius:11px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
 .iconbtn:hover{color:var(--brand);border-color:var(--brand);transform:translateY(-2px)}
 .iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -265,9 +262,14 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
     </a>
     <div class="nav-end">
       <a class="back" href="../index.html">&larr; <span class="en i">All games</span><span class="tr i">Tüm oyunlar</span></a>
-      <div class="seg">
-        <button data-lang-set="en">EN</button>
-        <button data-lang-set="tr">TR</button>
+      <div class="lang-menu">
+        <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+        <div class="lang-popover" id="language-menu" role="menu">
+          <div class="lang-menu-title">Site language</div>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+          <p class="lang-game-note"><b>Cyber Academy</b> supports 13 game languages.</p>
+        </div>
       </div>
       <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
         <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -289,13 +291,13 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
   <div class="grid"></div>
   <div class="orb o1"></div><div class="orb o2"></div>
   <div class="wrap">
-    <img class="herologo" src="../app_icon.png" alt="Cyber Academy" onerror="this.style.display='none'">
+    <img class="herologo" src="../app_icon.png?v=20260825" alt="Cyber Academy" onerror="this.style.display='none'">
     <h1 class="en">Learn to hack.<br><span class="cy">Learn to defend.</span></h1>
     <h1 class="tr">Saldırmayı öğren.<br><span class="cy">Savunmayı öğren.</span></h1>
     <p class="lead en">Cyber Academy is a cybersecurity game built on real concepts. Study the craft through hands on puzzles, then step into a living dark web where you attack, defend, and outsmart other players.</p>
     <p class="lead tr">Cyber Academy, gerçek kavramlar üzerine kurulu bir siber güvenlik oyunu. Zanaatı uygulamalı bulmacalarla öğren, sonra saldırdığın, savunduğun ve diğer oyuncuları alt ettiğin canlı bir karanlık ağa adım at.</p>
     <div class="cta">
-      <a class="btn p dis" href="#" title="Steam"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+      <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
       <a class="btn d" href="#trailer"><span class="en i">Watch the trailer</span><span class="tr i">Fragmanı izle</span></a>
     </div>
   </div>
@@ -307,8 +309,8 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
       <span class="eyebrow"><span class="en i">Launch support</span><span class="tr i">Çıkış desteği</span></span>
       <h2 class="en">Ready for your <span class="grad">world.</span></h2>
       <h2 class="tr">Senin <span class="grad">dünyan için hazır.</span></h2>
-      <p class="en">Cyber Academy launches across desktop platforms, with nine supported languages from day one.</p>
-      <p class="tr">Cyber Academy, çıkış gününde masaüstü platformları ve dokuz desteklenen dille hazır olacak.</p>
+      <p class="en">Cyber Academy launches across desktop platforms, with thirteen supported languages from day one.</p>
+      <p class="tr">Cyber Academy, çıkış gününde masaüstü platformları ve on üç desteklenen dille hazır olacak.</p>
     </div>
     <div class="support-cards">
       <div class="support-card rv">
@@ -316,8 +318,8 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
         <div class="platform-list"><span>Windows</span><span>macOS</span><span>Linux</span></div>
       </div>
       <div class="support-card rv">
-        <h3><span class="en i">9 languages</span><span class="tr i">9 dil</span></h3>
-        <div class="language-list"><span>English</span><span>Türkçe</span><span>Deutsch</span><span>简体中文</span><span>Русский</span><span>Español</span><span>한국어</span><span>日本語</span><span>Italiano</span></div>
+        <h3><span class="en i">13 languages</span><span class="tr i">13 dil</span></h3>
+        <div class="language-list"><span>English</span><span>Türkçe</span><span>简体中文</span><span>Русский</span><span>Deutsch</span><span>Español</span><span>日本語</span><span>한국어</span><span>Italiano</span><span>Português</span><span>Français</span><span>Polski</span><span>Eesti</span></div>
       </div>
     </div>
   </div>
@@ -435,7 +437,7 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
         <h2 class="tr">Cyber Academy'yi istek listene ekle.</h2>
         <p class="en">Wishlist to get notified the moment it launches on Steam.</p>
         <p class="tr">İstek listene ekle, Steam'de çıktığı an haberin olsun.</p>
-        <a class="btn p dis" href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+        <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -462,14 +464,17 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
   function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
   /* dil */
-  function paintLang(l){ $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); }); }
+  function closeLangMenus(){ $$('.lang-menu.open').forEach(function(menu){ menu.classList.remove('open'); var trigger=$('[data-lang-toggle]',menu); if(trigger) trigger.setAttribute('aria-expanded','false'); }); }
+  function paintLang(l){ $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); }); $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); }); }
   $$('[data-lang-set]').forEach(function(b){
     b.addEventListener('click',function(){
       var l=b.getAttribute('data-lang-set');
-      root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l);
+      root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus();
     });
   });
   paintLang(root.getAttribute('data-lang')||'en');
+  $$('[data-lang-toggle]').forEach(function(trigger){ trigger.addEventListener('click',function(e){ var menu=trigger.closest('.lang-menu'), opening=!menu.classList.contains('open'); closeLangMenus(); if(opening){ menu.classList.add('open'); trigger.setAttribute('aria-expanded','true'); } e.stopPropagation(); }); });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
 
   /* tema */
   $$('[data-theme-toggle]').forEach(function(b){
