@@ -3,19 +3,24 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>JinjaGames</title>
-<meta name="description" content="JinjaGames is an indie game studio from Ankara, Turkey, founded by Eren Oğur. We build deep, honest, hand crafted games." />
+<title>JinjaGames | Cyber Academy ve Derin Indie Oyunlar</title>
+<meta name="description" content="Ankara merkezli JinjaGames'in ilk oyunu Cyber Academy'yi keşfet: gerçek siber güvenliği oynayarak öğren ve Steam istek listene ekle." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/" />
 <meta name="theme-color" content="#FFFCFB" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0F0C0D" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-j-shuriken-32.png?v=2" />
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-j-shuriken-48.png?v=2" />
 <link rel="apple-touch-icon" href="favicon-j-shuriken-180.png?v=2" />
-<meta property="og:title" content="JinjaGames" />
-<meta property="og:description" content="Indie game studio from Ankara. We build deep, honest, hand crafted games." />
+<meta property="og:title" content="JinjaGames | Cyber Academy" />
+<meta property="og:description" content="Deep, honest indie games from Ankara. Wishlist Cyber Academy on Steam." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jinjagames.com" />
-<meta property="og:image" content="https://jinjagames.com/icon-512.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://jinjagames.com/JinjaGamesBanner.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/","logo":"https://jinjagames.com/logo-512.png","email":"jinjagamesofficial@gmail.com","sameAs":["https://www.instagram.com/jinja.games/","https://www.linkedin.com/company/jinjagamesofficial"]},{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JinjaGames?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is an indie game studio based in Ankara, Türkiye."}},{"@type":"Question","name":"What kind of games does JinjaGames make?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames makes deep, honest games with systems that reward curiosity."}},{"@type":"Question","name":"Where is JinjaGames based?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is based in Ankara, Türkiye."}},{"@type":"Question","name":"Can I join the team?","acceptedAnswer":{"@type":"Answer","text":"When new roles open, JinjaGames announces them on the site and social media."}},{"@type":"Question","name":"Can I send feedback?","acceptedAnswer":{"@type":"Answer","text":"Feedback, ideas and bug reports can be sent to jinjagamesofficial@gmail.com."}}]}]}
+</script>
 
 <script>
 /* Tema, dil ve "girişi bir kez göster" kararı BOYAMADAN ÖNCE verilir.
@@ -460,8 +465,8 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
       <p class="tagline en">Indie game studio from Ankara. Deep, honest games worth mastering.</p>
       <p class="tagline tr">Ankara merkezli indie oyun stüdyosu. Ustalaşmaya değer, dürüst ve derin oyunlar.</p>
       <div class="cta">
-        <a class="btn p" href="#games"><span class="en i">See our games</span><span class="tr i">Oyunlarımız</span> <span class="arw">&rarr;</span></a>
-        <a class="btn g" href="#studio"><span class="en i">About the studio</span><span class="tr i">Stüdyo hakkında</span></a>
+        <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+        <a class="btn g" href="cyberacademy/"><span class="en i">Explore Cyber Academy</span><span class="tr i">Cyber Academy'yi keşfet</span></a>
       </div>
     </div>
   </section>
@@ -489,7 +494,7 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
       </div>
       <div class="game rv">
         <div class="stage">
-          <video class="stagevid" src="newss_And_trailer/CyberAcademy_Steam_Trailer_v1.mp4" autoplay muted loop playsinline preload="metadata" poster="newss_And_trailer/main_capsule_1232x706_v1.png"></video>
+          <video class="stagevid" data-src="newss_And_trailer/CyberAcademy_Steam_Trailer_v1.mp4" muted loop playsinline preload="none" poster="newss_And_trailer/main_capsule_1232x706_v1.png"></video>
           <div class="scrim"></div>
         </div>
         <div class="ginfo">
@@ -630,6 +635,7 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
       <a href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/company/jinjagamesofficial" target="_blank" rel="noopener">LinkedIn</a>
       <a href="#faq"><span class="en i">FAQ</span><span class="tr i">SSS</span></a>
+      <a href="privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a>
     </div>
   </div>
   <div class="fbot">
@@ -747,6 +753,19 @@ footer{background:linear-gradient(135deg,var(--bg-soft),var(--bg) 56%,var(--bg-s
 
   /* ---------- YIL ---------- */
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+
+  /* ---------- SAYFA HIZI: oyun kartı görünene kadar büyük fragmanı yükleme ---------- */
+  $$('.stagevid[data-src]').forEach(function(video){
+    function loadVideo(){
+      if(video.src) return;
+      video.src=video.getAttribute('data-src'); video.preload='metadata';
+      video.addEventListener('canplay',function(){ video.play().catch(function(){}); },{once:true});
+    }
+    if('IntersectionObserver' in window){
+      var videoIO=new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){ loadVideo(); videoIO.unobserve(video); } }); },{rootMargin:'280px 0px'});
+      videoIO.observe(video);
+    } else { loadVideo(); }
+  });
 
   /* ---------- GİRİŞ: oturumda BİR KEZ ---------- */
   var intro=$('#intro'), shell=$('#shell');
