@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Cyber Academy on Steam | Cybersecurity Strategy Game | JinjaGames</title>
-<meta name="description" content="Cyber Academy is a cybersecurity strategy game by JinjaGames. Learn hacking and defense through 25+ hands-on missions in 25 languages, then wishlist it on Steam." />
+<meta name="description" content="Cyber Academy is a cybersecurity strategy game by JinjaGames. Learn hacking and defense through 25 hands on modules, on Windows, macOS and Linux in 25 languages, then wishlist it on Steam." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://jinjagames.com/cyberacademy/" />
 <meta name="theme-color" content="#FFFCFB" media="(prefers-color-scheme: light)" />
@@ -17,8 +17,11 @@
 <meta property="og:url" content="https://jinjagames.com/cyberacademy/" />
 <meta property="og:image" content="https://jinjagames.com/newss_And_trailer/main_capsule_1232x706_v1.png" />
 <meta name="twitter:card" content="summary_large_image" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/jetbrains-mono-latin-700.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/inter-latin-400.woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts.css" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Cyber Academy","alternateName":"Cyber Academy by JinjaGames","url":"https://jinjagames.com/cyberacademy/","mainEntityOfPage":"https://jinjagames.com/cyberacademy/","image":"https://jinjagames.com/newss_And_trailer/main_capsule_1232x706_v1.png","description":"A cybersecurity strategy game where players learn to attack and defend through 25+ hands-on missions and a living dark web sandbox.","author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"sameAs":["https://store.steampowered.com/app/5067820/Cyber_Academy/"],"gamePlatform":"Windows","genre":["Educational","Strategy","Simulation"],"inLanguage":["en","tr","zh-CN","zh-Hant","ru","de","es","ja","ko","it","pt-BR","fr","pl","et","hu","el","az","kk","fil","ro","sv","bg","uk","cs","vi"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Cyber Academy","item":"https://jinjagames.com/cyberacademy/"}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Cyber Academy","alternateName":"Cyber Academy by JinjaGames","url":"https://jinjagames.com/cyberacademy/","mainEntityOfPage":"https://jinjagames.com/cyberacademy/","image":"https://jinjagames.com/newss_And_trailer/main_capsule_1232x706_v1.png","description":"A cybersecurity strategy game where players learn to attack and defend through 25+ hands-on missions and a living dark web sandbox.","author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"sameAs":["https://store.steampowered.com/app/5067820/Cyber_Academy/"],"gamePlatform":["Windows","macOS","Linux"],"genre":["Educational","Strategy","Simulation"],"inLanguage":["en","tr","zh-CN","zh-Hant","ru","de","es","ja","ko","it","pt-BR","fr","pl","et","hu","el","az","kk","fil","ro","sv","bg","uk","cs","vi"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Cyber Academy","item":"https://jinjagames.com/cyberacademy/"}]}]}
 </script>
 
 <script>
@@ -65,7 +68,7 @@ html[data-theme="dark"]{
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s ease,color .35s ease}
 a{color:inherit;text-decoration:none}
-img,video{max-width:100%;display:block}
+img,video{max-width:100%;display:block;height:auto}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:8px}
 .wrap{max-width:var(--W);margin:0 auto;padding:0 24px}
@@ -83,8 +86,10 @@ html[data-lang="tr"] .en.i{display:none!important}
 }
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s}
-nav.stuck{background:var(--nav-bg-solid);border-color:var(--line);box-shadow:0 6px 26px rgba(0,0,0,.05)}
+/* DİKKAT: yalnız üst bar. Çıplak "nav" seçicisi sayfadaki
+   <nav class="crumb"> breadcrumb'ını da sabitleyip bara gizliyordu. */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s}
+nav#nav.stuck{background:var(--nav-bg-solid);border-color:var(--line);box-shadow:0 6px 26px rgba(0,0,0,.05)}
 .nav-in{max-width:var(--W);margin:0 auto;padding:0 24px;height:var(--navh);display:flex;align-items:center;justify-content:space-between;gap:14px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px;letter-spacing:-.02em}
 .brand img{height:30px;width:auto}
@@ -123,7 +128,7 @@ html[data-theme="dark"] .ic-moon{display:none}
 .hero h1 .cy{background:linear-gradient(100deg,#E85C4E,#FF9279);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p.lead{max-width:640px;color:rgba(255,255,255,.8);font-size:clamp(16.5px,2.2vw,20px);margin:0 0 32px}
 .hero .cta{display:flex;gap:13px;flex-wrap:wrap}
-.crumb{display:flex;align-items:center;gap:9px;margin:0 0 24px;color:rgba(255,255,255,.66);font-size:12px;font-weight:800;letter-spacing:.04em}.crumb a{color:inherit}.crumb a:hover{color:var(--cy)}.crumb .sep{color:var(--cy)}html[data-theme="light"] .crumb{color:#58707B}
+.crumb{display:flex;align-items:center;gap:9px;margin:0 0 24px;color:rgba(255,255,255,.66);font-size:12px;font-weight:800;letter-spacing:.04em}.crumb a{color:inherit}.crumb a:hover{color:var(--cy)}.crumb .sep{color:currentColor;opacity:.55}html[data-theme="light"] .crumb{color:#58707B}
 
 section.blk{padding:92px 0;position:relative}
 .band{background:var(--bg-soft)}
@@ -237,7 +242,7 @@ section.blk:nth-of-type(even)::before{left:-250px;bottom:-190px}
 .capsule-art{position:absolute!important;right:-14px;bottom:-62px;width:min(28%,245px);max-width:245px;opacity:.58;filter:drop-shadow(0 18px 28px rgba(0,0,0,.42));pointer-events:none;mask-image:linear-gradient(90deg,transparent 0%,#000 30%),linear-gradient(0deg,#000 70%,transparent)}@media(max-width:700px){.capsule-art{display:none}}
 
 /* Aydınlık tema: sıcak beyaz yerine oyunun turkuaz güvenlik paletiyle daha derin bir yüzey sistemi. */
-html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surface-2:#F6FBFC;--ink:#10222D;--ink-2:#536873;--ink-3:#728894;--line:#CEE0E5;--line-2:#B7D3D9;--brand-soft:#EAF6F5;--nav-bg:rgba(246,252,253,.82);--nav-bg-solid:rgba(246,252,253,.97);--shadow-1:0 1px 2px rgba(13,42,52,.05),0 9px 24px rgba(13,42,52,.07);--shadow-2:0 22px 52px rgba(13,42,52,.14)}html[data-theme="light"] nav{box-shadow:0 9px 24px rgba(13,42,52,.08)}html[data-theme="light"] .hero{color:#10222D;background:linear-gradient(90deg,rgba(244,251,252,.98) 0%,rgba(240,249,250,.94) 46%,rgba(235,247,248,.50) 72%,rgba(235,247,248,.22) 100%),radial-gradient(70% 90% at 12% 100%,rgba(56,199,180,.20),transparent 63%),url('../newss_And_trailer/library_hero_3840x1240_v2.png') center/cover no-repeat}html[data-theme="light"] .hero::before{opacity:.22}html[data-theme="light"] .hero::after{opacity:.18}html[data-theme="light"] .hero h1{color:#10222D}html[data-theme="light"] .hero h1 .game-name{color:#087D75}html[data-theme="light"] .hero p.lead{color:#425863;max-width:610px;border-left:2px solid var(--cy);padding-left:18px}html[data-theme="light"] .hero .btn.d{color:#18313B;background:rgba(255,255,255,.7);border-color:#A9CBD2}html[data-theme="light"] .hero .btn.d:hover{background:#fff;border-color:var(--cy)}html[data-theme="light"] .support-zone{background:linear-gradient(180deg,#DDEFF1 0%,var(--bg) 100%)}html[data-theme="light"] .support-card{background:linear-gradient(145deg,#fff,rgba(231,245,246,.85) 48%,#fff)}html[data-theme="light"] .story:hover,.fcard:hover{box-shadow:0 24px 52px rgba(13,72,77,.16)}
+html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surface-2:#F6FBFC;--ink:#10222D;--ink-2:#536873;--ink-3:#54686F;--line:#CEE0E5;--line-2:#B7D3D9;--brand-soft:#EAF6F5;--nav-bg:rgba(246,252,253,.82);--nav-bg-solid:rgba(246,252,253,.97);--shadow-1:0 1px 2px rgba(13,42,52,.05),0 9px 24px rgba(13,42,52,.07);--shadow-2:0 22px 52px rgba(13,42,52,.14)}html[data-theme="light"] nav{box-shadow:0 9px 24px rgba(13,42,52,.08)}html[data-theme="light"] .hero{color:#10222D;background:linear-gradient(90deg,rgba(244,251,252,.98) 0%,rgba(240,249,250,.94) 46%,rgba(235,247,248,.50) 72%,rgba(235,247,248,.22) 100%),radial-gradient(70% 90% at 12% 100%,rgba(56,199,180,.20),transparent 63%),url('../newss_And_trailer/library_hero_3840x1240_v2.png') center/cover no-repeat}html[data-theme="light"] .hero::before{opacity:.22}html[data-theme="light"] .hero::after{opacity:.18}html[data-theme="light"] .hero h1{color:#10222D}html[data-theme="light"] .hero h1 .game-name{color:#087D75}html[data-theme="light"] .hero p.lead{color:#425863;max-width:610px;border-left:2px solid var(--cy);padding-left:18px}html[data-theme="light"] .hero .btn.d{color:#18313B;background:rgba(255,255,255,.7);border-color:#A9CBD2}html[data-theme="light"] .hero .btn.d:hover{background:#fff;border-color:var(--cy)}html[data-theme="light"] .support-zone{background:linear-gradient(180deg,#DDEFF1 0%,var(--bg) 100%)}html[data-theme="light"] .support-card{background:linear-gradient(145deg,#fff,rgba(231,245,246,.85) 48%,#fff)}html[data-theme="light"] .story:hover,.fcard:hover{box-shadow:0 24px 52px rgba(13,72,77,.16)}
 
 @media(max-width:900px){
   .duo{grid-template-columns:1fr}
@@ -262,6 +267,103 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
 .support-zone{z-index:1;margin:0;padding:72px 0 40px;background:linear-gradient(180deg,#100d14 0%,var(--bg) 100%)}
 .support-panel{display:none}.support-heading{margin-bottom:28px}.support-heading h2{margin-bottom:10px}.support-heading p{max-width:630px;color:var(--ink-2);font-size:17px}.support-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px}.support-card{position:relative;min-height:206px;padding:36px 40px;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,rgba(56,199,180,.055),var(--surface) 45%,var(--surface-2));transition:transform .35s var(--ease),border-color .3s,box-shadow .3s}.support-card::after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,var(--cy),var(--brand),transparent);transform:scaleX(.18);transform-origin:left;transition:transform .35s var(--ease)}.support-card:hover{transform:translateY(-8px);border-color:var(--cy);box-shadow:0 25px 55px rgba(20,64,60,.16)}.support-card:hover::after{transform:scaleX(1)}.support-card h3{margin:0 0 20px;color:var(--brand);font-size:clamp(25px,3vw,32px)}.support-card .platform-list,.support-card .language-list{display:flex;flex-wrap:wrap;align-items:center;gap:0}.support-card .platform-list span{color:var(--ink);font-size:18px;font-weight:900;letter-spacing:-.025em}.support-card .platform-list span+span::before{content:"/";display:inline;margin:0 11px;color:var(--brand)}.platform-note{margin:14px 0 0;color:var(--ink-2);font-size:14px;font-weight:650;line-height:1.55}.support-card .language-list span{color:var(--ink);font-size:14px;font-weight:750;line-height:1.9}.support-card .language-list span:not(:last-child)::after{content:"·";display:inline;color:var(--brand);margin:0 8px}.support-card .language-list span:first-child{color:var(--ink)}
 @media(max-width:900px){.support-cards{gap:22px}}@media(max-width:640px){.support-zone{margin:0;padding:54px 0 22px}.support-cards{grid-template-columns:1fr}.support-card{min-height:0;padding:30px 26px}}
+
+/* ---------------- TİPOGRAFİ ----------------
+   Gövde Inter, başlıklar ve etiketler JetBrains Mono.
+   Terminal hissi bu sayfanın kendi dili; iskelet siteyle ortak kalıyor.
+   Yazı tipleri depodan geliyor, dışarıya istek gitmiyor. */
+:root{
+  --f-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:'JetBrains Mono',Consolas,ui-monospace,Menlo,monospace;
+}
+/* Siber şerit bilerek sayfadan taşıyor. Yatay kaymayı engellemek için
+   hem html hem body'de gizlenmeli; yalnız body yetmiyor. */
+html{overflow-x:hidden;max-width:100%}
+body{font-family:var(--f-body);font-size:16.5px;line-height:1.7}
+h1,h2,h3,h4{font-family:var(--f-mono);font-weight:700;letter-spacing:-.05em}
+h1{letter-spacing:-.055em}
+.game-name,.eyebrow,.crumb,.btn,.back,.lang-trigger,.lang-code,.lang-menu-title,
+.platform-list span,.language-list span,.platform-note,.cyber-unit,.lbcount,.fcard .fi::before,.fcard .fi::after,
+.foot2{font-family:var(--f-mono)}
+.eyebrow{font-weight:400;font-size:12.5px;letter-spacing:.18em}
+.btn{font-weight:700;font-size:14px;letter-spacing:.02em}
+.lead,.p,p{font-family:var(--f-body)}
+.language-list span,.platform-list span{letter-spacing:-.01em}
+
+/* İKİ KAYDIRMA ÇUBUĞU DÜZELTMESİ
+   overflow-x:hidden hem html hem body'ye verilince ikisi de ayrı bir
+   kaydırma kabı oluyor; içerik gövdeden taşarsa ikinci bir dikey çubuk
+   beliriyordu. clip, kap oluşturmadan kırpar ve overflow-y görünür kalır.
+   Önce hidden yazılı: clip desteklemeyen eski tarayıcılar için yedek. */
+html,body{overflow-x:hidden;overflow-x:clip}
+
+/* Son bölümün süs lekesi alt bilginin altına sarkıp sayfaya boş alan
+   ekliyordu; o lekeyi bölümün üstüne alıyoruz. */
+main>section.blk:last-of-type::before{top:-170px;bottom:auto;left:-250px;right:auto}
+
+/* Siber şeridin margin-top:-18px'i gövdeden dışarı sızıyor ve sayfanın
+   sonunda alt bilginin altında 18px boş şerit bırakıyordu. flow-root gövdeyi
+   kendi blok bağlamına alıyor: hiçbir şey yerinden oynamıyor, yalnız sayfa
+   yüksekliği içeriğe birebir oturuyor. */
+body{display:flow-root}
+
+/* ---------------- KÜNYE ŞERİDİ ----------------
+   Locard ve DayPot sayfalarıyla aynı omurga: hero'nun hemen altında,
+   okumadan önce oyunun ne olduğunu söyleyen tek satır. */
+.metarow{display:flex;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--line);position:relative;z-index:2}
+.metarow div{flex:1 1 180px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:22px 18px;border-right:1px solid var(--line)}
+.metarow div:last-child{border-right:0}
+.metarow b{font-family:var(--f-mono);font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+.metarow span{font-size:15.5px;font-weight:600;color:var(--ink)}
+
+/* ---------------- MODÜL ETİKETLERİ ---------------- */
+.modules{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.modules span{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:7px 14px;transition:color .22s,border-color .22s,transform .22s}
+.modules span::before{content:"› ";color:var(--cy)}
+.modules span:hover{color:var(--cy);border-color:var(--cy);transform:translateY(-2px)}
+
+/* ---------------- RAKAM ŞERİDİ ---------------- */
+.castats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface);margin-top:42px}
+.castats div{padding:28px 24px;border-right:1px solid var(--line);text-align:center}
+.castats div:last-child{border-right:0}
+.castats b{display:block;font-family:var(--f-mono);font-weight:700;font-size:34px;line-height:1;letter-spacing:-.05em;color:var(--cy);margin-bottom:9px}
+.castats span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+/* Camgöbeği açık zeminde okunmuyor, koyu zeminde etiket eşiğin altında kalıyordu. */
+html[data-theme="light"] .castats b{color:#13737F}
+html[data-theme="dark"] .castats span{color:#968A8C}
+
+
+/* ---------------- CTA: kapsül görseli artık kırpılmıyor ---------------- */
+.cta-big{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:48px;align-items:center;text-align:left;padding:56px 52px}
+.cta-big .cta-txt{min-width:0}
+.capsule-art{position:static!important;width:100%;max-width:250px;opacity:1;border-radius:18px;mask-image:none;-webkit-mask-image:none;filter:drop-shadow(0 22px 40px rgba(0,0,0,.45));box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+@media(max-width:860px){
+  .cta-big{grid-template-columns:1fr;gap:30px;text-align:center;padding:44px 24px}
+  .cta-big .capsule-art{display:block!important;max-width:190px;margin:0 auto;order:-1}
+  .metarow div{flex:1 1 100%;border-right:0;border-bottom:1px solid var(--line);padding:16px}
+  .metarow div:last-child{border-bottom:0}
+  .castats{grid-template-columns:1fr 1fr}
+  .castats div:nth-child(2n){border-right:0}
+  .castats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+
+/* ---------------- TELEFON RÖTUŞU ----------------
+   Dokunma hedefleri: küçük bağlantıların tıklama alanı, düzeni hiç
+   bozmadan görünmez bir katmanla 44 piksele çıkarılıyor.
+   Mikro tipografi: 10-11 piksellik etiketler telefonda 12 pikselin
+   altına inmiyor. */
+@media(max-width:680px){
+  .brand{min-height:44px}
+  .crumb a,.foot2 a,.back{position:relative}
+  .crumb a::after,.foot2 a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+  .crumb,.metarow b,.castats span,.modules span,.platform-note{font-size:12px}
+  .brand{min-width:44px}
+  .crumb a::after{left:-10px;right:-10px}
+  /* Dar ekranda metin, hero görselinin aydınlık yarısına da taşıyor.
+     İç gölge, arka planın üstüne ama içeriğin altına bir perde seriyor. */
+  .hero{box-shadow:inset 0 0 0 100vmax rgba(244,251,252,.58)}
+  html[data-theme="dark"] .hero{box-shadow:inset 0 0 0 100vmax rgba(7,10,14,.6)}
+}
 </style>
 </head>
 <body>
@@ -273,7 +375,7 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
       JinjaGames
     </a>
     <div class="nav-end">
-      <a class="back" href="../index.html">&larr; <span class="en i">All games</span><span class="tr i">Tüm oyunlar</span></a>
+      <a class="back" href="../index.html">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
       <div class="lang-menu">
         <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
         <div class="lang-popover" id="language-menu" role="menu">
@@ -292,8 +394,8 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
 
 <div class="cyber-ribbon" aria-hidden="true">
   <div class="cyber-track">
-    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div>
-    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS-ON MODULES</div>
+    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS ON MODULES</div>
+    <div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS ON MODULES</div><div class="cyber-unit">SYSTEM ONLINE</div><div class="cyber-unit">LEARN BY DOING</div><div class="cyber-unit">ATTACK / DEFEND / ADAPT</div><div class="cyber-unit">25 HANDS ON MODULES</div>
   </div>
 </div>
 
@@ -315,20 +417,28 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
   </div>
 </div>
 
+<div class="metarow">
+  <div><b><span class="en i">Genre</span><span class="tr i">Tür</span></b><span class="en i">Cybersecurity, strategy</span><span class="tr i">Siber güvenlik, strateji</span></div>
+  <div><b><span class="en i">Players</span><span class="tr i">Oyuncu</span></b><span class="en i">Single player and online PvP</span><span class="tr i">Tek oyunculu ve çevrimiçi PvP</span></div>
+  <div><b><span class="en i">Platform</span><span class="tr i">Platform</span></b><span>Windows, macOS, Linux</span></div>
+  <div><b><span class="en i">Languages</span><span class="tr i">Diller</span></b><span class="en i">25 languages</span><span class="tr i">25 dil</span></div>
+  <div><b><span class="en i">Studio</span><span class="tr i">Stüdyo</span></b><span>JinjaGames</span></div>
+</div>
+
 <section class="support-zone" aria-label="Platforms and languages">
   <div class="wrap">
     <div class="support-heading rv">
       <span class="eyebrow"><span class="en i">Launch support</span><span class="tr i">Çıkış desteği</span></span>
       <h2 class="en">Ready for your <span class="grad">world.</span></h2>
       <h2 class="tr">Senin <span class="grad">dünyan için hazır.</span></h2>
-      <p class="en">Cyber Academy launches on Windows with twenty-five supported languages. macOS and Linux support is planned for a later update.</p>
-      <p class="tr">Cyber Academy, çıkışta Windows ve yirmi beş desteklenen dille hazır olacak. macOS ve Linux desteği sonraki bir güncelleme için planlanıyor.</p>
+      <p class="en">Cyber Academy runs on Windows, macOS and Linux, with twenty five supported languages. Same game, same content, same save file on all three.</p>
+      <p class="tr">Cyber Academy; Windows, macOS ve Linux üzerinde, yirmi beş desteklenen dille çalışıyor. Üçünde de aynı oyun, aynı içerik, aynı kayıt dosyası.</p>
     </div>
     <div class="support-cards">
       <div class="support-card rv">
-        <h3><span class="en i">Windows at launch</span><span class="tr i">Çıkışta Windows</span></h3>
-        <div class="platform-list"><span>Windows</span></div>
-        <p class="platform-note"><span class="en i">macOS and Linux support is planned for a post-launch update.</span><span class="tr i">macOS ve Linux desteği, çıkış sonrası bir güncelleme için planlanıyor.</span></p>
+        <h3><span class="en i">Three platforms</span><span class="tr i">Üç platform</span></h3>
+        <div class="platform-list"><span>Windows</span><span>macOS</span><span>Linux</span></div>
+        <p class="platform-note"><span class="en i">Whichever one you sit down at, you get the same build and the same progress.</span><span class="tr i">Hangisinin başına oturursan otur, aynı sürümü ve aynı ilerlemeyi buluyorsun.</span></p>
       </div>
       <div class="support-card rv">
         <h3><span class="en i">25 languages</span><span class="tr i">25 dil</span></h3>
@@ -352,8 +462,16 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
           <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4 2 8l10 4 10-4-10-4z"/><path d="M6 10.5V15c0 1.4 2.7 2.8 6 2.8s6-1.4 6-2.8v-4.5"/><path d="M22 8v5.5"/></svg></div>
           <h3 class="en">The academy</h3>
           <h3 class="tr">Akademi</h3>
-          <p class="en">Twenty five hands on modules teach real cybersecurity: phishing, passwords, networks, malware, incident response, cryptography and more. You do not read about it, you do it. Every concept is a puzzle you solve inside a realistic tool, so the knowledge sticks.</p>
-          <p class="tr">Yirmi beş uygulamalı modül gerçek siber güvenliği öğretir: kimlik avı, parolalar, ağlar, zararlı yazılım, olay müdahale, kriptografi ve daha fazlası. Okumuyorsun, yapıyorsun. Her kavram gerçekçi bir aracın içinde çözdüğün bir bulmaca, böylece bilgi kalıcı oluyor.</p>
+          <p class="en">Twenty five hands on modules teach real cybersecurity. You do not read about it, you do it. Every concept is a puzzle you solve inside a realistic tool, so the knowledge sticks.</p>
+          <p class="tr">Yirmi beş uygulamalı modül gerçek siber güvenliği öğretir. Okumuyorsun, yapıyorsun. Her kavram gerçekçi bir aracın içinde çözdüğün bir bulmaca, böylece bilgi kalıcı oluyor.</p>
+          <div class="modules">
+            <span class="en i">Phishing</span><span class="tr i">Kimlik avı</span>
+            <span class="en i">Passwords</span><span class="tr i">Parolalar</span>
+            <span class="en i">Networks</span><span class="tr i">Ağlar</span>
+            <span class="en i">Malware</span><span class="tr i">Zararlı yazılım</span>
+            <span class="en i">Incident response</span><span class="tr i">Olay müdahale</span>
+            <span class="en i">Cryptography</span><span class="tr i">Kriptografi</span>
+          </div>
         </div>
         <div class="story rv">
           <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg></div>
@@ -408,11 +526,17 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
           <p class="tr">Saldırı gücü, gizlilik, savunma, onarım. Operatörünü dallar boyunca şekillendir.</p>
         </div>
         <div class="fcard rv">
-          <div class="fi"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M13.5 4l-3 16"/></svg></div>
-          <h4 class="en">CyberCode editor</h4><h4 class="tr">CyberCode editörü</h4>
-          <p class="en">Write scripts in a fictional DSL, with syntax highlight and autocomplete.</p>
-          <p class="tr">Kurgusal bir DSL'de betik yaz; sözdizimi vurgusu ve otomatik tamamlama ile.</p>
+          <div class="fi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="M5.7 7.1 9.6 10M18.3 7.1 14.4 10M5.7 16.9 9.6 14M18.3 16.9 14.4 14"/></svg></div>
+          <h4 class="en">Online PvP</h4><h4 class="tr">Çevrimiçi PvP</h4>
+          <p class="en">Raid other players, defend your own machine, and climb the reputation ranking.</p>
+          <p class="tr">Diğer oyunculara baskın yap, kendi makineni savun ve itibar sıralamasında yüksel.</p>
         </div>
+      </div>
+      <div class="castats rv">
+        <div><b>25</b><span class="en i">Modules</span><span class="tr i">Modül</span></div>
+        <div><b>25</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
+        <div><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
+        <div><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
       </div>
     </div>
   </section>
@@ -446,13 +570,15 @@ html[data-theme="light"]{--bg:#F1F7F8;--bg-soft:#E3EFF2;--surface:#FFFFFF;--surf
   <section class="blk band">
     <div class="wrap">
       <div class="cta-big rv">
-        <span class="eyebrow" style="color:var(--brand-2)"><span class="en i">Ready to play</span><span class="tr i">Oynamaya hazır mısın</span></span>
-        <h2 class="en">Add Cyber Academy to your wishlist.</h2>
-        <h2 class="tr">Cyber Academy'yi istek listene ekle.</h2>
-        <p class="en">Wishlist to get notified the moment it launches on Steam.</p>
-        <p class="tr">İstek listene ekle, Steam'de çıktığı an haberin olsun.</p>
-        <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
-        <img class="capsule-art" src="../newss_And_trailer/vertical_capsule_748x896_v1.png" alt="" aria-hidden="true" loading="lazy">
+        <div class="cta-txt">
+          <span class="eyebrow" style="color:var(--brand-2)"><span class="en i">Ready to play</span><span class="tr i">Oynamaya hazır mısın</span></span>
+          <h2 class="en">Add Cyber Academy to your wishlist.</h2>
+          <h2 class="tr">Cyber Academy'yi istek listene ekle.</h2>
+          <p class="en">Wishlist to get notified the moment it launches on Steam.</p>
+          <p class="tr">İstek listene ekle, Steam'de çıktığı an haberin olsun.</p>
+          <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+        </div>
+        <img class="capsule-art" src="../newss_And_trailer/vertical_capsule_748x896_v1.png" alt="Cyber Academy" loading="lazy">
       </div>
     </div>
   </section>

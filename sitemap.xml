@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jinjagames.com/</loc></url>
-  <url>
-    <loc>https://jinjagames.com/cyberacademy/</loc>
-    <lastmod>2026-09-02</lastmod>
-  </url>
+  <url><loc>https://jinjagames.com/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://jinjagames.com/cyberacademy/</loc><lastmod>2026-09-02</lastmod></url>
+  <url><loc>https://jinjagames.com/locard/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://jinjagames.com/daypot/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://jinjagames.com/daypot/gizlilik.html</loc><lastmod>2026-09-20</lastmod></url>
   <url><loc>https://jinjagames.com/privacy.html</loc></url>
 </urlset>

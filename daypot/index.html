@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>DayPot | Offline Recipe App, What Should I Cook Today? | JinjaGames</title>
+<meta name="description" content="DayPot is an offline cooking assistant by JinjaGames. Mark what is in your pantry and see the recipes you can actually make, with voice commands, a measured shopping list, a weekly plan and no ads, no accounts and no tracking." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/daypot/" />
+<meta name="theme-color" content="#FBF7EE" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#10140F" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" href="img/daypot-icon.png" />
+<link rel="apple-touch-icon" href="img/daypot-icon.png" />
+<meta property="og:title" content="DayPot | Bugün ne pişirsem?" />
+<meta property="og:description" content="Dolabındakini işaretle, gerçekten yapabileceğin tarifleri gör. Çevrimdışı çalışır, hesap istemez, reklam göstermez." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com/daypot/" />
+<meta property="og:image" content="https://jinjagames.com/daypot/img/daypot-og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces-latin-700.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/nunito-latin-400.woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"MobileApplication","name":"DayPot","url":"https://jinjagames.com/daypot/","image":"https://jinjagames.com/daypot/img/daypot-og.jpg","description":"An offline cooking assistant: mark the ingredients you have and see the recipes you can actually make, with voice commands, a measured shopping list, a weekly meal plan, a food diary and a hands-free cooking mode.","applicationCategory":"FoodAndDrinkApplication","operatingSystem":"Android","softwareVersion":"1.3.0","inLanguage":["tr","en"],"author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"DayPot","item":"https://jinjagames.com/daypot/"}]}]}
+</script>
+
+<script>
+/* Tema + dil, ana siteyle AYNI anahtarlardan okunur → sayfalar arası tutarlı. */
+(function(){
+  var d=document.documentElement;
+  try{
+    var t=localStorage.getItem('jg_theme');
+    if(t!=='light'&&t!=='dark'){ t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+    d.setAttribute('data-theme',t);
+    var l=localStorage.getItem('jg_lang');
+    if(l!=='tr'&&l!=='en') l='en';
+    d.setAttribute('data-lang',l); d.lang=l;
+  }catch(e){}
+})();
+</script>
+
+<style>
+/* ============================================================
+   DAYPOT — mutfak sayfası
+   Huzurlu olması gerekiyor: sıcak krem zemin, yumuşak köşeler,
+   büyük satır aralığı, keskin çizgi ve sert gölge yok.
+   Yazı: başlıklar Fraunces (yumuşak serif), gövde Nunito (yuvarlak).
+   ============================================================ */
+:root{
+  --bg:#FBF7EE; --bg-soft:#F4EEE0; --surface:#FFFFFF; --surface-2:#FAF5EA;
+  --ink:#22291F; --ink-2:#5A6353; --ink-3:#68705F;
+  --line:#EAE2D1; --line-2:#DCD2BD;
+  --accent:#376E49; --accent-2:#4C8C5E; --accent-rgb:55,110,73;
+  --lemon:#D9A520; --clay:#C4703F;
+  --nav-bg:rgba(251,247,238,.84); --nav-bg-solid:rgba(251,247,238,.97);
+  --shadow-1:0 2px 4px rgba(34,41,31,.03), 0 12px 30px rgba(34,41,31,.06);
+  --shadow-2:0 24px 60px rgba(34,41,31,.11);
+  --W:1180px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px; --r:26px; --r-sm:16px;
+  --f-body:'Nunito',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-display:'Fraunces',Georgia,'Times New Roman',serif;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10140F; --bg-soft:#151A14; --surface:#1A211A; --surface-2:#202820;
+  --ink:#F1F4EA; --ink-2:#BEC7B7; --ink-3:#98A192;
+  --line:#272F26; --line-2:#354032;
+  --accent:#7BC48D; --accent-2:#A6DA97; --accent-rgb:123,196,141;
+  --lemon:#E8C459; --clay:#D98C58;
+  --nav-bg:rgba(16,20,15,.8); --nav-bg-solid:rgba(16,20,15,.97);
+  --shadow-1:0 2px 4px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.3);
+  --shadow-2:0 24px 60px rgba(0,0,0,.5);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17.5px;line-height:1.78;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s ease,color .35s ease}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;height:auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
+.wrap{max-width:var(--W);margin:0 auto;padding:0 30px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.16;letter-spacing:-.018em}
+.eyebrow{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.tr,.en{display:block}
+html[data-lang="en"] .tr{display:none!important}
+html[data-lang="tr"] .en{display:none!important}
+.tr.i,.en.i{display:inline}
+html[data-lang="en"] .tr.i{display:none!important}
+html[data-lang="tr"] .en.i{display:none!important}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* NAV */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav#nav.stuck{background:var(--nav-bg-solid);border-color:var(--line)}
+.nav-in{max-width:var(--W);margin:0 auto;padding:0 30px;height:var(--navh);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16.5px;color:var(--ink-2);transition:color .2s}
+.brand img{height:28px;width:auto}
+.brand:hover{color:var(--ink)}
+.nav-end{display:flex;align-items:center;gap:8px}
+.back{font-size:14.5px;font-weight:700;color:var(--ink-2);padding:9px 14px;border-radius:999px;white-space:nowrap;transition:.2s}
+.back:hover{color:var(--accent);background:var(--bg-soft)}
+.lang-menu{position:relative}
+.lang-trigger{min-width:78px;height:38px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;cursor:pointer;color:var(--ink-2);font-size:12px;font-weight:800;letter-spacing:.05em;transition:.22s}
+.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--accent);border-color:var(--accent)}
+.lang-globe{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7}
+.lang-chev{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}
+.lang-menu.open .lang-chev{transform:rotate(180deg)}
+.lang-popover{position:absolute;right:0;top:calc(100% + 10px);width:222px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-2);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s;z-index:220}
+.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}
+.lang-menu-title{padding:7px 10px 9px;color:var(--ink-3);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.lang-option{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:0;border-radius:12px;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:14.5px;font-weight:700;transition:.2s}
+.lang-option:hover,.lang-option.on{background:var(--bg-soft);color:var(--ink)}
+.lang-code{min-width:22px;color:var(--accent);font-size:10.5px;font-weight:800;letter-spacing:.06em}
+.lang-option.on::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);margin-left:auto}
+.iconbtn{width:38px;height:38px;border-radius:999px;background:var(--surface);border:1px solid var(--line-2);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
+.iconbtn:hover{color:var(--accent);border-color:var(--accent)}
+.iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .ic-sun{display:block}html[data-theme="dark"] .ic-moon{display:none}
+.ic-sun{display:none}.ic-moon{display:block}
+
+/* BUTONLAR — yuvarlak ve yumuşak */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:16px 28px;border-radius:999px;font-weight:800;font-size:16px;border:1.5px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,border-color .2s,box-shadow .25s}
+.btn.p{background:var(--accent);color:#FFFDF7;box-shadow:0 12px 26px rgba(var(--accent-rgb),.26)}
+html[data-theme="dark"] .btn.p{color:#0F1710}
+.btn.p:hover{transform:translateY(-3px);background:var(--accent-2)}
+.btn.g{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
+.btn.g:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent)}
+.arw{transition:transform .3s var(--ease)}.btn:hover .arw{transform:translateX(5px)}
+
+/* HERO */
+.hero{padding:calc(var(--navh) + 66px) 0 84px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:680px;height:680px;left:-260px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(var(--accent-rgb),.14),transparent 66%);pointer-events:none}
+.hero::after{content:"";position:absolute;width:520px;height:520px;right:-180px;bottom:-240px;border-radius:50%;background:radial-gradient(circle,rgba(217,165,32,.16),transparent 68%);pointer-events:none}
+.hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(300px,.98fr);gap:60px;align-items:center}
+.crumb{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--ink-3);margin-bottom:30px}
+.crumb a:hover{color:var(--accent)}
+.applogo{width:88px;height:88px;margin-bottom:22px}
+h1{font-size:clamp(50px,8vw,92px);letter-spacing:-.03em}
+.claim{margin-top:10px;font-family:var(--f-display);font-weight:600;font-size:clamp(22px,3.1vw,32px);line-height:1.3;letter-spacing:-.02em;color:var(--accent)}
+.lead{max-width:540px;margin-top:20px;color:var(--ink-2);font-size:18px}
+.hero .cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:32px}
+.hero-art{position:relative}
+.hero-art .frame{border-radius:36px;overflow:hidden;box-shadow:var(--shadow-2);border:8px solid var(--surface)}
+
+/* BÖLÜMLER */
+section.blk{padding:100px 0;position:relative}
+.band{background:var(--bg-soft)}
+.head{max-width:720px;margin-bottom:54px}
+.head h2{font-size:clamp(32px,4.5vw,50px);margin:14px 0 18px}
+.head p{color:var(--ink-2);font-size:18px}
+.hl{color:var(--accent)}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ÜÇ ADIM */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.stepc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:34px 32px;transition:transform .3s var(--ease),box-shadow .3s}
+.stepc:hover{transform:translateY(-5px);box-shadow:var(--shadow-1)}
+.stepc .no{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--bg-soft);color:var(--accent);font-family:var(--f-display);font-weight:700;font-size:19px;margin-bottom:18px}
+.stepc h4{font-size:21px;margin-bottom:10px}
+.stepc p{color:var(--ink-2);font-size:16px}
+
+/* ÖZELLİKLER */
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.feat{display:grid;grid-template-columns:76px minmax(0,1fr);gap:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:32px 34px;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.feat:hover{transform:translateY(-4px);box-shadow:var(--shadow-1);border-color:var(--line-2)}
+/* İkonlar: ince çizgi yerine çift tonlu ve üstüne gelince küçük bir hareketi olan
+   simgeler. Hareket yalnız etkileşimle başlar, sürekli oynayan hiçbir şey yok. */
+.feat .ico{width:76px;height:76px;border-radius:26px;display:grid;place-items:center;
+  background:linear-gradient(150deg,rgba(var(--accent-rgb),.18),rgba(217,165,32,.16));
+  box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.16);
+  transition:transform .4s var(--ease),box-shadow .3s}
+html[data-theme="dark"] .feat .ico{background:linear-gradient(150deg,rgba(var(--accent-rgb),.2),rgba(232,196,89,.12))}
+.feat:hover .ico{transform:translateY(-3px) rotate(-5deg);box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.34)}
+.feat .ico svg{width:38px;height:38px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.feat .ico .sld{fill:var(--accent);opacity:.2;stroke:none}
+.feat .ico .w1,.feat .ico .w2{opacity:.3;transition:opacity .35s ease,transform .45s var(--ease)}
+.feat:hover .ico .w1{opacity:1;transform:translateX(1.5px)}
+.feat:hover .ico .w2{opacity:1;transform:translateX(3px)}
+.feat .ico .cart{transition:transform .5s var(--ease)}
+.feat:hover .ico .cart{transform:translateX(2.5px)}
+.feat .ico .cell{fill:var(--accent);stroke:none;opacity:.5;transform:scaleX(.42);transform-origin:9px 20px;transition:transform .5s var(--ease),opacity .35s ease}
+.feat:hover .ico .cell{transform:scaleX(1);opacity:.9}
+.feat .ico .ring{stroke-dasharray:69;stroke-dashoffset:30;transition:stroke-dashoffset .7s var(--ease)}
+.feat:hover .ico .ring{stroke-dashoffset:4}
+.feat .ico .arc{transition:opacity .35s ease}
+.feat:hover .ico .arc{opacity:.25}
+.feat .ico .door{transition:transform .45s var(--ease)}
+.feat:hover .ico .door{transform:translateX(-1.5px)}
+.feat h4{font-size:20px;margin-bottom:8px}
+.feat p{color:var(--ink-2);font-size:16px}
+
+/* TARİF ŞERİDİ */
+/* Esnek dizilimde sekizinci tabak tek başına alt satıra düşüyordu; 4+4 ızgara. */
+.plates{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;justify-items:center;max-width:680px;margin:46px auto 0}
+.plate{width:100%;max-width:142px;aspect-ratio:1/1;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;padding:14px;transition:transform .35s var(--ease),box-shadow .35s}
+.plate:hover{transform:translateY(-8px) scale(1.04);box-shadow:var(--shadow-2)}
+.plate img{width:100%;height:auto}
+
+/* RAKAMLAR */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:52px}
+.stats div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:26px;text-align:center}
+.stats b{display:block;font-family:var(--f-display);font-weight:700;font-size:38px;line-height:1;color:var(--accent);margin-bottom:8px}
+.stats span{font-size:13.5px;font-weight:700;color:var(--ink-3)}
+
+/* GİZLİLİK */
+.privacy{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.7fr);gap:30px;align-items:start}
+.pbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 36px 20px}
+.pbox ul{list-style:none}
+.pbox li{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:16.5px}
+.pbox li:last-child{border-bottom:0}
+.pbox li svg{width:22px;height:22px;flex-shrink:0;margin-top:5px;fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pside{background:var(--accent);color:#FFFDF7;border-radius:var(--r);padding:36px;box-shadow:0 18px 40px rgba(var(--accent-rgb),.24)}
+html[data-theme="dark"] .pside{background:linear-gradient(150deg,#24573C,#3C8459);color:#F1F4EA}
+.pside h4{font-size:22px;margin-bottom:12px}
+.pside p{font-size:16px;opacity:.95;margin-bottom:22px}
+.pside a{display:inline-flex;align-items:center;gap:10px;background:#FFFDF7;color:#2B5739;border:1px solid transparent;padding:12px 20px;border-radius:999px;font-weight:800;font-size:15px;transition:.22s}
+.pside a:hover{background:#FFFFFF;transform:translateY(-2px)}
+
+/* CTA */
+.endcta{background:var(--surface);border:1px solid var(--line);border-radius:38px;padding:74px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-1)}
+.endcta::before{content:"";position:absolute;width:520px;height:520px;left:50%;top:-360px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(var(--accent-rgb),.16),transparent 66%)}
+.endcta>*{position:relative}
+.endcta img{width:76px;margin:0 auto 22px}
+.endcta h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px}
+.endcta p{color:var(--ink-2);font-size:18px;max-width:560px;margin:0 auto 32px}
+.endcta .cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:38px 0;color:var(--ink-3);font-size:14.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{font-weight:700;color:var(--ink-2)}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:960px){
+  .hero-in{grid-template-columns:1fr;gap:46px}
+  .hero-art{max-width:430px;margin:0 auto}
+  .steps,.feats{grid-template-columns:1fr}
+  .privacy{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+}
+/* Telefonda dört sütunluk rakam ızgarası etiketleri beş satıra kırıyordu;
+   tek sütuna inip sayı ile etiketi yan yana koyuyoruz. */
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr;gap:12px}
+  .stats div{display:flex;align-items:center;gap:18px;text-align:left;padding:18px 22px}
+  .stats b{margin-bottom:0;font-size:32px;min-width:66px}
+  .stats span{font-size:15px}
+}
+@media(max-width:680px){
+  :root{--navh:64px;--r:22px}
+  body{font-size:16.5px}
+  .wrap{padding:0 20px}
+  section.blk{padding:66px 0}
+  .hero{padding:calc(var(--navh) + 36px) 0 56px}
+  .hero .cta{flex-direction:column;align-items:stretch}
+  .feat{grid-template-columns:1fr;gap:16px;padding:28px 24px}
+  .pbox{padding:10px 24px 14px}
+  .plates{grid-template-columns:repeat(2,1fr);gap:14px;max-width:320px}
+  .plate{max-width:132px;padding:12px}
+  .endcta{padding:48px 24px;border-radius:28px}
+  .back{padding:9px 8px}
+}
+
+/* İKİ KAYDIRMA ÇUBUĞU DÜZELTMESİ
+   overflow-x:hidden hem html hem body'ye verilince ikisi de ayrı bir
+   kaydırma kabı oluyor; içerik gövdeden taşarsa ikinci bir dikey çubuk
+   beliriyordu. clip, kap oluşturmadan kırpar ve overflow-y görünür kalır.
+   Önce hidden yazılı: clip desteklemeyen eski tarayıcılar için yedek. */
+html,body{overflow-x:hidden;overflow-x:clip}
+
+/* ---------------- TELEFON RÖTUŞU ----------------
+   Dokunma hedefleri: küçük bağlantıların tıklama alanı, düzeni hiç
+   bozmadan görünmez bir katmanla 44 piksele çıkarılıyor.
+   Mikro tipografi: 10-11 piksellik etiketler telefonda 12 pikselin
+   altına inmiyor. */
+@media(max-width:680px){
+  .brand{min-height:44px}
+  .crumb a,footer a,.pside a{position:relative}
+  .crumb a::after,footer a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+  /* Dar ekranda marka yazısı geri bağlantısının üstüne biniyordu. */
+  .brand span{display:none}
+  .brand{min-width:44px}
+  .crumb a::after{left:-10px;right:-10px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
+      <span>JinjaGames</span>
+    </a>
+    <div class="nav-end">
+      <a class="back" href="../index.html">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+      <div class="lang-menu">
+        <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+        <div class="lang-popover" id="language-menu" role="menu">
+          <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+        </div>
+      </div>
+      <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
+        <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>DayPot</span></nav>
+    <div class="hero-in">
+      <div>
+        <img class="applogo" src="img/daypot-icon.png" alt="DayPot" width="512" height="512">
+        <h1>DayPot</h1>
+        <p class="claim en">What should I cook today?</p>
+        <p class="claim tr">Bugün ne pişirsem?</p>
+        <p class="lead en">It is six in the evening, the fridge is half full and nobody has an answer. DayPot looks at what is actually in your kitchen, what you are in the mood for and how much time you have, then tells you what you can make right now.</p>
+        <p class="lead tr">Saat akşam altı, dolap yarı dolu ve kimsenin bir cevabı yok. DayPot mutfağında gerçekten ne olduğuna, canının ne çektiğine ve elindeki zamana bakar, sonra şu anda ne yapabileceğini söyler.</p>
+        <div class="cta">
+          <a class="btn p" href="#features"><span class="en i">See what it does</span><span class="tr i">Neler yapıyor?</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="gizlilik.html"><span class="en i">Privacy policy</span><span class="tr i">Gizlilik politikası</span></a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame"><img src="img/kitchen.webp" alt="" width="760" height="1350" loading="eager"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ÜÇ ADIM -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">How it works</span><span class="tr i">Nasıl çalışıyor</span></span>
+        <h2 class="en">Three taps between <span class="hl">hungry and cooking.</span></h2>
+        <h2 class="tr">Açlıkla ocak arasında <span class="hl">üç dokunuş.</span></h2>
+      </div>
+      <div class="steps">
+        <div class="stepc rv">
+          <span class="no">1</span>
+          <h4><span class="en i">Fill your pantry</span><span class="tr i">Dolabını doldur</span></h4>
+          <p class="en">Tick off what you have. Ingredients are grouped into nineteen searchable categories, so it takes a minute, not an evening.</p>
+          <p class="tr">Elinde ne varsa işaretle. Malzemeler on dokuz aranabilir kategoriye ayrılmış; bu iş bir akşam değil bir dakika sürüyor.</p>
+        </div>
+        <div class="stepc rv">
+          <span class="no">2</span>
+          <h4><span class="en i">See what is really possible</span><span class="tr i">Gerçekten yapabileceklerini gör</span></h4>
+          <p class="en">Recipes you can cover come first, and the ones you nearly have show exactly what is missing. You decide instead of guessing.</p>
+          <p class="tr">En çok malzemesini karşıladığın tarifler öne çıkar; az kalanlarda neyin eksik olduğunu baştan görürsün. Tahmin etmezsin, karar verirsin.</p>
+        </div>
+        <div class="stepc rv">
+          <span class="no">3</span>
+          <h4><span class="en i">Cook with your hands full</span><span class="tr i">Ellerin doluyken pişir</span></h4>
+          <p class="en">Cooking mode keeps the screen awake and walks the steps one at a time in large type, reading them aloud if you want. A timer is one sentence away.</p>
+          <p class="tr">Pişirme modu ekranı açık tutar, adımları tek tek büyük punto ile ilerletir ve istersen sesli okur. Zamanlayıcı bir cümle uzağında.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÖZELLİKLER -->
+  <section id="features" class="blk band">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">Features</span><span class="tr i">Özellikler</span></span>
+        <h2 class="en">Built for the middle of <span class="hl">an ordinary weekday.</span></h2>
+        <h2 class="tr">Sıradan bir hafta içi akşamı için <span class="hl">tasarlandı.</span></h2>
+        <p class="en">Not a feed to scroll through. A quiet tool that answers one question fast and then gets out of your way.</p>
+        <p class="tr">Kaydırılacak bir akış değil. Tek bir soruyu hızlıca cevaplayıp yolundan çekilen sessiz bir araç.</p>
+      </div>
+      <div class="feats">
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="sld" x="5" y="4" width="22" height="25" rx="4"/><rect x="5" y="4" width="22" height="25" rx="4"/><path d="M5 15.5h22"/><path class="door" d="M16 4v25"/><path class="door" d="M13 9.5v2.5M13 20v2.5"/></svg></div>
+          <div>
+            <h4><span class="en i">Suggestions from your own pantry</span><span class="tr i">Dolabına göre öneri</span></h4>
+            <p class="en">The core promise, and it will never sit behind a paywall: what can I cook with what I already have?</p>
+            <p class="tr">Uygulamanın var oluş sebebi ve hiçbir zaman ödeme duvarının arkasına konmayacak: elimdekiyle ne pişirebilirim?</p>
+          </div>
+        </div>
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="sld" x="12" y="3" width="8" height="15" rx="4"/><rect x="12" y="3" width="8" height="15" rx="4"/><path d="M7.5 15a8.5 8.5 0 0 0 17 0M16 23.5V28"/><path class="w1" d="M25.5 10.5c1.3 1.6 1.3 4.4 0 6"/><path class="w2" d="M28.5 8c2.3 2.9 2.3 7.1 0 10"/></svg></div>
+          <div>
+            <h4><span class="en i">Just say it out loud</span><span class="tr i">Sesle söylemen yeter</span></h4>
+            <p class="en">"Add two kilos of flour to the list." "Set a fifteen minute timer." Your voice is never recorded and never reaches our servers.</p>
+            <p class="tr">"Alışveriş listesine iki kilo un ekle." "On beş dakika zamanlayıcı kur." Sesin kaydedilmez ve sunucumuza gitmez.</p>
+          </div>
+        </div>
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><g class="cart"><path class="sld" d="M9.5 10.5h18L25 21H12z"/><path d="M3 5.5h3.4l4.2 16.5h14"/><path d="M9.5 10.5h18L25 21H12"/><circle cx="13" cy="27" r="2"/><circle cx="23" cy="27" r="2"/></g></svg></div>
+          <div>
+            <h4><span class="en i">A shopping list that knows quantities</span><span class="tr i">Miktarı bilen alışveriş listesi</span></h4>
+            <p class="en">Rows carry amount, unit and a note, grouped by aisle. Add the same item twice and the amounts add up instead of piling up.</p>
+            <p class="tr">Her satır miktar, birim ve not taşır; reyona göre gruplanır. Aynı ürünü ikinci kez eklersen miktarlar birikmez, toplanır.</p>
+          </div>
+        </div>
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="sld" x="4" y="6" width="24" height="22" rx="5"/><rect x="4" y="6" width="24" height="22" rx="5"/><path d="M11 3v6M21 3v6M4 13.5h24"/><rect class="cell" x="9" y="18" width="14" height="4" rx="2"/></svg></div>
+          <div>
+            <h4><span class="en i">A week you planned once</span><span class="tr i">Bir kere planladığın hafta</span></h4>
+            <p class="en">Place the week's meals in advance and shop once. Mark what you ate and see the day's calorie and macro totals.</p>
+            <p class="tr">Haftanın yemeklerini önceden koy, alışverişi tek seferde yap. Yediklerini işaretle, günün kalori ve makro toplamını gör.</p>
+          </div>
+        </div>
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle class="sld" cx="16" cy="16" r="11.5"/><circle class="ring" cx="16" cy="16" r="11" transform="rotate(-90 16 16)"/><path d="M16 9.5V16l4.5 2.8"/></svg></div>
+          <div>
+            <h4><span class="en i">Honest nutrition</span><span class="tr i">Dürüst besin değeri</span></h4>
+            <p class="en">Values are computed from the ingredients in your portion.</p>
+            <p class="tr">Değerler porsiyondaki malzemelerden hesaplanır.</p>
+          </div>
+        </div>
+        <div class="feat rv">
+          <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle class="sld" cx="16" cy="24.5" r="3.5"/><path class="arc" d="M4 13a17 17 0 0 1 24 0"/><path class="arc" d="M9 18.5a10 10 0 0 1 14 0"/><circle cx="16" cy="24.5" r="1.8"/><path d="M5 4.5 27 27"/></svg></div>
+          <div>
+            <h4><span class="en i">Works with no signal</span><span class="tr i">İnternetsiz çalışır</span></h4>
+            <p class="en">Every recipe ships inside the app. It opens in the dead corner of a supermarket and in a cabin in the mountains.</p>
+            <p class="tr">Tariflerin tamamı uygulamanın içinde. Markette çekmeyen bir köşede de, dağ evinde de açılır.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats rv">
+        <div><b>250+</b><span class="en i">Recipes, written by hand</span><span class="tr i">Elle yazılmış tarif</span></div>
+        <div><b>147</b><span class="en i">Ingredients classified</span><span class="tr i">Sınıflandırılmış malzeme</span></div>
+        <div><b>19</b><span class="en i">Pantry categories</span><span class="tr i">Dolap kategorisi</span></div>
+        <div><b>0</b><span class="en i">Ads and trackers</span><span class="tr i">Reklam ve izleyici</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARİFLER -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="head center rv" style="text-align:center">
+        <span class="eyebrow"><span class="en i">The catalogue</span><span class="tr i">Katalog</span></span>
+        <h2 class="en">More than 250 recipes, <span class="hl">none of them copied.</span></h2>
+        <h2 class="tr">250'den fazla tarif, <span class="hl">hiçbiri kopya değil.</span></h2>
+        <p class="en">Every measured ingredient list, every step, every serving note and tip was written from scratch. Measures and technique are checked against several sources, then put into our own words: soups, mains, pastries and desserts of everyday Turkish cooking, plus the practical weeknight things. New recipes are added with every update, so the catalogue keeps growing.</p>
+        <p class="tr">Ölçülü malzeme listesi, adımlar, porsiyon bilgisi ve ipucu, hepsi sıfırdan yazıldı. Ölçü ve teknik birden çok kaynağa bakılarak doğrulanıyor, sonra kendi cümlelerimizle yazılıyor: çorbadan ana yemeğe, hamur işinden tatlıya Türk mutfağının bildikleri ve gündelik pratikler. Her güncellemede yeni tarifler ekleniyor, yani katalog günden güne büyüyor.</p>
+      </div>
+      <div class="plates rv">
+        <div class="plate"><img src="img/manti.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/mercimek_corbasi.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/karniyarik.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/menemen.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/lahmacun.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/kuru_fasulye.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/tavuk_sis.webp" alt="" loading="lazy"></div>
+        <div class="plate"><img src="img/cilbir.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GİZLİLİK -->
+  <section class="blk band">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">Your data</span><span class="tr i">Verilerin</span></span>
+        <h2 class="en">We collect <span class="hl">nothing.</span></h2>
+        <h2 class="tr">Hiçbir şey <span class="hl">toplamıyoruz.</span></h2>
+        <p class="en">This is not a slogan, it is the architecture: DayPot has no accounts, no servers and no database, so there is nowhere for your data to go.</p>
+        <p class="tr">Bu bir slogan değil, mimarinin kendisi: DayPot'un hesabı, sunucusu ve veritabanı yok; verinin gidebileceği bir yer yok.</p>
+      </div>
+      <div class="privacy">
+        <div class="pbox rv">
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">Favourites, calendar, shopping list, diary and pantry stay in the app's own storage on your device.</span><span class="tr i">Favoriler, takvim, alışveriş listesi, günlük ve dolap yalnızca cihazındaki uygulama alanında durur.</span></span></li>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">No signup, no email, no phone number. The app never asks who you are.</span><span class="tr i">Kayıt yok, mail adresi yok, telefon numarası yok. Uygulama kim olduğunu hiç sormaz.</span></span></li>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">No ads, no analytics, no tracking libraries, and your advertising ID is not read.</span><span class="tr i">Reklam yok, analitik yok, izleme kütüphanesi yok; reklam kimliğin okunmuyor.</span></span></li>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">Voice input runs only while you hold the button. Speech is turned into text by your device's own service and the text is discarded after the command.</span><span class="tr i">Sesli komut yalnız düğmeye basılıyken çalışır. Konuşmayı metne cihazın kendi servisi çevirir; metin komut işlendikten sonra atılır.</span></span></li>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">Every permission is optional. Refuse the microphone or notifications and the rest of the app works normally.</span><span class="tr i">Bütün izinler isteğe bağlı. Mikrofonu veya bildirimleri reddedersen uygulamanın geri kalanı normal çalışır.</span></span></li>
+            <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span><span class="en i">Changing phones is handled by Android's own backup, into your own Google account. We have no access to it.</span><span class="tr i">Telefon değişimini Android'in kendi yedeklemesi, senin Google hesabına yapar. Bizim erişimimiz yok.</span></span></li>
+          </ul>
+        </div>
+        <div class="pside rv">
+          <h4><span class="en i">Read the full policy</span><span class="tr i">Politikanın tamamı</span></h4>
+          <p class="en">The privacy policy spells out exactly what is stored, what leaves the device and what never happens, in Turkish and English.</p>
+          <p class="tr">Gizlilik politikası neyin saklandığını, cihazdan neyin çıktığını ve neyin hiç olmadığını tek tek yazar; Türkçe ve İngilizce.</p>
+          <a href="gizlilik.html"><span class="en i">Privacy policy</span><span class="tr i">Gizlilik politikası</span> <span class="arw">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="endcta rv">
+        <img src="img/daypot-icon.png" alt="" width="512" height="512" loading="lazy">
+        <h2 class="en">Almost out of the kitchen.</h2>
+        <h2 class="tr">Neredeyse hazır.</h2>
+        <p class="en">DayPot is in release preparation for Android; an iOS version is planned to follow. Want to know the day it lands, or have a recipe you think belongs in it? Write to us.</p>
+        <p class="tr">DayPot'un Android yayın hazırlığı sürüyor; ardından bir iOS sürümü planlanıyor. Çıktığı günü öğrenmek ya da içinde olması gerektiğini düşündüğün bir tarifi söylemek istersen bize yaz.</p>
+        <div class="cta">
+          <a class="btn p" href="mailto:jinjagamesofficial@gmail.com?subject=DayPot"><span class="en i">Write to us</span><span class="tr i">Bize yaz</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn g" href="../index.html#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="yr"></span> JinjaGames, Ankara, Türkiye</div>
+    <div><a href="../index.html">&larr; <span class="en i">Back to JinjaGames</span><span class="tr i">JinjaGames'e dön</span></a> · <a href="gizlilik.html"><span class="en i">DayPot privacy</span><span class="tr i">DayPot gizlilik</span></a> · <a href="../privacy.html"><span class="en i">Site privacy</span><span class="tr i">Site gizliliği</span></a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var d=document, root=d.documentElement;
+  function $(s,c){return (c||d).querySelector(s);}
+  function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s));}
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+  function paintLang(l){
+    $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); });
+    $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); });
+  }
+  function closeLangMenus(){
+    $$('.lang-menu.open').forEach(function(m){ m.classList.remove('open'); var t=$('[data-lang-toggle]',m); if(t) t.setAttribute('aria-expanded','false'); });
+  }
+  $$('[data-lang-set]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-lang-set'); if(l!=='tr'&&l!=='en') l='en';
+      root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus();
+    });
+  });
+  paintLang(root.getAttribute('data-lang')||'en');
+  $$('[data-lang-toggle]').forEach(function(t){
+    t.addEventListener('click',function(e){
+      var m=t.closest('.lang-menu'), opening=!m.classList.contains('open');
+      closeLangMenus(); if(opening){ m.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+      e.stopPropagation();
+    });
+  });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLangMenus(); });
+
+  $$('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',t); store('jg_theme',t);
+      var m=d.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content', t==='dark'?'#10140F':'#FBF7EE');
+    });
+  });
+
+  var nav=$('#nav');
+  window.addEventListener('scroll',function(){ nav.classList.toggle('stuck',(window.scrollY||0)>10); },{passive:true});
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.06,rootMargin:'0px 0px -60px 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el); });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

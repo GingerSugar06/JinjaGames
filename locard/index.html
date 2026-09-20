@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Locard | First Person Detective Game by JinjaGames</title>
+<meta name="description" content="Locard is a first person investigation game by JinjaGames. Work a branching murder case across 12 locations, build an evidence board, catch contradictions in testimony and reach one of seven outcomes." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/locard/" />
+<meta name="theme-color" content="#EDE7DA" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0C0D10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-j-shuriken-32.png?v=2" />
+<link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
+<meta property="og:title" content="Locard | First Person Detective Game" />
+<meta property="og:description" content="Every contact leaves a trace. A branching first person investigation game from JinjaGames." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com/locard/" />
+<meta property="og:image" content="https://jinjagames.com/locard/locard-og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/playfair-display-latin-900.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/courier-prime-latin-400.woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","mainEntityOfPage":"https://jinjagames.com/locard/","image":"https://jinjagames.com/locard/locard-og.jpg","description":"A first person investigation game. Work a branching murder case in the coastal city of Meridian across 12 locations, build an evidence board, catch contradictions in testimony and reach one of seven outcomes.","slogan":"Every contact leaves a trace.","author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"gamePlatform":["Windows","macOS"],"applicationCategory":"Game","genre":["Adventure","Mystery","Simulation"],"playMode":["SinglePlayer","CoOp"],"inLanguage":["tr","en"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Locard","item":"https://jinjagames.com/locard/"}]}]}
+</script>
+
+<script>
+/* Tema + dil, ana siteyle AYNI anahtarlardan okunur → sayfalar arası tutarlı.
+   Bu sayfada açık tema "sararmış dosya kâğıdı", koyu tema "gece bürosu"dur. */
+(function(){
+  var d=document.documentElement;
+  try{
+    var t=localStorage.getItem('jg_theme');
+    if(t!=='light'&&t!=='dark'){ t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+    d.setAttribute('data-theme',t);
+    var l=localStorage.getItem('jg_lang');
+    if(l!=='tr'&&l!=='en') l='en';
+    d.setAttribute('data-lang',l); d.lang=l;
+  }catch(e){}
+})();
+</script>
+
+<style>
+/* ============================================================
+   LOCARD — dosya sayfası
+   Açık tema: sararmış dosya kâğıdı, daktilo etiketleri, mürekkep damgası.
+   Koyu tema: gece bürosu. İkisi de aynı iskelet, aynı ölçüler.
+   Yazı: başlıklar Playfair Display, etiketler Courier Prime, gövde Inter.
+   ============================================================ */
+:root{
+  --bg:#EDE7DA; --bg-soft:#E6DECE; --surface:#F7F3E9; --surface-2:#EDE6D7;
+  --ink:#191611; --ink-2:#4F483F; --ink-3:#665D50;
+  --line:#D6CCB7; --line-2:#C3B69C;
+  --accent:#A3231C; --accent-2:#C9453A; --accent-rgb:163,35,28;
+  --paper:#F7F3E9; --stamp:rgba(163,35,28,.9);
+  --nav-bg:rgba(237,231,218,.84); --nav-bg-solid:rgba(237,231,218,.97);
+  --shadow-1:0 1px 2px rgba(25,22,17,.05), 0 10px 26px rgba(25,22,17,.07);
+  --shadow-2:0 22px 56px rgba(25,22,17,.14);
+  --W:1180px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px;
+  --f-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-type:'Courier Prime',Consolas,ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C0D10; --bg-soft:#101217; --surface:#15171D; --surface-2:#1A1D24;
+  --ink:#F0ECE5; --ink-2:#A8A29A; --ink-3:#8A847C;
+  --line:#23262D; --line-2:#31353E;
+  --accent:#E2574A; --accent-2:#FF8A78; --accent-rgb:226,87,74;
+  --paper:#15171D; --stamp:rgba(226,87,74,.9);
+  --nav-bg:rgba(12,13,16,.8); --nav-bg-solid:rgba(12,13,16,.97);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(0,0,0,.34);
+  --shadow-2:0 22px 56px rgba(0,0,0,.56);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s ease,color .35s ease}
+/* kâğıt / gece dokusu — çok hafif */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(circle at 20% 30%,rgba(120,100,70,.05),transparent 42%),radial-gradient(circle at 78% 66%,rgba(120,100,70,.045),transparent 46%)}
+html[data-theme="dark"] body::before{opacity:.75;background-image:radial-gradient(circle at 18% 22%,rgba(226,87,74,.055),transparent 46%),radial-gradient(circle at 82% 72%,rgba(70,90,130,.05),transparent 48%)}
+body>*{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;height:auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.wrap{max-width:var(--W);margin:0 auto;padding:0 32px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.1;letter-spacing:-.01em}
+.tag{font-family:var(--f-type);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.tr,.en{display:block}
+html[data-lang="en"] .tr{display:none!important}
+html[data-lang="tr"] .en{display:none!important}
+.tr.i,.en.i{display:inline}
+html[data-lang="en"] .tr.i{display:none!important}
+html[data-lang="tr"] .en.i{display:none!important}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* NAV */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav#nav.stuck{background:var(--nav-bg-solid);border-color:var(--line)}
+.nav-in{max-width:var(--W);margin:0 auto;padding:0 32px;height:var(--navh);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-type);font-size:14px;letter-spacing:.06em;color:var(--ink-2);transition:color .2s}
+.brand img{height:26px;width:auto}
+.brand:hover{color:var(--ink)}
+.nav-end{display:flex;align-items:center;gap:8px}
+.back{font-family:var(--f-type);font-size:13px;color:var(--ink-2);padding:9px 12px;white-space:nowrap;transition:.2s}
+.back:hover{color:var(--accent)}
+.lang-menu{position:relative}
+.lang-trigger{min-width:74px;height:36px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;background:transparent;border:1px solid var(--line-2);border-radius:2px;cursor:pointer;color:var(--ink-2);font-family:var(--f-type);font-size:11px;letter-spacing:.08em;transition:.22s}
+.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--ink);border-color:var(--ink-3)}
+.lang-globe{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+.lang-chev{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}
+.lang-menu.open .lang-chev{transform:rotate(180deg)}
+.lang-popover{position:absolute;right:0;top:calc(100% + 9px);width:218px;padding:7px;background:var(--surface);border:1px solid var(--line-2);border-radius:2px;box-shadow:var(--shadow-2);opacity:0;visibility:hidden;transform:translateY(-5px);transition:.2s;z-index:220}
+.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}
+.lang-menu-title{padding:7px 9px 9px;color:var(--ink-3);font-family:var(--f-type);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.lang-option{width:100%;display:flex;align-items:center;gap:10px;padding:9px;border:0;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:14px;transition:.2s}
+.lang-option:hover,.lang-option.on{background:var(--bg-soft);color:var(--ink)}
+.lang-code{min-width:22px;font-family:var(--f-type);font-size:10px;color:var(--ink-3)}
+.lang-option.on::after{content:"\00D7";margin-left:auto;color:var(--accent);font-family:var(--f-type)}
+.iconbtn{width:36px;height:36px;border-radius:2px;background:transparent;border:1px solid var(--line-2);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
+.iconbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .ic-sun{display:block}html[data-theme="dark"] .ic-moon{display:none}
+.ic-sun{display:none}.ic-moon{display:block}
+
+/* BUTONLAR — bu sayfada düğmeler damga gibi: keskin köşe, daktilo yazısı */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:15px 26px;border-radius:2px;font-family:var(--f-type);font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,border-color .2s}
+.btn.p{background:var(--accent);color:#FFF6F3}
+.btn.p:hover{transform:translateY(-2px);background:var(--accent-2)}
+/* Koyu temada damga kırmızısı açılıyor; beyaz yazının okunması için
+   dolu düğme kendi koyu tonunu kullanır. */
+html[data-theme="dark"] .btn.p{background:#C43C30}
+html[data-theme="dark"] .btn.p:hover{background:#A82F25}
+
+.btn.g{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.g:hover{transform:translateY(-2px);border-color:var(--ink)}
+.arw{transition:transform .3s var(--ease)}.btn:hover .arw{transform:translateX(5px)}
+
+/* HERO — dosya kapağı */
+.hero{padding:calc(var(--navh) + 72px) 0 0;position:relative}
+.crumb{display:flex;align-items:center;gap:10px;font-family:var(--f-type);font-size:12px;color:var(--ink-3);margin-bottom:34px}
+.crumb a:hover{color:var(--accent)}
+.folder{border:1px solid var(--line-2);background:var(--paper);box-shadow:var(--shadow-2);position:relative}
+.folder::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent)}
+.fhead{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:16px 30px;border-bottom:1px solid var(--line)}
+.fhead .tag{font-size:11px}
+.stamp{font-family:var(--f-type);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);border:1.5px solid var(--stamp);padding:6px 13px;transform:rotate(-1.4deg)}
+.fbody{padding:60px 60px 54px;text-align:center}
+.wordmark{font-family:var(--f-display);font-weight:900;font-size:clamp(58px,12.6vw,164px);line-height:.9;letter-spacing:.005em;color:var(--ink)}
+.slogan{margin-top:20px;font-family:var(--f-type);font-size:clamp(13.5px,2.1vw,20px);letter-spacing:.06em;color:var(--ink-2)}
+.hline{width:74px;height:1px;background:var(--line-2);margin:32px auto}
+.lead{max-width:660px;margin:0 auto;color:var(--ink-2);font-size:17.5px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+.ffoot{display:flex;flex-wrap:wrap;border-top:1px solid var(--line)}
+.ffoot div{flex:1 1 168px;padding:20px 22px;text-align:center;border-right:1px solid var(--line)}
+.ffoot div:last-child{border-right:0}
+.ffoot b{display:block;font-family:var(--f-type);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.ffoot span{font-size:15.5px;font-weight:500;color:var(--ink)}
+
+/* BÖLÜMLER */
+section.blk{padding:100px 0;position:relative}
+.head{max-width:760px;margin-bottom:52px}
+.head h2{font-size:clamp(32px,4.6vw,52px);margin:14px 0 18px}
+.head p{color:var(--ink-2);font-size:17.5px}
+.hl{color:var(--accent);font-style:italic}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* VAKA DOSYASI */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.68fr);border:1px solid var(--line-2);background:var(--surface)}
+.case-main{padding:44px 46px;border-right:1px solid var(--line)}
+.case-main h3{font-size:clamp(28px,3.6vw,40px);margin:12px 0 20px}
+.case-main p{color:var(--ink-2);font-size:16.5px;margin-bottom:14px}
+.case-side{padding:38px 34px;background:var(--surface-2)}
+.kv{padding:14px 0;border-bottom:1px dotted var(--line-2)}
+.kv:last-child{border-bottom:0}
+.kv b{display:block;font-family:var(--f-type);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.kv span{font-size:15.5px;color:var(--ink)}
+
+/* ÇELİŞKİ GÖSTERİMİ */
+.demo{border:1px solid var(--line-2);background:var(--surface);padding:38px 40px}
+.demo-top{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:26px}
+.demo-top .tag{font-size:10.5px}
+.slips{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative}
+.slip{border:1px solid var(--line-2);background:var(--bg-soft);padding:22px 24px;transition:border-color .35s,transform .35s var(--ease)}
+.slip .tag{font-size:10px;display:block;margin-bottom:10px}
+.slip q{display:block;font-family:var(--f-type);font-size:15px;line-height:1.7;color:var(--ink);quotes:none}
+.slip .meta{margin-top:12px;font-family:var(--f-type);font-size:12px;color:var(--ink-3)}
+.demo.on .slip{border-color:var(--accent)}
+.demo.on .slip:nth-child(1){transform:rotate(-.5deg)}
+.demo.on .slip:nth-child(2){transform:rotate(.5deg)}
+.strike{position:absolute;left:0;right:0;top:50%;border-top:2px solid var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease);pointer-events:none;z-index:2}
+.demo.on .strike{transform:scaleX(1)}
+.verdict{margin-top:24px;border-left:2px solid var(--accent);padding:0 0 0 20px;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .4s ease .1s,padding .3s}
+.demo.on .verdict{max-height:260px;opacity:1;padding:4px 0 4px 20px}
+.verdict b{display:block;font-family:var(--f-type);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.verdict p{color:var(--ink-2);font-size:16px}
+.demobtn{margin-top:26px;background:transparent;border:1px solid var(--ink-3);border-radius:2px;padding:12px 22px;font-family:var(--f-type);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:.22s}
+.demobtn:hover{border-color:var(--accent);color:var(--accent)}
+.note-small{margin-top:16px;font-family:var(--f-type);font-size:11.5px;color:var(--ink-3)}
+
+/* DALLANMA */
+.branch{margin-top:52px;border:1px solid var(--line-2);background:var(--surface);padding:36px 40px 30px}
+.branch svg{width:100%;height:auto;display:block;margin-top:18px;overflow:visible}
+.branch .bl{fill:none;stroke:var(--line-2);stroke-width:1.4;transition:stroke .3s}
+.branch .bn{fill:var(--ink-3);transition:fill .3s}
+.branch .bt{font-family:'Courier Prime',monospace;font-size:11px;fill:var(--ink-3);transition:fill .3s}
+.branch g.end:hover .bl,.branch g.end:focus-within .bl{stroke:var(--accent);stroke-width:2}
+.branch g.end:hover .bn,.branch g.end:focus-within .bn{fill:var(--accent)}
+.branch g.end:hover .bt,.branch g.end:focus-within .bt{fill:var(--ink)}
+.branch-cap{margin-top:24px}
+.branch-cap p{color:var(--ink-2);font-size:16px;max-width:760px}
+
+/* SİSTEM LİSTESİ */
+.sys{border-top:1px solid var(--line-2)}
+.sysrow{display:grid;grid-template-columns:70px minmax(0,1fr) minmax(0,1.3fr);gap:32px;padding:30px 0;border-bottom:1px solid var(--line);align-items:start;transition:background .3s,padding-left .3s var(--ease)}
+.sysrow:hover{background:var(--surface);padding-left:14px}
+.sysrow .n{font-family:var(--f-type);font-size:12px;color:var(--accent);letter-spacing:.1em;padding-top:6px}
+.sysrow h4{font-size:22px;letter-spacing:-.005em}
+.sysrow p{color:var(--ink-2);font-size:16px}
+
+/* RAKAMLAR */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-2);background:var(--surface);margin-top:52px}
+.stats div{padding:30px 26px;border-right:1px solid var(--line);text-align:center}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--f-display);font-weight:900;font-size:42px;line-height:1;color:var(--ink);margin-bottom:8px}
+.stats span{font-family:var(--f-type);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+/* DÜRÜSTLÜK LİSTESİ */
+.plain{border-top:1px solid var(--line-2);list-style:none}
+.plain li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:16.5px}
+.plain li::before{content:"\25AA";font-family:var(--f-type);color:var(--accent)}
+.plain li b{color:var(--ink);font-weight:600}
+
+/* CTA */
+.endcta{border:1px solid var(--line-2);background:var(--surface);padding:70px 48px;text-align:center;position:relative;overflow:hidden}
+.endcta::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent)}
+.endcta h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px}
+.endcta p{color:var(--ink-2);font-size:17.5px;max-width:560px;margin:0 auto 32px}
+.endcta .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--ink-3);font-family:var(--f-type);font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--ink-2)}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:940px){
+  .case{grid-template-columns:1fr}
+  .case-main{border-right:0;border-bottom:1px solid var(--line)}
+  .slips{grid-template-columns:1fr}
+  .strike{display:none}
+  .sysrow{grid-template-columns:52px minmax(0,1fr);gap:20px}
+  .sysrow p{grid-column:2}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div:nth-child(2n){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:680px){
+  :root{--navh:64px}
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  section.blk{padding:64px 0}
+  .hero{padding-top:calc(var(--navh) + 36px)}
+  .fhead{padding:14px 20px}
+  .fbody{padding:40px 22px 36px}
+  .ffoot div{flex:1 1 100%;border-right:0;border-bottom:1px solid var(--line);padding:16px}
+  .ffoot div:last-child{border-bottom:0}
+  .hero .cta{flex-direction:column}.hero .cta .btn{width:100%}
+  .case-main{padding:30px 22px}.case-side{padding:28px 22px}
+  .demo,.branch,.endcta{padding:28px 20px}
+  .brand span{display:none}
+}
+
+/* İKİ KAYDIRMA ÇUBUĞU DÜZELTMESİ
+   overflow-x:hidden hem html hem body'ye verilince ikisi de ayrı bir
+   kaydırma kabı oluyor; içerik gövdeden taşarsa ikinci bir dikey çubuk
+   beliriyordu. clip, kap oluşturmadan kırpar ve overflow-y görünür kalır.
+   Önce hidden yazılı: clip desteklemeyen eski tarayıcılar için yedek. */
+html,body{overflow-x:hidden;overflow-x:clip}
+
+/* ---------------- TELEFON RÖTUŞU ----------------
+   Dokunma hedefleri: küçük bağlantıların tıklama alanı, düzeni hiç
+   bozmadan görünmez bir katmanla 44 piksele çıkarılıyor.
+   Mikro tipografi: 10-11 piksellik etiketler telefonda 12 pikselin
+   altına inmiyor. */
+@media(max-width:680px){
+  .brand{min-height:44px;padding:4px 0}
+  .crumb a,footer a,.back{position:relative}
+  .crumb a::after,footer a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+  .tag,.ffoot b,.kv b,.stats span,.sysrow .n,.slip .tag,.slip .meta,
+  .demo-top .tag,.note-small,.branch .bt,footer,.crumb{font-size:12px}
+  .fhead .tag,.stamp,.stamp span{font-size:12px}
+  .brand{min-width:44px;justify-content:center}
+  .crumb a::after{left:-10px;right:-10px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
+      <span>JinjaGames</span>
+    </a>
+    <div class="nav-end">
+      <a class="back" href="../index.html">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+      <div class="lang-menu">
+        <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+        <div class="lang-popover" id="language-menu" role="menu">
+          <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+        </div>
+      </div>
+      <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
+        <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
+    <div class="folder">
+      <div class="fhead">
+        <span class="tag"><span class="en i">Regional Investigation Bureau · File 01</span><span class="tr i">Bölgesel Soruşturma Bürosu · Dosya 01</span></span>
+        <span class="stamp"><span class="en i">Open investigation</span><span class="tr i">Açık soruşturma</span></span>
+      </div>
+      <div class="fbody">
+        <h1 class="wordmark">LOCARD</h1>
+        <p class="slogan">Every contact leaves a trace.</p>
+        <div class="hline" aria-hidden="true"></div>
+        <p class="lead en">A first person investigation game. You are Patrick Hale, a senior detective in the coastal city of Meridian. Everybody is hiding something, but not every secret is a murder. Success is not collecting the most objects; it is understanding what your evidence proves, and what it does not.</p>
+        <p class="lead tr">Birinci şahıs bir soruşturma oyunu. Kurmaca kıyı kenti Meridian'da, Bölgesel Soruşturma Bürosu'nun kıdemli dedektifi Patrick Hale'sin. Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir. Başarı çok nesne toplamak değil, elindeki delilin neyi ispatlayıp neyi ispatlamadığını anlamaktır.</p>
+        <div class="cta">
+          <a class="btn p" href="#case"><span class="en i">Read the file</span><span class="tr i">Dosyayı oku</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="#method"><span class="en i">How it plays</span><span class="tr i">Nasıl oynanıyor</span></a>
+        </div>
+      </div>
+      <div class="ffoot">
+        <div><b><span class="en i">Genre</span><span class="tr i">Tür</span></b><span class="en i">First person investigation</span><span class="tr i">Birinci şahıs soruşturma</span></div>
+        <div><b><span class="en i">Players</span><span class="tr i">Oyuncu</span></b><span class="en i">Solo or together</span><span class="tr i">Tek başına ya da birlikte</span></div>
+        <div><b><span class="en i">Platform</span><span class="tr i">Platform</span></b><span>Windows, macOS</span></div>
+        <div><b><span class="en i">Text</span><span class="tr i">Metin</span></b><span class="en i">Turkish, English</span><span class="tr i">Türkçe, İngilizce</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- VAKA -->
+  <section id="case" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag"><span class="en i">Case 01</span><span class="tr i">Dosya 01</span></span>
+        <h2 class="en">The first file on <span class="hl">your desk.</span></h2>
+        <h2 class="tr">Masandaki <span class="hl">ilk dosya.</span></h2>
+        <p class="en">Locard is built as a series. Each entry is one complete case; the name never changes and the series grows underneath it.</p>
+        <p class="tr">Locard bir seri olarak kurgulanıyor. Her bölüm eksiksiz bir vaka; ad hiç değişmiyor, seri onun altında büyüyor.</p>
+      </div>
+      <div class="case rv">
+        <div class="case-main">
+          <span class="tag">LOCARD / <span class="en i">CASE 01</span><span class="tr i">DOSYA 01</span></span>
+          <h3 class="en">The Vesper Lot</h3>
+          <h3 class="tr">Son Teklif</h3>
+          <p class="en">The case opens in the Bureau, not at the scene: a short walk through the office, the team you have known for years, then the call. From there it is your investigation: the scene, the interviews, the lab, the city.</p>
+          <p class="tr">Vaka olay yerinde değil Büro'da açılır: kısa bir ofis turu, yıllardır tanıdığın ekip, sonra gelen ihbar. Oradan sonrası senin soruşturman: olay yeri, görüşmeler, laboratuvar ve şehir.</p>
+          <p class="en">The file can close in seven different ways, depending on what you proved, who you pushed, and how you moved in.</p>
+          <p class="tr">Dosya; neyi ispatladığına, kimi sıkıştırdığına ve nasıl müdahale ettiğine göre yedi farklı şekilde kapanabilir.</p>
+        </div>
+        <div class="case-side">
+          <div class="kv"><b><span class="en i">Setting</span><span class="tr i">Mekân</span></b><span class="en i">Meridian, present day</span><span class="tr i">Meridian, günümüz</span></div>
+          <div class="kv"><b><span class="en i">Detective</span><span class="tr i">Dedektif</span></b><span>Patrick Hale</span></div>
+          <div class="kv"><b><span class="en i">Unit</span><span class="tr i">Birim</span></b><span class="en i">Regional Investigation Bureau</span><span class="tr i">Bölgesel Soruşturma Bürosu</span></div>
+          <div class="kv"><b><span class="en i">Look</span><span class="tr i">Görünüm</span></b><span class="en i">Low poly, serious tone</span><span class="tr i">Low poly, ciddi ton</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YÖNTEM -->
+  <section id="method" class="blk" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag"><span class="en i">The method</span><span class="tr i">Yöntem</span></span>
+        <h2 class="en">A statement is not <span class="hl">a fact.</span></h2>
+        <h2 class="tr">İfade, <span class="hl">gerçek değildir.</span></h2>
+        <p class="en">Locard gives you findings. The reasoning stays yours. There is no golden trail to the objective, no evidence glowing across the room, and no colour code that quietly names the killer.</p>
+        <p class="tr">Locard sana bulguyu verir; çıkarım sende kalır. Hedefe giden altın çizgi yok, odanın öbür ucunda parlayan delil yok, katili sessizce ele veren renk kodu yok.</p>
+      </div>
+
+      <div class="demo rv" id="demo">
+        <div class="demo-top">
+          <span class="tag"><span class="en i">Evidence board · comparing</span><span class="tr i">Delil panosu · karşılaştırma</span></span>
+          <span class="tag" style="color:var(--accent)"><span class="en i">Illustration</span><span class="tr i">Gösterim</span></span>
+        </div>
+        <div class="slips">
+          <div class="slip">
+            <span class="tag"><span class="en i">Witness statement</span><span class="tr i">Tanık ifadesi</span></span>
+            <q class="en">"I never went into the storage room that night."</q>
+            <q class="tr">"O gece depoya hiç girmedim."</q>
+            <div class="meta"><span class="en i">Interview · 09:40</span><span class="tr i">Görüşme · 09:40</span></div>
+          </div>
+          <div class="slip">
+            <span class="tag"><span class="en i">Record you documented</span><span class="tr i">Belgelediğin kayıt</span></span>
+            <q class="en">Door access log, storage room, 23:41.</q>
+            <q class="tr">Kapı erişim kaydı, depo, 23:41.</q>
+            <div class="meta"><span class="en i">Collected at the scene</span><span class="tr i">Olay yerinde alındı</span></div>
+          </div>
+          <div class="strike" aria-hidden="true"></div>
+        </div>
+        <div class="verdict">
+          <b><span class="en i">Contradiction filed</span><span class="tr i">Çelişki kaydedildi</span></b>
+          <p class="en">The claim does not survive the record. You can put it on the table in the middle of the interview, or hold it back until it costs more. Neither choice is free: pressure closes some doors and opens others.</p>
+          <p class="tr">İddia kaydın karşısında ayakta kalmıyor. Bunu görüşmenin tam ortasında masaya koyabilirsin ya da daha pahalıya patlayacağı ana saklayabilirsin. İkisi de bedelsiz değil: baskı bazı kapıları kapatır, bazılarını açar.</p>
+        </div>
+        <button class="demobtn" type="button" id="demobtn"><span class="en i">Compare the two</span><span class="tr i">İkisini karşılaştır</span></button>
+        <p class="note-small"><span class="en i">An illustration of the mechanic, not a scene from the case.</span><span class="tr i">Mekaniğin gösterimi; vakadan bir sahne değildir.</span></p>
+      </div>
+
+      <div class="branch rv">
+        <span class="tag"><span class="en i">Where the file can end</span><span class="tr i">Dosya nerede bitebilir</span></span>
+        <svg viewBox="0 0 800 210" role="img" aria-label="Seven possible outcomes branching from one case">
+          <circle class="bn" cx="26" cy="105" r="5"></circle>
+          <text class="bt" x="26" y="132" text-anchor="middle">01</text>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 18, 700 18"></path><circle class="bn" cx="706" cy="18" r="4"></circle><text class="bt" x="720" y="22">A</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 47, 700 47"></path><circle class="bn" cx="706" cy="47" r="4"></circle><text class="bt" x="720" y="51">B</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 76, 700 76"></path><circle class="bn" cx="706" cy="76" r="4"></circle><text class="bt" x="720" y="80">C</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 105, 700 105"></path><circle class="bn" cx="706" cy="105" r="4"></circle><text class="bt" x="720" y="109">D</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 134, 700 134"></path><circle class="bn" cx="706" cy="134" r="4"></circle><text class="bt" x="720" y="138">E</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 163, 700 163"></path><circle class="bn" cx="706" cy="163" r="4"></circle><text class="bt" x="720" y="167">F</text></g>
+          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 192, 700 192"></path><circle class="bn" cx="706" cy="192" r="4"></circle><text class="bt" x="720" y="196">G</text></g>
+        </svg>
+        <div class="branch-cap">
+          <p class="en">Seven ways for one case to close. A decision is never only a closed option: it opens a different event, a different place to hold an interview, an official route, a pursuit. The murder and the person who committed it do not change. What changes is what you can prove, and what it cost you.</p>
+          <p class="tr">Tek bir vakanın kapanabileceği yedi yol. Karar hiçbir zaman yalnızca kapanan bir seçenek değildir: başka bir olay, görüşmenin yapılacağı başka bir yer, resmî bir erişim yolu ya da bir takip açar. Cinayet ve onu işleyen kişi değişmez. Değişen şey, neyi ispatlayabildiğin ve bunun sana neye mal olduğudur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SİSTEMLER -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag"><span class="en i">Systems</span><span class="tr i">Sistemler</span></span>
+        <h2 class="en">What is in <span class="hl">the kit.</span></h2>
+        <h2 class="tr">Çantanda <span class="hl">ne var.</span></h2>
+      </div>
+      <div class="sys rv">
+        <div class="sysrow">
+          <span class="n">01</span>
+          <h4><span class="en i">The evidence board</span><span class="tr i">Delil panosu</span></h4>
+          <p class="en">People, places and objects are filed automatically. The links, like "this person could have been here", are drawn by you. A board full of facts is not a solved case.</p>
+          <p class="tr">Kişi, yer ve nesne kartları panoya kendiliğinden düşer. Bağlantıyı, yani "bu kişi burada bulunmuş olabilir" satırını, sen kurarsın. Gerçeklerle dolu bir pano çözülmüş vaka demek değildir.</p>
+        </div>
+        <div class="sysrow">
+          <span class="n">02</span>
+          <h4><span class="en i">Observation and contradiction</span><span class="tr i">Gözlem ve çelişki</span></h4>
+          <p class="en">Testimony is compared against what you documented. When a statement does not survive the record, you can put the contradiction on the table during the interview itself.</p>
+          <p class="tr">İfade, belgelediğin kayıtla karşılaştırılır. Bir anlatım kayda dayanmıyorsa çelişkiyi görüşmenin tam ortasında masaya koyabilirsin.</p>
+        </div>
+        <div class="sysrow">
+          <span class="n">03</span>
+          <h4><span class="en i">Forensics on a queue</span><span class="tr i">Kuyruktaki laboratuvar</span></h4>
+          <p class="en">Prints, UV, blood documentation, fibre samples, autopsy. Results do not arrive instantly: reports land on your phone or are handed to you in person as the case moves.</p>
+          <p class="tr">Parmak izi, UV, kan izi belgeleme, lif örneği, otopsi. Sonuçlar anında gelmez: soruşturma ilerledikçe telefona düşer ya da yerinde teslim alınır.</p>
+        </div>
+        <div class="sysrow">
+          <span class="n">04</span>
+          <h4><span class="en i">Interviews with a cost</span><span class="tr i">Bedeli olan görüşmeler</span></h4>
+          <p class="en">Choose the topic and the register: empathy, formality or pressure. Present evidence, get it wrong, walk it back. People answer with words and with body language.</p>
+          <p class="tr">Konuyu ve tonu seçersin: empati, resmiyet ya da baskı. Delil sunarsın, yanlış çıkarım yaparsın, geri adım atarsın. Karşındaki hem sözle hem beden diliyle cevap verir.</p>
+        </div>
+        <div class="sysrow">
+          <span class="n">05</span>
+          <h4><span class="en i">The city and the team</span><span class="tr i">Şehir ve ekip</span></h4>
+          <p class="en">Walk the streets or take the car across the map. Pick a partner for the trip, or go alone. Every route to the truth stays open on a solo run.</p>
+          <p class="tr">Sokakları yürü ya da harita üzerinde araçla git. Yolculuk için bir ortak seç ya da yalnız git. Yalnız rotada da gerçeğe giden bütün yollar açık kalır.</p>
+        </div>
+        <div class="sysrow">
+          <span class="n">06</span>
+          <h4><span class="en i">Reconstruction</span><span class="tr i">Yeniden kurgu</span></h4>
+          <p class="en">When the chain holds, the scene is replayed in 3D silhouettes: your version of the night, built only from what you actually established.</p>
+          <p class="tr">Zincir tuttuğunda sahne 3B silüetlerle yeniden oynatılır: o gecenin senin kurduğun hâli, yalnızca gerçekten ispatladıklarından.</p>
+        </div>
+      </div>
+
+      <div class="stats rv">
+        <div><b>12</b><span class="en i">Locations</span><span class="tr i">Mekân</span></div>
+        <div><b>18</b><span class="en i">Characters</span><span class="tr i">Karakter</span></div>
+        <div><b>64</b><span class="en i">Records</span><span class="tr i">Kayıt</span></div>
+        <div><b>7</b><span class="en i">Outcomes</span><span class="tr i">Sonuç</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AÇIK KONUŞALIM -->
+  <section class="blk" style="background:var(--bg-soft);border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag"><span class="en i">Straight answers</span><span class="tr i">Açık konuşalım</span></span>
+        <h2 class="en">What you are <span class="hl">actually buying.</span></h2>
+        <h2 class="tr">Eline <span class="hl">tam olarak ne geçiyor.</span></h2>
+        <p class="en">We would rather tell you this now than let you find it out afterwards.</p>
+        <p class="tr">Bunu sonradan öğrenmen yerine şimdi söylemeyi tercih ediyoruz.</p>
+      </div>
+      <ul class="plain rv">
+        <li><span><b><span class="en i">One complete case.</span><span class="tr i">Eksiksiz bir vaka.</span></b> <span class="en i">Case 01 plays from the first call to the last decision, and closes in one of seven ways.</span><span class="tr i">Dosya 01 ilk ihbardan son karara kadar oynanır ve yedi yoldan biriyle kapanır.</span></span></li>
+        <li><span><b><span class="en i">Windows and macOS.</span><span class="tr i">Windows ve macOS.</span></b> <span class="en i">The first case arrives on both, with the same content and the same save format.</span><span class="tr i">İlk dosya ikisine birden geliyor; aynı içerik, aynı kayıt biçimi.</span></span></li>
+        <li><span><b><span class="en i">Solo or together.</span><span class="tr i">Tek başına ya da birlikte.</span></b> <span class="en i">Case 01 can be worked alone or with someone else. The evidence board is shared, but the conclusion still has to be argued between you.</span><span class="tr i">Dosya 01 yalnız da, biriyle birlikte de çözülebilir. Delil panosu ortaktır, ama sonucu yine kendi aranızda tartışmanız gerekir.</span></span></li>
+        <li><span><b><span class="en i">A serious crime story.</span><span class="tr i">Ciddi bir suç öyküsü.</span></b> <span class="en i">The game opens with a content warning screen, and it means it.</span><span class="tr i">Oyun bir içerik uyarısı ekranıyla açılır ve bunu ciddiye alır.</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="endcta rv">
+        <span class="stamp" style="display:inline-block;margin-bottom:22px"><span class="en i">Pending</span><span class="tr i">Beklemede</span></span>
+        <h2 class="en">The Steam page opens soon.</h2>
+        <h2 class="tr">Steam sayfası yakında açılıyor.</h2>
+        <p class="en">Locard is registered on Steam and the store page is being prepared. Until it is live, the fastest way to hear about the release is us.</p>
+        <p class="tr">Locard Steam'de kayıtlı; mağaza sayfası hazırlanıyor. Sayfa açılana kadar çıkışı en hızlı bizden duyarsın.</p>
+        <div class="cta">
+          <a class="btn p" href="mailto:jinjagamesofficial@gmail.com?subject=Locard"><span class="en i">Write to us</span><span class="tr i">Bize yaz</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn g" href="../index.html#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="yr"></span> JINJAGAMES · ANKARA</div>
+    <div><a href="../index.html">&larr; <span class="en i">Back to JinjaGames</span><span class="tr i">JinjaGames'e dön</span></a> · <a href="../privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var d=document, root=d.documentElement;
+  function $(s,c){return (c||d).querySelector(s);}
+  function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s));}
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+  function paintLang(l){
+    $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); });
+    $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); });
+  }
+  function closeLangMenus(){
+    $$('.lang-menu.open').forEach(function(m){ m.classList.remove('open'); var t=$('[data-lang-toggle]',m); if(t) t.setAttribute('aria-expanded','false'); });
+  }
+  $$('[data-lang-set]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-lang-set'); if(l!=='tr'&&l!=='en') l='en';
+      root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus();
+    });
+  });
+  paintLang(root.getAttribute('data-lang')||'en');
+  $$('[data-lang-toggle]').forEach(function(t){
+    t.addEventListener('click',function(e){
+      var m=t.closest('.lang-menu'), opening=!m.classList.contains('open');
+      closeLangMenus(); if(opening){ m.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+      e.stopPropagation();
+    });
+  });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLangMenus(); });
+
+  $$('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',t); store('jg_theme',t);
+      var m=d.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content', t==='dark'?'#0C0D10':'#EDE7DA');
+    });
+  });
+
+  var nav=$('#nav');
+  window.addEventListener('scroll',function(){ nav.classList.toggle('stuck',(window.scrollY||0)>10); },{passive:true});
+
+  /* Çelişki gösterimi — düğme metni dile göre yeniden yazıldığı için
+     iki dilin de kalıbı burada duruyor. */
+  var demo=$('#demo'), demobtn=$('#demobtn');
+  if(demo && demobtn){
+    demobtn.addEventListener('click',function(){
+      var on=demo.classList.toggle('on');
+      demobtn.innerHTML = on
+        ? '<span class="en i">Reset</span><span class="tr i">Baştan al</span>'
+        : '<span class="en i">Compare the two</span><span class="tr i">İkisini karşılaştır</span>';
+    });
+  }
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.06,rootMargin:'0px 0px -60px 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el); });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
