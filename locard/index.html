@@ -194,8 +194,6 @@ section.blk{padding:100px 0;position:relative}
 .slip q{display:block;font-family:var(--f-type);font-size:15px;line-height:1.7;color:var(--ink);quotes:none}
 .slip .meta{margin-top:12px;font-family:var(--f-type);font-size:12px;color:var(--ink-3)}
 .demo.on .slip{border-color:var(--accent)}
-.demo.on .slip:nth-child(1){transform:rotate(-.5deg)}
-.demo.on .slip:nth-child(2){transform:rotate(.5deg)}
 .strike{position:absolute;left:0;right:0;top:50%;border-top:2px solid var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease);pointer-events:none;z-index:2}
 .demo.on .strike{transform:scaleX(1)}
 .verdict{margin-top:24px;border-left:2px solid var(--accent);padding:0 0 0 20px;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .4s ease .1s,padding .3s}
@@ -212,9 +210,9 @@ section.blk{padding:100px 0;position:relative}
 .branch .bl{fill:none;stroke:var(--line-2);stroke-width:1.4;transition:stroke .3s}
 .branch .bn{fill:var(--ink-3);transition:fill .3s}
 .branch .bt{font-family:'Courier Prime',monospace;font-size:11px;fill:var(--ink-3);transition:fill .3s}
-.branch g.end:hover .bl,.branch g.end:focus-within .bl{stroke:var(--accent);stroke-width:2}
-.branch g.end:hover .bn,.branch g.end:focus-within .bn{fill:var(--accent)}
-.branch g.end:hover .bt,.branch g.end:focus-within .bt{fill:var(--ink)}
+.branch g.end:hover .bl{stroke:var(--accent);stroke-width:2}
+.branch g.end:hover .bn{fill:var(--accent)}
+.branch g.end:hover .bt{fill:var(--ink)}
 .branch-cap{margin-top:24px}
 .branch-cap p{color:var(--ink-2);font-size:16px;max-width:760px}
 
@@ -301,6 +299,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
   .crumb a::after{left:-10px;right:-10px}
 }
 </style>
+<script src="../assets/clean-scroll.js" defer></script>
 </head>
 <body>
 
@@ -434,13 +433,13 @@ html,body{overflow-x:hidden;overflow-x:clip}
         <svg viewBox="0 0 800 210" role="img" aria-label="Seven possible outcomes branching from one case">
           <circle class="bn" cx="26" cy="105" r="5"></circle>
           <text class="bt" x="26" y="132" text-anchor="middle">01</text>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 18, 700 18"></path><circle class="bn" cx="706" cy="18" r="4"></circle><text class="bt" x="720" y="22">A</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 47, 700 47"></path><circle class="bn" cx="706" cy="47" r="4"></circle><text class="bt" x="720" y="51">B</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 76, 700 76"></path><circle class="bn" cx="706" cy="76" r="4"></circle><text class="bt" x="720" y="80">C</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 105, 700 105"></path><circle class="bn" cx="706" cy="105" r="4"></circle><text class="bt" x="720" y="109">D</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 134, 700 134"></path><circle class="bn" cx="706" cy="134" r="4"></circle><text class="bt" x="720" y="138">E</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 163, 700 163"></path><circle class="bn" cx="706" cy="163" r="4"></circle><text class="bt" x="720" y="167">F</text></g>
-          <g class="end" tabindex="0"><path class="bl" d="M31 105 C 240 105, 320 192, 700 192"></path><circle class="bn" cx="706" cy="192" r="4"></circle><text class="bt" x="720" y="196">G</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 18, 700 18"></path><circle class="bn" cx="706" cy="18" r="4"></circle><text class="bt" x="720" y="22">A</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 47, 700 47"></path><circle class="bn" cx="706" cy="47" r="4"></circle><text class="bt" x="720" y="51">B</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 76, 700 76"></path><circle class="bn" cx="706" cy="76" r="4"></circle><text class="bt" x="720" y="80">C</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 105, 700 105"></path><circle class="bn" cx="706" cy="105" r="4"></circle><text class="bt" x="720" y="109">D</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 134, 700 134"></path><circle class="bn" cx="706" cy="134" r="4"></circle><text class="bt" x="720" y="138">E</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 163, 700 163"></path><circle class="bn" cx="706" cy="163" r="4"></circle><text class="bt" x="720" y="167">F</text></g>
+          <g class="end"><path class="bl" d="M31 105 C 240 105, 320 192, 700 192"></path><circle class="bn" cx="706" cy="192" r="4"></circle><text class="bt" x="720" y="196">G</text></g>
         </svg>
         <div class="branch-cap">
           <p class="en">Seven ways for one case to close. A decision is never only a closed option: it opens a different event, a different place to hold an interview, an official route, a pursuit. The murder and the person who committed it do not change. What changes is what you can prove, and what it cost you.</p>
@@ -559,9 +558,21 @@ html,body{overflow-x:hidden;overflow-x:clip}
   function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s));}
   function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
+  function alignStrike(){
+    var slips=$('.slips'), strike=$('.strike',slips);
+    if(!slips || !strike || window.innerWidth<=940) return;
+    var lang=root.getAttribute('data-lang')==='tr'?'tr':'en';
+    var quote=$('.slip q.'+lang,slips);
+    if(!quote) return;
+    var slipsBox=slips.getBoundingClientRect(), quoteBox=quote.getBoundingClientRect();
+    var lineHeight=parseFloat(getComputedStyle(quote).lineHeight)||quoteBox.height;
+    strike.style.top=(quoteBox.top-slipsBox.top+(lineHeight/2))+'px';
+  }
+
   function paintLang(l){
     $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); });
     $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); });
+    requestAnimationFrame(alignStrike);
   }
   function closeLangMenus(){
     $$('.lang-menu.open').forEach(function(m){ m.classList.remove('open'); var t=$('[data-lang-toggle]',m); if(t) t.setAttribute('aria-expanded','false'); });
@@ -605,6 +616,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
         : '<span class="en i">Compare the two</span><span class="tr i">İkisini karşılaştır</span>';
     });
   }
+  window.addEventListener('resize',alignStrike,{passive:true});
 
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.06,rootMargin:'0px 0px -60px 0px'});
