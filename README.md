@@ -89,6 +89,7 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
 
 ## Yeni proje sayfası eklerken
 1. Sayfayı `<proje>/index.html` olarak aç; `locard/index.html` iyi bir iskelet.
+   Site içi bağlantılarda dosya adı yerine klasör adresini (`/locard/`, `/daypot/`, `/cyberacademy/`) kullan; ana sayfa için `/` kullan.
 2. Ana sayfada `.world` satırı ekle (kendi `--accent` deri sınıfıyla) ve alt bilgideki "İşler" sütununa bağlantı koy.
 3. `sitemap.xml` ve `index.html` içindeki JSON-LD `@graph` listesini güncelle.
 

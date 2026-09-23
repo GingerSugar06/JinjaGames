@@ -2,6 +2,12 @@
 <html lang="en" data-lang="en" data-theme="light">
 <head>
 <meta charset="utf-8" />
+<script>
+// Keep legacy index.html links on the same clean URL as directory links.
+if ((location.protocol === 'https:' || location.protocol === 'http:') && location.pathname.endsWith('/index.html')) {
+  history.replaceState(history.state, '', location.pathname.replace(/index\.html$/, '') + location.search + location.hash);
+}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Locard | First Person Detective Game by JinjaGames</title>
 <meta name="description" content="Locard is a first person investigation game by JinjaGames. Work a branching murder case across 12 locations, build an evidence board, catch contradictions in testimony and reach one of seven outcomes." />
@@ -300,12 +306,12 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <nav id="nav">
   <div class="nav-in">
-    <a class="brand" href="../index.html">
+    <a class="brand" href="../">
       <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
       <span>JinjaGames</span>
     </a>
     <div class="nav-end">
-      <a class="back" href="../index.html">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+      <a class="back" href="../">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
       <div class="lang-menu">
         <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
         <div class="lang-popover" id="language-menu" role="menu">
@@ -324,7 +330,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <header class="hero">
   <div class="wrap">
-    <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
+    <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
     <div class="folder">
       <div class="fhead">
         <span class="tag"><span class="en i">Regional Investigation Bureau · File 01</span><span class="tr i">Bölgesel Soruşturma Bürosu · Dosya 01</span></span>
@@ -531,7 +537,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
         <div class="cta">
           <a class="btn p" href="mailto:jinjagamesofficial@gmail.com?subject=Locard"><span class="en i">Write to us</span><span class="tr i">Bize yaz</span> <span class="arw">&rarr;</span></a>
           <a class="btn g" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
-          <a class="btn g" href="../index.html#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+          <a class="btn g" href="../#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
         </div>
       </div>
     </div>
@@ -541,7 +547,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 <footer>
   <div class="wrap">
     <div>&copy; <span id="yr"></span> JINJAGAMES · ANKARA</div>
-    <div><a href="../index.html">&larr; <span class="en i">Back to JinjaGames</span><span class="tr i">JinjaGames'e dön</span></a> · <a href="../privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
+    <div><a href="../">&larr; <span class="en i">Back to JinjaGames</span><span class="tr i">JinjaGames'e dön</span></a> · <a href="../privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
   </div>
 </footer>
 

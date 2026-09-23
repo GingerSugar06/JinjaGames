@@ -2,6 +2,12 @@
 <html lang="en" data-lang="en" data-theme="light">
 <head>
 <meta charset="utf-8" />
+<script>
+// Keep legacy index.html links on the same clean URL as directory links.
+if ((location.protocol === 'https:' || location.protocol === 'http:') && location.pathname.endsWith('/index.html')) {
+  history.replaceState(history.state, '', location.pathname.replace(/index\.html$/, '') + location.search + location.hash);
+}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>JinjaGames | Cyber Academy, Locard ve DayPot</title>
 <meta name="description" content="Ankara merkezli indie stüdyo JinjaGames: siber güvenlik oyunu Cyber Academy, birinci şahıs soruşturma oyunu Locard ve çevrimdışı yemek yardımcısı DayPot." />
@@ -514,7 +520,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
               <div><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
               <div><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
             </div>
-            <a class="wlink" href="cyberacademy/index.html"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span class="arw">&rarr;</span></a>
+            <a class="wlink" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span class="arw">&rarr;</span></a>
           </div>
           <div class="wart">
             <video class="stagevid" data-src="newss_And_trailer/CyberAcademy_Steam_Trailer_v1.mp4" muted loop playsinline preload="none" poster="newss_And_trailer/main_capsule_1232x706_v1.png"></video>
@@ -539,7 +545,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
               <div><b>64</b><span class="en i">Records</span><span class="tr i">Kayıt</span></div>
               <div><b>7</b><span class="en i">Outcomes</span><span class="tr i">Sonuç</span></div>
             </div>
-            <a class="wlink" href="locard/index.html"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a>
+            <a class="wlink" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a>
           </div>
           <div class="wart">
             <span class="nmark">LOCARD</span>
@@ -565,7 +571,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
               <div><b>100%</b><span class="en i">Offline</span><span class="tr i">Çevrimdışı</span></div>
               <div><b>0</b><span class="en i">Trackers</span><span class="tr i">İzleyici</span></div>
             </div>
-            <a class="wlink" href="daypot/index.html"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span class="arw">&rarr;</span></a>
+            <a class="wlink" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span class="arw">&rarr;</span></a>
           </div>
           <div class="wart">
             <img class="wpot" src="daypot/img/daypot-icon.png" alt="DayPot" width="512" height="512" loading="lazy">
@@ -631,7 +637,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
         </div>
         <div class="fitem">
           <button class="fq" data-faq><span><span class="en i">What are you working on right now?</span><span class="tr i">Şu an neler üzerinde çalışıyorsunuz?</span></span><span class="fi"></span></button>
-          <div class="fa"><div><span class="en i">Three projects: <a href="cyberacademy/index.html">Cyber Academy</a>, a cybersecurity game; <a href="locard/index.html">Locard</a>, a first person investigation game; and <a href="daypot/index.html">DayPot</a>, an offline cooking assistant.</span><span class="tr i">Üç proje: siber güvenlik oyunu <a href="cyberacademy/index.html">Cyber Academy</a>, birinci şahıs soruşturma oyunu <a href="locard/index.html">Locard</a> ve çevrimdışı yemek yardımcısı <a href="daypot/index.html">DayPot</a>.</span></div></div>
+          <div class="fa"><div><span class="en i">Three projects: <a href="cyberacademy/">Cyber Academy</a>, a cybersecurity game; <a href="locard/">Locard</a>, a first person investigation game; and <a href="daypot/">DayPot</a>, an offline cooking assistant.</span><span class="tr i">Üç proje: siber güvenlik oyunu <a href="cyberacademy/">Cyber Academy</a>, birinci şahıs soruşturma oyunu <a href="locard/">Locard</a> ve çevrimdışı yemek yardımcısı <a href="daypot/">DayPot</a>.</span></div></div>
         </div>
         <div class="fitem">
           <button class="fq" data-faq><span><span class="en i">Why do the three projects look so different?</span><span class="tr i">Neden üç proje birbirinden bu kadar farklı görünüyor?</span></span><span class="fi"></span></button>
@@ -688,9 +694,9 @@ html,body{overflow-x:hidden;overflow-x:clip}
     </div>
     <div class="fcol">
       <h5><span class="en i">Work</span><span class="tr i">İşler</span></h5>
-      <a href="cyberacademy/index.html">Cyber Academy</a>
-      <a href="locard/index.html">Locard</a>
-      <a href="daypot/index.html">DayPot</a>
+      <a href="cyberacademy/">Cyber Academy</a>
+      <a href="locard/">Locard</a>
+      <a href="daypot/">DayPot</a>
     </div>
     <div class="fcol">
       <h5><span class="en i">Studio</span><span class="tr i">Stüdyo</span></h5>
