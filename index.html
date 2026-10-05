@@ -28,9 +28,10 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-400.woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts.css" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/","logo":"https://jinjagames.com/logo-512.png","email":"jinjagamesofficial@gmail.com","sameAs":["https://www.instagram.com/jinja.games/","https://www.linkedin.com/company/jinjagamesofficial"]},{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JinjaGames?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is an indie game studio based in Ankara, Türkiye."}},{"@type":"Question","name":"What kind of games does JinjaGames make?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames makes deep, honest games with systems that reward curiosity."}},{"@type":"Question","name":"What is JinjaGames working on right now?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is building three projects: Cyber Academy, a cybersecurity game; Locard, a first person investigation game; and DayPot, an offline cooking assistant for Android."}},{"@type":"Question","name":"Where is JinjaGames based?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is based in Ankara, Türkiye."}},{"@type":"Question","name":"Can I join the team?","acceptedAnswer":{"@type":"Answer","text":"When new roles open, JinjaGames announces them on the site and social media."}},{"@type":"Question","name":"Can I send feedback?","acceptedAnswer":{"@type":"Answer","text":"Feedback, ideas and bug reports can be sent to jinjagamesofficial@gmail.com."}}]},{"@type":"VideoGame","name":"Cyber Academy","url":"https://jinjagames.com/cyberacademy/","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS","Linux"],"genre":["Educational","Strategy","Simulation"]},{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","slogan":"Every contact leaves a trace.","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS"],"genre":["Adventure","Mystery"],"playMode":["SinglePlayer","CoOp"]},{"@type":"MobileApplication","name":"DayPot","url":"https://jinjagames.com/daypot/","applicationCategory":"FoodAndDrinkApplication","operatingSystem":"Android","publisher":{"@type":"Organization","name":"JinjaGames"}}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/","logo":"https://jinjagames.com/logo-512.png","email":"jinjagamesofficial@gmail.com","sameAs":["https://www.instagram.com/jinja.games/","https://www.linkedin.com/company/jinjagamesofficial"]},{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JinjaGames?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is an indie game studio based in Ankara, Türkiye."}},{"@type":"Question","name":"What kind of games does JinjaGames make?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames makes deep, honest games with systems that reward curiosity."}},{"@type":"Question","name":"What is JinjaGames working on right now?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is building three projects: Cyber Academy, a cybersecurity game; Locard, a first person investigation game; and DayPot, an offline cooking assistant for Android."}},{"@type":"Question","name":"Where is JinjaGames based?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is based in Ankara, Türkiye."}},{"@type":"Question","name":"Can I join the team?","acceptedAnswer":{"@type":"Answer","text":"When new roles open, JinjaGames announces them on the site and social media."}},{"@type":"Question","name":"Can I send feedback?","acceptedAnswer":{"@type":"Answer","text":"Feedback, ideas and bug reports can be sent to jinjagamesofficial@gmail.com."}}]},{"@type":"VideoGame","name":"Cyber Academy","url":"https://jinjagames.com/cyberacademy/","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS","Linux"],"genre":["Educational","Strategy","Simulation"]},{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","slogan":"Every contact leaves a trace.","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS"],"genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"]},{"@type":"MobileApplication","name":"DayPot","url":"https://jinjagames.com/daypot/","applicationCategory":"FoodAndDrinkApplication","operatingSystem":"Android","publisher":{"@type":"Organization","name":"JinjaGames"}}]}
 </script>
 
+<script src="assets/steam.js"></script>
 <script>
 /* Tema, dil ve "girişi bir kez göster" kararı BOYAMADAN ÖNCE verilir.
    Böylece yanlış temayla bir kare bile görünmez (FOUC yok). */
@@ -260,12 +261,19 @@ section.blk{padding:112px 0;position:relative}
 .w-cyber .wtag{position:absolute;z-index:3;left:20px;bottom:18px;font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FE3F0;text-shadow:0 1px 6px rgba(0,0,0,.85)}
 
 .world.w-noir{--accent:var(--w-noir)}
+html[data-steam="soon"] .sx-live{display:none!important}
+html[data-steam="live"] .sx-soon{display:none!important}
+.wlinks{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+/* Locard logo harfleri: oyunun kendi yazı tipi (Spartan SemiBold, SIL OFL), yalnız L O C A R D alt kümesi */
+@font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/spartan-semibold-locard.woff') format('woff')}
 .w-noir .wart{background:#0C0D10;flex-direction:column;gap:14px;text-align:center;padding:36px}
-.w-noir .wart::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 50% 40%,rgba(192,70,60,.2),transparent 68%)}
-.w-noir .wart::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.09)}
-.w-noir .nmark{position:relative;font-family:var(--f-noir);font-weight:900;font-size:clamp(40px,6vw,74px);letter-spacing:.01em;color:#F3EFEA;line-height:1}
-.w-noir .nsub{position:relative;font-family:'Courier Prime',monospace;font-size:13.5px;letter-spacing:.06em;color:rgba(243,239,234,.62)}
-.w-noir .nstamp{position:relative;margin-top:8px;display:inline-block;font-family:'Courier Prime',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#E2796D;border:1px solid rgba(226,121,109,.5);padding:6px 13px;transform:rotate(-2deg)}
+.w-noir .wimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;opacity:.8;transition:transform 1.6s var(--ease)}
+.w-noir:hover .wimg{transform:scale(1.045)}
+.w-noir .wart::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,7,6,.78) 0,rgba(8,7,6,.28) 46%,rgba(8,7,6,.8) 100%)}
+.w-noir .wart::after{content:"";position:absolute;inset:14px;z-index:2;border:1px solid rgba(255,255,255,.12)}
+.w-noir .nmark{position:relative;z-index:3;font-family:'Spartan Locard',var(--f-body);font-weight:600;font-size:clamp(36px,5.2vw,64px);letter-spacing:.17em;margin-right:-.17em;color:#F3EFEA;line-height:1}
+.w-noir .nsub{position:relative;z-index:3;font-family:'Courier Prime',monospace;font-size:13.5px;letter-spacing:.06em;color:rgba(243,239,234,.92);text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.w-noir .nstamp{position:relative;z-index:3;margin-top:8px;display:inline-block;font-family:'Courier Prime',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#F08A7E;background:rgba(8,7,6,.55);border:1px solid rgba(240,138,126,.6);padding:6px 13px;transform:rotate(-2deg)}
 
 .world.w-warm{--accent:var(--w-warm)}
 .w-warm .wart{background:linear-gradient(150deg,#EFEADC,#DCE7D6)}
@@ -534,24 +542,29 @@ html,body{overflow-x:hidden;overflow-x:clip}
       <article id="locard" class="world w-noir flip rv">
         <div class="world-in">
           <div class="wtext">
-            <div class="wtop"><span class="num">02</span><span class="kind en i">Investigation game · Windows, macOS</span><span class="kind tr i">Soruşturma oyunu · Windows, macOS</span></div>
+            <div class="wtop"><span class="num">02</span><span class="kind en i">Detective game · Windows, macOS · Early Access</span><span class="kind tr i">Dedektif oyunu · Windows, macOS · Erken Erişim</span></div>
             <h3>Locard</h3>
             <p class="say en"><b>Everybody is hiding something, but not every secret is a murder.</b> You are a senior detective in the coastal city of Meridian, and the file only closes when you can say what your evidence proves.</p>
             <p class="say tr"><b>Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir.</b> Kıyı kenti Meridian'da kıdemli bir dedektifsin ve dosya, ancak delilinin neyi ispatladığını söyleyebildiğinde kapanır.</p>
-            <p class="say en">Read the room, catch the contradiction in a statement, build the chain on your board. Every decision opens a different route, and closes another one.</p>
-            <p class="say tr">Odayı oku, ifadedeki çelişkiyi yakala, zinciri panonda kur. Her karar başka bir yol açar, bir başkasını kapatır.</p>
+            <p class="say en">Read the room, catch the contradiction in a statement, build the chain on your board. Drive the city yourself, alone or with up to three friends. Every decision opens a different route, and closes another one.</p>
+            <p class="say tr">Odayı oku, ifadedeki çelişkiyi yakala, zinciri panonda kur. Şehirde aracı kendin sür, tek başına ya da üç arkadaşınla. Her karar başka bir yol açar, bir başkasını kapatır.</p>
             <div class="wmeta">
-              <div><b>12</b><span class="en i">Locations</span><span class="tr i">Mekân</span></div>
+              <div><b>10</b><span class="en i">Locations</span><span class="tr i">Mekân</span></div>
               <div><b>18</b><span class="en i">Characters</span><span class="tr i">Karakter</span></div>
               <div><b>64</b><span class="en i">Records</span><span class="tr i">Kayıt</span></div>
               <div><b>7</b><span class="en i">Outcomes</span><span class="tr i">Sonuç</span></div>
             </div>
-            <a class="wlink" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a>
+            <div class="wlinks">
+              <a class="wlink sx-live" data-steam-link href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+              <a class="wlink" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a>
+            </div>
           </div>
           <div class="wart">
+            <img class="wimg" src="locard/img/hero-sm.webp" width="960" height="550" alt="" loading="lazy" decoding="async" />
             <span class="nmark">LOCARD</span>
             <span class="nsub">Every contact leaves a trace.</span>
-            <span class="nstamp"><span class="en i">Case 01 · open</span><span class="tr i">Dosya 01 · açık</span></span>
+            <span class="nstamp sx-soon"><span class="en i">Steam page soon</span><span class="tr i">Steam sayfası yakında</span></span>
+            <span class="nstamp sx-live"><span class="en i">Wishlist open</span><span class="tr i">İstek listesi açık</span></span>
           </div>
         </div>
       </article>

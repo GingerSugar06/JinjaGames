@@ -41,7 +41,11 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 - `index.html` — ana sayfa (hero, üç proje satırı, stüdyo, SSS, iletişim).
 - `assets/fonts.css` + `assets/fonts/` — yazı tipleri; her sayfa bunu bağlar.
 - `cyberacademy/index.html` — Cyber Academy tanıtım sayfası.
-- `locard/index.html` — Locard tanıtım sayfası (`locard-og.jpg` paylaşım görseli).
+- `locard/index.html` — Locard tanıtım sayfası (`locard-og.jpg` paylaşım görseli,
+  `locard/img/` oyun içi kareler ve kapak sahnesi, WebP). Sayfada etkileşimli delil
+  panosu, galeri, sekmeli sistem listesi ve birlikte oynama bölümü var.
+- `assets/steam.js` — **Locard Steam anahtarı.** Mağaza sayfası açılınca değiştirilecek tek
+  yer burası (aşağıya bak). Hem `locard/` hem ana sayfa bunu okur.
 - `daypot/index.html` — DayPot tanıtım sayfası; görseller `daypot/img/`.
 - `daypot/gizlilik.html` — DayPot gizlilik politikası (TR + EN). Uygulamadaki
   `privacyPolicyUrl` bu adrese bakmalı: `https://jinjagames.com/daypot/gizlilik.html`.
@@ -86,6 +90,24 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
   nokta (·) kullanılır.
 - Her cümlenin Türkçesi ve İngilizcesi `class="tr"` / `class="en"` çiftiyle
   yan yana durur; satır içi kullanımda `i` sınıfı eklenir.
+
+## Locard: Steam sayfası açılınca
+
+`assets/steam.js` içinde `live:false` yazıyor; bu durumda sitede "Steam sayfası yakında"
+görünür ve istek listesi düğmeleri gizlidir (mağaza henüz kapalıyken ölü bağlantı olmasın).
+Mağaza sayfası yayına girince:
+
+1. `live:true` yap (ya da `liveAt:'2026-10-09T17:00:00Z'` gibi bir an yaz; o andan sonra
+   site kendiliğinden açılır, elle müdahale gerekmez), commit + push.
+2. Bağlantı `https://store.steampowered.com/app/5296440/Locard/` adresine gider. Uygulama
+   kimliğini (5296440) Steamworks panelinden bir kez daha teyit et.
+
+Canlı modda: Locard sayfasında hero düğmesi, üst bar düğmesi, telefondaki alt çubuk ve
+kapanış bölümü "Steam'de istek listesine ekle" olur; ana sayfadaki kartta ek bağlantı belirir.
+
+Hero sahnesindeki yazı görselden silinip sayfada canlı yazı olarak basılır (oyunun kendi
+Spartan SemiBold yazı tipi, yalnız L O C A R D alt kümesi: `assets/fonts/spartan-semibold-locard.woff`).
+Kaynak sahne: `steam_locard/90_Uretim_Kaynaklari/main.png`.
 
 ## Yeni proje sayfası eklerken
 1. Sayfayı `<proje>/index.html` olarak aç; `locard/index.html` iyi bir iskelet.
@@ -135,20 +157,24 @@ Apex (kök) domain için **A** kayıtları, `www` için **CNAME**:
 DNS yayılması 10 dk – 24 saat sürebilir.
 
 ## Yapılacaklar
-- [ ] Locard: Steam mağaza sayfası açılınca `locard/index.html` ve ana sayfadaki satıra
-      gerçek Steam bağlantısı eklenecek (uygulama kimliği Steamworks panelinden teyit edilmeli).
-- [ ] Locard sayfası Windows + macOS ve birlikte oynama (co-op) vaadini duyuruyor;
-      ikisi de kullanıcı kararıdır, geliştirme belgeleri henüz bunları kesinleştirmedi.
-      Plan değişirse `locard/index.html` künyesi, "Açık konuşalım" listesi ve JSON-LD
-      (`gamePlatform`, `playMode`) birlikte güncellenmeli.
+- [ ] Locard: Steam mağaza sayfası açılınca `assets/steam.js` içinde `live:true` yapılacak
+      (ayrıntı yukarıda, "Locard: Steam sayfası açılınca").
+- [ ] Locard sayfası ve ana sayfa kartı Windows ve macOS diyor (kullanıcı kararı). Steamworks'te
+      macOS platformu ve gerçek bir Mac derlemesi henüz yoksa mağaza sayfası ile site çelişir;
+      Steam'e macOS eklenene kadar düzeltilmeli ya da site geri alınmalı. Plan değişirse künye
+      şeridi, ana sayfa kartı ve JSON-LD (`gamePlatform`) birlikte güncellenmeli.
+- [ ] Locard sayfasındaki rakamlar (10 mekân, 18 karakter, 64 kayıt, 7 son) ve "Erken Erişim ·
+      Q1 2027" ibaresi Steam mağaza metniyle birebir aynı olmalı. Çıkış tarihi kesinleşince ya da
+      mağaza "yakında" yerine tarih gösterirse `locard/index.html` künyesi güncellenmeli.
 - [ ] Cyber Academy sayfası çıkışta Windows, macOS ve Linux diyor (önceden "çıkışta
       Windows, macOS ve Linux sonra" yazıyordu). Bu da kullanıcı kararıdır; plan
       değişirse künye şeridi, "Üç platform" kartı, rakam şeridi ve JSON-LD
       (`gamePlatform`) birlikte güncellenmeli.
 - [ ] DayPot tarif sayısı sayfada "250+" olarak yazılıyor; katalog büyüdükçe bu eşik
       güncellenebilir (ana sayfadaki rakam satırı ve DayPot sayfası).
-- [ ] Locard: tanıtıma uygun görsel/fragman çıkınca hero'ya ve karta konacak. Mevcut
-      geliştirme ekran görüntüleri Rev4 öncesi adlandırmayı taşıdığı için siteye konmadı.
+- [ ] Locard: galeride 5 kare var (3 oyun içi ekran görüntüsü + ana menü + vaka dosyaları).
+      Fragman çıkınca galeriye ya da hero'ya eklenecek. `Locard_Bolum01_Senaryo.mp4` katili
+      açıkladığı için siteye konmaz.
 - [ ] DayPot: Play yayını açılınca "Yakında Google Play'de" durumu mağaza rozetiyle
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
 - [ ] DayPot: gizlilik politikasındaki tarih, yayın gününde güncellensin.
