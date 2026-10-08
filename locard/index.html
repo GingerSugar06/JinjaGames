@@ -1,14 +1,1189 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en" data-theme="light">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Locard | JinjaGames</title>
-<meta name="robots" content="noindex,follow" />
-<link rel="canonical" href="https://jinjagames.com/games/locard/" />
-<meta http-equiv="refresh" content="0;url=../games/locard/" />
-<script>location.replace('/games/locard/'+location.search+location.hash);</script>
-<style>body{font:17px/1.6 system-ui,sans-serif;background:#0E0C0D;color:#F6F1EF;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#F16A5C}</style>
+<script>
+// Keep legacy index.html links on the same clean URL as directory links.
+if ((location.protocol === 'https:' || location.protocol === 'http:') && location.pathname.endsWith('/index.html')) {
+  history.replaceState(history.state, '', location.pathname.replace(/index\.html$/, '') + location.search + location.hash);
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Locard | First Person Detective Game by JinjaGames</title>
+<meta name="description" content="Locard is a first person detective game by JinjaGames. Work a branching murder case in the city of Meridian on foot and by car, alone or with up to three friends. Coming to Steam Early Access." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/locard/" />
+<meta name="theme-color" content="#EDE7DA" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0C0D10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-j-shuriken-32.png?v=2" />
+<link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
+<meta property="og:title" content="Locard | First Person Detective Game" />
+<meta property="og:description" content="Every contact leaves a trace. A branching detective game for one to four players, coming to Steam Early Access." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com/locard/" />
+<meta property="og:image" content="https://jinjagames.com/locard/locard-og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://jinjagames.com/locard/locard-og.jpg" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/playfair-display-latin-900.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/courier-prime-latin-400.woff2" crossorigin />
+<link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-sm.webp 960w, img/hero.webp 1657w" imagesizes="100vw" fetchpriority="high" />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","mainEntityOfPage":"https://jinjagames.com/locard/","image":"https://jinjagames.com/locard/locard-og.jpg","description":"A first person detective game. Work a branching murder case in the city of Meridian on foot and by car, build an evidence board, catch contradictions in testimony and reach one of seven outcomes, alone or with up to three friends.","slogan":"Every contact leaves a trace.","author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"gamePlatform":["PC","Windows","macOS"],"applicationCategory":"Game","genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"],"numberOfPlayers":{"@type":"QuantitativeValue","minValue":1,"maxValue":4},"inLanguage":["tr","en"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Locard","item":"https://jinjagames.com/locard/"}]}]}
+</script>
+
+<!-- Steam durumu: tek yerden yönetilir (assets/steam.js). Senkron yüklenir. -->
+<script src="../assets/steam.js"></script>
+<script>
+/* Tema + dil, ana siteyle AYNI anahtarlardan okunur → sayfalar arası tutarlı.
+   Bu sayfada açık tema "sararmış dosya kâğıdı", koyu tema "gece bürosu"dur. */
+(function(){
+  var d=document.documentElement;
+  try{
+    var t=localStorage.getItem('jg_theme');
+    if(t!=='light'&&t!=='dark'){ t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+    d.setAttribute('data-theme',t);
+    var l=localStorage.getItem('jg_lang');
+    if(l!=='tr'&&l!=='en') l='en';
+    d.setAttribute('data-lang',l); d.lang=l;
+  }catch(e){}
+})();
+</script>
+
+<style>
+/* Oyunun kendi logo harfleri (Spartan SemiBold, SIL OFL): yalnızca L O C A R D alt kümesi */
+@font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/spartan-semibold-locard.woff') format('woff')}
+
+/* ============================================================
+   LOCARD: dosya sayfası
+   Açık tema: sararmış dosya kâğıdı, daktilo etiketleri, mürekkep damgası.
+   Koyu tema: gece bürosu. İkisi de aynı iskelet, aynı ölçüler.
+   Yazı: başlıklar Playfair Display, etiketler Courier Prime, gövde Inter.
+   Kahraman bölümü (hero) her iki temada da gece sahnesidir: sabit koyu belirteç.
+   ============================================================ */
+:root{
+  --bg:#EDE7DA; --bg-soft:#E6DECE; --surface:#F7F3E9; --surface-2:#EDE6D7;
+  --ink:#191611; --ink-2:#4F483F; --ink-3:#665D50;
+  --line:#D6CCB7; --line-2:#C3B69C;
+  --accent:#A3231C; --accent-2:#C9453A; --accent-rgb:163,35,28;
+  --paper:#F7F3E9; --stamp:rgba(163,35,28,.9);
+  --nav-bg:rgba(237,231,218,.84); --nav-bg-solid:rgba(237,231,218,.97);
+  --shadow-1:0 1px 2px rgba(25,22,17,.05), 0 10px 26px rgba(25,22,17,.07);
+  --shadow-2:0 22px 56px rgba(25,22,17,.14);
+  --W:1180px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px;
+  --f-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-type:'Courier Prime',Consolas,ui-monospace,monospace;
+  --f-mark:'Spartan Locard','Inter',-apple-system,"Segoe UI",sans-serif;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C0D10; --bg-soft:#101217; --surface:#15171D; --surface-2:#1A1D24;
+  --ink:#F0ECE5; --ink-2:#A8A29A; --ink-3:#8A847C;
+  --line:#23262D; --line-2:#31353E;
+  --accent:#E2574A; --accent-2:#FF8A78; --accent-rgb:226,87,74;
+  --paper:#15171D; --stamp:rgba(226,87,74,.9);
+  --nav-bg:rgba(12,13,16,.8); --nav-bg-solid:rgba(12,13,16,.97);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(0,0,0,.34);
+  --shadow-2:0 22px 56px rgba(0,0,0,.56);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;scrollbar-color:var(--line-2) var(--bg);accent-color:var(--accent)}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s ease,color .35s ease;caret-color:var(--accent)}
+::selection{background:var(--accent);color:#FFF6F3}
+/* kâğıt / gece dokusu, çok hafif */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(circle at 20% 30%,rgba(120,100,70,.05),transparent 42%),radial-gradient(circle at 78% 66%,rgba(120,100,70,.045),transparent 46%)}
+html[data-theme="dark"] body::before{opacity:.75;background-image:radial-gradient(circle at 18% 22%,rgba(226,87,74,.055),transparent 46%),radial-gradient(circle at 82% 72%,rgba(70,90,130,.05),transparent 48%)}
+body>*{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;height:auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.wrap{max-width:var(--W);margin:0 auto;padding:0 32px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.tag{font-family:var(--f-type);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.tr,.en{display:block}
+html[data-lang="en"] .tr{display:none!important}
+html[data-lang="tr"] .en{display:none!important}
+.tr.i,.en.i{display:inline}
+html[data-lang="en"] .tr.i{display:none!important}
+html[data-lang="tr"] .en.i{display:none!important}
+/* Steam durumu: soon = mağaza henüz kapalı, live = istek listesi açık */
+html[data-steam="soon"] .sx-live{display:none!important}
+html[data-steam="live"] .sx-soon{display:none!important}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+section[id]{scroll-margin-top:calc(var(--navh) + 6px)}
+
+/* NAV */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav#nav.stuck{background:var(--nav-bg-solid);border-color:var(--line)}
+.nav-in{max-width:var(--W);margin:0 auto;padding:0 32px;height:var(--navh);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-type);font-size:14px;letter-spacing:.06em;color:var(--ink-2);transition:color .2s}
+.brand img{height:26px;width:auto}
+.brand:hover{color:var(--ink)}
+.nav-end{display:flex;align-items:center;gap:8px}
+.back{font-family:var(--f-type);font-size:13px;color:var(--ink-2);padding:9px 12px;white-space:nowrap;transition:.2s}
+.back:hover{color:var(--accent)}
+.nav-wl{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;background:var(--accent);color:#FFF6F3;border-radius:2px;font-family:var(--f-type);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s,transform .25s var(--ease)}
+.nav-wl:hover{background:var(--accent-2);transform:translateY(-1px)}
+html[data-theme="dark"] .nav-wl{background:#C43C30}
+html[data-theme="dark"] .nav-wl:hover{background:#A82F25}
+.lang-menu{position:relative}
+.lang-trigger{min-width:74px;height:36px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 10px;background:transparent;border:1px solid var(--line-2);border-radius:2px;cursor:pointer;color:var(--ink-2);font-family:var(--f-type);font-size:11px;letter-spacing:.08em;transition:.22s}
+.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--ink);border-color:var(--ink-3)}
+.lang-globe{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+.lang-chev{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}
+.lang-menu.open .lang-chev{transform:rotate(180deg)}
+.lang-popover{position:absolute;right:0;top:calc(100% + 9px);width:218px;padding:7px;background:var(--surface);border:1px solid var(--line-2);border-radius:2px;box-shadow:var(--shadow-2);opacity:0;visibility:hidden;transform:translateY(-5px);transition:.2s;z-index:220}
+.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}
+.lang-menu-title{padding:7px 9px 9px;color:var(--ink-3);font-family:var(--f-type);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.lang-option{width:100%;display:flex;align-items:center;gap:10px;padding:9px;border:0;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:14px;transition:.2s}
+.lang-option:hover,.lang-option.on{background:var(--bg-soft);color:var(--ink)}
+.lang-code{min-width:22px;font-family:var(--f-type);font-size:10px;color:var(--ink-3)}
+.lang-option.on::after{content:"\00D7";margin-left:auto;color:var(--accent);font-family:var(--f-type)}
+.iconbtn{width:36px;height:36px;border-radius:2px;background:transparent;border:1px solid var(--line-2);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
+.iconbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .ic-sun{display:block}html[data-theme="dark"] .ic-moon{display:none}
+.ic-sun{display:none}.ic-moon{display:block}
+
+/* BUTONLAR: bu sayfada düğmeler damga gibi: keskin köşe, daktilo yazısı */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:15px 26px;border-radius:2px;font-family:var(--f-type);font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,border-color .2s}
+.btn.p{background:var(--accent);color:#FFF6F3}
+.btn.p:hover{transform:translateY(-2px);background:var(--accent-2)}
+/* Koyu temada damga kırmızısı açılıyor; beyaz yazının okunması için
+   dolu düğme kendi koyu tonunu kullanır. */
+html[data-theme="dark"] .btn.p{background:#C43C30}
+html[data-theme="dark"] .btn.p:hover{background:#A82F25}
+.btn.g{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.g:hover{transform:translateY(-2px);border-color:var(--ink)}
+.btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.arw{transition:transform .3s var(--ease)}.btn:hover .arw{transform:translateX(5px)}
+.btn.big{padding:19px 34px;font-size:14.5px}
+.btn.soon{background:transparent;color:var(--ink);border-color:var(--ink-3);cursor:pointer}
+.btn.soon:hover{border-color:var(--accent);color:var(--accent)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--accent-2);position:relative;flex:none}
+.pulse::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--accent-2);animation:ping 2.2s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:.9}80%,100%{transform:scale(1.5);opacity:0}}
+
+/* ================= HERO: gece bürosu sahnesi ================= */
+.hero{--hh:clamp(740px,100svh,980px);--sh:var(--hh);--sw:max(100%,calc(var(--sh) * 1.746));
+  --h-ink:#F5EEE0;--h-ink-2:#D8CCB6;--h-ink-3:#BDB09A;--h-red:#F0685A;--h-line:rgba(245,238,224,.22);
+  position:relative;min-height:var(--hh);display:flex;flex-direction:column;justify-content:flex-end;background:#0A0807;color:var(--h-ink);overflow:hidden;isolation:isolate}
+.stage{position:absolute;z-index:-3;bottom:0;width:var(--sw);aspect-ratio:1657/949;left:clamp(calc(100% - var(--sw)),calc(58% - .664 * var(--sw)),0px);will-change:transform}
+.stage-in{position:absolute;inset:0;transform-origin:66% 55%;animation:drift 26s ease-in-out infinite alternate}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:fadein .5s ease forwards}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes fadein{to{opacity:1}}
+/* lamba ışığı: sahnedeki gerçek lamba konumuna sabitli */
+.glow{position:absolute;left:66.4%;top:53.2%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,206,120,.55) 0,rgba(255,170,80,.22) 28%,transparent 62%);mix-blend-mode:screen;pointer-events:none;animation:flicker 7s linear infinite}
+@keyframes flicker{0%,100%{opacity:.85}6%{opacity:1}9%{opacity:.7}12%{opacity:.98}38%{opacity:.9}41%{opacity:.62}44%{opacity:.95}70%{opacity:1}73%{opacity:.78}76%{opacity:.97}}
+.shade{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(8,7,6,.94) 0,rgba(8,7,6,.82) 30%,rgba(8,7,6,.34) 56%,rgba(8,7,6,0) 76%),
+    linear-gradient(0deg,rgba(8,7,6,.92) 0,rgba(8,7,6,.5) 26%,rgba(8,7,6,0) 52%),
+    linear-gradient(180deg,rgba(8,7,6,.7) 0,rgba(8,7,6,0) 24%)}
+.grain{position:absolute;inset:-50%;z-index:-1;pointer-events:none;opacity:.09;mix-blend-mode:overlay;animation:grain 1.1s steps(6) infinite;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.hero-in{width:100%;padding-top:calc(var(--navh) + 56px);padding-bottom:0}
+.hero-copy{max-width:640px;padding-bottom:44px}
+.hero .crumb{display:flex;align-items:center;gap:10px;font-family:var(--f-type);font-size:12px;color:var(--h-ink-3);margin-bottom:30px}
+.hero .crumb a:hover{color:var(--h-red)}
+.fileline{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-bottom:22px}
+.fileline .tag{color:var(--h-ink-3)}
+.stamp{font-family:var(--f-type);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);border:1.5px solid var(--stamp);padding:6px 13px;transform:rotate(-1.4deg);display:inline-block}
+.hero .stamp{color:var(--h-red);border-color:var(--h-red)}
+.wordmark{font-family:var(--f-mark);font-weight:600;font-size:clamp(54px,10.4vw,142px);line-height:.95;letter-spacing:.17em;margin-right:-.17em;color:var(--h-ink);display:flex;white-space:nowrap}
+.wordmark span{display:inline-block;opacity:0;transform:translateY(.32em);filter:blur(10px);animation:letter .65s var(--ease) forwards;animation-delay:calc(.08s + var(--i) * .05s)}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.wm-bar{display:block;height:4px;width:0;background:var(--h-red);margin:20px 0 0;animation:bar .7s var(--ease) .4s forwards}
+@keyframes bar{to{width:clamp(110px,18%,200px)}}
+.slogan{margin-top:20px;font-family:var(--f-type);font-size:clamp(13px,1.5vw,17px);letter-spacing:.16em;text-transform:uppercase;color:var(--h-ink-2);height:1.5em}
+.slogan span{display:inline-block;overflow:hidden;white-space:nowrap;width:0;vertical-align:bottom;border-right:2px solid var(--h-red);animation:type 1s steps(29,end) .55s forwards,caret .8s steps(1) .55s 4}
+@keyframes type{to{width:calc(29ch + 4.7em)}}
+@keyframes caret{0%,49%{border-color:var(--h-red)}50%,100%{border-color:transparent}}
+.slogan span{animation-fill-mode:forwards}
+.hero .lead{margin-top:26px;max-width:540px;color:var(--h-ink-2);font-size:17.5px;line-height:1.7}
+.fx{opacity:0;transform:translateY(12px);animation:rise .6s var(--ease) forwards;animation-delay:calc(var(--d,0) * 1ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hero .btn.g{color:var(--h-ink);border-color:rgba(245,238,224,.38)}
+.hero .btn.g:hover{border-color:var(--h-ink)}
+.hero .btn.soon{color:var(--h-ink);border-color:rgba(245,238,224,.5)}
+.hero .btn.soon:hover{color:var(--h-red);border-color:var(--h-red)}
+.ledger{width:100%;border-top:1px solid var(--h-line);background:rgba(8,7,6,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ledger-in{display:flex;flex-wrap:wrap}
+.ledger-in>div{flex:1 1 170px;padding:16px 22px;border-right:1px solid var(--h-line)}
+.ledger-in>div:first-child{padding-left:0}
+.ledger-in>div:last-child{border-right:0}
+.ledger b{display:block;font-family:var(--f-type);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--h-ink-3);margin-bottom:3px;font-weight:400}
+.ledger span{font-size:15.5px;font-weight:500;color:var(--h-ink)}
+
+/* BÖLÜMLER */
+section.blk{padding:104px 0;position:relative}
+.head{max-width:760px;margin-bottom:54px}
+.head h2{font-size:clamp(32px,4.6vw,54px);margin:0 0 18px}
+.head p{color:var(--ink-2);font-size:17.5px}
+.hl{color:var(--accent);font-style:italic}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.from-l{transform:translateX(-26px)}.rv.from-l.in{transform:none}
+.rv.clip{opacity:1;transform:none;clip-path:inset(-60px 100% -60px -60px);transition:clip-path 1.1s var(--ease)}.rv.clip.in{clip-path:inset(-60px)}
+html:not(.js) .rv{opacity:1;transform:none;clip-path:none}
+
+/* VAKA DOSYASI */
+.case{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);border:1px solid var(--line-2);background:var(--surface);box-shadow:var(--shadow-1)}
+.case-main{padding:46px 48px;border-right:1px solid var(--line)}
+.case-main .tag{display:block;margin-bottom:12px}
+.case-main h3{font-size:clamp(34px,4.4vw,54px);margin-bottom:8px}
+.case-main .deck{font-family:var(--f-type);color:var(--accent);font-size:15px;margin-bottom:24px}
+.case-main p{color:var(--ink-2);font-size:16.5px;margin-bottom:14px;max-width:62ch}
+.case-side{background:var(--surface-2);display:flex;flex-direction:column}
+.night{margin-top:30px;border-top:1px dotted var(--line-2)}
+.night div{display:flex;gap:20px;align-items:baseline;padding:13px 0;border-bottom:1px dotted var(--line-2);font-family:var(--f-type);font-size:14.5px;color:var(--ink-2)}
+.night b{color:var(--accent);font-weight:700;min-width:3.4em}
+.polaroid{margin:30px 30px 8px;padding:12px 12px 14px;background:var(--paper);border:1px solid var(--line-2);box-shadow:var(--shadow-2);transform:rotate(1.8deg);transition:transform .6s var(--ease);position:relative}
+.polaroid:hover{transform:rotate(0) scale(1.015)}
+.polaroid::before{content:"";position:absolute;left:50%;top:-12px;width:92px;height:24px;transform:translateX(-50%) rotate(-2deg);background:rgba(var(--accent-rgb),.22);border:1px solid rgba(var(--accent-rgb),.28)}
+.polaroid img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:saturate(.9) contrast(1.02)}
+.polaroid figcaption{margin-top:11px;font-family:var(--f-type);font-size:12.5px;color:var(--ink-2);display:flex;justify-content:space-between;gap:12px}
+.polaroid figcaption b{color:var(--accent);font-weight:700}
+.kvs{padding:14px 30px 26px}
+.kv{padding:12px 0;border-bottom:1px dotted var(--line-2)}
+.kv:last-child{border-bottom:0}
+.kv b{display:block;font-family:var(--f-type);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px;font-weight:400}
+.kv span{font-size:15.5px;color:var(--ink)}
+
+/* GALERİ */
+#gallery{background:var(--bg-soft);border-block:1px solid var(--line)}
+.gal{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.gal-main{position:relative;aspect-ratio:16/9;background:#0A0807;border:1px solid var(--line-2);box-shadow:var(--shadow-2);overflow:hidden;touch-action:pan-y}
+.gal-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;visibility:hidden;will-change:clip-path}
+.gal-main img.cur{opacity:1;visibility:visible;z-index:1}
+.gal-main img.enter{opacity:1;visibility:visible;z-index:2;animation:wipe .55s cubic-bezier(.65,0,.35,1) both}
+@keyframes wipe{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0)}}
+.gal-main::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 -90px 90px -60px rgba(0,0,0,.55)}
+.gal-count{position:absolute;z-index:4;left:18px;bottom:16px;font-family:var(--f-type);font-size:12px;letter-spacing:.16em;color:#F5EEE0}
+.gal-nav{position:absolute;z-index:4;right:14px;bottom:12px;display:flex;gap:8px}
+.gal-nav button{width:44px;height:44px;display:grid;place-items:center;background:rgba(8,7,6,.62);border:1px solid rgba(245,238,224,.3);color:#F5EEE0;cursor:pointer;border-radius:2px;transition:background .2s,border-color .2s,transform .25s var(--ease)}
+.gal-nav button:hover{background:rgba(8,7,6,.85);border-color:#F5EEE0}
+.gal-nav button:active{transform:scale(.94)}
+.gal-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gal-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:start}
+.gal-cap{min-height:3.4em;color:var(--ink-2);font-size:16.5px;max-width:64ch}
+.gal-cap p{display:none}.gal-cap p.on{display:block;animation:rise .6s var(--ease) both}
+.gal-thumbs{display:flex;gap:10px}
+.thumb{width:112px;aspect-ratio:16/9;border:1px solid var(--line-2);padding:0;background:#0A0807;cursor:pointer;overflow:hidden;position:relative;opacity:.55;transition:opacity .25s,transform .3s var(--ease),border-color .25s}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover{opacity:.9;transform:translateY(-2px)}
+.thumb[aria-selected="true"]{opacity:1;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.thumb::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.thumb[aria-selected="true"]::after{transform:scaleX(1)}
+.note-small{margin-top:20px;font-family:var(--f-type);font-size:11.5px;color:var(--ink-3)}
+
+/* DELİL PANOSU: etkileşimli */
+.board{position:relative;border:1px solid var(--line-2);background:var(--surface);min-height:480px;box-shadow:var(--shadow-1);overflow:hidden;
+  background-image:radial-gradient(circle,rgba(120,100,70,.18) 1px,transparent 1.4px);background-size:22px 22px}
+html[data-theme="dark"] .board{background-image:radial-gradient(circle,rgba(240,236,229,.07) 1px,transparent 1.4px)}
+.board-top{position:absolute;z-index:2;left:20px;right:20px;top:14px;display:flex;justify-content:space-between;gap:12px;pointer-events:none}
+.board-top .tag{font-size:10.5px}
+.threads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+.threads path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:thread .75s var(--ease) forwards;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.threads path.ghost{stroke:var(--ink-3);stroke-width:1.8;stroke-dasharray:1;animation:thread .6s var(--ease) forwards,thread-out .5s ease 1.9s forwards}
+@keyframes thread{to{stroke-dashoffset:0}}
+@keyframes thread-out{to{opacity:0}}
+.pin{position:absolute;left:var(--x);top:var(--y);width:min(264px,34%);padding:20px 20px 16px;text-align:left;background:var(--paper);border:1px solid var(--line-2);box-shadow:var(--shadow-1);cursor:pointer;transform:rotate(var(--r));transition:transform .45s var(--ease),box-shadow .3s,border-color .3s;z-index:2;border-radius:0}
+.pin::before{content:"";position:absolute;left:50%;top:-6px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FF8D7E,var(--accent) 55%,#6E1511);box-shadow:0 2px 3px rgba(0,0,0,.35);transition:box-shadow .3s,transform .3s var(--ease)}
+.pin:hover{transform:rotate(0) translateY(-4px);box-shadow:var(--shadow-2)}
+.pin.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--shadow-2);transform:rotate(0) translateY(-4px)}
+.pin.sel::before{transform:scale(1.35);box-shadow:0 0 0 5px rgba(var(--accent-rgb),.25),0 2px 3px rgba(0,0,0,.35)}
+.pin.hit{border-color:var(--accent);background:var(--surface-2)}
+.pin .tag{display:block;font-size:10px;margin-bottom:8px;color:var(--ink-3)}
+.pin q{display:block;font-family:var(--f-type);font-size:14.5px;line-height:1.6;color:var(--ink);quotes:none}
+.pin .meta{margin-top:10px;font-family:var(--f-type);font-size:12px;color:var(--ink-3)}
+.pin:nth-of-type(1){--x:5%;--y:16%;--r:-2deg}
+.pin:nth-of-type(2){--x:60%;--y:12%;--r:1.6deg}
+.pin:nth-of-type(3){--x:34%;--y:56%;--r:-1.2deg}
+.pin:nth-of-type(4){--x:7%;--y:62%;--r:2.2deg}
+.pin:nth-of-type(5){--x:66%;--y:60%;--r:-2.4deg}
+.board-stamp{position:absolute;z-index:3;left:50%;top:44%;pointer-events:none;font-family:var(--f-type);font-weight:700;font-size:clamp(18px,3vw,30px);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:3px solid var(--accent);padding:10px 22px;background:rgba(var(--accent-rgb),.06);opacity:0;transform:translate(-50%,-50%) rotate(-7deg) scale(1.9);white-space:nowrap}
+.board.solved .board-stamp{animation:thump .6s var(--ease) .55s forwards}
+@keyframes thump{0%{opacity:0;transform:translate(-50%,-50%) rotate(-7deg) scale(1.9)}55%{opacity:1;transform:translate(-50%,-50%) rotate(-7deg) scale(.94)}100%{opacity:.92;transform:translate(-50%,-50%) rotate(-7deg) scale(1)}}
+.board-foot{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:flex-start;justify-content:space-between;margin-top:26px}
+.msg{flex:1 1 420px;min-height:7.2em;border-left:1px solid var(--accent);padding:2px 0 2px 20px;color:var(--ink-2);font-size:16px}
+.msg>div{display:none}.msg>div.on{display:block;animation:rise .55s var(--ease) both}
+.msg b{display:block;font-family:var(--f-type);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;font-weight:700}
+.demobtn{background:transparent;border:1px solid var(--ink-3);border-radius:2px;padding:12px 22px;font-family:var(--f-type);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:.22s}
+.demobtn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* DALLANMA */
+.branch{margin-top:72px;border:1px solid var(--line-2);background:var(--surface);padding:38px 40px 34px}
+.branch h3{font-size:clamp(24px,3vw,32px);margin-bottom:6px}
+.branch>p{color:var(--ink-2);font-size:16px;max-width:60ch}
+.branch svg{width:100%;height:auto;display:block;margin-top:22px;overflow:visible}
+.branch .bl{fill:none;stroke:var(--line-2);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke .3s,stroke-width .3s,stroke-dashoffset 1.5s var(--ease);transition-delay:0s,0s,calc(var(--i) * .09s)}
+.branch.in .bl{stroke-dashoffset:0}
+.branch .bn{fill:var(--ink-3);transition:fill .3s,r .3s;opacity:0;transition-property:fill,opacity;transition-duration:.3s,.5s;transition-delay:0s,calc(1s + var(--i) * .09s)}
+.branch.in .bn{opacity:1}
+.branch .bt{font-family:'Courier Prime',monospace;font-size:12px;fill:var(--ink-3);transition:fill .3s}
+.branch g.end{cursor:pointer;outline:none}
+.branch g.end:hover .bl,.branch g.end.on .bl,.branch g.end:focus-visible .bl{stroke:var(--accent);stroke-width:2.6}
+.branch g.end:hover .bn,.branch g.end.on .bn,.branch g.end:focus-visible .bn{fill:var(--accent)}
+.branch g.end:hover .bt,.branch g.end.on .bt,.branch g.end:focus-visible .bt{fill:var(--ink)}
+.end-read{margin-top:26px;min-height:9.4em}
+.end-copy{display:none;max-width:70ch}
+.end-copy.on{display:block;animation:rise .5s var(--ease) both}
+.end-copy h4{font-size:24px;margin-bottom:8px}
+.end-copy p{color:var(--ink-2);font-size:16px}
+.end-hint{font-family:var(--f-type);font-size:12px;color:var(--ink-3);margin-top:10px}
+
+/* ÇANTA: sekmeli sistem listesi */
+.kit{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);border:1px solid var(--line-2);background:var(--surface);box-shadow:var(--shadow-1)}
+.kit-tabs{display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.ktab{display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;padding:20px 26px;background:transparent;border:0;border-bottom:1px solid var(--line);cursor:pointer;font-family:var(--f-display);font-weight:700;font-size:19px;color:var(--ink-2);transition:background .25s,color .25s,padding-left .35s var(--ease);position:relative}
+.ktab:last-child{border-bottom:0}
+.ktab::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform .4s var(--ease)}
+.ktab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:translateX(-6px);transition:.3s var(--ease);flex:none}
+.ktab:hover{color:var(--ink);background:var(--surface-2)}
+.ktab[aria-selected="true"]{color:var(--ink);background:var(--surface-2);padding-left:32px}
+.ktab[aria-selected="true"]::before{transform:scaleY(1)}
+.ktab[aria-selected="true"] svg{opacity:1;transform:none;color:var(--accent)}
+.kit-panels{position:relative;min-height:430px}
+.kpanel{display:none;padding:34px 40px 40px;height:100%}
+.kpanel.on{display:flex;flex-direction:column;gap:26px;animation:rise .6s var(--ease) both}
+.kart{background:var(--bg-soft);border:1px solid var(--line);padding:14px;aspect-ratio:400/220;max-height:260px}
+.kart svg{width:100%;height:100%;display:block;overflow:visible}
+.kart .kf{fill:var(--paper);stroke:var(--line-2);stroke-width:1.4}
+.kart .kl{fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;opacity:.55}
+.kart .ks{fill:none;stroke:var(--ink-3);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.kart .kp{fill:var(--accent)}
+.kart .kt{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.kart .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:thread 1.5s var(--ease) .15s forwards}
+.kart .d2{animation-delay:.55s}.kart .d3{animation-delay:.95s}
+.kart .fade{opacity:0;animation:fadein .6s ease .9s forwards}
+.kart .fill{fill:var(--accent);opacity:.9}
+.kpanel h3{font-size:clamp(26px,3vw,34px)}
+.kpanel p{color:var(--ink-2);font-size:16.5px;max-width:58ch}
+.car{offset-path:path("M60 180 L60 120 L200 120 L200 60 L340 60");offset-rotate:auto;animation:drive 5s linear infinite}
+@keyframes drive{from{offset-distance:0%}to{offset-distance:100%}}
+.scrub{animation:scrub 5s ease-in-out infinite alternate}
+@keyframes scrub{from{transform:translateX(0)}to{transform:translateX(250px)}}
+.prog{transform-box:fill-box;transform-origin:left;animation:prog 3.2s var(--ease) infinite alternate}
+@keyframes prog{from{transform:scaleX(.12)}to{transform:scaleX(1)}}
+.dash-flow{stroke-dasharray:7 7;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-14}}
+
+/* BİRLİKTE OYNA */
+#coop{background:var(--bg-soft);border-block:1px solid var(--line)}
+.coop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.table{border:1px solid var(--line-2);background:var(--surface);padding:30px 28px 26px;box-shadow:var(--shadow-1)}
+.table svg{width:100%;height:auto;display:block;overflow:visible}
+.table .tb{fill:var(--surface-2);stroke:var(--line-2);stroke-width:1.5}
+.table .sheet{fill:var(--paper);stroke:var(--line-2);stroke-width:1.2}
+.table .tl{fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;opacity:.5}
+.table .seat circle{fill:var(--bg-soft);stroke:var(--line-2);stroke-width:1.6;transition:fill .5s,stroke .5s}
+.table .seat text{font-family:'Courier Prime',monospace;font-size:12px;letter-spacing:.08em;fill:var(--ink-3);text-anchor:middle;transition:fill .5s}
+.table .seat{transform-box:fill-box;transform-origin:center}
+.coop.in .seat circle{animation:seat .7s var(--ease) forwards;animation-delay:calc(.35s + var(--i) * .55s)}
+.coop.in .seat text{animation:seattxt .7s ease forwards;animation-delay:calc(.35s + var(--i) * .55s)}
+@keyframes seat{to{fill:#B9362B;stroke:#B9362B}}
+@keyframes seattxt{to{fill:#FFF6F3}}
+.coop.in .thread-c{animation:thread 1.6s var(--ease) 1.2s forwards}
+.table .thread-c{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.roomcode{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin-top:20px;padding-top:18px;border-top:1px dotted var(--line-2)}
+.roomcode .tag{font-size:10px}
+.code{display:flex;gap:6px;font-family:var(--f-type);font-size:20px;font-weight:700;color:var(--ink)}
+.code i{font-style:normal;display:grid;place-items:center;width:30px;height:38px;border:1px solid var(--line-2);background:var(--paper);opacity:0;transform:translateY(8px)}
+.code i.gap{width:12px;border:0;background:none}
+.coop.in .code i{animation:rise .5s var(--ease) forwards;animation-delay:calc(1.4s + var(--i) * .07s)}
+.coop-list{list-style:none;border-top:1px solid var(--line-2)}
+.coop-list li{padding:19px 0;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:16.5px}
+.coop-list li b{display:block;color:var(--ink);font-family:var(--f-display);font-size:20px;margin-bottom:3px}
+
+/* AÇIK KONUŞALIM */
+.plain-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-2);background:var(--surface)}
+.plain-col{padding:34px 38px}
+.plain-col+.plain-col{border-left:1px solid var(--line);background:var(--surface-2)}
+.plain-col h3{font-size:26px;margin-bottom:6px}
+.plain-col>.tag{display:block;margin-bottom:16px}
+.plain{list-style:none;border-top:1px solid var(--line-2)}
+.plain li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:16px}
+.plain li:last-child{border-bottom:0}
+.plain li::before{content:"\25AA";font-family:var(--f-type);color:var(--accent)}
+.plain.not li::before{content:"\25AB";color:var(--ink-3)}
+.plain li b{color:var(--ink);font-weight:600}
+
+/* CTA */
+.endcta{border:1px solid var(--line-2);background:var(--surface);padding:78px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-1)}
+.endcta::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent)}
+.endcta .lampbg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 90% at 50% 120%,rgba(var(--accent-rgb),.12),transparent 70%)}
+.endcta>*{position:relative}
+.endcta .stamp{margin-bottom:24px}
+.endcta h2{font-size:clamp(30px,4.4vw,50px);margin-bottom:16px}
+.endcta p{color:var(--ink-2);font-size:17.5px;max-width:580px;margin:0 auto 34px}
+.endcta .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--ink-3);font-family:var(--f-type);font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--ink-2)}
+footer a:hover{color:var(--accent)}
+
+/* Alt çubuk: telefonda, hero geçildikten sonra */
+.dock{display:none}
+
+@media(max-width:1020px){
+  .case{grid-template-columns:1fr}
+  .case-main{border-right:0;border-bottom:1px solid var(--line)}
+  .case-side{flex-direction:row;flex-wrap:wrap}
+  .polaroid{flex:1 1 300px;margin:30px}
+  .kvs{flex:1 1 260px;padding:20px 30px}
+  .kit{grid-template-columns:1fr}
+  .kit-tabs{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);scrollbar-width:thin}
+  .ktab{flex:0 0 auto;border-bottom:0;border-right:1px solid var(--line);padding:16px 20px;font-size:16.5px;white-space:nowrap}
+  .ktab svg{display:none}
+  .ktab::before{top:auto;height:3px;width:100%;bottom:0;transform:scaleX(0);transform-origin:left}
+  .ktab[aria-selected="true"]::before{transform:scaleX(1)}
+  .ktab[aria-selected="true"]{padding-left:20px}
+  .kit-panels{min-height:0}
+  .coop{grid-template-columns:minmax(0,1fr);gap:40px}
+  .plain-cols{grid-template-columns:1fr}
+  .plain-col+.plain-col{border-left:0;border-top:1px solid var(--line)}
+  .gal-bar{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .board{min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:26px 16px;padding:54px 16px 24px;align-items:start}
+  .pin{position:relative;left:auto;top:auto;width:auto;padding:18px 14px 14px}
+  .pin q{font-size:13.5px}
+  .board-stamp{top:30%;font-size:15px;letter-spacing:.12em;padding:8px 14px}
+}
+@media(max-width:680px){
+  :root{--navh:64px}
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .nav-wl{display:none}
+  section.blk{padding:68px 0}
+  .head{margin-bottom:38px}
+  /* Telefonda sahne üstte durur, metin sahnenin altından başlar */
+  .hero{--hh:clamp(760px,100svh,900px);--sh:540px}
+  .stage{top:0;bottom:auto;left:clamp(calc(100% - var(--sw)),calc(60% - .664 * var(--sw)),0px)}
+  .hero-in{padding-top:calc(var(--navh) + 190px)}
+  .hero .crumb{display:none}
+  .hero-copy{padding-bottom:30px}
+  .hero .cta{flex-direction:column}.hero .cta .btn{width:100%}
+  .ledger-in>div{flex:1 1 50%;padding:13px 16px}
+  .ledger-in>div:nth-child(odd){padding-left:0}
+  .ledger-in>div:nth-child(2n){border-right:0}
+  .ledger-in>div:nth-child(-n+2){border-bottom:1px solid var(--h-line)}
+  .shade{background:linear-gradient(180deg,rgba(8,7,6,.62) 0,rgba(8,7,6,0) 110px,rgba(8,7,6,.08) 190px,rgba(8,7,6,.66) 290px,rgba(8,7,6,.92) 420px,rgba(8,7,6,.97) 520px,#0A0807 560px)}
+  .case-main{padding:30px 22px}
+  .polaroid{margin:30px 22px 10px}
+  .kvs{padding:14px 22px 22px}
+  .branch,.endcta,.table{padding:28px 18px}
+  .endcta{padding:52px 20px}
+  .plain-col{padding:26px 22px}
+  .kpanel{padding:24px 20px 28px}
+  .brand span{display:none}
+  .code{font-size:17px;gap:4px}.code i{width:25px;height:34px}.code i.gap{width:8px}
+  .branch .bt{font-size:25px}
+  .thumb{width:calc((100% - 20px) / 3)}
+  .gal-thumbs{overflow-x:auto;padding-bottom:4px}
+  .gal-thumbs .thumb{flex:0 0 96px}
+  .gal-cap{font-size:16px}
+  .dock{position:fixed;left:0;right:0;bottom:0;z-index:90;display:block;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--nav-bg-solid);border-top:1px solid var(--line-2);transform:translateY(110%);transition:transform .45s var(--ease)}
+  .dock.show{transform:none}
+  .dock .btn{width:100%;min-height:48px;padding:13px 18px}
+  html[data-steam="soon"] .dock{display:none}
+  footer{padding-bottom:calc(34px + 70px)}
+}
+
+/* İKİ KAYDIRMA ÇUBUĞU DÜZELTMESİ
+   overflow-x:hidden hem html hem body'ye verilince ikisi de ayrı bir
+   kaydırma kabı oluyor; içerik gövdeden taşarsa ikinci bir dikey çubuk
+   beliriyordu. clip, kap oluşturmadan kırpar ve overflow-y görünür kalır.
+   Önce hidden yazılı: clip desteklemeyen eski tarayıcılar için yedek. */
+html,body{overflow-x:hidden;overflow-x:clip}
+
+/* ---------------- TELEFON RÖTUŞU ----------------
+   Dokunma hedefleri: küçük bağlantıların tıklama alanı, düzeni hiç
+   bozmadan görünmez bir katmanla 44 piksele çıkarılıyor.
+   Mikro tipografi: 10-11 piksellik etiketler telefonda 12 pikselin
+   altına inmiyor. */
+@media(max-width:680px){
+  .brand{min-height:44px;padding:4px 0}
+  .crumb a,footer a,.back{position:relative}
+  .crumb a::after,footer a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+  .tag,.ledger b,.kv b,.pin .tag,.pin .meta,.board-top .tag,.note-small,.msg b,.roomcode .tag,footer,.crumb,.end-hint{font-size:12px}
+  .fileline .tag,.stamp,.stamp span{font-size:12px}
+  .brand{min-width:44px;justify-content:center}
+  .crumb a::after{left:-10px;right:-10px}
+}
+</style>
+<script src="../assets/clean-scroll.js" defer></script>
 </head>
-<body><p>Locard has moved to <a href="../games/locard/">jinjagames.com/games/locard/</a>.</p></body>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../">
+      <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
+      <span>JinjaGames</span>
+    </a>
+    <div class="nav-end">
+      <a class="nav-wl sx-live" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist</span><span class="tr i">İstek listesi</span></a>
+      <a class="back" href="../">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+      <div class="lang-menu">
+        <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+        <div class="lang-popover" id="language-menu" role="menu">
+          <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+        </div>
+      </div>
+      <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
+        <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="stage" id="stage">
+    <div class="stage-in">
+      <img src="img/hero.webp" srcset="img/hero-sm.webp 960w, img/hero.webp 1657w" sizes="100vw" width="1657" height="949" alt="" fetchpriority="high" decoding="async" />
+      <div class="glow" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <nav class="crumb fx" style="--d:50" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
+      <div class="fileline fx" style="--d:120">
+        <span class="tag"><span class="en i">Regional Investigation Bureau · File 01</span><span class="tr i">Bölgesel Soruşturma Bürosu · Dosya 01</span></span>
+        <span class="stamp"><span class="en i">Open investigation</span><span class="tr i">Açık soruşturma</span></span>
+      </div>
+      <h1 class="wordmark" aria-label="Locard"><span style="--i:0" aria-hidden="true">L</span><span style="--i:1" aria-hidden="true">O</span><span style="--i:2" aria-hidden="true">C</span><span style="--i:3" aria-hidden="true">A</span><span style="--i:4" aria-hidden="true">R</span><span style="--i:5" aria-hidden="true">D</span></h1>
+      <i class="wm-bar" aria-hidden="true"></i>
+      <p class="slogan" aria-label="Every contact leaves a trace."><span aria-hidden="true">Every contact leaves a trace.</span></p>
+      <p class="lead en fx" style="--d:450">A first person detective game set in the city of Meridian. Work a branching murder case on foot and by car, alone or with up to three friends. Everybody is hiding something, but not every secret is a murder.</p>
+      <p class="lead tr fx" style="--d:450">Meridian kentinde geçen birinci şahıs bir dedektif oyunu. Dallanan bir cinayet dosyasını yürüyerek ve araçla, tek başına ya da üç arkadaşınla birlikte çöz. Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir.</p>
+      <div class="cta fx" style="--d:600">
+        <span class="sx-live" style="display:contents"><a class="btn p big" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span></a></span>
+        <span class="sx-soon" style="display:contents"><a class="btn soon big" href="#wishlist"><i class="pulse" aria-hidden="true"></i><span class="en i">Steam page opens soon</span><span class="tr i">Steam sayfası yakında</span></a></span>
+        <a class="btn g big" href="#case"><span class="en i">Read the file</span><span class="tr i">Dosyayı oku</span> <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="ledger fx" style="--d:700">
+    <div class="wrap ledger-in">
+      <div><b><span class="en i">Release</span><span class="tr i">Çıkış</span></b><span class="en i">Early Access · Q1 2027</span><span class="tr i">Erken Erişim · 2027 ilk çeyrek</span></div>
+      <div><b><span class="en i">Players</span><span class="tr i">Oyuncu</span></b><span class="en i">Solo, or up to four</span><span class="tr i">Tek, ya da dört kişiye kadar</span></div>
+      <div><b><span class="en i">Platform</span><span class="tr i">Platform</span></b><span>Windows, macOS</span></div>
+      <div><b><span class="en i">Language</span><span class="tr i">Dil</span></b><span class="en i">Turkish, English</span><span class="tr i">Türkçe, İngilizce</span></div>
+    </div>
+  </div>
+  </header>
+
+<main>
+
+  <!-- VAKA -->
+  <section id="case" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">The first file on <span class="hl">your desk.</span></h2>
+        <h2 class="tr">Masandaki <span class="hl">ilk dosya.</span></h2>
+        <p class="en">Locard is built as a series. Each entry is one complete case; the name never changes and the series grows underneath it.</p>
+        <p class="tr">Locard bir seri olarak kurgulanıyor. Her bölüm eksiksiz bir vaka; ad hiç değişmiyor, seri onun altında büyüyor.</p>
+      </div>
+      <div class="case rv">
+        <div class="case-main">
+          <span class="tag">LOCARD / <span class="en i">CASE 01</span><span class="tr i">DOSYA 01</span></span>
+          <h3 class="en">The Last Bid</h3>
+          <h3 class="tr">Son Teklif</h3>
+          <p class="deck en">An auction house, a body, and a last bid nobody will own up to.</p>
+          <p class="deck tr">Bir müzayede evi, bir ceset ve kimsenin sahiplenmediği son bir teklif.</p>
+          <p class="en">The case opens in the Bureau, not at the scene: a short walk through the office, the team you have known for years, then the call. From there it is your investigation: the scene, the interviews, the lab, the city.</p>
+          <p class="tr">Vaka olay yerinde değil Büro'da açılır: kısa bir ofis turu, yıllardır tanıdığın ekip, sonra gelen ihbar. Oradan sonrası senin soruşturman: olay yeri, görüşmeler, laboratuvar ve şehir.</p>
+          <p class="en">The file can close in seven different ways, depending on what you proved, who you pushed, and how you moved in.</p>
+          <p class="tr">Dosya; neyi ispatladığına, kimi sıkıştırdığına ve nasıl müdahale ettiğine göre yedi farklı şekilde kapanabilir.</p>
+          <div class="night">
+            <div><b>22:10</b><span class="en i">A body is found at the Vesper Auction House.</span><span class="tr i">Vesper Müzayede Evi'nde bir ceset bulunur.</span></div>
+            <div><b>22:25</b><span class="en i">The Bureau team arrives. The file is yours.</span><span class="tr i">Büro ekibi gelir. Dosya senin.</span></div>
+          </div>
+        </div>
+        <div class="case-side">
+          <figure class="polaroid">
+            <img src="img/shot-hall.webp" width="1600" height="900" loading="lazy" decoding="async" alt="First person view inside the Vesper Auction House with police and witnesses" />
+            <figcaption><span>Vesper Auction House</span><b>22:25</b></figcaption>
+          </figure>
+          <div class="kvs">
+            <div class="kv"><b><span class="en i">Setting</span><span class="tr i">Mekân</span></b><span class="en i">Meridian, present day</span><span class="tr i">Meridian, günümüz</span></div>
+            <div class="kv"><b><span class="en i">Detective</span><span class="tr i">Dedektif</span></b><span>Patrick Hale</span></div>
+            <div class="kv"><b><span class="en i">Unit</span><span class="tr i">Birim</span></b><span class="en i">Regional Investigation Bureau</span><span class="tr i">Bölgesel Soruşturma Bürosu</span></div>
+            <div class="kv"><b><span class="en i">Look</span><span class="tr i">Görünüm</span></b><span class="en i">Low poly, serious tone</span><span class="tr i">Low poly, ciddi ton</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERİ -->
+  <section id="gallery" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">Seen from <span class="hl">the inside.</span></h2>
+        <h2 class="tr">İçeriden <span class="hl">görünüş.</span></h2>
+        <p class="en">Frames from the current build, taken in the game itself.</p>
+        <p class="tr">Mevcut sürümden, oyunun kendisinde alınmış kareler.</p>
+      </div>
+      <div class="gal rv" id="gal">
+        <div class="gal-main" id="galmain">
+          <img class="cur" src="img/shot-hall.webp" width="1600" height="900" alt="First person view in the Vesper Auction House: police, witnesses and a red carpet leading to the exit" decoding="async" />
+          <img src="img/shot-city.webp" width="1600" height="900" alt="Driving a police car through the city on a rainy night" decoding="async" />
+          <img src="img/shot-bureau.webp" width="1600" height="900" alt="Team members in the Bureau elevator" decoding="async" />
+          <img src="img/shot-menu.webp" width="1580" height="762" alt="The Locard main menu: a desk lamp, a typewriter and an evidence board" decoding="async" />
+          <img src="img/shot-files.webp" width="1579" height="881" alt="The case files screen, with a field for an eight character room code" decoding="async" />
+          <span class="gal-count" id="galcount" aria-live="polite">01 / 05</span>
+          <div class="gal-nav">
+            <button type="button" id="galprev" aria-label="Previous frame"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button type="button" id="galnext" aria-label="Next frame"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div class="gal-bar">
+          <div class="gal-cap" id="galcap" aria-live="polite">
+            <p class="on en">The scene. Police, witnesses, and a room full of things that could mean anything.</p><p class="on tr">Olay yeri. Polis, tanıklar ve her şeyin bir anlama gelebileceği bir salon.</p>
+            <p class="en">The city is the map. You drive the team car yourself, rain included.</p><p class="tr">Şehir haritanın kendisi. Ekip aracını kendin sürersin, yağmur dahil.</p>
+            <p class="en">The Bureau lift, and the team you have known for years.</p><p class="tr">Büro asansörü ve yıllardır tanıdığın ekip.</p>
+            <p class="en">The Bureau after hours.</p><p class="tr">Mesai sonrası Büro.</p>
+            <p class="en">Case files, and a room code for whoever you bring.</p><p class="tr">Vaka dosyaları ve yanında getirdiğin kişi için oda kodu.</p>
+          </div>
+          <div class="gal-thumbs" role="tablist" aria-label="Frames">
+            <button class="thumb" role="tab" aria-selected="true" type="button" aria-label="Frame 1"><img src="img/shot-hall-t.webp" width="480" height="270" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 2"><img src="img/shot-city-t.webp" width="480" height="270" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 3"><img src="img/shot-bureau-t.webp" width="480" height="270" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 4"><img src="img/shot-menu-t.webp" width="480" height="232" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 5"><img src="img/shot-files-t.webp" width="480" height="268" alt="" loading="lazy"></button>
+          </div>
+        </div>
+      </div>
+      <p class="note-small"><span class="en i">Work in progress. Interface and visuals may change before release.</span><span class="tr i">Yapım sürüyor. Arayüz ve görseller çıkıştan önce değişebilir.</span></p>
+    </div>
+  </section>
+
+  <!-- YÖNTEM -->
+  <section id="method" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">A statement is not <span class="hl">a fact.</span></h2>
+        <h2 class="tr">İfade, <span class="hl">gerçek değildir.</span></h2>
+        <p class="en">Locard gives you findings. The reasoning stays yours. There is no golden trail to the objective, no evidence glowing across the room, and no colour code that quietly names the killer.</p>
+        <p class="tr">Locard sana bulguyu verir; çıkarım sende kalır. Hedefe giden altın çizgi yok, odanın öbür ucunda parlayan delil yok, katili sessizce ele veren renk kodu yok.</p>
+      </div>
+
+      <div class="board rv" id="board">
+        <div class="board-top"><span class="tag"><span class="en i">Evidence board · try it</span><span class="tr i">Delil panosu · dene</span></span><span class="tag" style="color:var(--accent)"><span class="en i">Illustration</span><span class="tr i">Gösterim</span></span></div>
+        <svg class="threads" id="threads" aria-hidden="true"></svg>
+        <button class="pin" type="button" data-k="stmt">
+          <span class="tag"><span class="en i">Witness statement</span><span class="tr i">Tanık ifadesi</span></span>
+          <q class="en">"I never went into the storage room that night."</q><q class="tr">"O gece depoya hiç girmedim."</q>
+          <div class="meta"><span class="en i">Interview · 09:40</span><span class="tr i">Görüşme · 09:40</span></div>
+        </button>
+        <button class="pin" type="button" data-k="log">
+          <span class="tag"><span class="en i">Record you documented</span><span class="tr i">Belgelediğin kayıt</span></span>
+          <q class="en">Door access log, storage room, 23:41.</q><q class="tr">Kapı erişim kaydı, depo, 23:41.</q>
+          <div class="meta"><span class="en i">Collected at the scene</span><span class="tr i">Olay yerinde alındı</span></div>
+        </button>
+        <button class="pin" type="button" data-k="rcpt">
+          <span class="tag"><span class="en i">Object</span><span class="tr i">Nesne</span></span>
+          <q class="en">Café receipt, 22:58. Two coffees.</q><q class="tr">Kafe fişi, 22:58. İki kahve.</q>
+          <div class="meta"><span class="en i">Found in a coat pocket</span><span class="tr i">Bir palto cebinde bulundu</span></div>
+        </button>
+        <button class="pin" type="button" data-k="key">
+          <span class="tag"><span class="en i">Object</span><span class="tr i">Nesne</span></span>
+          <q class="en">Key card, dropped. Evidence bag 04.</q><q class="tr">Anahtar kart, düşürülmüş. Delil torbası 04.</q>
+          <div class="meta"><span class="en i">Hallway, near the lift</span><span class="tr i">Koridor, asansörün yanı</span></div>
+        </button>
+        <button class="pin" type="button" data-k="vm">
+          <span class="tag"><span class="en i">Phone record</span><span class="tr i">Telefon kaydı</span></span>
+          <q class="en">Voicemail, 21:20, fourteen seconds.</q><q class="tr">Sesli mesaj, 21:20, on dört saniye.</q>
+          <div class="meta"><span class="en i">Requested through the Bureau</span><span class="tr i">Büro üzerinden istendi</span></div>
+        </button>
+        <div class="board-stamp" aria-hidden="true"><span class="en i">Contradiction filed</span><span class="tr i">Çelişki kaydedildi</span></div>
+      </div>
+      <div class="board-foot rv">
+        <div class="msg" id="boardmsg" aria-live="polite">
+          <div class="on" data-m="hint"><b><span class="en i">Your move</span><span class="tr i">Sıra sende</span></b><p class="en">Pick two pieces of paper and string them together. One pair does not survive the comparison. The others can sit on the same board without proving a thing.</p><p class="tr">İki kâğıt seç ve ipi bağla. Bir çift karşılaştırmaya dayanmıyor. Diğerleri aynı panoda durup hiçbir şeyi ispatlamayabilir.</p></div>
+          <div data-m="nope"><b><span class="en i">No link yet</span><span class="tr i">Henüz bağ yok</span></b><p class="en">These two sit side by side and prove nothing together. A board full of facts is not a solved case. Try another pair.</p><p class="tr">Bu ikisi yan yana duruyor ama birlikte hiçbir şeyi ispatlamıyor. Gerçeklerle dolu bir pano çözülmüş vaka demek değildir. Başka bir çift dene.</p></div>
+          <div data-m="solved"><b><span class="en i">Contradiction filed</span><span class="tr i">Çelişki kaydedildi</span></b><p class="en">The claim does not survive the record. You can put it on the table in the middle of the interview, or hold it back until it costs more. Neither choice is free: pressure closes some doors and opens others.</p><p class="tr">İddia kaydın karşısında ayakta kalmıyor. Bunu görüşmenin tam ortasında masaya koyabilirsin ya da daha pahalıya patlayacağı ana saklayabilirsin. İkisi de bedelsiz değil: baskı bazı kapıları kapatır, bazılarını açar.</p></div>
+        </div>
+        <button class="demobtn" type="button" id="boardreset"><span class="en i">Clear the board</span><span class="tr i">Panoyu temizle</span></button>
+      </div>
+      <p class="note-small"><span class="en i">An illustration of the mechanic, not a scene from the case.</span><span class="tr i">Mekaniğin gösterimi; vakadan bir sahne değildir.</span></p>
+
+      <div class="branch rv" id="branch">
+        <h3 class="en">Where the file can end</h3><h3 class="tr">Dosya nerede bitebilir</h3>
+        <p class="en">Seven ways for one case to close. Touch a branch to read how.</p>
+        <p class="tr">Tek bir vakanın kapanabileceği yedi yol. Nasıl olduğunu okumak için bir dala dokun.</p>
+        <svg viewBox="0 0 800 210" role="group" aria-label="Seven possible outcomes branching from one case">
+          <circle class="bn" cx="26" cy="105" r="5" style="--i:0;opacity:1"></circle>
+          <text class="bt" x="26" y="132" text-anchor="middle">01</text>
+          <g class="end" tabindex="0" role="button" data-end="1" aria-label="Outcome A"><path class="bl" pathLength="1" style="--i:0" d="M31 105 C 240 105, 320 18, 700 18"></path><circle class="bn" style="--i:0" cx="706" cy="18" r="4"></circle><text class="bt" x="720" y="22">A</text></g>
+          <g class="end" tabindex="0" role="button" data-end="2" aria-label="Outcome B"><path class="bl" pathLength="1" style="--i:1" d="M31 105 C 240 105, 320 47, 700 47"></path><circle class="bn" style="--i:1" cx="706" cy="47" r="4"></circle><text class="bt" x="720" y="51">B</text></g>
+          <g class="end" tabindex="0" role="button" data-end="3" aria-label="Outcome C"><path class="bl" pathLength="1" style="--i:2" d="M31 105 C 240 105, 320 76, 700 76"></path><circle class="bn" style="--i:2" cx="706" cy="76" r="4"></circle><text class="bt" x="720" y="80">C</text></g>
+          <g class="end" tabindex="0" role="button" data-end="4" aria-label="Outcome D"><path class="bl" pathLength="1" style="--i:3" d="M31 105 C 240 105, 320 105, 700 105"></path><circle class="bn" style="--i:3" cx="706" cy="105" r="4"></circle><text class="bt" x="720" y="109">D</text></g>
+          <g class="end" tabindex="0" role="button" data-end="5" aria-label="Outcome E"><path class="bl" pathLength="1" style="--i:4" d="M31 105 C 240 105, 320 134, 700 134"></path><circle class="bn" style="--i:4" cx="706" cy="134" r="4"></circle><text class="bt" x="720" y="138">E</text></g>
+          <g class="end" tabindex="0" role="button" data-end="6" aria-label="Outcome F"><path class="bl" pathLength="1" style="--i:5" d="M31 105 C 240 105, 320 163, 700 163"></path><circle class="bn" style="--i:5" cx="706" cy="163" r="4"></circle><text class="bt" x="720" y="167">F</text></g>
+          <g class="end" tabindex="0" role="button" data-end="7" aria-label="Outcome G"><path class="bl" pathLength="1" style="--i:6" d="M31 105 C 240 105, 320 192, 700 192"></path><circle class="bn" style="--i:6" cx="706" cy="192" r="4"></circle><text class="bt" x="720" y="196">G</text></g>
+        </svg>
+        <div class="end-read" id="endread" aria-live="polite">
+          <div class="end-copy on" data-for="0">
+            <p class="en">A decision is never only a closed option: it opens a different event, a different place to hold an interview, an official route, a pursuit. The murder and the person who committed it do not change. What changes is what you can prove, and what it cost you.</p>
+            <p class="tr">Karar hiçbir zaman yalnızca kapanan bir seçenek değildir: başka bir olay, görüşmenin yapılacağı başka bir yer, resmî bir erişim yolu ya da bir takip açar. Cinayet ve onu işleyen kişi değişmez. Değişen şey, neyi ispatlayabildiğin ve bunun sana neye mal olduğudur.</p>
+          </div>
+          <div class="end-copy" data-for="1"><h4 class="en">A file that holds</h4><h4 class="tr">Ayakta kalan dosya</h4><p class="en">The right person, in custody, with a case that stands on documented records. This is the hardest ending to earn.</p><p class="tr">Doğru kişi, gözaltında, belgelenmiş kayıtlara dayanan bir dosyayla. Kazanılması en zor son budur.</p></div>
+          <div class="end-copy" data-for="2"><h4 class="en">Right name, weak file</h4><h4 class="tr">Doğru isim, zayıf dosya</h4><p class="en">You named the right person, but the file was not strong enough to hold them. Being right and being able to prove it are different things.</p><p class="tr">Doğru kişiyi andın ama dosya onu tutacak kadar sağlam değildi. Haklı olmak ile ispatlayabilmek aynı şey değildir.</p></div>
+          <div class="end-copy" data-for="3"><h4 class="en">An unjust accusation</h4><h4 class="tr">Haksız isnat</h4><p class="en">You named someone, and the record that would have cleared them never reached your file.</p><p class="tr">Birini suçladın; onu aklayacak kayıt dosyana hiç girmedi.</p></div>
+          <div class="end-copy" data-for="4"><h4 class="en">The contradiction you saw</h4><h4 class="tr">Görülen çelişki</h4><p class="en">The proof was on your board. You accused anyway, and the file records that you could have known.</p><p class="tr">Kanıt panonda duruyordu. Yine de suçladın ve dosya, bilebileceğini kaydediyor.</p></div>
+          <div class="end-copy" data-for="5"><h4 class="en">The one who got away</h4><h4 class="tr">Kaçan fail</h4><p class="en">The person you wanted slips out of reach. How you approached the final moment decided whether they could.</p><p class="tr">Aradığın kişi elinden kayıp gidiyor. Son ana nasıl yaklaştığın, bunun mümkün olup olmadığını belirledi.</p></div>
+          <div class="end-copy" data-for="6"><h4 class="en">A death in the intervention</h4><h4 class="tr">Ölümle kapanan müdahale</h4><p class="en">It ends in violence, not in a conviction. The evidence you gathered stays, but the way you moved in is part of the record.</p><p class="tr">Son bir mahkûmiyetle değil, şiddetle bitiyor. Topladığın deliller yerinde kalıyor ama nasıl müdahale ettiğin kaydın parçası oluyor.</p></div>
+          <div class="end-copy" data-for="7"><h4 class="en">An open file</h4><h4 class="tr">Açık dosya</h4><p class="en">No accusation. You close the folder without a name, and the file stays on the desk.</p><p class="tr">İsnat yok. Dosyayı bir isim yazmadan kapatıyorsun ve dosya masanda kalıyor.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SİSTEMLER -->
+  <section id="kit" class="blk" style="padding-top:104px">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">What is in <span class="hl">the kit.</span></h2>
+        <h2 class="tr">Çantanda <span class="hl">ne var.</span></h2>
+      </div>
+      <div class="kit rv" id="kit">
+        <div class="kit-tabs" role="tablist" aria-orientation="vertical" aria-label="Systems">
+          <button class="ktab" role="tab" id="kt0" aria-controls="kp0" aria-selected="true" type="button"><span><span class="en i">The evidence board</span><span class="tr i">Delil panosu</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt1" aria-controls="kp1" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">Observation and contradiction</span><span class="tr i">Gözlem ve çelişki</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt2" aria-controls="kp2" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">Forensics on a queue</span><span class="tr i">Kuyruktaki laboratuvar</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt3" aria-controls="kp3" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">Interviews with a cost</span><span class="tr i">Bedeli olan görüşmeler</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt4" aria-controls="kp4" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">The city and the car</span><span class="tr i">Şehir ve araç</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt5" aria-controls="kp5" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">Locked rooms</span><span class="tr i">Kilitli odalar</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <button class="ktab" role="tab" id="kt6" aria-controls="kp6" aria-selected="false" tabindex="-1" type="button"><span><span class="en i">Reconstruction</span><span class="tr i">Yeniden kurgu</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+        </div>
+        <div class="kit-panels">
+
+          <div class="kpanel on" role="tabpanel" id="kp0" aria-labelledby="kt0">
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <g transform="rotate(-3 78 65)"><rect class="kf" x="30" y="30" width="96" height="70"/><path class="kl" d="M44 54h50M44 66h64M44 78h38"/></g>
+              <g transform="rotate(2 205 60)"><rect class="kf" x="150" y="20" width="110" height="80"/><path class="kl" d="M164 46h60M164 58h78M164 70h48"/></g>
+              <g transform="rotate(-2 330 78)"><rect class="kf" x="290" y="46" width="80" height="64"/><path class="kl" d="M302 70h44M302 82h54"/></g>
+              <g transform="rotate(2 120 175)"><rect class="kf" x="70" y="140" width="100" height="66"/><path class="kl" d="M84 166h56M84 178h72"/></g>
+              <g transform="rotate(-2 285 180)"><rect class="kf" x="230" y="146" width="110" height="64"/><path class="kl" d="M244 172h62M244 184h80"/></g>
+              <path class="kt draw" pathLength="1" d="M78 33 L205 22 L330 49 L285 149 L120 143 Z"/>
+              <circle class="kp" cx="78" cy="33" r="4.5"/><circle class="kp" cx="205" cy="22" r="4.5"/><circle class="kp" cx="330" cy="49" r="4.5"/><circle class="kp" cx="285" cy="149" r="4.5"/><circle class="kp" cx="120" cy="143" r="4.5"/>
+            </svg></div>
+            <h3 class="en">The evidence board</h3><h3 class="tr">Delil panosu</h3>
+            <p class="en">People, places and objects are filed automatically. The links, like "this person could have been here", are drawn by you. A board full of facts is not a solved case.</p>
+            <p class="tr">Kişi, yer ve nesne kartları panoya kendiliğinden düşer. Bağlantıyı, yani "bu kişi burada bulunmuş olabilir" satırını, sen kurarsın. Gerçeklerle dolu bir pano çözülmüş vaka demek değildir.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp1" aria-labelledby="kt1" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <rect class="kf" x="30" y="40" width="150" height="130"/><path class="kl" d="M46 70h92M46 86h114M46 102h78M46 118h100"/>
+              <rect class="kf" x="220" y="40" width="150" height="130"/><path class="kl" d="M236 70h100M236 86h76M236 102h112M236 118h60"/>
+              <path class="kt draw" pathLength="1" d="M38 94 H362"/>
+              <g class="fade"><rect x="140" y="150" width="120" height="34" fill="none" stroke="var(--accent)" stroke-width="2.4" transform="rotate(-6 200 167)"/></g>
+            </svg></div>
+            <h3 class="en">Observation and contradiction</h3><h3 class="tr">Gözlem ve çelişki</h3>
+            <p class="en">Testimony is compared against what you documented. When a statement does not survive the record, you can put the contradiction on the table during the interview itself.</p>
+            <p class="tr">İfade, belgelediğin kayıtla karşılaştırılır. Bir anlatım kayda dayanmıyorsa çelişkiyi görüşmenin tam ortasında masaya koyabilirsin.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp2" aria-labelledby="kt2" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <g class="ks"><path class="draw" pathLength="1" d="M70 150 C70 70 150 70 150 150"/><path class="draw d2" pathLength="1" d="M82 150 C82 86 138 86 138 150"/><path class="draw d3" pathLength="1" d="M94 150 C94 100 126 100 126 150"/><path class="draw d3" pathLength="1" d="M106 150 C106 114 114 114 114 150"/><path class="draw d2" pathLength="1" d="M60 168 C60 200 130 214 160 168"/></g>
+              <g><rect class="kf" x="210" y="40" width="150" height="26"/><rect class="fill" x="210" y="40" width="150" height="26" opacity=".25"/><rect class="kf" x="210" y="82" width="150" height="26"/><rect class="kf" x="210" y="124" width="150" height="26"/>
+              <rect class="fill prog" x="212" y="126" width="146" height="22"/><path class="kt draw" pathLength="1" d="M340 53l8 8 14-16"/><path class="kt draw d2" pathLength="1" d="M340 95l8 8 14-16"/></g>
+              <circle class="kp" cx="372" cy="137" r="5"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+            </svg></div>
+            <h3 class="en">Forensics on a queue</h3><h3 class="tr">Kuyruktaki laboratuvar</h3>
+            <p class="en">Prints, UV, blood documentation, fibre samples, autopsy. Results do not arrive instantly: reports land on your phone or are handed to you in person as the case moves.</p>
+            <p class="tr">Parmak izi, UV, kan izi belgeleme, lif örneği, otopsi. Sonuçlar anında gelmez: soruşturma ilerledikçe telefona düşer ya da yerinde teslim alınır.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp3" aria-labelledby="kt3" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <path class="kf" d="M40 40h170v90H110l-30 28v-28H40z"/><path class="kl" d="M58 66h110M58 84h134M58 102h84"/>
+                            <path class="kf" style="stroke:var(--accent)" d="M190 112h170v80h-60l-26 24v-24h-84z"/><path class="kl" d="M208 138h100M208 156h128M208 174h70"/>
+              <path class="kt draw" pathLength="1" d="M36 188 q40 -30 80 0 t80 0"/>
+            </svg></div>
+            <h3 class="en">Interviews with a cost</h3><h3 class="tr">Bedeli olan görüşmeler</h3>
+            <p class="en">Choose the topic and the register: empathy, formality or pressure. Present evidence, get it wrong, walk it back. People answer with words and with body language.</p>
+            <p class="tr">Konuyu ve tonu seçersin: empati, resmiyet ya da baskı. Delil sunarsın, yanlış çıkarım yaparsın, geri adım atarsın. Karşındaki hem sözle hem beden diliyle cevap verir.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp4" aria-labelledby="kt4" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <g class="ks" opacity=".6"><path d="M20 120H380M20 60H380M20 180H380M60 20V200M200 20V200M340 20V200"/></g>
+              <path class="kt dash-flow" d="M60 180 L60 120 L200 120 L200 60 L340 60"/>
+              <g class="car"><rect x="-13" y="-7" width="26" height="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/><rect x="-3" y="-5" width="10" height="10" fill="var(--accent)" opacity=".85"/></g>
+              <circle class="kp" cx="340" cy="60" r="7"/><circle cx="340" cy="60" r="12" fill="none" stroke="var(--accent)" stroke-width="1.5" opacity=".6"/>
+            </svg></div>
+            <h3 class="en">The city and the car</h3><h3 class="tr">Şehir ve araç</h3>
+            <p class="en">Meridian is one open city. Drive the team car yourself, follow the GPS line, or go on foot. Pick a partner for each trip, or go alone: every route to the truth stays open on a solo run.</p>
+            <p class="tr">Meridian tek bir açık şehir. Ekip aracını kendin sür, GPS çizgisini izle ya da yürüyerek git. Her yolculuk için bir ortak seç ya da yalnız git: yalnız rotada da gerçeğe giden bütün yollar açık kalır.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp5" aria-labelledby="kt5" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <rect class="kf" x="140" y="96" width="120" height="92"/><path class="kt draw" pathLength="1" d="M162 96V68a38 38 0 0 1 76 0v28"/>
+              <circle class="kp" cx="200" cy="138" r="9"/><path class="kt draw d2" pathLength="1" d="M200 146v18"/>
+              <g class="ks"><circle class="draw d3" pathLength="1" cx="76" cy="140" r="34"/><path class="draw d3" pathLength="1" d="M76 106v10M76 164v10M42 140h10M100 140h10"/></g>
+              <path class="kt draw d3" pathLength="1" d="M76 140l16-14"/>
+              <g class="ks"><circle class="draw d2" pathLength="1" cx="320" cy="116" r="12"/><path class="draw d2" pathLength="1" d="M332 116h44M360 116v14M372 116v10"/></g>
+            </svg></div>
+            <h3 class="en">Locked rooms</h3><h3 class="tr">Kilitli odalar</h3>
+            <p class="en">Places keep their own secrets: doors, cabinets and safes that want a code, a key or a second pair of hands. Some puzzles ask for two people; on a solo run, a teammate helps.</p>
+            <p class="tr">Mekânların kendi sırları var: kod, anahtar ya da ikinci bir çift el isteyen kapılar, dolaplar ve kasalar. Bazı bulmacalar iki kişi ister; yalnız oynarken bir ekip arkadaşı yardım eder.</p>
+          </div>
+
+          <div class="kpanel" role="tabpanel" id="kp6" aria-labelledby="kt6" hidden>
+            <div class="kart"><svg viewBox="0 0 400 220" aria-hidden="true">
+              <g class="ks"><circle cx="110" cy="70" r="14" fill="var(--ink-3)" opacity=".4"/><path d="M92 124q0-34 18-34t18 34z" fill="var(--ink-3)" opacity=".4"/><circle cx="260" cy="82" r="14" fill="var(--ink-3)" opacity=".4"/><path d="M242 136q0-34 18-34t18 34z" fill="var(--ink-3)" opacity=".4"/></g>
+              <path class="kt dash-flow" d="M126 120 C170 150 210 150 244 126"/>
+              <path class="ks" d="M30 178H370"/><path class="ks" d="M30 172v12M110 172v12M190 172v12M270 172v12M350 172v12"/>
+              <g class="scrub"><path class="kt" d="M60 160v36"/><circle class="kp" cx="60" cy="160" r="5"/></g>
+            </svg></div>
+            <h3 class="en">Reconstruction</h3><h3 class="tr">Yeniden kurgu</h3>
+            <p class="en">When the chain holds, the scene is replayed in 3D silhouettes: your version of the night, built only from what you actually established.</p>
+            <p class="tr">Zincir tuttuğunda sahne 3B silüetlerle yeniden oynatılır: o gecenin senin kurduğun hâli, yalnızca gerçekten ispatladıklarından.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BİRLİKTE -->
+  <section id="coop" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">Bring someone <span class="hl">to the table.</span></h2>
+        <h2 class="tr">Masaya birini <span class="hl">davet et.</span></h2>
+        <p class="en">The case is the same whether you walk in alone or with three friends. What changes is who is arguing with you.</p>
+        <p class="tr">Vaka, yalnız girsen de üç arkadaşınla girsen de aynı. Değişen, seninle kimin tartıştığı.</p>
+      </div>
+      <div class="coop rv" id="coopbox">
+        <div class="table">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Four seats around one table. The seats fill one by one.">
+            <circle class="tb" cx="200" cy="150" r="96"/>
+            <rect class="sheet" x="150" y="118" width="64" height="48" transform="rotate(-8 182 142)"/>
+            <path class="tl" d="M162 134h38M162 144h44M162 154h26" transform="rotate(-8 182 142)"/>
+            <rect class="sheet" x="196" y="134" width="46" height="36" transform="rotate(10 219 152)"/>
+            <path class="thread-c" pathLength="1" d="M200 54 L262 150 L200 246 L138 150 Z"/>
+            <g class="seat" style="--i:0"><circle cx="200" cy="38" r="22"/><text x="200" y="42">HOST</text></g>
+            <g class="seat" style="--i:1"><circle cx="318" cy="150" r="22"/><text x="318" y="154">P2</text></g>
+            <g class="seat" style="--i:2"><circle cx="200" cy="262" r="22"/><text x="200" y="266">P3</text></g>
+            <g class="seat" style="--i:3"><circle cx="82" cy="150" r="22"/><text x="82" y="154">P4</text></g>
+          </svg>
+          <div class="roomcode">
+            <span class="tag"><span class="en i">Room code</span><span class="tr i">Oda kodu</span></span>
+            <span class="code" aria-hidden="true"><i style="--i:0">K</i><i style="--i:1">7</i><i style="--i:2">Q</i><i style="--i:3">X</i><i class="gap" style="--i:4"></i><i style="--i:5">2</i><i style="--i:6">9</i><i style="--i:7">M</i><i style="--i:8">A</i></span>
+          </div>
+        </div>
+        <ul class="coop-list">
+          <li><b><span class="en i">One to four players.</span><span class="tr i">Bir ile dört oyuncu.</span></b><span class="en i">Invite through Steam, or share an eight character room code with a friend.</span><span class="tr i">Steam üzerinden davet et ya da sekiz karakterlik oda kodunu bir arkadaşınla paylaş.</span></li>
+          <li><b><span class="en i">One shared case.</span><span class="tr i">Ortak bir vaka.</span></b><span class="en i">The board, the evidence and the car are shared. Everyone can examine, document and question.</span><span class="tr i">Pano, deliller ve araç ortaktır. Herkes inceleyebilir, belgeleyebilir, soru sorabilir.</span></li>
+          <li><b><span class="en i">Voice chat is built in.</span><span class="tr i">Sesli sohbet hazır.</span></b><span class="en i">Argue the case out loud, in the car, over the board.</span><span class="tr i">Vakayı sesli tartış; araçta, panonun başında.</span></li>
+          <li><b><span class="en i">Big decisions are a vote.</span><span class="tr i">Büyük kararlar oylamayla.</span></b><span class="en i">The majority wins, and the host breaks a tie.</span><span class="tr i">Çoğunluk kazanır, eşitlikte host karar verir.</span></li>
+          <li><b><span class="en i">Solo is the whole game.</span><span class="tr i">Tek başına oyunun tamamı.</span></b><span class="en i">Every route to the truth stays open on a solo run.</span><span class="tr i">Yalnız rotada da gerçeğe giden bütün yollar açık kalır.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AÇIK KONUŞALIM -->
+  <section id="straight" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">What you are <span class="hl">actually buying.</span></h2>
+        <h2 class="tr">Eline <span class="hl">tam olarak ne geçiyor.</span></h2>
+        <p class="en">We would rather tell you this now than let you find it out afterwards.</p>
+        <p class="tr">Bunu sonradan öğrenmen yerine şimdi söylemeyi tercih ediyoruz.</p>
+      </div>
+      <div class="plain-cols rv">
+        <div class="plain-col">
+          <h3 class="en">In the first file</h3><h3 class="tr">İlk dosyada</h3>
+          <span class="tag"><span class="en i">Case 01 · Early Access</span><span class="tr i">Dosya 01 · Erken Erişim</span></span>
+          <ul class="plain">
+            <li><span><b><span class="en i">One complete case.</span><span class="tr i">Eksiksiz bir vaka.</span></b> <span class="en i">Case 01 plays from the first call to the last decision, and closes in one of seven ways.</span><span class="tr i">Dosya 01 ilk ihbardan son karara kadar oynanır ve yedi yoldan biriyle kapanır.</span></span></li>
+            <li><span><b><span class="en i">A lot to look at.</span><span class="tr i">İncelenecek çok şey.</span></b> <span class="en i">Ten places to walk into, 18 characters and 64 records to examine. The archive and the lab are reached through the Bureau.</span><span class="tr i">Girilecek on mekân, 18 karakter ve incelenecek 64 kayıt. Arşive ve laboratuvara Büro üzerinden ulaşılır.</span></span></li>
+            <li><span><b><span class="en i">Solo or together.</span><span class="tr i">Tek başına ya da birlikte.</span></b> <span class="en i">One to four players. The evidence board is shared, but the conclusion still has to be argued between you.</span><span class="tr i">Bir ile dört oyuncu. Delil panosu ortaktır, ama sonucu yine kendi aranızda tartışmanız gerekir.</span></span></li>
+            <li><span><b><span class="en i">Turkish and English text.</span><span class="tr i">Türkçe ve İngilizce metin.</span></b> <span class="en i">There is no voice acting.</span><span class="tr i">Seslendirme yok.</span></span></li>
+            <li><span><b><span class="en i">A serious crime story.</span><span class="tr i">Ciddi bir suç öyküsü.</span></b> <span class="en i">The game opens with a content warning screen, and it means it. A few tense scenes put a service weapon in your hand, but this is an investigation game, not a shooter.</span><span class="tr i">Oyun bir içerik uyarısı ekranıyla açılır ve bunu ciddiye alır. Birkaç gergin sahnede eline hizmet silahı verilir, ama bu bir soruşturma oyunudur, nişancı oyunu değil.</span></span></li>
+          </ul>
+        </div>
+        <div class="plain-col">
+          <h3 class="en">Not yet</h3><h3 class="tr">Henüz değil</h3>
+          <span class="tag"><span class="en i">Said plainly</span><span class="tr i">Açıkça söylüyoruz</span></span>
+          <ul class="plain not">
+            <li><span><b><span class="en i">Early Access.</span><span class="tr i">Erken Erişim.</span></b> <span class="en i">The first file is complete. The files after it are built in the open, with feedback from the people playing. Players who join early get the full game at no extra cost.</span><span class="tr i">İlk dosya tamam. Sonraki dosyalar, oynayanların geri bildirimiyle açık açık yapılacak. Erken katılanlar tam sürüme ek ücret ödemeden erişir.</span></span></li>
+            <li><span><b><span class="en i">The next files.</span><span class="tr i">Sonraki dosyalar.</span></b> <span class="en i">Case 02 is sealed until Case 01 is closed. We will not rush it to hit a date.</span><span class="tr i">Dosya 02, Dosya 01 kapanana kadar mühürlü. Bir tarihi tutturmak için acele etmeyeceğiz.</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="wishlist" class="blk" style="padding-top:20px">
+    <div class="wrap">
+      <div class="endcta rv">
+        <i class="lampbg" aria-hidden="true"></i>
+        <span class="stamp sx-soon"><span class="en i">Pending</span><span class="tr i">Beklemede</span></span>
+        <span class="stamp sx-live"><span class="en i">Open on Steam</span><span class="tr i">Steam'de açık</span></span>
+
+        <div class="sx-soon">
+          <h2 class="en">The Steam page opens in a few days.</h2>
+          <h2 class="tr">Steam sayfası birkaç gün içinde açılıyor.</h2>
+          <p class="en">Locard is registered on Steam and the store page is going live shortly. Until then, the fastest way to hear about it is us.</p>
+          <p class="tr">Locard Steam'de kayıtlı ve mağaza sayfası çok yakında yayına giriyor. O âna kadar duyuruyu en hızlı bizden alırsın.</p>
+          <div class="cta">
+            <a class="btn p big" href="mailto:jinjagamesofficial@gmail.com?subject=Locard"><span class="en i">Write to us</span><span class="tr i">Bize yaz</span> <span class="arw">&rarr;</span></a>
+            <a class="btn g big" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+
+        <div class="sx-live">
+          <h2 class="en">Add Locard to your wishlist.</h2>
+          <h2 class="tr">Locard'ı istek listene ekle.</h2>
+          <p class="en">A wishlist is the most useful thing you can do for a small studio, and it costs nothing. Steam will tell you the day Case 01 arrives.</p>
+          <p class="tr">İstek listesi, küçük bir stüdyo için yapabileceğin en faydalı şey ve hiçbir bedeli yok. Dosya 01 geldiği gün Steam sana haber verir.</p>
+          <div class="cta">
+            <a class="btn p big" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span></a>
+            <a class="btn g big" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn g big" href="../#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dock sx-live" id="dock"><a class="btn p" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span></a></div>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="yr"></span> JINJAGAMES · ANKARA</div>
+    <div><a href="../">&larr; <span class="en i">Back to JinjaGames</span><span class="tr i">JinjaGames'e dön</span></a> · <a href="../privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var d=document, root=d.documentElement;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,c){return (c||d).querySelector(s);}
+  function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s));}
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+  /* ---------- dil, tema, üst bar ---------- */
+  function paintLang(l){
+    $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); });
+    $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); });
+  }
+  function closeLangMenus(){
+    $$('.lang-menu.open').forEach(function(m){ m.classList.remove('open'); var t=$('[data-lang-toggle]',m); if(t) t.setAttribute('aria-expanded','false'); });
+  }
+  $$('[data-lang-set]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-lang-set'); if(l!=='tr'&&l!=='en') l='en';
+      root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus();
+    });
+  });
+  paintLang(root.getAttribute('data-lang')||'en');
+  $$('[data-lang-toggle]').forEach(function(t){
+    t.addEventListener('click',function(e){
+      var m=t.closest('.lang-menu'), opening=!m.classList.contains('open');
+      closeLangMenus(); if(opening){ m.classList.add('open'); t.setAttribute('aria-expanded','true'); }
+      e.stopPropagation();
+    });
+  });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLangMenus(); });
+
+  $$('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',t); store('jg_theme',t);
+      var m=d.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content', t==='dark'?'#0C0D10':'#EDE7DA');
+    });
+  });
+
+  var nav=$('#nav');
+  /* ---------- hero: sahne yavaşça kayar ---------- */
+  var stage=$('#stage'), heroEl=$('.hero'), ticking=false;
+  function onScroll(){
+    var y=window.scrollY||0;
+    nav.classList.toggle('stuck',y>10);
+    if(!reduce && stage && y<heroEl.offsetHeight+80){ stage.style.transform='translate3d(0,'+(y*.16).toFixed(1)+'px,0)'; }
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
+  onScroll();
+
+  /* ---------- görünüme girince ----------
+     IntersectionObserver yerine kaydırma denetimi: sayfa ortada yenilendiğinde
+     ya da bağlantıyla aşağı atlandığında, geçilmiş bloklar da açık gelir. */
+  var pending=$$('.rv');
+  pending.forEach(function(el){ if(el.classList.contains('case')||el.classList.contains('board')||el.classList.contains('gal')) el.classList.add('clip'); });
+  var revealing=false;
+  function reveal(){
+    revealing=false;
+    var vh=window.innerHeight||root.clientHeight;
+    pending=pending.filter(function(el){
+      if(el.getBoundingClientRect().top<vh-60){ el.classList.add('in'); return false; }
+      return true;
+    });
+  }
+  function queue(){ if(!revealing){ revealing=true; requestAnimationFrame(reveal); } }
+  window.addEventListener('scroll',queue,{passive:true});
+  window.addEventListener('resize',queue,{passive:true});
+  window.addEventListener('load',queue);
+  reveal();
+
+  /* ---------- galeri ---------- */
+  (function(){
+    var main=$('#galmain'); if(!main) return;
+    var imgs=$$('img',main), thumbs=$$('.thumb'), caps=$$('#galcap p'), count=$('#galcount');
+    var n=imgs.length, cur=0, busy=false, want=null;
+    function pad(x){ return (x<10?'0':'')+x; }
+    imgs.forEach(function(im){ if(im.decode){ im.decode().catch(function(){}); } });
+    function show(i){
+      i=(i+n)%n; if(busy){ want=i; return; } if(i===cur) return;
+      var from=imgs[cur], to=imgs[i]; busy=true;
+      function go(){
+        to.classList.add('enter');
+        var fin=false;
+        function done(){ if(fin) return; fin=true; from.classList.remove('cur'); to.classList.remove('enter'); to.classList.add('cur'); busy=false; if(want!==null&&want!==cur){ var w=want; want=null; show(w); } else want=null; }
+        if(reduce){ done(); } else { to.addEventListener('animationend',done,{once:true}); setTimeout(done,800); }
+      }
+      /* görsel çözülmeden geçiş başlamasın: takılma buradan geliyordu */
+      if(to.decode){ to.decode().then(go,go); } else { go(); }
+      cur=i;
+      thumbs.forEach(function(t,k){ t.setAttribute('aria-selected',k===i?'true':'false'); t.tabIndex=(k===i?0:-1); });
+      caps.forEach(function(p){ p.classList.remove('on'); });
+      caps.forEach(function(p,k){ if(Math.floor(k/2)===i) p.classList.add('on'); });
+      count.textContent=pad(i+1)+' / '+pad(n);
+    }
+    $('#galprev').addEventListener('click',function(){ show(cur-1); });
+    $('#galnext').addEventListener('click',function(){ show(cur+1); });
+    thumbs.forEach(function(t,k){
+      t.tabIndex=(k===0?0:-1);
+      t.addEventListener('click',function(){ show(k); });
+      t.addEventListener('keydown',function(e){
+        if(e.key==='ArrowRight'){ show(cur+1); thumbs[cur].focus(); e.preventDefault(); }
+        if(e.key==='ArrowLeft'){ show(cur-1); thumbs[cur].focus(); e.preventDefault(); }
+      });
+    });
+    var sx=null;
+    main.addEventListener('pointerdown',function(e){ sx=e.clientX; });
+    main.addEventListener('pointerup',function(e){ if(sx===null) return; var dx=e.clientX-sx; sx=null; if(Math.abs(dx)>45) show(cur+(dx<0?1:-1)); });
+    main.addEventListener('pointercancel',function(){ sx=null; });
+  })();
+
+  /* ---------- delil panosu ---------- */
+  (function(){
+    var board=$('#board'); if(!board) return;
+    var svg=$('#threads'), pins=$$('.pin',board), msgs=$$('#boardmsg>div'), links=[], first=null, ns='http://www.w3.org/2000/svg';
+    function say(k){ msgs.forEach(function(m){ m.classList.toggle('on',m.getAttribute('data-m')===k); }); }
+    function pt(el){ var b=board.getBoundingClientRect(), r=el.getBoundingClientRect(); return {x:r.left-b.left+r.width/2,y:r.top-b.top+8}; }
+    function dAttr(a,b){
+      var p=pt(a), q=pt(b), sag=Math.min(46,Math.hypot(q.x-p.x,q.y-p.y)*.14);
+      return 'M'+p.x.toFixed(1)+' '+p.y.toFixed(1)+' Q'+((p.x+q.x)/2).toFixed(1)+' '+(((p.y+q.y)/2)+sag).toFixed(1)+' '+q.x.toFixed(1)+' '+q.y.toFixed(1);
+    }
+    function addLink(a,b,ok){
+      var el=d.createElementNS(ns,'path'); el.setAttribute('pathLength','1'); el.setAttribute('d',dAttr(a,b));
+      if(!ok) el.setAttribute('class','ghost');
+      svg.appendChild(el);
+      var L={a:a,b:b,el:el,ok:ok}; links.push(L);
+      if(!ok) setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); links=links.filter(function(x){return x!==L;}); },2500);
+    }
+    function clearSel(){ pins.forEach(function(p){ p.classList.remove('sel'); }); first=null; }
+    pins.forEach(function(p){
+      p.addEventListener('click',function(){
+        if(board.classList.contains('solved')) return;
+        if(!first){ first=p; p.classList.add('sel'); return; }
+        if(first===p){ clearSel(); return; }
+        var a=first, b=p, k=[a.getAttribute('data-k'),b.getAttribute('data-k')].sort().join('+');
+        clearSel();
+        if(k==='log+stmt'){
+          addLink(a,b,true); a.classList.add('hit'); b.classList.add('hit');
+          board.classList.add('solved'); say('solved');
+        } else { addLink(a,b,false); say('nope'); }
+      });
+    });
+    $('#boardreset').addEventListener('click',function(){
+      links.forEach(function(l){ if(l.el.parentNode) l.el.parentNode.removeChild(l.el); }); links=[];
+      pins.forEach(function(p){ p.classList.remove('hit'); }); clearSel();
+      board.classList.remove('solved'); say('hint');
+    });
+    window.addEventListener('resize',function(){ links.forEach(function(l){ l.el.setAttribute('d',dAttr(l.a,l.b)); }); },{passive:true});
+  })();
+
+  /* ---------- sonlar ---------- */
+  (function(){
+    var ends=$$('.branch g.end'), copies=$$('.end-copy');
+    function pick(k){
+      ends.forEach(function(g){ g.classList.toggle('on',g.getAttribute('data-end')===String(k)); });
+      copies.forEach(function(c){ c.classList.toggle('on',c.getAttribute('data-for')===String(k)); });
+    }
+    ends.forEach(function(g){
+      var k=g.getAttribute('data-end');
+      g.addEventListener('click',function(){ pick(k); });
+      g.addEventListener('mouseenter',function(){ pick(k); });
+      g.addEventListener('focus',function(){ pick(k); });
+      g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(k); } });
+    });
+  })();
+
+  /* ---------- çanta sekmeleri ---------- */
+  (function(){
+    var tabs=$$('.ktab'), panels=$$('.kpanel');
+    function sel(i,focus){
+      tabs.forEach(function(t,k){ t.setAttribute('aria-selected',k===i?'true':'false'); t.tabIndex=(k===i?0:-1); });
+      panels.forEach(function(p,k){ if(k===i){ p.hidden=false; p.classList.add('on'); } else { p.hidden=true; p.classList.remove('on'); } });
+      if(focus) tabs[i].focus();
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){ sel(i); });
+      t.addEventListener('keydown',function(e){
+        var k=e.key, n=tabs.length;
+        if(k==='ArrowDown'||k==='ArrowRight'){ sel((i+1)%n,true); e.preventDefault(); }
+        else if(k==='ArrowUp'||k==='ArrowLeft'){ sel((i-1+n)%n,true); e.preventDefault(); }
+        else if(k==='Home'){ sel(0,true); e.preventDefault(); }
+        else if(k==='End'){ sel(n-1,true); e.preventDefault(); }
+      });
+    });
+  })();
+
+  /* ---------- alt çubuk (telefon) ---------- */
+  (function(){
+    var dock=$('#dock'), cta=$('#wishlist'); if(!dock||!('IntersectionObserver' in window)) return;
+    var inHero=true, inCta=false;
+    function upd(){ dock.classList.toggle('show',!inHero&&!inCta); }
+    new IntersectionObserver(function(es){ inHero=es[0].isIntersecting; upd(); },{threshold:.35}).observe(heroEl);
+    new IntersectionObserver(function(es){ inCta=es[0].isIntersecting; upd(); },{threshold:.2}).observe(cta);
+  })();
+
+  var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
 </html>

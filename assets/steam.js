@@ -14,7 +14,7 @@
   var cfg = window.LOCARD_STEAM = {
     appId: 5296440,          // Steamworks uygulama kimliği
     slug: 'Locard',          // mağaza adresindeki ad
-    live: true,              // mağaza sayfası açık mı?
+    live: false,             // mağaza sayfası açık mı?
     liveAt: null             // ya da açılış zamanı (ISO 8601, UTC)
   };
   var now = Date.now();
