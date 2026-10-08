@@ -40,14 +40,15 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 
 - `index.html` — ana sayfa (hero, üç proje satırı, stüdyo, SSS, iletişim).
 - `assets/fonts.css` + `assets/fonts/` — yazı tipleri; her sayfa bunu bağlar.
-- `cyberacademy/index.html` — Cyber Academy tanıtım sayfası.
-- `locard/index.html` — Locard tanıtım sayfası (`locard-og.jpg` paylaşım görseli,
-  `locard/img/` oyun içi kareler ve kapak sahnesi, WebP). Sayfada etkileşimli delil
+- `games/index.html` — oyunlar merkezi (jinjagames.com/games/): öne çıkan Locard, diğer oyun kartları, karşılaştırma tablosu. Kartların ortak stili `assets/cards.css`.
+- `games/cyber-academy/index.html` — Cyber Academy tanıtım sayfası (eski adres `cyberacademy/` yönlendirme saplamasıdır).
+- `games/locard/index.html` — Locard tanıtım sayfası (`locard-og.jpg` paylaşım görseli (eski `locard/` adresi yönlendirme saplaması),
+  `games/locard/img/` oyun içi kareler ve kapak sahnesi, WebP). Sayfada etkileşimli delil
   panosu, galeri, sekmeli sistem listesi ve birlikte oynama bölümü var.
 - `assets/steam.js` — **Locard Steam anahtarı.** Mağaza sayfası açılınca değiştirilecek tek
-  yer burası (aşağıya bak). Hem `locard/` hem ana sayfa bunu okur.
-- `daypot/index.html` — DayPot tanıtım sayfası; görseller `daypot/img/`.
-- `daypot/gizlilik.html` — DayPot gizlilik politikası (TR + EN). Uygulamadaki
+  yer burası (aşağıya bak). Hem `games/locard/` hem ana sayfa bunu okur.
+- `games/daypot/index.html` — DayPot tanıtım sayfası; görseller `games/daypot/img/`. `daypot/index.html` yönlendirme saplamasıdır.
+- `daypot/gizlilik.html` — DayPot gizlilik politikası (TR + EN); adres Play Console/uygulamada kayıtlı olduğu için TAŞINMADI. Uygulamadaki
   `privacyPolicyUrl` bu adrese bakmalı: `https://jinjagames.com/daypot/gizlilik.html`.
 - `privacy.html` — site gizlilik politikası.
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
@@ -93,8 +94,8 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
 
 ## Locard: Steam sayfası açılınca
 
-`assets/steam.js` içinde `live:false` yazıyor; bu durumda sitede "Steam sayfası yakında"
-görünür ve istek listesi düğmeleri gizlidir (mağaza henüz kapalıyken ölü bağlantı olmasın).
+Mağaza sayfası yayında: `assets/steam.js` içinde `live:true` (Ekim 2026). `live:false` yapılırsa sitede
+"Steam sayfası yakında" görünür ve istek listesi düğmeleri gizlenir.
 Mağaza sayfası yayına girince:
 
 1. `live:true` yap (ya da `liveAt:'2026-10-09T17:00:00Z'` gibi bir an yaz; o andan sonra
