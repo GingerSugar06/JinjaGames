@@ -45,8 +45,8 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
   (`/cyberacademy/`, `/locard/`, `/daypot/`) bilerek TAŞINMADI: Steam, Play Console ve dış
   bağlantılar bu adreslere bakıyor.
 - `banebender/` — kardeşimin (BaneBender) Minecraft mod wikisi. Sitenin geri kalanıyla
-  bilerek ortak tasarım dili yok; ana sayfada görünmez, `games/` sayfasındaki kapıdan ve
-  oradaki alt bilgiden girilir. Ayrıntı aşağıda, "BaneBender wikisi".
+  bilerek ortak tasarım dili yok;
+  ana sayfadaki menüden (BaneBender), SSS'nin üstündeki kapıdan ve `games/` sayfasından girilir. Ayrıntı aşağıda, "BaneBender wikisi".
 - `assets/fonts.css` + `assets/fonts/` — yazı tipleri; her sayfa bunu bağlar.
 - `cyberacademy/index.html` — Cyber Academy tanıtım sayfası. Fragman `cyberacademy/media/darknet-trailer.mp4`
   (kaynak: `steam_cyberacademy/steam_darknet_trailer/DarkNet_Trailer_EN_final.mp4`, web için yeniden

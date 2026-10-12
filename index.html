@@ -304,6 +304,52 @@ section.blk{padding:112px 0;position:relative}
 html[data-steam="soon"] .sx-live{display:none!important}
 html[data-steam="live"] .sx-soon{display:none!important}
 
+
+/* BaneBender menü bağlantısı: küçük çimen bloğuyla ayrışır */
+.nav-links a.bb{display:flex;align-items:center;gap:8px}
+.nav-links a.bb i{width:13px;height:13px;flex-shrink:0;background:linear-gradient(180deg,#6fbd47 0 36%,#866043 36%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);transition:transform .35s var(--ease)}
+.nav-links a.bb:hover i{transform:rotate(-12deg) scale(1.15)}
+.dock a.bb svg{display:none}
+.dock a.bb i{width:20px;height:20px;background:linear-gradient(180deg,#6fbd47 0 36%,#866043 36%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+/* BAŞKA BİR DÜNYAYA KAPI: BaneBender */
+.portal{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:center;padding:56px 56px;border-radius:8px;overflow:hidden;color:#EAF7E4;background:radial-gradient(90% 120% at 85% 20%,#2c4a1f 0,#13230e 45%,#090f07 100%);isolation:isolate}
+.portal::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.08) 2px,transparent 2px);background-size:32px 32px;mask-image:radial-gradient(80% 80% at 80% 40%,#000,transparent)}
+.portal .pk{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.18em;color:#9BE07A}
+.portal h2{font-size:clamp(30px,4vw,48px);margin:14px 0 14px;color:#F3FFEE}
+.portal h2 b{color:#7ED957}
+.portal p{color:rgba(234,247,228,.78);font-size:17px;max-width:560px}
+.portal .btn{margin-top:26px;background:#7ED957;color:#0B1607;font-weight:700}
+.portal .btn:hover{transform:translateY(-2px);background:#9BE97A}
+.cubewrap{height:260px;display:grid;place-items:center;perspective:900px}
+.cube{position:relative;width:130px;height:130px;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube i{position:absolute;inset:0;image-rendering:pixelated;background-size:100% 100%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.cube .f1{transform:translateZ(65px)}.cube .f2{transform:rotateY(180deg) translateZ(65px)}
+.cube .f3{transform:rotateY(90deg) translateZ(65px)}.cube .f4{transform:rotateY(-90deg) translateZ(65px)}
+.cube .f5{transform:rotateX(90deg) translateZ(65px)}.cube .f6{transform:rotateX(-90deg) translateZ(65px)}
+.cube .side{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23866043'/%3E%3Crect width='8' height='2' fill='%235da33a'/%3E%3Crect y='2' width='1' height='1' fill='%235da33a'/%3E%3Crect x='3' y='2' width='1' height='2' fill='%235da33a'/%3E%3Crect x='6' y='2' width='1' height='1' fill='%235da33a'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%23705038'/%3E%3Crect x='5' y='4' width='1' height='1' fill='%239a7350'/%3E%3Crect x='4' y='6' width='1' height='1' fill='%23705038'/%3E%3Crect x='7' y='6' width='1' height='1' fill='%239a7350'/%3E%3C/svg%3E")}
+.cube .top{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%235da33a'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%2372bd48'/%3E%3Crect x='5' y='2' width='1' height='1' fill='%234c8c2f'/%3E%3Crect x='3' y='5' width='1' height='1' fill='%2372bd48'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%234c8c2f'/%3E%3C/svg%3E")}
+.cube .bot{background:#705038}
+@keyframes spin{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.cubeshadow{width:120px;height:18px;margin-top:34px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:shadow 3.5s ease-in-out infinite}
+.cubefloat{display:flex;flex-direction:column;align-items:center;animation:float 3.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes shadow{50%{transform:scale(.8);opacity:.6}}
+.portal{text-decoration:none}
+.portal .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:10px;font-weight:600}
+@media(max-width:1060px){.portal{grid-template-columns:1fr;padding:44px 32px}.cubewrap{height:220px;order:-1}}
+@media(max-width:680px){.portal{padding:36px 22px}.portal .pk{font-size:12px}}
+
+
+/* kapı daha görünür: parlayan kenar, kayan ışık, uçuşan pikseller */
+.portal{box-shadow:0 0 0 1px rgba(126,217,87,.35),0 30px 80px rgba(70,160,50,.22);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.portal:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(126,217,87,.7),0 40px 100px rgba(70,160,50,.35)}
+.portal::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(160,255,120,.10) 50%,transparent 65%);background-size:250% 100%;animation:portalsweep 5s ease-in-out infinite}
+@keyframes portalsweep{0%{background-position:120% 0}60%,100%{background-position:-120% 0}}
+.portal .px{position:absolute;z-index:-1;width:8px;height:8px;background:#7ED957;opacity:0;animation:pxup 6s linear infinite;pointer-events:none}
+.portal .px:nth-of-type(1){left:52%;animation-delay:0s}.portal .px:nth-of-type(2){left:62%;animation-delay:1.5s;background:#ffd166}.portal .px:nth-of-type(3){left:74%;animation-delay:3s}.portal .px:nth-of-type(4){left:86%;animation-delay:4.5s;background:#9be97a}
+@keyframes pxup{0%{bottom:-10px;opacity:0;transform:rotate(0)}15%{opacity:.8}100%{bottom:100%;opacity:0;transform:rotate(180deg)}}
+.portal h2{font-size:clamp(34px,4.6vw,58px)!important}
+
 /* ---------------- STÜDYO ---------------- */
 .studio-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);gap:76px;align-items:start}
 .studio-in .lede{font-family:var(--f-display);font-weight:500;font-size:clamp(21px,2.5vw,27px);line-height:1.42;letter-spacing:-.025em;margin-bottom:24px}
@@ -453,6 +499,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
         <li><a href="#studio"><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a></li>
         <li><a href="#faq"><span class="en i">FAQ</span><span class="tr i">SSS</span></a></li>
         <li><a href="#contact"><span class="en i">Contact</span><span class="tr i">İletişim</span></a></li>
+        <li><a class="bb" href="banebender/"><i aria-hidden="true"></i>BaneBender</a></li>
       </ul>
       <div class="nav-end">
         <div class="lang-menu">
@@ -613,6 +660,29 @@ html,body{overflow-x:hidden;overflow-x:clip}
     </div>
   </section>
 
+  <!-- BANEBENDER KAPISI -->
+  <section class="blk" id="banebender" style="padding-bottom:0">
+    <div class="wrap">
+      <a class="portal rv" href="banebender/" id="portal">
+        <div>
+          <span class="pk"><span class="en i">BEYOND THE STUDIO · MINECRAFT</span><span class="tr i">STÜDYONUN DIŞINDA · MINECRAFT</span></span>
+          <h2 class="en">Step through to <b>BaneBender's</b> mods.</h2>
+          <h2 class="tr"><b>BaneBender</b>'ın modlarına geç.</h2>
+          <p class="en">Minecraft mods: tower raids, mythic bosses, a parasite outbreak, a horror dream and a lot more. They get a world of their own, with a full wiki for every one.</p>
+          <p class="tr">Minecraft modları: kule baskınları, mitolojik boss'lar, bir parazit salgını, bir korku rüyası ve çok daha fazlası. Onlara kendi dünyalarını ayırdık; her biri için eksiksiz bir wiki.</p>
+          <span class="btn"><span class="en i">Open the wiki</span><span class="tr i">Wiki'yi aç</span> <span class="arw">&rarr;</span></span>
+        </div>
+        <i class="px" aria-hidden="true"></i><i class="px" aria-hidden="true"></i><i class="px" aria-hidden="true"></i><i class="px" aria-hidden="true"></i>
+        <div class="cubewrap" aria-hidden="true">
+          <div class="cubefloat">
+            <div class="cube"><i class="f1 side"></i><i class="f2 side"></i><i class="f3 side"></i><i class="f4 side"></i><i class="f5 top"></i><i class="f6 bot"></i></div>
+            <div class="cubeshadow"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- SSS -->
   <section id="faq" class="blk">
     <div class="wrap">
@@ -716,6 +786,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
   <a href="#studio" data-dock="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9.5 20v-5.5h5V20"/></svg><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
   <a href="#faq" data-dock="faq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.7"/><path d="M12 16.9v.2"/></svg><span class="en i">FAQ</span><span class="tr i">SSS</span></a>
   <a href="#contact" data-dock="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
+  <a class="bb" href="banebender/"><i aria-hidden="true"></i><span>BaneBender</span></a>
 </div>
 
 </div><!-- /shell -->
