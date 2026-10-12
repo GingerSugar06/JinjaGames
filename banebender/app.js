@@ -5,6 +5,16 @@
   var d = document, root = d.documentElement;
   var GEN = window.BB_GEN || {}, MODS = window.BB_MODS || [], CATS = window.BB_CATS || [], PROF = window.BB_PROFILE || {};
   var BY = {}; MODS.forEach(function (m, i) { m.i = i; m.g = GEN[m.slug] || {}; BY[m.slug] = m; });
+  /* data/stats.js her gece GitHub Actions ile güncellenir; varsa elle yazılan sayıların yerine geçer. */
+  var ST = window.BB_STATS, ASOF = { en: '12 Oct 2026', tr: '12 Eki 2026' };
+  if (ST && ST.mods) {
+    MODS.forEach(function (m) { var x = ST.mods[m.slug]; if (x && typeof x.dl === 'number') m.dl = x.dl; });
+    if (ST.total) PROF.downloads = ST.total >= 10000 ? (Math.floor(ST.total / 100) / 10) + 'K' : String(ST.total);
+    if (ST.updated) {
+      var p = ST.updated.slice(0, 10).split('-'), mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ay = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+      ASOF = { en: (+p[2]) + ' ' + mo[+p[1] - 1] + ' ' + p[0], tr: (+p[2]) + ' ' + ay[+p[1] - 1] + ' ' + p[0] };
+    }
+  }
   var COLS = 12, CELL = 32;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -59,7 +69,7 @@
   var stats = [
     { b: String(MODS.length), en: 'Mods', tr: 'Mod' },
     { b: totalBosses + '+', en: 'Bosses', tr: 'Boss' },
-    { b: PROF.downloads + '+', en: 'Downloads', tr: 'İndirme' },
+    { b: PROF.downloads + (ST && ST.total ? '' : '+'), en: 'Downloads', tr: 'İndirme' },
     { b: '1.20.1', en: 'Forge', tr: 'Forge' }
   ];
   $('#stats').innerHTML = stats.map(function (s) { return '<div class="stat"><b>' + esc(s.b) + '</b><span>' + bi(s) + '</span></div>'; }).join('');
@@ -71,7 +81,7 @@
   function countIn(cat) { return cat === 'all' ? MODS.length : MODS.filter(function (m) { return m.cats.indexOf(cat) > -1; }).length; }
   $('#cats').innerHTML = CATS.map(function (c) { return '<button class="cat" type="button" data-cat="' + c.id + '" aria-pressed="' + (c.id === 'all') + '">' + bi(c) + ' <em>' + countIn(c.id) + '</em></button>'; }).join('');
 
-  var FEAT = { 'pale-contagion': 1, 'frontier-structures': 1 };
+  var FEAT = { 'pale-contagion': 1, 'frontier-structures': 1, 'hearthly': 1 };
   $('#grid').innerHTML = MODS.map(function (m, i) {
     var g = m.g, feat = FEAT[m.slug];
     var art = feat
@@ -197,6 +207,7 @@
   function spriteHTML(m, list) {
     var g = m.g, ex = m.spriteExclude || [];
     var html = '';
+    if (m.noSprites) return '';
     (g.sprites || []).forEach(function (s, i) {
       if (ex.some(function (w) { return s.en.indexOf(w) > -1; })) return;
       var size = 40, x = -(i % COLS) * size, y = -Math.floor(i / COLS) * size;
@@ -240,10 +251,11 @@
     var id = 's' + idx, h = '<h2 class="blockh" id="' + id + '">' + bi(s.h) + '</h2>';
     if (s.p) h += biBlock(s.p);
     if (s.list) h += '<ul class="ul">' + s.list.map(function (li) { return '<li>' + bi(li) + '</li>'; }).join('') + '</ul>';
-    if (s.cards) h += '<div class="bgrid">' + s.cards.map(function (c) { return '<div class="boss"><div class="bn">' + esc(c.t) + '</div>' + (c.sub ? '<div class="bl">' + bi(c.sub) + '</div>' : '') + '<div class="bh">' + bi(c) + '</div></div>'; }).join('') + '</div>';
+    if (s.cards) h += '<div class="bgrid">' + s.cards.map(function (c) { return '<div class="boss"><div class="bn">' + (c.e != null ? bi((m.g.entities || [])[c.e] || c.t) : esc(c.t)) + '</div>' + (c.sub ? '<div class="bl">' + bi(c.sub) + '</div>' : '') + '<div class="bh">' + bi(c) + '</div></div>'; }).join('') + '</div>';
     if (s.table) h += '<div class="tblwrap"><table class="tbl"><thead><tr>' + s.table.cols.map(function (c) { return '<th>' + bi(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
       s.table.rows.map(function (r) { return '<tr>' + r.map(function (c) { return '<td>' + bi(c) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
     if (s.chips === 'structures') { var st = (m.g.lists && m.g.lists.structures) || []; h += '<div class="chips2">' + st.map(function (x) { return '<span>' + bi(x) + '</span>'; }).join('') + '</div>'; }
+    if (s.chips === 'tabs') { var tb = (m.g.lists && m.g.lists.tabs) || []; h += '<div class="chips2">' + tb.map(function (x) { return '<span>' + bi({ en: x.en.replace(/^[^:]+:\s*/, ''), tr: x.tr.replace(/^[^:]+:\s*/, '') }) + '</span>'; }).join('') + '</div>'; }
     if (s.chips === 'spells') {
       var sp = ((m.g.lists && m.g.lists.spells) || []).filter(function (x) { return x.en.indexOf('%') < 0; });
       var seen = {}; sp = sp.filter(function (x) { if (seen[x.en]) return false; seen[x.en] = 1; return true; });
@@ -323,7 +335,7 @@
       [{ en: 'Version', tr: 'Sürüm' }, g.version || '1.0.0'], [{ en: 'Mod ID', tr: 'Mod kimliği' }, g.modid],
       [{ en: 'Side', tr: 'Taraf' }, { en: 'Client + server', tr: 'İstemci + sunucu' }], [{ en: 'Requires', tr: 'Gerektirir' }, deps],
       [{ en: 'Languages', tr: 'Diller' }, langs],
-      [{ en: 'Latest file', tr: 'Son dosya' }, file], [{ en: 'Downloads', tr: 'İndirme' }, { en: m.dl + ' (12 Oct 2026)', tr: m.dl + ' (12 Eki 2026)' }]
+      [{ en: 'Latest file', tr: 'Son dosya' }, file], [{ en: 'Downloads', tr: 'İndirme' }, { en: m.dl + ' (' + ASOF.en + ')', tr: m.dl + ' (' + ASOF.tr + ')' }]
     ];
     var i = m.i, prev = MODS[(i - 1 + MODS.length) % MODS.length], next = MODS[(i + 1) % MODS.length];
 

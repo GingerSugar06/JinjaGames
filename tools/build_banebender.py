@@ -18,6 +18,7 @@ JARS = {
     'seraph': 'Seraph', 'uncraft-and-unfurnace': 'Uncraft and Unfurnace', 'power-generators': 'Power Generators',
     'hard-mobs-and-bosses': 'Hard Mobs', 'elemental-arcana': 'Elemental-Arcana', 'card-lootbags': 'Loot Bags',
     'all-irons': 'Irones', 'veinminer-all-types': "Banebender's Veinminer",
+    'death-hand': 'Death Hand', 'hearthly': 'Hearthly', 'ore-elemental-golems': 'Ore and Elemental Golems',
 }
 # gallery files worth showing (screenshots, not unreadable creative-tab strips)
 GALLERY_KEEP = {
@@ -37,9 +38,9 @@ COLS = 12
 def load_json(z, name):
     t = z.read(name).decode('utf8', 'replace')
     try:
-        return json.loads(t)
+        return json.loads(t, strict=False)
     except Exception:
-        return json.loads(re.sub(r',\s*}', '}', t))
+        return json.loads(re.sub(r',\s*}', '}', t), strict=False)
 
 
 def fix(t):
@@ -194,6 +195,7 @@ def main():
             'effects': group(f'effect.{modid}.'),
             'advancements': [x for x in group(f'advancements.{modid}.', 4) if x['id'] == 'title'],
             'towers': group('towers.tower.'),
+            'tabs': group(f'itemGroup.{modid}.'),
         }
         extra = {k: v for k, v in extra.items() if v}
         a = meta[slug]

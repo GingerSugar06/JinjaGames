@@ -96,6 +96,24 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
 - **`<nav>` etiketini üst bar dışında kullanma.** Ana sayfadaki `nav{position:fixed}` kuralı
   her `<nav>`'ı yakalar; telefondaki alt gezinme çubuğu bu yüzden `div role="navigation"`.
 
+## BaneBender: gece otomatik sayı güncellemesi
+
+- `.github/workflows/curseforge-stats.yml` her gece **00.00 (Türkiye, 21:00 UTC)** çalışır;
+  Actions sekmesinden "Run workflow" ile elle de çalıştırılabilir.
+- `tools/update_stats.py` CurseForge'dan indirme sayılarını çeker ve yalnız
+  `banebender/data/stats.js` dosyasını yazar. Wiki bu dosya varsa `mods.js`'teki elle yazılmış
+  sayıların yerine onu kullanır. Sayı değişmediyse dosyaya dokunmaz, boş commit atılmaz.
+- Profilde wikide sayfası olmayan bir mod görülürse bir GitHub issue açılır ("yeni mod … için sayfa
+  yazılmalı"). Sayfanın kendisi elle yazılır; sayısı ise o gece itibarıyla zaten izlenir.
+- Kaynak sırası: `CF_API_KEY` sırrı varsa CurseForge resmî API'si → profil sayfası →
+  api.cfwidget.com. CurseForge profil sayfası Cloudflare arkasında ve bazen otomatik istekleri
+  engelliyor; **en sağlam yol ücretsiz bir API anahtarı** almak (console.curseforge.com) ve onu
+  Repo > Settings > Secrets and variables > Actions altına `CF_API_KEY` adıyla eklemek.
+- Hiçbir kaynak cevap vermezse iş başarısız sayılmaz; site bir önceki sayılarla devam eder.
+- GitHub, 60 gün boyunca hiç commit almayan depolarda zamanlanmış işleri kendiliğinden durdurur;
+  bu iş her gün commit atmayabileceği için uzun sessiz dönemlerden sonra Actions sekmesinden
+  yeniden etkinleştirmek gerekebilir.
+
 ## Canlı katmanlar
 
 - Ana sayfa hero'su: `assets/home3d.js`, üç dünyanın biçimleri (küp, parmak izi, tencere)
@@ -145,7 +163,7 @@ Bulunulan bölüm çubukta yanar. Dil ve tema düğmeleri sağ üstte kalır. Ç
 
 - **Önbellek:** GitHub Pages CSS/JS dosyalarını tarayıcıda 10 dakika önbellekte tutar; yeni
   HTML eski CSS ile birleşince (örneğin wiki logosu ve yükleme bloğu görünmüyordu) sayfa
-  bozuk görünür. Bu yüzden bütün `.css`/`.js` bağlantılarının sonunda `?v=20261012b` var.
+  bozuk görünür. Bu yüzden bütün `.css`/`.js` bağlantılarının sonunda `?v=20261012c` var.
   CSS ya da JS değiştiğinde bu değeri bütün sayfalarda birlikte artır (tek sed komutu yeter).
 
 ## Yazı kuralları

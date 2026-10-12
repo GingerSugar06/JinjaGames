@@ -1,0 +1,156 @@
+"""BaneBender'ın CurseForge indirme sayılarını çekip banebender/data/stats.js'e yazar.
+
+GitHub Actions her gece 00.00'da (Türkiye) bunu çalıştırır (.github/workflows/curseforge-stats.yml).
+Yalnızca SAYILAR güncellenir; yeni bir mod bulunursa sayfası elle yazılır, betik yalnızca
+listesini `banebender/data/new_mods.txt` dosyasına bırakır (iş akışı bundan bir GitHub issue açar).
+
+Kaynak sırası:
+  1. CurseForge resmî API'si (CF_API_KEY ortam değişkeni varsa; console.curseforge.com'dan ücretsiz anahtar).
+  2. Yoksa ya da başarısız olursa profil sayfası (curseforge.com/members/banebender/projects).
+  3. O da Cloudflare'e takılırsa api.cfwidget.com (resmî değil; yalnız bilinen modların sayısı).
+Hiçbiri olmazsa dosyaya dokunmadan çıkar; site eski sayılarla çalışmaya devam eder.
+
+Yalnızca Python standart kütüphanesi kullanır.
+"""
+import datetime, json, os, re, shutil, subprocess, sys, time, urllib.request
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, 'banebender', 'data', 'stats.js')
+NEW = os.path.join(ROOT, 'banebender', 'data', 'new_mods.txt')
+MODS_JS = os.path.join(ROOT, 'banebender', 'data', 'mods.js')
+AUTHOR_ID = 127320626          # CurseForge yazar kimliği (BaneBender)
+MEMBER = 'banebender'
+UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
+
+
+def get(url, headers=None, tries=5):
+    """curl ile çeker (Cloudflare, Python'un urllib istemcisine 403 dönüyor); curl yoksa urllib."""
+    last = None
+    hdr = dict({'User-Agent': UA, 'Accept-Language': 'en'}, **(headers or {}))
+    for i in range(tries):
+        try:
+            if shutil.which('curl'):
+                cmd = ['curl', '-sS', '-L', '--max-time', '40', '--fail']
+                for k, v in hdr.items():
+                    cmd += ['-H', '%s: %s' % (k, v)]
+                return subprocess.run(cmd + [url], capture_output=True, check=True).stdout.decode('utf8', 'replace')
+            req = urllib.request.Request(url, headers=hdr)
+            return urllib.request.urlopen(req, timeout=40).read().decode('utf8', 'replace')
+        except Exception as e:  # ağ ya da Cloudflare
+            last = e
+            time.sleep(6 * (i + 1))
+    raise last
+
+
+def from_api(key):
+    mods, index = {}, 0
+    while True:
+        url = ('https://api.curseforge.com/v1/mods/search?gameId=432&classId=6&authorId=%d&pageSize=50&index=%d'
+               '&sortField=2&sortOrder=desc' % (AUTHOR_ID, index))
+        data = json.loads(get(url, {'x-api-key': key, 'Accept': 'application/json'}))
+        for m in data.get('data', []):
+            if any(a.get('id') == AUTHOR_ID for a in m.get('authors', [])):
+                mods[m['slug']] = {'name': m['name'], 'dl': int(m.get('downloadCount', 0))}
+        page = data.get('pagination', {})
+        index += page.get('resultCount', 0)
+        if not page.get('resultCount') or index >= page.get('totalCount', 0):
+            break
+    total = sum(v['dl'] for v in mods.values())
+    return mods, total
+
+
+def from_profile():
+    mods, total = {}, None
+    for page in range(1, 6):
+        html = get('https://www.curseforge.com/members/%s/projects%s' % (MEMBER, '' if page == 1 else '?page=%d' % page))
+        if 'member-project-card' not in html:
+            if page == 1:
+                raise RuntimeError('profil sayfası okunamadı (Cloudflare?)')
+            break
+        if total is None:
+            m = re.search(r'downloadCount\\?"\s*:\s*(\d+)', html)
+            total = int(m.group(1)) if m else None
+        added = 0
+        for card in html.split('member-project-card')[1:]:
+            s = re.search(r'href="/minecraft/mc-mods/([a-z0-9-]+)"', card)
+            n = re.search(r'aria-label="Go to (.*?) Project Page"', card)
+            dl = re.search(r'downloads">\s*([\d.,]+)\s*([KkMm]?)<', card)
+            if not s or not dl:
+                continue
+            num = float(dl.group(1).replace(',', ''))
+            num = int(num * (1000 if dl.group(2).lower() == 'k' else 1000000 if dl.group(2).lower() == 'm' else 1))
+            if s.group(1) not in mods:
+                mods[s.group(1)] = {'name': (n.group(1) if n else s.group(1)).replace('&amp;', '&'), 'dl': num}
+                added += 1
+        if not added:
+            break
+    if not mods:
+        raise RuntimeError('profilde proje bulunamadı')
+    return mods, total if total is not None else sum(v['dl'] for v in mods.values())
+
+
+def from_cfwidget(slugs):
+    mods = {}
+    for s in slugs:
+        try:
+            d = json.loads(get('https://api.cfwidget.com/minecraft/mc-mods/' + s, tries=2))
+            mods[s] = {'name': d.get('title', s), 'dl': int(d.get('downloads', {}).get('total', 0))}
+        except Exception as e:
+            print('cfwidget', s, e)
+    if len(mods) < len(slugs):
+        raise RuntimeError('cfwidget eksik döndü')
+    return mods, sum(v['dl'] for v in mods.values())
+
+
+def main():
+    mods = total = None
+    source = ''
+    key = os.environ.get('CF_API_KEY', '').strip()
+    if key:
+        try:
+            mods, total = from_api(key); source = 'api'
+        except Exception as e:
+            print('API başarısız:', e)
+    if mods is None:
+        try:
+            mods, total = from_profile(); source = 'profile'
+        except Exception as e:
+            print('Profil başarısız:', e)
+    known = set(re.findall(r"slug: '([a-z0-9-]+)'", open(MODS_JS, encoding='utf8').read()))
+    if mods is None:
+        try:
+            mods, total = from_cfwidget(sorted(known)); source = 'cfwidget'
+        except Exception as e:
+            print('cfwidget başarısız:', e)
+            print('Güncelleme yok; mevcut sayılar kalıyor.')
+            return 0
+
+    new = sorted(s for s in mods if s not in known)
+
+    # Sayılar değişmediyse dosyaya dokunma (gereksiz commit olmasın).
+    old = None
+    if os.path.exists(OUT):
+        t = open(OUT, encoding='utf8').read()
+        m = re.search(r'window\.BB_STATS=(\{.*\});', t, re.S)
+        if m:
+            old = json.loads(m.group(1))
+    payload = {'total': total, 'projects': len(mods), 'mods': {k: mods[k] for k in sorted(mods)}, 'unlisted': new}
+    if old and {k: old.get(k) for k in payload} == payload:
+        print('Değişiklik yok.')
+    else:
+        payload['updated'] = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
+        payload['source'] = source
+        with open(OUT, 'w', encoding='utf8', newline='\n') as f:
+            f.write('/* Otomatik: tools/update_stats.py (her gece 00.00, GitHub Actions). Elle düzenleme. */\n')
+            f.write('window.BB_STATS=' + json.dumps(payload, ensure_ascii=False, indent=1) + ';\n')
+        print('Güncellendi:', total, 'indirme,', len(mods), 'proje, kaynak:', source)
+
+    with open(NEW, 'w', encoding='utf8', newline='\n') as f:
+        f.write(''.join('%s\t%s\n' % (s, mods[s]['name']) for s in new))
+    if new:
+        print('Wikide sayfası olmayan modlar:', ', '.join(new))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

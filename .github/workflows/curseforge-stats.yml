@@ -1,0 +1,66 @@
+# BaneBender wikisinin CurseForge indirme sayılarını her gece günceller.
+# 21:00 UTC = 00:00 Türkiye saati. Yeni bir mod bulunursa bir issue açar; o modun
+# wiki sayfası elle yazılır (tools/update_stats.py yalnızca sayıları değiştirir).
+name: CurseForge sayıları
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: curseforge-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sayıları çek
+        env:
+          # İsteğe bağlı: console.curseforge.com'dan alınan ücretsiz API anahtarı.
+          # Repo > Settings > Secrets and variables > Actions > New repository secret: CF_API_KEY
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          PYTHONIOENCODING: utf-8
+        run: python tools/update_stats.py
+
+      - name: Değiştiyse siteye işle
+        run: |
+          git config user.name "jinjagames-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add banebender/data/stats.js
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok."
+          else
+            git commit -m "BaneBender: CurseForge indirme sayıları güncellendi"
+            git push
+          fi
+
+      - name: Yeni mod varsa issue aç
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const p = 'banebender/data/new_mods.txt';
+            if (!fs.existsSync(p)) return;
+            const lines = fs.readFileSync(p, 'utf8').split('\n').filter(Boolean);
+            for (const line of lines) {
+              const [slug, name] = line.split('\t');
+              const title = `BaneBender wikisi: yeni mod "${name}" için sayfa yazılmalı`;
+              const open = await github.paginate(github.rest.issues.listForRepo, { owner: context.repo.owner, repo: context.repo.repo, state: 'all', per_page: 100 });
+              if (open.some(i => i.title === title)) continue;
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo, title,
+                body: `CurseForge profilinde wikide sayfası olmayan bir mod bulundu.\n\n- Ad: ${name}\n- CurseForge: https://www.curseforge.com/minecraft/mc-mods/${slug}\n\nİndirme sayısı zaten otomatik izleniyor. Sayfası için: jar'ı kur, \`tools/build_banebender.py\` içindeki \`JARS\` listesine ekle, betiği çalıştır ve \`banebender/data/mods.js\`'e metnini yaz.`
+              });
+            }

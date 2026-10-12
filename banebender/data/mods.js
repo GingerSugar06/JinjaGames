@@ -1,7 +1,7 @@
 /* BaneBender mod wikisi: elle yazılmış içerik.
    Kaynak: her modun CurseForge açıklaması ve mod dosyalarının kendisi (dil dosyaları, dokular).
    Sayılar ve adlar oradan alındı; açıklamada olmayan bir özellik buraya yazılmaz.
-   İndirme sayıları 12 Ekim 2026 tarihli CurseForge profilinden. */
+   İndirme sayıları 12 Ekim 2026 akşamı CurseForge profilinden (20 proje). */
 window.BB_PROFILE = {
   handle: 'BaneBender',
   curseforge: 'https://www.curseforge.com/members/banebender/projects',
@@ -20,13 +20,14 @@ window.BB_CATS = [
   { id: 'tech', en: 'Tech & storage', tr: 'Teknoloji ve depo' },
   { id: 'utility', en: 'Quality of life', tr: 'Kolaylık' },
   { id: 'loot', en: 'Loot & economy', tr: 'Ganimet ve ekonomi' },
+  { id: 'decor', en: 'Furniture & decor', tr: 'Mobilya ve dekor' },
   { id: 'horror', en: 'Horror', tr: 'Korku' }
 ];
 
 window.BB_MODS = [
 /* ------------------------------------------------------------------ */
 {
-  slug: 'pale-contagion', cats: ['creatures', 'horror', 'adventure'], dl: 7, released: '2026-10-09',
+  slug: 'pale-contagion', cats: ['creatures', 'horror', 'adventure'], dl: 10, released: '2026-10-09',
   tag: { en: 'A parasite outbreak that spreads further every day.', tr: 'Her gün biraz daha yayılan bir parazit salgını.' },
   lede: {
     en: 'The infection starts where the pale research facilities stand and creeps outward day after day, corrupting soil, sand and stone and darkening the world as it goes. Almost nothing that lives is safe: zombies, villagers, cows and creepers all have infected, biome specific variants.',
@@ -50,7 +51,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'frontier-structures', cats: ['adventure'], dl: 173, released: '2026-10-07',
+  slug: 'frontier-structures', cats: ['adventure'], dl: 177, released: '2026-10-07',
   tag: { en: '70 hand built structures, ten bosses and the roads between them.', tr: 'Elle kurulmuş 70 yapı, on boss ve aralarındaki yollar.' },
   lede: {
     en: 'Frontier makes exploring the world worth the walk. Seventy hand built structures adapt to the terrain and take their wood and stone from the biome, and ten bosses wait in lairs ringed by camps and linked by paths. It needs no other mods.',
@@ -92,7 +93,97 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'pantheon-of-legends', cats: ['magic', 'adventure'], dl: 65, released: '2026-10-04',
+  slug: 'hearthly', cats: ['decor', 'adventure'], dl: 1, released: '2026-10-11', noSprites: true,
+  tag: { en: 'Over 960 hand modelled pieces of furniture, and villages that use them.', tr: 'Elle modellenmiş 960\u2019tan fazla mobilya ve onları kullanan köyler.' },
+  lede: {
+    en: 'Hearthly fills your world with over 960 hand modelled pieces of furniture and decoration for every room of a home, and puts them to use in villages and buildings that generate on their own. All models and textures are original.',
+    tr: 'Hearthly, dünyanı bir evin her odası için elle modellenmiş 960\u2019tan fazla mobilya ve dekorasyon parçasıyla dolduruyor ve onları kendiliğinden oluşan köylerde ve binalarda kullanıyor. Bütün modeller ve dokular özgün.'
+  },
+  sections: [
+    { h: { en: 'What is inside', tr: 'İçinde neler var' }, table: {
+      cols: [{ en: 'Room', tr: 'Oda' }, { en: 'What you get', tr: 'Neler var' }],
+      rows: [
+        [{ en: 'Seating', tr: 'Oturma' }, { en: 'Chairs, stools, benches, armchairs and sofas in many woods and 16 colours. Sofas join and turn corners like stairs, and you can sit on all of them.', tr: 'Birçok ahşapta ve 16 renkte sandalye, tabure, bank, koltuk ve kanepe. Kanepeler merdiven gibi birleşip köşe döner; hepsine oturabilirsin.' }],
+        [{ en: 'Tables and storage', tr: 'Masa ve depolama' }, { en: 'Tables that join up, cabinets and bookcases that stack, desks, wardrobes, dressers and fridges, with real inventories and doors and drawers that open.', tr: 'Birleşen masalar, üst üste dizilen dolaplar ve kitaplıklar, çalışma masaları, gardıroplar, şifonyerler ve buzdolapları; gerçek envanterli, kapıları ve çekmeceleri açılır.' }],
+        [{ en: 'Kitchen and bathroom', tr: 'Mutfak ve banyo' }, { en: 'Stoves, fridges, sinks with working taps, bathtubs that fill with water, toilets that flush.', tr: 'Ocaklar, buzdolapları, musluğu çalışan lavabolar, suyla dolan küvetler, sifonu çekilen tuvaletler.' }],
+        [{ en: 'Bedroom and kids', tr: 'Yatak ve çocuk odası' }, { en: 'Beds in 16 colours, cribs, play mats, trampolines that really bounce, rocking horses that really rock.', tr: '16 renkte yataklar, beşikler, oyun halıları, gerçekten zıplatan trambolinler, gerçekten sallanan sallanan atlar.' }],
+        [{ en: 'Garden', tr: 'Bahçe' }, { en: 'Fences, planters, fountains, grills and fire pits you can cook on, parasols, porch swings.', tr: 'Çitler, saksılar, çeşmeler, üstünde pişirebileceğin ızgaralar ve ateş çukurları, şemsiyeler, veranda salıncakları.' }],
+        [{ en: 'Lighting and tech', tr: 'Aydınlatma ve teknoloji' }, { en: 'Lamps, chandeliers, neon signs, TVs, a full gaming PC setup, server racks. Everything switchable also reacts to redstone.', tr: 'Lambalar, avizeler, neon tabelalar, televizyonlar, eksiksiz bir oyun bilgisayarı düzeni, sunucu dolapları. Açılıp kapanan her şey kızıltaşa da tepki verir.' }],
+        [{ en: 'Building materials', tr: 'Yapı malzemeleri' }, { en: 'Wallpapers, tile and parquet floors, skirting boards, crown moulding, wainscoting, blinds, shutters, sliding glass doors, room dividers and railings.', tr: 'Duvar kâğıtları, fayans ve parke zeminler, süpürgelikler, kartonpiyerler, lambriler, jaluziler, panjurlar, sürgülü cam kapılar, paravanlar ve korkuluklar.' }],
+        [{ en: 'Pets and aquarium', tr: 'Evcil hayvan ve akvaryum' }, { en: 'Cat trees, dog beds, bowls, bird cages and aquarium decorations.', tr: 'Kedi ağaçları, köpek yatakları, mamalıklar, kuş kafesleri ve akvaryum süsleri.' }],
+        [{ en: 'Themed rooms', tr: 'Temalı odalar' }, { en: 'Restaurant, hospital, school, library, Halloween and Easter sets.', tr: 'Restoran, hastane, okul, kütüphane, Cadılar Bayramı ve Paskalya setleri.' }]
+      ] }, note: { en: 'Mirrors really reflect players and mobs, with a config option to limit what they cost.', tr: 'Aynalar oyuncuları ve yaratıkları gerçekten yansıtır; maliyetlerini sınırlamak için bir ayar var.' } },
+    { h: { en: 'Twelve creative tabs', tr: 'On iki yaratıcı sekmesi' }, chips: 'tabs' },
+    { h: { en: 'Structures', tr: 'Yapılar' }, list: [
+      { en: 'A furnished village with a fountain plaza, streets and seven kinds of houses: cottages, a cafe, a library, a clinic, a school and a pet shop.', tr: 'Çeşmeli bir meydanı, sokakları ve yedi çeşit evi olan döşeli bir köy: kulübeler, bir kafe, bir kütüphane, bir klinik, bir okul ve bir evcil hayvan dükkânı.' },
+      { en: 'Roadside diners, a haunted manor, garden gazebos, greenhouse cafes and log cabins generate in matching biomes.', tr: 'Yol kenarı lokantaları, perili bir konak, bahçe çardakları, sera kafeler ve kütük evler uygun biyomlarda oluşur.' }
+    ] },
+    { h: { en: 'Details', tr: 'Ayrıntılar' }, list: [
+      { en: 'Furniture sinks onto rugs, tables and counters instead of floating above them.', tr: 'Mobilyalar halıların, masaların ve tezgâhların üstünde havada durmaz, üzerlerine oturur.' },
+      { en: 'Blocks can be waterlogged, and wooden furniture burns like planks.', tr: 'Bloklar suyla dolabilir; ahşap mobilyalar kalaslar gibi yanar.' },
+      { en: 'English and Turkish language support.', tr: 'İngilizce ve Türkçe dil desteği.' }
+    ] }
+  ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'ore-elemental-golems', cats: ['creatures'], dl: 4, released: '2026-10-11',
+  tag: { en: '14 new golems, built the classic way, each with its own power.', tr: 'Klasik yolla yapılan, her biri kendi gücüne sahip 14 yeni golem.' },
+  lede: {
+    en: 'Ore & Elemental Golems adds 14 new golems to Minecraft, built the classic way: stack the blocks in a T shape and top it with a carved pumpkin. Every golem has its own 3D model, animations, stats and special ability. The vanilla Iron Golem is untouched.',
+    tr: 'Ore & Elemental Golems, Minecraft\u2019a klasik yolla yapılan 14 yeni golem ekliyor: blokları T şeklinde diz, tepesine oyulmuş bir balkabağı koy. Her golemin kendi 3B modeli, animasyonları, değerleri ve özel yeteneği var. Vanilla Demir Golem\u2019e dokunulmuyor.'
+  },
+  sections: [
+    { h: { en: 'All 14 golems', tr: '14 golemin tamamı' }, cards: [
+      { e: 2, en: 'Ignites enemies with its fists.', tr: 'Düşmanları yumruklarıyla tutuşturur.' },
+      { e: 3, en: 'Shocks nearby enemies, more strongly in storms.', tr: 'Yakındaki düşmanları çarpar; fırtınada daha güçlü.' },
+      { e: 4, en: 'Strikes twice as fast and can stun.', tr: 'İki kat hızlı vurur ve sersemletebilir.' },
+      { e: 5, en: 'Fires magical bolts from range.', tr: 'Uzaktan büyülü mermiler atar.' },
+      { e: 6, en: 'Charges up, then releases an electric pulse.', tr: 'Güç toplar, sonra bir elektrik dalgası salar.' },
+      { e: 7, en: 'Raises an aura that gives allies Resistance and Regeneration.', tr: 'Dostlarına Direnç ve Yenilenme veren bir hâle yayar.' },
+      { e: 8, en: 'Hits hard and raises a crystal shield when hurt or surrounded.', tr: 'Sert vurur; yaralanınca ya da kuşatılınca kristal bir kalkan kaldırır.' },
+      { e: 9, en: 'Immune to fire and knockback, and slams the ground with both fists.', tr: 'Ateşe ve geri itilmeye bağışık; iki yumruğuyla yere vurur.' },
+      { e: 10, en: 'Fires a sonic wave in a line.', tr: 'Bir hat boyunca ses dalgası atar.' },
+      { e: 11, en: 'Cannot be pushed, is blast proof, and taunts monsters onto itself.', tr: 'İtilemez, patlamaya dayanıklıdır ve canavarları kendi üstüne çeker.' },
+      { e: 12, en: 'Bursts with dark energy that damages and slows enemies.', tr: 'Düşmanları yaralayan ve yavaşlatan karanlık bir enerjiyle patlar.' },
+      { e: 13, en: 'Shoots water jets and grows stronger in water or rain.', tr: 'Su fışkırtır; suda ya da yağmurda güçlenir.' },
+      { e: 14, en: 'Emits a radiant pulse that burns the undead and makes enemies glow.', tr: 'Ölümsüzleri yakan ve düşmanları parlatan ışıltılı bir dalga yayar.' },
+      { e: 15, en: 'Flashes a warning, then blows up hostile mobs. It harms no allies and breaks no blocks by default.', tr: 'Önce uyarı olarak yanıp söner, sonra düşman yaratıkları havaya uçurur. Varsayılan olarak dostlara zarar vermez, blok kırmaz.' }
+    ] },
+    { h: { en: 'How they behave', tr: 'Nasıl davranırlar' }, list: [
+      { en: 'Golems defend villagers, their builder and themselves.', tr: 'Golemler köylüleri, kendilerini yapanı ve kendilerini savunur.' },
+      { en: 'They never attack players, animals or other golems.', tr: 'Asla oyunculara, hayvanlara ya da diğer golemlere saldırmazlar.' },
+      { en: 'Right click a golem with its own material to repair it.', tr: 'Bir golemi onarmak için ona kendi malzemesiyle sağ tıkla.' },
+      { en: 'Drops are balanced so valuable materials cannot be farmed or duplicated.', tr: 'Düşürdükleri dengeli; değerli malzemeler çiftlik kurularak ya da kopyalanarak elde edilemez.' }
+    ] },
+    { h: { en: 'The Golem Codex', tr: 'Golem Kodeksi' }, p: { en: 'An in game book, crafted from a book and a carved pumpkin, shows how to build every golem and what it does.', tr: 'Bir kitap ve oyulmuş bir balkabağından yapılan oyun içi bir kitap; her golemin nasıl yapıldığını ve ne işe yaradığını gösterir.' } },
+    { h: { en: 'Good to know', tr: 'Bilmekte fayda var' }, p: { en: 'Forge 1.20.1, with English and Turkish translations. No dependencies.', tr: 'Forge 1.20.1, İngilizce ve Türkçe çevirileriyle. Bağımlılık yok.' } }
+  ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'death-hand', cats: ['utility', 'horror'], dl: 3, released: '2026-10-11',
+  tag: { en: 'Dying becomes a small ritual instead of a corpse run.', tr: 'Ölmek, eşya peşinde koşmak yerine küçük bir ritüele dönüşüyor.' },
+  lede: {
+    en: 'The moment you die, your inventory, armour, offhand and XP are stored safely in a record of their own, and a gaunt, glowing veined hand rises from the exact spot where you fell, its fingers twitching, with whispers and soul particles in the air.',
+    tr: 'Öldüğün anda envanterin, zırhın, ikinci elindeki eşya ve XP\u2019n o ölüme özel bir kayda güvenle alınır; düştüğün noktadan, parmakları seğiren, damarları parlayan sıska bir el yükselir; havada fısıltılar ve ruh parçacıkları dolaşır.'
+  },
+  sections: [
+    { h: { en: 'Shaking hands with yourself', tr: 'Kendi elini sıkmak' }, p: { en: 'Right click the hand and a translucent, fully green ghost of you rises out of the ground, glides over and shakes your hand while the camera turns to watch. Then the ghost fades, the hand sinks back into the earth, and every item returns to its original slot, along with all your XP levels and points.', tr: 'Ele sağ tıkla: yerden yarı saydam, tamamen yeşil bir hayaletin yükselir, süzülerek gelir ve kamera dönüp izlerken elini sıkar. Sonra hayalet solar, el toprağa geri gömülür ve her eşya, bütün XP seviyelerin ve puanlarınla birlikte eski yuvasına döner.' } },
+    { h: { en: 'The rules', tr: 'Kurallar' }, list: [
+      { en: 'Only the owner can use their hand; anyone else clicking it does nothing.', tr: 'Eli yalnızca sahibi kullanabilir; başkası tıklarsa hiçbir şey olmaz.' },
+      { en: 'Items and XP are returned exactly once, with no duplication and no loss.', tr: 'Eşyalar ve XP tam bir kez geri verilir; ne kopyalanır ne kaybolur.' },
+      { en: 'Records are saved with the world, so they survive logouts, restarts and chunk reloads.', tr: 'Kayıtlar dünyayla birlikte saklanır; çıkış, yeniden başlatma ve parça yüklemelerinden etkilenmez.' },
+      { en: 'Items that do not fit are dropped at your feet and locked to you.', tr: 'Sığmayan eşyalar ayağının dibine bırakılır ve sana kilitlenir.' }
+    ] },
+    { h: { en: 'Command', tr: 'Komut' }, table: {
+      cols: [{ en: 'Command', tr: 'Komut' }, { en: 'What it does', tr: 'Ne yapar' }],
+      rows: [['/deathhand list', { en: 'Shows where your hands are waiting.', tr: 'Ellerinin nerede beklediğini gösterir.' }]] } }
+  ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'pantheon-of-legends', cats: ['magic', 'adventure'], dl: 66, released: '2026-10-04',
   tag: { en: 'Turkic and Greek mythology: 15 animated gods and legends.', tr: 'Türk ve Yunan mitolojisi: animasyonlu 15 tanrı ve efsane.' },
   lede: {
     en: 'Mythos brings myth themed boss fights, structures and gear from two mythologies, with more to come. Each of the 15 bosses has eight custom animated attacks, its own battle theme and a death fanfare, and each has a weakness and a special finishing condition you have to work out.',
@@ -136,7 +227,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'towers', cats: ['adventure'], dl: 40, released: '2026-10-04',
+  slug: 'towers', cats: ['adventure'], dl: 42, released: '2026-10-04',
   tag: { en: 'Nine unbreakable towers, rising hazards and a boss on every roof.', tr: 'Kırılmaz dokuz kule, yükselen tehlikeler ve her çatıda bir boss.' },
   lede: {
     en: 'Nine huge towers stand across the dimensions: three in the Overworld, three in the Nether and three in the End. Every floor is full of spawners and holds a chest, and the top floor is an open roof where an animated boss waits with its own attacks and beams.',
@@ -256,7 +347,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'hard-mobs-and-bosses', cats: ['adventure', 'creatures'], dl: 249, released: '2026-10-03',
+  slug: 'hard-mobs-and-bosses', cats: ['adventure', 'creatures'], dl: 253, released: '2026-10-03',
   tag: { en: 'The night was too easy. Not anymore.', tr: 'Gece fazla kolaydı. Artık değil.' },
   lede: {
     en: 'Four elite monsters roam the world alongside the vanilla ones, and three bosses answer only when you call them yourself. Beat them, and their remains become the strongest gear in the game. No dependencies, no GeckoLib: just drop it in.',
@@ -287,7 +378,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'real-animals', cats: ['creatures'], dl: 81, released: '2026-10-08',
+  slug: 'real-animals', cats: ['creatures'], dl: 83, released: '2026-10-08',
   tag: { en: 'Real world wildlife, each in its own biome.', tr: 'Gerçek dünyanın vahşi yaşamı, her biri kendi biyomunda.' },
   lede: {
     en: 'Real Animals fills the gaps in vanilla Minecraft’s wildlife with real world creatures: savanna giants, jungle primates, big cats, polar and shore mammals, birds, reptiles and sea giants, all spawning in fitting biomes.',
@@ -302,7 +393,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'variantide', cats: ['creatures'], dl: 7, released: '2026-10-09',
+  slug: 'variantide', cats: ['creatures'], dl: 9, released: '2026-10-09',
   tag: { en: 'Zombie, Creeper, Skeleton and Spider: 15 variants each, 60 in all.', tr: 'Zombi, Creeper, İskelet ve Örümcek: her birine 15 tür, toplam 60.' },
   lede: {
     en: 'Variantide gives four vanilla mobs fifteen unique variants each. Every variant has its own spawn rules, abilities and effects: frost zombies freeze you, toxic creepers leave radiation clouds, sniper skeletons shoot from far away and web spiders pin you in place.',
@@ -363,7 +454,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'gilded-gambit', cats: ['loot'], dl: 5, released: '2026-10-09',
+  slug: 'gilded-gambit', cats: ['loot'], dl: 6, released: '2026-10-09',
   tag: { en: 'Coins from structure chests, a roulette table and the Gambler.', tr: 'Yapı sandıklarından altınlar, bir rulet masası ve Kumarbaz.' },
   lede: {
     en: 'Gilded Gambit adds a risk and reward economy. Coins can only be found in the loot chests of vanilla structures. Spend them on rare goods, or gamble them first and hope to come out richer.',
@@ -400,7 +491,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'uncraft-and-unfurnace', cats: ['utility'], dl: 103, released: '2026-10-03',
+  slug: 'uncraft-and-unfurnace', cats: ['utility'], dl: 104, released: '2026-10-03',
   tag: { en: 'Two blocks that let you change your mind.', tr: 'Fikrini değiştirmene izin veren iki blok.' },
   lede: {
     en: 'Minecraft is very good at letting you build things. It is not good at letting you change your mind. This mod adds the two blocks that undo it.',
@@ -436,7 +527,7 @@ window.BB_MODS = [
 },
 /* ------------------------------------------------------------------ */
 {
-  slug: 'flesh-tanner', cats: ['utility'], dl: 13, released: '2026-10-07',
+  slug: 'flesh-tanner', cats: ['utility'], dl: 14, released: '2026-10-07',
   tag: { en: 'Cook rotten flesh, get leather.', tr: 'Çürük eti pişir, deri al.' },
   lede: {
     en: 'Flesh Tanner turns useless zombie drops into something worth keeping. Smelt rotten flesh in a furnace, blast furnace, smoker or campfire and it comes out as ordinary leather, the same item cows drop.',
