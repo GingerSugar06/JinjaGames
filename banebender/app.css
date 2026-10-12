@@ -85,9 +85,7 @@ html.seen #boot{display:none}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero-copy{max-width:600px;position:relative}
 .hero-copy::before{content:"";position:absolute;inset:-60px -80px -60px -200px;z-index:-1;background:radial-gradient(closest-side,rgba(7,11,18,.78),transparent);pointer-events:none}
-.kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--grass);padding:7px 12px;border:1px solid rgba(126,217,87,.35);background:rgba(126,217,87,.08);border-radius:999px}
-.kicker i{width:7px;height:7px;background:var(--grass);box-shadow:0 0 12px var(--grass)}
-.title{font-family:var(--f-pix);font-weight:700;font-size:clamp(52px,7.4vw,112px);white-space:nowrap;line-height:.9;letter-spacing:.01em;margin:22px 0 18px;color:#f4ffe9;
+.title{font-family:var(--f-pix);font-weight:700;font-size:clamp(52px,7.4vw,112px);white-space:nowrap;line-height:.9;letter-spacing:.01em;margin:0 0 18px;color:#f4ffe9;
   text-shadow:0 1px 0 #5da33a,0 2px 0 #4c8c2f,0 3px 0 #3e7526,0 4px 0 #866043,0 5px 0 #705038,0 6px 0 #5c412c,0 14px 30px rgba(0,0,0,.6),0 0 60px rgba(126,217,87,.25)}
 .title span{display:inline-block;animation:drop .7s var(--ease) both;animation-delay:calc(var(--i)*55ms + .2s)}
 @keyframes drop{from{opacity:0;transform:translateY(-40px) rotate(-8deg)}to{opacity:1;transform:none}}
@@ -392,7 +390,7 @@ footer a:hover{color:var(--ink)}
   .recipes{grid-template-columns:1fr}
   .pfoot{grid-template-columns:1fr}
   .pcrumb{display:none}
-  .chip,.stat span,.eyebrow,.kicker,.cat em,.tbl th,.infobox dt,.boss .bl,.tower .dim,.pfoot small,.more,.search kbd{font-size:12px}
+  .chip,.stat span,.eyebrow,.cat em,.tbl th,.infobox dt,.boss .bl,.tower .dim,.pfoot small,.more,.search kbd{font-size:12px}
   .search kbd{display:none}
   .lb{padding:12px}.lb .pv{left:8px}.lb .nx{right:8px}
 }
