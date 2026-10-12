@@ -8,7 +8,7 @@
   /* data/stats.js her gece GitHub Actions ile güncellenir; varsa elle yazılan sayıların yerine geçer. */
   var ST = window.BB_STATS, ASOF = { en: '12 Oct 2026', tr: '12 Eki 2026' };
   if (ST && ST.mods) {
-    MODS.forEach(function (m) { var x = ST.mods[m.slug]; if (x && typeof x.dl === 'number') m.dl = x.dl; });
+    MODS.forEach(function (m) { var x = ST.mods[m.slug]; if (!x) return; if (typeof x.dl === 'number') m.dl = x.dl; if (x.created) m.created = x.created; if (x.updated) m.updatedAt = x.updated; });
     if (ST.total) PROF.downloads = ST.total >= 10000 ? (Math.floor(ST.total / 100) / 10) + 'K' : String(ST.total);
     if (ST.updated) {
       var p = ST.updated.slice(0, 10).split('-'), mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ay = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
@@ -90,11 +90,47 @@
     return '<a class="card rv' + (feat ? ' feat' : '') + '" href="#/' + m.slug + '" data-slug="' + m.slug + '" style="--ac:' + (g.accent || '#7ed957') + '">' +
       '<div class="art">' + art + '<span class="num">#' + String(i + 1).padStart(2, '0') + '</span>' +
       '<span class="dlc" title="CurseForge downloads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>' + m.dl + '</span></div>' +
-      '<div class="body"><h3>' + esc(g.name) + '</h3><p>' + bi(m.tag) + '</p><div class="chips">' +
+      '<div class="body"><span class="when" data-c="' + esc(m.created || m.released) + '" data-u="' + esc(m.updatedAt || m.created || m.released) + '"></span><h3>' + esc(g.name) + '</h3><p>' + bi(m.tag) + '</p><div class="chips">' +
       m.cats.map(function (c) { return '<span class="chip">' + bi(catName(c)) + '</span>'; }).join('') + '</div></div>' +
       '<span class="glare" aria-hidden="true"></span><span class="bar" aria-hidden="true"></span></a>';
   }).join('');
   d.getElementById('grid').style.gridAutoFlow = 'dense';
+
+  /* ---------------- SIRALAMA ---------------- */
+  function dateBi(iso) {
+    var p = String(iso).slice(0, 10).split('-'), mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ay = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+    return { en: (+p[2]) + ' ' + mo[+p[1] - 1] + ' ' + p[0], tr: (+p[2]) + ' ' + ay[+p[1] - 1] + ' ' + p[0] };
+  }
+  var grid = $('#grid');
+  function sortBy(mode) {
+    var cards = $$('.card', grid), key = function (el) { return BY[el.getAttribute('data-slug')]; };
+    var cmp = {
+      featured: function (a, b) { return key(a).i - key(b).i; },
+      downloads: function (a, b) { return key(b).dl - key(a).dl || key(a).i - key(b).i; },
+      newest: function (a, b) { return String(key(b).created || key(b).released).localeCompare(String(key(a).created || key(a).released)); },
+      updated: function (a, b) { return String(key(b).updatedAt || key(b).created || '').localeCompare(String(key(a).updatedAt || key(a).created || '')); },
+      name: function (a, b) { return (key(a).g.name || '').localeCompare(key(b).g.name || '', 'tr'); }
+    }[mode];
+    cards.sort(cmp).forEach(function (el, i) {
+      el.classList.toggle('feat', mode === 'featured' && !!FEAT[el.getAttribute('data-slug')]);
+      grid.appendChild(el);
+      var w = $('.when', el), iso = mode === 'updated' ? w.getAttribute('data-u') : w.getAttribute('data-c');
+      w.innerHTML = mode === 'newest' || mode === 'updated'
+        ? bi({ en: (mode === 'newest' ? 'Released ' : 'Updated ') + dateBi(iso).en, tr: (mode === 'newest' ? 'Yayın: ' : 'Güncelleme: ') + dateBi(iso).tr })
+        : mode === 'downloads' ? bi({ en: m2(el).dl + ' downloads', tr: m2(el).dl + ' indirme' }) : '';
+      $('.num', el).textContent = '#' + String(i + 1).padStart(2, '0');
+    });
+    grid.setAttribute('data-sort', mode);
+  }
+  function m2(el) { return BY[el.getAttribute('data-slug')]; }
+  $$('[data-sort]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('[data-sort]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      sortBy(b.getAttribute('data-sort'));
+      try { sessionStorage.setItem('bb_sort', b.getAttribute('data-sort')); } catch (e) {}
+    });
+  });
+  try { var savedSort = sessionStorage.getItem('bb_sort'); if (savedSort && savedSort !== 'featured') { var sb = $('[data-sort="' + savedSort + '"]'); if (sb) sb.click(); } } catch (e) {}
 
   /* arama dizini: ad, slogan, kategori, varlık ve eşya adları (iki dilde) */
   MODS.forEach(function (m) {

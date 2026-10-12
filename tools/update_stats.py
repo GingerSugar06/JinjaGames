@@ -1,6 +1,6 @@
 """BaneBender'ın CurseForge indirme sayılarını çekip banebender/data/stats.js'e yazar.
 
-GitHub Actions her gece 00.00'da (Türkiye) bunu çalıştırır (.github/workflows/curseforge-stats.yml).
+GitHub Actions 6 saatte bir (Türkiye saatiyle 00.00, 06.00, 12.00, 18.00) bunu çalıştırır (.github/workflows/curseforge-stats.yml).
 Yalnızca SAYILAR güncellenir; yeni bir mod bulunursa sayfası elle yazılır, betik yalnızca
 listesini `banebender/data/new_mods.txt` dosyasına bırakır (iş akışı bundan bir GitHub issue açar).
 
@@ -50,7 +50,9 @@ def from_api(key):
         data = json.loads(get(url, {'x-api-key': key, 'Accept': 'application/json'}))
         for m in data.get('data', []):
             if any(a.get('id') == AUTHOR_ID for a in m.get('authors', [])):
-                mods[m['slug']] = {'name': m['name'], 'dl': int(m.get('downloadCount', 0))}
+                mods[m['slug']] = {'name': m['name'], 'dl': int(m.get('downloadCount', 0)),
+                                   'created': (m.get('dateReleased') or m.get('dateCreated') or '')[:16] + 'Z',
+                                   'updated': (m.get('dateModified') or '')[:16] + 'Z'}
         page = data.get('pagination', {})
         index += page.get('resultCount', 0)
         if not page.get('resultCount') or index >= page.get('totalCount', 0):
@@ -87,6 +89,21 @@ def from_profile():
     if not mods:
         raise RuntimeError('profilde proje bulunamadı')
     return mods, total if total is not None else sum(v['dl'] for v in mods.values())
+
+
+def iso(ms):
+    return datetime.datetime.fromtimestamp(int(ms) / 1000, datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
+
+
+def dates_from_page(slug):
+    """Proje sayfasındaki JSON'dan yayınlanma (dateCreated) ve son güncelleme (updateDate) tarihleri."""
+    html = get('https://www.curseforge.com/minecraft/mc-mods/' + slug, tries=2).replace('\\"', '"')
+    m = re.search(r'"slug":"' + re.escape(slug) + r'".{0,2500}?"updateDate":(\d+),"dateCreated":(\d+)', html, re.S)
+    if not m:
+        raise RuntimeError('tarih yok')
+    # CurseForge onaydan önce yüklenen dosyanın tarihini 'güncelleme' sayar; yayından eski olamaz.
+    created, updated = iso(m.group(2)), iso(m.group(1))
+    return {'created': created, 'updated': max(created, updated)}
 
 
 def from_cfwidget(slugs):
@@ -134,14 +151,34 @@ def main():
         m = re.search(r'window\.BB_STATS=(\{.*\});', t, re.S)
         if m:
             old = json.loads(m.group(1))
+    # Tarihler: API verdiyse onlar; yoksa eskiler korunur ve günde bir kez proje sayfalarından tazelenir.
+    old_mods = (old or {}).get('mods', {})
+    now = datetime.datetime.now(datetime.timezone.utc)
+    last = (old or {}).get('datesAt')
+    stale = not last or (now - datetime.datetime.strptime(last, '%Y-%m-%dT%H:%MZ').replace(tzinfo=datetime.timezone.utc)).total_seconds() > 20 * 3600
+    dates_at = last
+    for slug, v in mods.items():
+        prev = old_mods.get(slug, {})
+        if v.get('created', 'Z') == 'Z':
+            v.pop('created', None); v.pop('updated', None)
+        if 'created' not in v and (stale or 'created' not in prev):
+            try:
+                v.update(dates_from_page(slug)); dates_at = now.strftime('%Y-%m-%dT%H:%MZ'); time.sleep(1.5)
+            except Exception as e:
+                print('tarih alınamadı', slug, e)
+        for k in ('created', 'updated'):
+            if k not in v and k in prev:
+                v[k] = prev[k]
     payload = {'total': total, 'projects': len(mods), 'mods': {k: mods[k] for k in sorted(mods)}, 'unlisted': new}
-    if old and {k: old.get(k) for k in payload} == payload:
+    if old and dates_at == last and {k: old.get(k) for k in payload} == payload:
         print('Değişiklik yok.')
-    else:
-        payload['updated'] = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
+        payload = None
+    if payload:
+        payload['updated'] = now.strftime('%Y-%m-%dT%H:%MZ')
         payload['source'] = source
+        payload['datesAt'] = dates_at
         with open(OUT, 'w', encoding='utf8', newline='\n') as f:
-            f.write('/* Otomatik: tools/update_stats.py (her gece 00.00, GitHub Actions). Elle düzenleme. */\n')
+            f.write('/* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */\n')
             f.write('window.BB_STATS=' + json.dumps(payload, ensure_ascii=False, indent=1) + ';\n')
         print('Güncellendi:', total, 'indirme,', len(mods), 'proje, kaynak:', source)
 
