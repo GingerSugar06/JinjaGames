@@ -143,6 +143,11 @@ Bulunulan bölüm çubukta yanar. Dil ve tema düğmeleri sağ üstte kalır. Ç
 - YouTube videosu (Chest Hauler) tıklanana kadar yüklenmez, tıklanınca youtube-nocookie.com
   açılır; gizlilik sayfası bunu söylüyor.
 
+- **Önbellek:** GitHub Pages CSS/JS dosyalarını tarayıcıda 10 dakika önbellekte tutar; yeni
+  HTML eski CSS ile birleşince (örneğin wiki logosu ve yükleme bloğu görünmüyordu) sayfa
+  bozuk görünür. Bu yüzden bütün `.css`/`.js` bağlantılarının sonunda `?v=20261012b` var.
+  CSS ya da JS değiştiğinde bu değeri bütün sayfalarda birlikte artır (tek sed komutu yeter).
+
 ## Yazı kuralları
 
 - **Sitede uzun tire (—), kısa tire (–) ve kelime içi tire kullanılmaz.** Cümle
