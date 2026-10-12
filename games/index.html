@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<script>
+// Keep legacy index.html links on the same clean URL as directory links.
+if ((location.protocol === 'https:' || location.protocol === 'http:') && location.pathname.endsWith('/index.html')) {
+  history.replaceState(history.state, '', location.pathname.replace(/index\.html$/, '') + location.search + location.hash);
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Games | JinjaGames: Cyber Academy, Locard, DayPot</title>
+<meta name="description" content="Every JinjaGames project in one place: Cyber Academy, out now in Steam Early Access; Locard, a detective game for one to four players you can wishlist on Steam; and DayPot, an offline cooking assistant for Android." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/games/" />
+<meta name="theme-color" content="#FCFAF8" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0E0C0D" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-j-shuriken-32.png?v=2" />
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-j-shuriken-48.png?v=2" />
+<link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
+<meta property="og:title" content="Games | JinjaGames" />
+<meta property="og:description" content="Cyber Academy, Locard and DayPot: status, platforms and languages, side by side." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com/games/" />
+<meta property="og:image" content="https://jinjagames.com/JinjaGamesBanner.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/space-grotesk-latin-700.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/inter-latin-400.woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Games by JinjaGames","url":"https://jinjagames.com/games/","isPartOf":{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},"mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://jinjagames.com/cyberacademy/","name":"Cyber Academy"},{"@type":"ListItem","position":2,"url":"https://jinjagames.com/locard/","name":"Locard"},{"@type":"ListItem","position":3,"url":"https://jinjagames.com/daypot/","name":"DayPot"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"}]}]}
+</script>
+<script src="../assets/steam.js"></script>
+<script>
+(function(){
+  var d=document.documentElement;
+  try{
+    var t=localStorage.getItem('jg_theme');
+    if(t!=='light'&&t!=='dark'){ t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+    d.setAttribute('data-theme',t);
+    var l=localStorage.getItem('jg_lang');
+    if(l!=='tr'&&l!=='en') l='en';
+    d.setAttribute('data-lang',l); d.lang=l;
+  }catch(e){}
+})();
+</script>
+<style>
+/* ============================================================
+   JinjaGames — oyunlar merkezi
+   Ana sayfanın editöryel dili: kâğıt zemin, ince çizgi, az renk.
+   Her oyun satırı kendi dünyasının vurgusunu ve başlık yazı tipini taşır.
+   ============================================================ */
+:root{
+  --brand:#C42B2B; --brand-2:#E0604E; --brand-rgb:196,43,43;
+  --bg:#FCFAF8; --bg-soft:#F5F1ED; --surface:#FFFFFF; --surface-2:#F8F4F1;
+  --ink:#191517; --ink-2:#5E5457; --ink-3:#6E6467;
+  --line:#E8E1DB; --line-2:#D8CFC8; --brand-soft:#FAEDEA;
+  --nav-bg:rgba(252,250,248,.82); --nav-bg-solid:rgba(252,250,248,.97);
+  --shadow-1:0 1px 2px rgba(25,21,23,.04), 0 8px 22px rgba(25,21,23,.05);
+  --shadow-2:0 20px 54px rgba(25,21,23,.11);
+  --w-cyber:#0E7A8A; --w-noir:#B03B32; --w-warm:#2F6B48;
+  --W:1240px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px;
+  --f-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-display:'Space Grotesk',var(--f-body);
+  --f-mono:'JetBrains Mono',Consolas,ui-monospace,Menlo,monospace;
+  --f-noir:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-warm:'Fraunces',Georgia,serif;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --brand:#F16A5C; --brand-2:#FF9B82; --brand-rgb:241,106,92;
+  --bg:#0E0C0D; --bg-soft:#141112; --surface:#181415; --surface-2:#1F1A1B;
+  --ink:#F6F1EF; --ink-2:#BCAFB0; --ink-3:#968A8C;
+  --line:#272122; --line-2:#372F31; --brand-soft:#271817;
+  --nav-bg:rgba(14,12,13,.78); --nav-bg-solid:rgba(14,12,13,.96);
+  --shadow-1:0 1px 2px rgba(0,0,0,.36), 0 8px 22px rgba(0,0,0,.3);
+  --shadow-2:0 22px 56px rgba(0,0,0,.52);
+  --w-cyber:#4FD0E4; --w-noir:#F16A5C; --w-warm:#6FBF87;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{overflow-x:hidden;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .35s ease,color .35s ease}
+a{color:inherit;text-decoration:none}
+img,video{max-width:100%;display:block;height:auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:4px;border-radius:4px}
+.wrap{max-width:var(--W);margin:0 auto;padding:0 32px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.08;letter-spacing:-.03em}
+.tr,.en{display:block}
+html[data-lang="en"] .tr{display:none!important}
+html[data-lang="tr"] .en{display:none!important}
+.tr.i,.en.i{display:inline}
+html[data-lang="en"] .tr.i{display:none!important}
+html[data-lang="tr"] .en.i{display:none!important}
+html[data-steam="soon"] .sx-live{display:none!important}
+html[data-steam="live"] .sx-soon{display:none!important}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+.label{display:inline-block;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.hl{color:var(--brand)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* NAV (yalnız üst bar: nav#nav) */
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+nav#nav.stuck{background:var(--nav-bg-solid);border-color:var(--line)}
+.nav-in{max-width:var(--W);margin:0 auto;padding:0 32px;height:var(--navh);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:-.035em;flex-shrink:0}
+.brand img{height:30px;width:auto}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center}
+.nav-links a{display:block;color:var(--ink-2);font-size:14.5px;font-weight:500;padding:9px 15px;border-radius:9px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--bg-soft)}
+.nav-end{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang-menu{position:relative}
+.lang-trigger{min-width:76px;height:36px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 11px;background:transparent;border:1px solid var(--line-2);border-radius:9px;cursor:pointer;color:var(--ink-2);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;transition:.22s}
+.lang-trigger:hover,.lang-menu.open .lang-trigger{color:var(--ink);border-color:var(--ink-3)}
+.lang-globe{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+.lang-chev{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;transition:transform .22s}
+.lang-menu.open .lang-chev{transform:rotate(180deg)}
+.lang-popover{position:absolute;right:0;top:calc(100% + 9px);width:224px;padding:7px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-2);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:220}
+.lang-menu.open .lang-popover{opacity:1;visibility:visible;transform:none}
+.lang-menu-title{padding:7px 10px 9px;color:var(--ink-3);font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.lang-option{width:100%;display:flex;align-items:center;gap:11px;padding:10px;border:0;border-radius:9px;background:transparent;cursor:pointer;text-align:left;color:var(--ink-2);font-size:14px;font-weight:500;transition:.2s}
+.lang-option:hover,.lang-option.on{background:var(--bg-soft);color:var(--ink)}
+.lang-code{min-width:22px;color:var(--ink-3);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em}
+.lang-option.on::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);margin-left:auto}
+.iconbtn{width:36px;height:36px;border-radius:9px;background:transparent;border:1px solid var(--line-2);display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.22s}
+.iconbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .ic-sun{display:block}
+html[data-theme="dark"] .ic-moon{display:none}
+.ic-sun{display:none}.ic-moon{display:block}
+
+/* ALT GEZİNME (telefon) */
+.dock{display:none;position:fixed;z-index:110;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(440px,calc(100% - 24px));padding:6px;gap:4px;background:var(--nav-bg-solid);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 40px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.06);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+html[data-theme="dark"] .dock{box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.dock a{flex:1;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:14px;color:var(--ink-3);font-size:12px;font-weight:600;transition:color .2s,background .25s}
+.dock a svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.dock a.on{color:var(--brand);background:var(--brand-soft)}
+
+/* BUTON */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,border-color .2s}
+.btn.p{background:var(--accent,var(--brand));color:#fff}
+html[data-theme="dark"] .btn.p{color:#12100F}
+.btn.p:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.g{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.g:hover{transform:translateY(-2px);border-color:var(--ink)}
+.btn .arw{transition:transform .3s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* HERO */
+.hero{padding:calc(var(--navh) + 84px) 0 46px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:760px;height:760px;right:-260px;top:-320px;border-radius:50%;background:radial-gradient(circle,rgba(var(--brand-rgb),.08),transparent 66%);pointer-events:none}
+.crumb{display:flex;gap:9px;align-items:center;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);margin-bottom:26px}
+.crumb a:hover{color:var(--brand)}
+.hero h1{font-size:clamp(46px,8vw,104px);letter-spacing:-.055em;line-height:.95;max-width:980px}
+.hero .lede{max-width:620px;margin-top:26px;color:var(--ink-2);font-size:19px;line-height:1.6}
+.counts{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.counts div{flex:1 1 160px;padding:18px 20px 18px 0;display:flex;align-items:baseline;gap:12px}
+.counts b{font-family:var(--f-display);font-size:34px;letter-spacing:-.04em;line-height:1}
+.counts span{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.counts i{width:8px;height:8px;border-radius:50%;align-self:center;flex-shrink:0}
+
+/* FİLTRE */
+.filters{position:sticky;top:calc(var(--navh) - 1px);z-index:50;background:var(--nav-bg-solid);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;align-items:center;gap:8px;padding-top:12px;padding-bottom:12px;overflow-x:auto;scrollbar-width:none}
+.filters .wrap::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:999px;border:1px solid var(--line-2);background:transparent;cursor:pointer;color:var(--ink-2);font-size:14px;font-weight:500;transition:.2s}
+.chip:hover{color:var(--ink);border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip em{font-style:normal;font-family:var(--f-mono);font-size:11px;opacity:.65}
+.filters .note{margin-left:auto;flex-shrink:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+
+/* OYUN SATIRLARI */
+.list{padding:44px 0 30px}
+.game{--accent:var(--brand);display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:56px;align-items:center;padding:56px 0;border-bottom:1px solid var(--line);transition:opacity .4s var(--ease)}
+.game:first-child{padding-top:24px}
+.game.flip .media{order:2}
+.game[hidden]{display:none}
+.media{position:relative;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#0B0A0B;box-shadow:var(--shadow-2);transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media .status{position:absolute;z-index:3;left:16px;top:16px;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(12,10,11,.74);color:#F6F1EF;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--dot,#999)}
+.status.live i{--dot:#45D49A;animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(69,212,154,.6)}70%{box-shadow:0 0 0 8px rgba(69,212,154,0)}100%{box-shadow:0 0 0 0 rgba(69,212,154,0)}}
+.media .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(60% 60% at var(--mx,50%) var(--my,50%),rgba(255,255,255,.14),transparent 60%);opacity:0;transition:opacity .35s}
+.media:hover .sheen{opacity:1}
+.info .num{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--accent)}
+.info .kind{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-left:12px}
+.info h2{font-size:clamp(36px,4.6vw,56px);margin:14px 0 14px}
+.info .pitch{color:var(--ink-2);font-size:17.5px;line-height:1.62}
+.info .pitch b{color:var(--ink);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:26px 0 22px;border-top:1px solid var(--line)}
+.facts div{padding:13px 14px 13px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
+.facts dd{font-size:15px;font-weight:500;color:var(--ink)}
+.hi{list-style:none;display:grid;gap:9px;margin-bottom:28px}
+.hi li{position:relative;padding-left:22px;color:var(--ink-2);font-size:15.5px;line-height:1.55}
+.hi li::before{content:"";position:absolute;left:2px;top:.62em;width:9px;height:2px;background:var(--accent)}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.g-cyber{--accent:var(--w-cyber)}
+.g-cyber h2{font-family:var(--f-mono);letter-spacing:-.055em;font-size:clamp(32px,4vw,50px)}
+.g-cyber .media::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(rgba(47,179,201,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(47,179,201,.07) 1px,transparent 1px);background-size:34px 34px}
+.g-noir{--accent:var(--w-noir)}
+.g-noir h2{font-family:var(--f-noir);font-weight:900;letter-spacing:-.005em}
+.g-noir .media img{object-position:60% 50%}
+.g-noir .media::after{content:"";position:absolute;inset:14px;z-index:1;border:1px solid rgba(255,255,255,.14);pointer-events:none}
+.g-warm{--accent:var(--w-warm)}
+.g-warm h2{font-family:var(--f-warm);font-weight:700;letter-spacing:-.022em}
+.g-warm .media{background:linear-gradient(150deg,#EFEADC,#DCE7D6);display:grid;place-items:center}
+html[data-theme="dark"] .g-warm .media{background:linear-gradient(150deg,#1B2419,#1F2A22)}
+.g-warm .media::before{content:"";position:absolute;width:52%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.35)}
+html[data-theme="dark"] .g-warm .media::before{background:rgba(255,255,255,.05)}
+.g-warm .media img.pot{position:relative;inset:auto;width:34%;height:auto;object-fit:contain;filter:drop-shadow(0 22px 34px rgba(0,0,0,.24));animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-2deg)}}
+@font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/spartan-semibold-locard.woff') format('woff')}
+.g-noir .media .nmark{position:absolute;z-index:2;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-family:'Spartan Locard',var(--f-body);font-weight:600;font-size:clamp(36px,5vw,64px);letter-spacing:.17em;margin-right:-.17em;color:#F3EFEA;text-shadow:0 2px 22px rgba(0,0,0,.6)}
+.empty{padding:60px 0;text-align:center;color:var(--ink-3);font-family:var(--f-mono);font-size:13px}
+
+/* KARŞILAŞTIRMA */
+section.blk{padding:96px 0}
+.head{margin-bottom:36px}
+.head h2{font-size:clamp(32px,4.4vw,50px);margin-top:14px}
+.head p{color:var(--ink-2);font-size:17px;max-width:640px;margin-top:14px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:400;background:var(--bg-soft)}
+tbody th{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:400;width:170px}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+td .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.c-cy{color:var(--w-cyber)}.c-no{color:var(--w-noir)}.c-wa{color:var(--w-warm)}
+thead th.c-cy,thead th.c-no,thead th.c-wa{font-family:var(--f-display);font-size:16px;letter-spacing:-.02em;text-transform:none;font-weight:700}
+
+/* BAŞKA BİR DÜNYAYA KAPI: BaneBender */
+.portal{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:center;padding:56px 56px;border-radius:8px;overflow:hidden;color:#EAF7E4;background:radial-gradient(90% 120% at 85% 20%,#2c4a1f 0,#13230e 45%,#090f07 100%);isolation:isolate}
+.portal::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.08) 2px,transparent 2px);background-size:32px 32px;mask-image:radial-gradient(80% 80% at 80% 40%,#000,transparent)}
+.portal .pk{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#9BE07A}
+.portal h2{font-size:clamp(30px,4vw,48px);margin:14px 0 14px;color:#F3FFEE}
+.portal h2 b{color:#7ED957}
+.portal p{color:rgba(234,247,228,.78);font-size:17px;max-width:560px}
+.portal .btn{margin-top:26px;background:#7ED957;color:#0B1607;font-weight:700}
+.portal .btn:hover{transform:translateY(-2px);background:#9BE97A}
+.cubewrap{height:260px;display:grid;place-items:center;perspective:900px}
+.cube{position:relative;width:130px;height:130px;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube i{position:absolute;inset:0;image-rendering:pixelated;background-size:100% 100%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.cube .f1{transform:translateZ(65px)}.cube .f2{transform:rotateY(180deg) translateZ(65px)}
+.cube .f3{transform:rotateY(90deg) translateZ(65px)}.cube .f4{transform:rotateY(-90deg) translateZ(65px)}
+.cube .f5{transform:rotateX(90deg) translateZ(65px)}.cube .f6{transform:rotateX(-90deg) translateZ(65px)}
+.cube .side{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23866043'/%3E%3Crect width='8' height='2' fill='%235da33a'/%3E%3Crect y='2' width='1' height='1' fill='%235da33a'/%3E%3Crect x='3' y='2' width='1' height='2' fill='%235da33a'/%3E%3Crect x='6' y='2' width='1' height='1' fill='%235da33a'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%23705038'/%3E%3Crect x='5' y='4' width='1' height='1' fill='%239a7350'/%3E%3Crect x='4' y='6' width='1' height='1' fill='%23705038'/%3E%3Crect x='7' y='6' width='1' height='1' fill='%239a7350'/%3E%3C/svg%3E")}
+.cube .top{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%235da33a'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%2372bd48'/%3E%3Crect x='5' y='2' width='1' height='1' fill='%234c8c2f'/%3E%3Crect x='3' y='5' width='1' height='1' fill='%2372bd48'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%234c8c2f'/%3E%3C/svg%3E")}
+.cube .bot{background:#705038}
+@keyframes spin{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.cubeshadow{width:120px;height:18px;margin-top:34px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:shadow 3.5s ease-in-out infinite}
+.cubefloat{display:flex;flex-direction:column;align-items:center;animation:float 3.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes shadow{50%{transform:scale(.8);opacity:.6}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:40px 0}
+.foot{max-width:var(--W);margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-3);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em}
+.foot a:hover{color:var(--brand)}
+
+/* RESPONSIVE */
+@media(max-width:1060px){
+  .nav-links{display:none}
+  .dock{display:flex}
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  .game{grid-template-columns:1fr;gap:30px}
+  .game.flip .media{order:0}
+  .portal{grid-template-columns:1fr;padding:44px 32px}
+  .cubewrap{height:220px;order:-1}
+}
+@media(max-width:680px){
+  :root{--navh:64px}
+  body{font-size:16px}
+  .wrap,.nav-in,.foot{padding-left:22px;padding-right:22px}
+  .hero{padding:calc(var(--navh) + 46px) 0 34px}
+  .hero .lede{font-size:17px}
+  .counts div{flex:1 1 50%;padding-right:10px}
+  .counts b{font-size:28px}
+  .game{padding:40px 0}
+  .facts{grid-template-columns:1fr}
+  .acts .btn{flex:1 1 auto}
+  section.blk{padding:68px 0}
+  .portal{padding:36px 22px}
+  .label,.crumb,.counts span,.info .kind,.info .num,.facts dt,.media .status,thead th,tbody th,.foot,.filters .note,.chip em{font-size:12px}
+  .filters .note{display:none}
+}
+</style>
+<script src="../assets/clean-scroll.js" defer></script>
+<script src="../assets/local-links.js"></script>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../" aria-label="JinjaGames">
+      <img src="../brand-mark.png" alt="" onerror="this.style.display='none'">
+      JinjaGames
+    </a>
+    <ul class="nav-links">
+      <li><a class="active" href="./"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a></li>
+      <li><a href="../#studio"><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a></li>
+      <li><a href="../#faq"><span class="en i">FAQ</span><span class="tr i">SSS</span></a></li>
+      <li><a href="../#contact"><span class="en i">Contact</span><span class="tr i">İletişim</span></a></li>
+    </ul>
+    <div class="nav-end">
+      <div class="lang-menu">
+        <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
+        <div class="lang-popover" id="language-menu" role="menu">
+          <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
+          <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
+        </div>
+      </div>
+      <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
+        <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span><span class="en i">Games</span><span class="tr i">Oyunlar</span></span></nav>
+      <span class="label"><span class="en i">Games and apps · JinjaGames</span><span class="tr i">Oyunlar ve uygulamalar · JinjaGames</span></span>
+      <h1 class="en" style="margin-top:18px">Every world, <span class="hl">in one place.</span></h1>
+      <h1 class="tr" style="margin-top:18px">Bütün dünyalar, <span class="hl">tek yerde.</span></h1>
+      <p class="lede en">What each project is, where it stands today and where you can get it. Statuses on this page follow the Steam store and the builds themselves.</p>
+      <p class="lede tr">Her projenin ne olduğu, bugün nerede durduğu ve nereden alınabileceği. Bu sayfadaki durumlar Steam mağazasını ve sürümlerin kendisini izler.</p>
+      <div class="counts">
+        <div><i style="background:#45D49A"></i><b>1</b><span class="en i">Out now</span><span class="tr i">Çıktı</span></div>
+        <div><i style="background:#F08A7E"></i><b>1</b><span class="en i">On Steam wishlist</span><span class="tr i">Steam istek listesinde</span></div>
+        <div><i style="background:#E3B341"></i><b>1</b><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="filters" role="toolbar" aria-label="Filter games">
+    <div class="wrap">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true"><span class="en i">All</span><span class="tr i">Hepsi</span> <em>3</em></button>
+      <button class="chip" type="button" data-filter="steam" aria-pressed="false">Steam <em>2</em></button>
+      <button class="chip" type="button" data-filter="out" aria-pressed="false"><span class="en i">Out now</span><span class="tr i">Çıktı</span> <em>1</em></button>
+      <button class="chip" type="button" data-filter="soon" aria-pressed="false"><span class="en i">Coming</span><span class="tr i">Yolda</span> <em>2</em></button>
+      <button class="chip" type="button" data-filter="mobile" aria-pressed="false"><span class="en i">Mobile</span><span class="tr i">Mobil</span> <em>1</em></button>
+      <span class="note"><span class="en i">Updated October 2026</span><span class="tr i">Ekim 2026 itibarıyla</span></span>
+    </div>
+  </div>
+
+  <div class="wrap list" id="list">
+
+    <!-- CYBER ACADEMY -->
+    <article class="game g-cyber rv" id="cyber" data-tags="all steam out">
+      <a class="media" href="../cyberacademy/" aria-label="Cyber Academy">
+        <video class="lazyvid" data-src="../cyberacademy/media/darknet-loop.mp4" muted loop playsinline preload="none" poster="../cyberacademy/img/darknet-cover-t.webp" aria-hidden="true"></video>
+        <span class="sheen" aria-hidden="true"></span>
+      </a>
+      <div class="info">
+        <span class="num">01</span><span class="kind en i">Cybersecurity game</span><span class="kind tr i">Siber güvenlik oyunu</span>
+        <h2>Cyber Academy</h2>
+        <p class="pitch en"><b>Learn security by doing it, then put it to work.</b> Hands on modules teach inside a living virtual OS. The Dark Net is the online side: take contracts, break into fictional targets, defend your own machine and trace whoever came for it.</p>
+        <p class="pitch tr"><b>Güvenliği yaparak öğren, sonra sahada kullan.</b> Uygulamalı modüller yaşayan bir sanal işletim sisteminin içinde öğretir. Karanlık Ağ ise çevrimiçi taraf: sözleşme al, kurgusal hedeflere sız, kendi makineni savun ve sana geleni iz sürerek bul.</p>
+        <dl class="facts">
+          <div><dt><span class="en i">Status</span><span class="tr i">Durum</span></dt><dd><span class="en i">Steam Early Access, since 11 Sep 2026</span><span class="tr i">Steam Erken Erişim, 11 Eylül 2026'dan beri</span></dd></div>
+          <div><dt>Platform</dt><dd>Windows, macOS, SteamOS + Linux</dd></div>
+          <div><dt><span class="en i">Players</span><span class="tr i">Oyuncu</span></dt><dd><span class="en i">Single player and online PvP</span><span class="tr i">Tek oyunculu ve çevrimiçi PvP</span></dd></div>
+          <div><dt><span class="en i">Languages</span><span class="tr i">Diller</span></dt><dd><span class="en i">25 interface languages</span><span class="tr i">25 arayüz dili</span></dd></div>
+        </dl>
+        <ul class="hi">
+          <li><span class="en i">A curriculum of 25 modules; the first are playable and more arrive through updates.</span><span class="tr i">25 modüllük bir müfredat; ilkleri oynanabiliyor, gerisi güncellemelerle geliyor.</span></li>
+          <li><span class="en i">Clans, forums, a contract market, ZeroBank and a branching skill tree.</span><span class="tr i">Klanlar, forumlar, sözleşme pazarı, ZeroBank ve dallanan yetenek ağacı.</span></li>
+          <li><span class="en i">Steam Achievements and Steam Cloud saves.</span><span class="tr i">Steam Başarımları ve Steam Cloud kayıtları.</span></li>
+        </ul>
+        <div class="acts">
+          <a class="btn p" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Get it on Steam</span><span class="tr i">Steam'de al</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="../cyberacademy/"><span class="en i">Game page</span><span class="tr i">Oyun sayfası</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- LOCARD -->
+    <article class="game g-noir flip rv" id="locard" data-tags="all steam soon">
+      <a class="media" href="../locard/" aria-label="Locard">
+        <video class="lazyvid" data-src="../locard/media/locard-loop.mp4" muted loop playsinline preload="none" poster="../locard/img/hero-sm.webp" aria-hidden="true"></video>
+        <span class="sheen" aria-hidden="true"></span>
+      </a>
+      <div class="info">
+        <span class="num">02</span><span class="kind en i">Detective game, solo or together</span><span class="kind tr i">Tek ya da birlikte dedektif oyunu</span>
+        <h2>Locard</h2>
+        <p class="pitch en"><b>Everybody is hiding something, but not every secret is a murder.</b> A first person case in the coastal city of Meridian: read the scene, catch the contradiction, build the chain on your board, and drive the city yourself.</p>
+        <p class="pitch tr"><b>Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir.</b> Kıyı kenti Meridian'da birinci şahıs bir dosya: olay yerini oku, çelişkiyi yakala, zinciri panonda kur ve şehirde aracı kendin sür.</p>
+        <dl class="facts">
+          <div><dt><span class="en i">Status</span><span class="tr i">Durum</span></dt><dd><span class="en i">Planned for Q1 2027, Early Access</span><span class="tr i">2027 ilk çeyrek, Erken Erişim planlanıyor</span></dd></div>
+          <div><dt>Platform</dt><dd><span class="en i">Windows · macOS planned</span><span class="tr i">Windows · macOS planlanıyor</span></dd></div>
+          <div><dt><span class="en i">Players</span><span class="tr i">Oyuncu</span></dt><dd><span class="en i">Solo, or 1 to 4 players online</span><span class="tr i">Tek başına ya da 1 ile 4 kişi çevrimiçi</span></dd></div>
+          <div><dt><span class="en i">Language</span><span class="tr i">Dil</span></dt><dd><span class="en i">Turkish · English planned</span><span class="tr i">Türkçe · İngilizce planlanıyor</span></dd></div>
+        </dl>
+        <ul class="hi">
+          <li><span class="en i">Case 01, The Last Bid: one complete case that can close in seven different ways.</span><span class="tr i">Dosya 01, Son Teklif: yedi farklı şekilde kapanabilen eksiksiz bir vaka.</span></li>
+          <li><span class="en i">Ten places to walk into, 18 characters and 64 records to examine.</span><span class="tr i">Girilecek on mekân, 18 karakter ve incelenecek 64 kayıt.</span></li>
+          <li><span class="en i">Shared evidence board and built in voice chat; big decisions are a vote.</span><span class="tr i">Ortak delil panosu ve yerleşik sesli sohbet; büyük kararlar oylamayla.</span></li>
+        </ul>
+        <div class="acts">
+          <a class="btn p sx-live" data-steam-link href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="../locard/"><span class="en i">Game page</span><span class="tr i">Oyun sayfası</span></a>
+          <a class="btn g" href="../locard/#trailer"><span class="en i">Trailer</span><span class="tr i">Fragman</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- DAYPOT -->
+    <article class="game g-warm rv" id="daypot" data-tags="all soon mobile">
+      <a class="media" href="../daypot/" aria-label="DayPot">
+        <img class="pot" src="../daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy">
+        <span class="sheen" aria-hidden="true"></span>
+      </a>
+      <div class="info">
+        <span class="num">03</span><span class="kind en i">Kitchen assistant</span><span class="kind tr i">Mutfak yardımcısı</span>
+        <h2>DayPot</h2>
+        <p class="pitch en"><b>What should I cook today?</b> Mark what is in your kitchen and DayPot shows you what you can actually make right now, with what is missing spelled out for the recipes you nearly have.</p>
+        <p class="pitch tr"><b>Bugün ne pişirsem?</b> Dolabındakini işaretle, DayPot şu anda gerçekten ne yapabileceğini göstersin; az kalan tariflerde neyin eksik olduğunu da açıkça yazsın.</p>
+        <dl class="facts">
+          <div><dt><span class="en i">Status</span><span class="tr i">Durum</span></dt><dd><span class="en i">In development, Google Play planned</span><span class="tr i">Yapımda, Google Play planlanıyor</span></dd></div>
+          <div><dt>Platform</dt><dd>Android</dd></div>
+          <div><dt><span class="en i">Recipes</span><span class="tr i">Tarif</span></dt><dd><span class="en i">250+, written by hand</span><span class="tr i">250+, elle yazılmış</span></dd></div>
+          <div><dt><span class="en i">Account</span><span class="tr i">Hesap</span></dt><dd><span class="en i">None. Works offline, no ads</span><span class="tr i">Yok. İnternetsiz, reklamsız</span></dd></div>
+        </dl>
+        <ul class="hi">
+          <li><span class="en i">Cooking mode keeps the screen awake and reads the steps aloud.</span><span class="tr i">Pişirme modu ekranı açık tutar, adımları sesli okur.</span></li>
+          <li><span class="en i">A shopping list that knows amounts and units.</span><span class="tr i">Miktarı ve birimi bilen bir alışveriş listesi.</span></li>
+          <li><span class="en i">Your voice is never recorded and never reaches a server.</span><span class="tr i">Sesin kaydedilmez ve hiçbir sunucuya gitmez.</span></li>
+        </ul>
+        <div class="acts">
+          <a class="btn p" href="../daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="../daypot/gizlilik.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a>
+        </div>
+      </div>
+    </article>
+
+    <p class="empty" id="empty" hidden><span class="en i">Nothing here with that filter yet.</span><span class="tr i">Bu filtreyle henüz bir şey yok.</span></p>
+  </div>
+
+  <!-- KARŞILAŞTIRMA -->
+  <section class="blk" id="compare" style="padding-top:40px">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="label"><span class="en i">At a glance</span><span class="tr i">Bir bakışta</span></span>
+        <h2 class="en">Side by <span class="hl">side.</span></h2>
+        <h2 class="tr">Yan <span class="hl">yana.</span></h2>
+      </div>
+      <div class="tablewrap rv">
+        <table>
+          <thead><tr><th></th><th class="c-cy">Cyber Academy</th><th class="c-no">Locard</th><th class="c-wa">DayPot</th></tr></thead>
+          <tbody>
+            <tr><th><span class="en i">Status</span><span class="tr i">Durum</span></th><td><span class="dot" style="background:#45D49A"></span><span class="en i">Out now, Early Access</span><span class="tr i">Çıktı, Erken Erişim</span></td><td><span class="dot" style="background:#F08A7E"></span><span class="en i">Q1 2027, wishlist open</span><span class="tr i">2027 Q1, istek listesi açık</span></td><td><span class="dot" style="background:#E3B341"></span><span class="en i">In development</span><span class="tr i">Yapımda</span></td></tr>
+            <tr><th><span class="en i">Genre</span><span class="tr i">Tür</span></th><td><span class="en i">Cybersecurity, strategy</span><span class="tr i">Siber güvenlik, strateji</span></td><td><span class="en i">Detective, mystery</span><span class="tr i">Dedektif, gizem</span></td><td><span class="en i">Kitchen assistant</span><span class="tr i">Mutfak yardımcısı</span></td></tr>
+            <tr><th>Platform</th><td>Windows, macOS, SteamOS + Linux</td><td><span class="en i">Windows (macOS planned)</span><span class="tr i">Windows (macOS planlanıyor)</span></td><td>Android</td></tr>
+            <tr><th><span class="en i">Players</span><span class="tr i">Oyuncu</span></th><td><span class="en i">Single player, online PvP</span><span class="tr i">Tek oyunculu, çevrimiçi PvP</span></td><td><span class="en i">1 to 4, online together</span><span class="tr i">1 ile 4 kişi, çevrimiçi birlikte</span></td><td><span class="en i">Not a game</span><span class="tr i">Oyun değil</span></td></tr>
+            <tr><th><span class="en i">Languages</span><span class="tr i">Diller</span></th><td><span class="en i">25 interface languages</span><span class="tr i">25 arayüz dili</span></td><td><span class="en i">Turkish, English planned</span><span class="tr i">Türkçe, İngilizce planlanıyor</span></td><td>&middot;</td></tr>
+            <tr><th><span class="en i">Internet</span><span class="tr i">İnternet</span></th><td><span class="en i">Required</span><span class="tr i">Gerekli</span></td><td><span class="en i">Online to play together</span><span class="tr i">Birlikte oynamak için çevrimiçi</span></td><td><span class="en i">Not needed</span><span class="tr i">Gerekmez</span></td></tr>
+            <tr><th><span class="en i">Where</span><span class="tr i">Nerede</span></th><td><a class="c-cy" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a></td><td><a class="c-no" href="https://store.steampowered.com/app/5296440/Locard/" target="_blank" rel="noopener">Steam ↗</a></td><td><span class="en i">Google Play, later</span><span class="tr i">Google Play, ileride</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- KAPI -->
+  <section class="blk" style="padding-top:20px">
+    <div class="wrap">
+      <a class="portal rv" href="../banebender/" id="portal">
+        <div>
+          <span class="pk"><span class="en i">Beyond the studio · Minecraft</span><span class="tr i">Stüdyonun dışında · Minecraft</span></span>
+          <h2 class="en">Step through to <b>BaneBender's</b> mods.</h2>
+          <h2 class="tr"><b>BaneBender</b>'ın modlarına geç.</h2>
+          <p class="en">Minecraft mods: tower raids, mythic bosses, a parasite outbreak, a horror dream and a lot more. They get a world of their own, with a full wiki for every one.</p>
+          <p class="tr">Minecraft modları: kule baskınları, mitolojik boss'lar, bir parazit salgını, bir korku rüyası ve çok daha fazlası. Onlara kendi dünyalarını ayırdık; her biri için eksiksiz bir wiki.</p>
+          <span class="btn"><span class="en i">Open the wiki</span><span class="tr i">Wiki'yi aç</span> <span class="arw">&rarr;</span></span>
+        </div>
+        <div class="cubewrap" aria-hidden="true">
+          <div class="cubefloat">
+            <div class="cube"><i class="f1 side"></i><i class="f2 side"></i><i class="f3 side"></i><i class="f4 side"></i><i class="f5 top"></i><i class="f6 bot"></i></div>
+            <div class="cubeshadow"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>&copy; <span id="yr"></span> JinjaGames · Ankara, Türkiye</div>
+    <div><a href="../">&larr; JinjaGames</a> · <a href="../banebender/">BaneBender</a> · <a href="../privacy.html"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
+  </div>
+</footer>
+
+<div class="dock" id="dock" role="navigation" aria-label="Sections">
+  <a class="on" href="./"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg><span class="en i">Games</span><span class="tr i">Oyunlar</span></a>
+  <a href="../#studio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9.5 20v-5.5h5V20"/></svg><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
+  <a href="../#faq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.7"/><path d="M12 16.9v.2"/></svg><span class="en i">FAQ</span><span class="tr i">SSS</span></a>
+  <a href="../#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var d=document, root=d.documentElement;
+  function $(s,c){return (c||d).querySelector(s);}
+  function $$(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s));}
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+  /* dil */
+  function closeLangMenus(){ $$('.lang-menu.open').forEach(function(m){ m.classList.remove('open'); var t=$('[data-lang-toggle]',m); if(t) t.setAttribute('aria-expanded','false'); }); }
+  function paintLang(l){ $$('[data-lang-set]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set')===l); }); $$('[data-current-lang]').forEach(function(el){ el.textContent=l.toUpperCase(); }); }
+  $$('[data-lang-set]').forEach(function(b){ b.addEventListener('click',function(){ var l=b.getAttribute('data-lang-set'); root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus(); }); });
+  paintLang(root.getAttribute('data-lang')||'en');
+  $$('[data-lang-toggle]').forEach(function(t){ t.addEventListener('click',function(e){ var m=t.closest('.lang-menu'), o=!m.classList.contains('open'); closeLangMenus(); if(o){ m.classList.add('open'); t.setAttribute('aria-expanded','true'); } e.stopPropagation(); }); });
+  d.addEventListener('click',function(e){ if(!e.target.closest('.lang-menu')) closeLangMenus(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLangMenus(); });
+
+  /* tema */
+  $$('[data-theme-toggle]').forEach(function(b){ b.addEventListener('click',function(){ var t=root.getAttribute('data-theme')==='dark'?'light':'dark'; root.setAttribute('data-theme',t); store('jg_theme',t); }); });
+
+  /* nav gölgesi */
+  var nav=$('#nav');
+  window.addEventListener('scroll',function(){ nav.classList.toggle('stuck',(window.scrollY||window.pageYOffset)>10); },{passive:true});
+
+  /* belirme */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.06,rootMargin:'0px 0px -50px 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el); });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  /* videolar yalnız görünürken yüklenip oynar */
+  $$('.lazyvid[data-src]').forEach(function(v){
+    function load(){ if(!v.src){ v.src=v.getAttribute('data-src'); } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) load(); else if(v.src) v.pause(); }); },{rootMargin:'200px 0px'}).observe(v);
+    } else load();
+  });
+
+  /* fare ile hafif eğim + ışık */
+  var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(fine&&!reduce){
+    $$('.media').forEach(function(m){
+      m.addEventListener('mousemove',function(e){
+        var r=m.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+        m.style.transform='perspective(1000px) rotateY('+((x-.5)*6)+'deg) rotateX('+((.5-y)*5)+'deg)';
+        m.style.setProperty('--mx',(x*100)+'%'); m.style.setProperty('--my',(y*100)+'%');
+      });
+      m.addEventListener('mouseleave',function(){ m.style.transform=''; });
+    });
+  }
+
+  /* filtre */
+  var chips=$$('[data-filter]'), games=$$('.game'), empty=$('#empty');
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var f=c.getAttribute('data-filter'), shown=0;
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', x===c?'true':'false'); });
+      games.forEach(function(g){ var on=(' '+g.getAttribute('data-tags')+' ').indexOf(' '+f+' ')>-1; g.hidden=!on; if(on){ shown++; g.classList.add('in'); } });
+      empty.hidden=shown>0;
+    });
+  });
+
+  var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

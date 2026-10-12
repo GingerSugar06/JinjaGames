@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8" />
+<script>
+if ((location.protocol === 'https:' || location.protocol === 'http:') && location.pathname.endsWith('/index.html')) {
+  history.replaceState(history.state, '', location.pathname.replace(/index\.html$/, '') + location.search + location.hash);
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>BaneBender · Minecraft Mods Wiki</title>
+<meta name="description" content="The wiki for BaneBender's Minecraft mods for Forge 1.20.1: Pale Contagion, Frontier Structures, Pantheon of Legends, Towers, Elemental Arcana, Power Generators and more. Bosses, items, commands and how everything works." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jinjagames.com/banebender/" />
+<meta name="theme-color" content="#070b12" />
+<link rel="icon" type="image/webp" href="img/frontier-structures/logo-s.webp" />
+<meta property="og:title" content="BaneBender · Minecraft Mods Wiki" />
+<meta property="og:description" content="17 Minecraft mods for Forge 1.20.1: bosses, towers, myths, magic, machines and a parasite outbreak. Every one explained." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jinjagames.com/banebender/" />
+<meta property="og:image" content="https://jinjagames.com/banebender/img/frontier-structures/logo.webp" />
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/pixelify-sans-var.woff2" crossorigin />
+<link rel="stylesheet" href="../assets/fonts.css" />
+<link rel="stylesheet" href="app.css" />
+<script>
+(function(){
+  var d=document.documentElement;
+  try{
+    var l=localStorage.getItem('jg_lang'); if(l!=='tr'&&l!=='en') l='en';
+    d.setAttribute('data-lang',l); d.lang=l;
+    if(sessionStorage.getItem('bb_seen')) d.classList.add('seen');
+  }catch(e){}
+})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"BaneBender Minecraft Mods Wiki","url":"https://jinjagames.com/banebender/","about":{"@type":"Person","name":"BaneBender","sameAs":["https://www.curseforge.com/members/banebender/projects","https://www.instagram.com/banebender/","https://www.youtube.com/@banebender"]},"isPartOf":{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"}}
+</script>
+<script src="../assets/local-links.js"></script>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="stars" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true">
+  <div class="boot-in">
+    <div class="boot-cube"><i></i></div>
+    <div class="boot-t"><span class="en i">Generating terrain&hellip;</span><span class="tr i">Arazi oluşturuluyor&hellip;</span></div>
+    <div class="boot-bar"><i></i></div>
+  </div>
+</div>
+
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="logo" href="#/" aria-label="BaneBender"><i class="blk" aria-hidden="true"></i>BaneBender</a>
+    <nav aria-label="Sections">
+      <a href="#mods"><span class="en i">Mods</span><span class="tr i">Modlar</span></a>
+      <a href="#worlds"><span class="en i">Worlds</span><span class="tr i">Dünyalar</span></a>
+      <a href="#about"><span class="en i">About</span><span class="tr i">Hakkında</span></a>
+    </nav>
+    <span class="sp"></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="tr" aria-pressed="false">TR</button>
+    </div>
+    <a class="home" href="../games/">&larr; JinjaGames</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="hero">
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="kicker"><i></i><span class="en i">MINECRAFT MODS · FORGE 1.20.1</span><span class="tr i">MINECRAFT MODLARI · FORGE 1.20.1</span></span>
+        <h1 class="title" id="title" aria-label="BaneBender">BaneBender</h1>
+        <p class="lede en">Bosses that need a trick to kill, towers that flood with lava, Turkic and Greek myths, a parasite outbreak, a horror dream, and machines that run on the sun. Seventeen mods, every one explained here.</p>
+        <p class="lede tr">Yenmek için hile isteyen boss&rsquo;lar, lavla dolan kuleler, Türk ve Yunan mitleri, bir parazit salgını, bir korku rüyası ve güneşle çalışan makineler. On yedi mod, her biri burada anlatılıyor.</p>
+        <div class="hero-stats" id="stats"></div>
+        <div class="cta">
+          <a class="mcbtn green" href="#mods"><span class="en i">Browse the mods</span><span class="tr i">Modlara göz at</span></a>
+          <a class="mcbtn" href="https://www.curseforge.com/members/banebender/projects" target="_blank" rel="noopener">CurseForge ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true"><div class="rtrack" id="ribbon"></div></div>
+
+  <section class="sec" id="mods">
+    <div class="wrap">
+      <div class="sh rv">
+        <div>
+          <span class="eyebrow"><span class="en i">The mod list</span><span class="tr i">Mod listesi</span></span>
+          <h2 class="en">Pick a <b>mod.</b></h2>
+          <h2 class="tr">Bir <b>mod</b> seç.</h2>
+        </div>
+        <p class="en">Every card opens a full page: what it adds, how it works, the bosses and how to beat them, the items straight from the mod&rsquo;s own textures, and links to download.</p>
+        <p class="tr">Her kart eksiksiz bir sayfa açar: ne eklediği, nasıl çalıştığı, boss&rsquo;lar ve nasıl yenildikleri, doğrudan modun kendi dokularından eşyalar ve indirme bağlantıları.</p>
+      </div>
+      <div class="tools rv">
+        <label class="search"><span class="sr">Search</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="q" type="search" autocomplete="off" placeholder="Search mods, bosses, items" />
+          <kbd>/</kbd>
+        </label>
+        <div class="cats" id="cats" role="toolbar" aria-label="Categories"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="nores" id="nores"><span class="en i">Nothing matched. Try another word.</span><span class="tr i">Eşleşen bir şey yok. Başka bir kelime dene.</span></p>
+      <noscript>
+        <ul>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/pale-contagion">Pale Contagion</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/frontier-structures">Frontier Structures</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/pantheon-of-legends">Pantheon of Legends</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/towers">Towers</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/elemental-arcana">Elemental Arcana</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/power-generators">Power Generators</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/all-irons">All irons</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/hard-mobs-and-bosses">Hard Mobs and bosses</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/real-animals">Real Animals</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/variantide">Variantide</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/seraph">Seraph</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/card-lootbags">Card Loot bags</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/gilded-gambit">Gilded Gambit</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/chest-hauler">Chest Hauler</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/uncraft-and-unfurnace">Uncraft and Unfurnace</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/veinminer-all-types">Veinminer All Types</a></li>
+          <li><a href="https://www.curseforge.com/minecraft/mc-mods/flesh-tanner">Flesh Tanner</a></li>
+        </ul>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="sec" id="worlds" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sh rv">
+        <div>
+          <span class="eyebrow"><span class="en i">Where to start</span><span class="tr i">Nereden başlamalı</span></span>
+          <h2 class="en">Pick a <b>world.</b></h2>
+          <h2 class="tr">Bir <b>dünya</b> seç.</h2>
+        </div>
+      </div>
+      <div class="biomes" id="biomes"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="rv">
+        <span class="eyebrow"><span class="en i">The modder</span><span class="tr i">Modcu</span></span>
+        <h2>BaneBender</h2>
+        <p class="en">BaneBender makes Minecraft mods for Forge 1.20.1 and publishes them on CurseForge. The mods are written in English and Turkish, and each one is built to stand on its own: most need no other mods or libraries.</p>
+        <p class="tr">BaneBender, Forge 1.20.1 için Minecraft modları yapıyor ve CurseForge&rsquo;da yayımlıyor. Modlar İngilizce ve Türkçe yazılıyor ve her biri kendi ayakları üstünde duracak şekilde kuruluyor: çoğu başka bir moda ya da kütüphaneye ihtiyaç duymuyor.</p>
+        <p class="en">This wiki lives on the JinjaGames site. Everything on these pages comes from the mods&rsquo; own descriptions and files: names, numbers and hints are what the game itself says.</p>
+        <p class="tr">Bu wiki JinjaGames sitesinde duruyor. Bu sayfalardaki her şey modların kendi açıklamalarından ve dosyalarından geliyor: adlar, sayılar ve ipuçları oyunun kendisinin söyledikleri.</p>
+      </div>
+      <div class="socials rv">
+        <a class="soc" style="--sc:#f16436" href="https://www.curseforge.com/members/banebender/projects" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13.5c-1.6 1.2-2.4 2.6-2.4 4.2 0 1.7 1.2 3 3 3.5V17H8.5v-2.3c1.4-.4 2.1-1.2 2.1-2.4 0-1.5-1.5-2.3-4-2.6C4.5 9.4 3.3 8.5 3 7zm14.5 0H21c-.2 2.5-1.5 3.9-3.5 4.3V7z"/></svg></span>
+          <span><b>CurseForge</b><span class="en i">All projects and downloads</span><span class="tr i">Bütün projeler ve indirmeler</span></span><span class="ar">&rarr;</span>
+        </a>
+        <a class="soc" style="--sc:#e1306c" href="https://www.instagram.com/banebender/" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></span>
+          <span><b>Instagram</b><span>@banebender</span></span><span class="ar">&rarr;</span>
+        </a>
+        <a class="soc" style="--sc:#e62117" href="https://www.youtube.com/@banebender" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-3.2.5-4.8s-.1-3.2-.5-4.8zM9.7 15V9l5.8 3-5.8 3z"/></svg></span>
+          <span><b>YouTube</b><span>@banebender</span></span><span class="ar">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr"></span> BaneBender · <span class="en i">Hosted by</span><span class="tr i">Barındıran:</span> <a href="../">JinjaGames</a></span>
+    <span><span class="en i">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</span><span class="tr i">Resmî bir Minecraft ürünü değildir. Mojang ya da Microsoft tarafından onaylanmamıştır, onlarla bağlantılı değildir.</span></span>
+  </div>
+</footer>
+
+<div id="page" role="dialog" aria-modal="true" aria-label="Mod page"></div>
+<div class="wipe" id="wipe" aria-hidden="true"></div>
+<div class="tip" id="tip" role="tooltip"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image"><button class="x" type="button" aria-label="Close">&times;</button><button class="pv" type="button" aria-label="Previous">&lsaquo;</button><img alt="" /><button class="nx" type="button" aria-label="Next">&rsaquo;</button><span class="cnt"></span></div>
+
+<script src="data/generated.js"></script>
+<script src="data/mods.js"></script>
+<script src="app.js"></script>
+<script src="vendor/three.min.js"></script>
+<script src="data/hero-sprites.js"></script>
+<script src="scene.js"></script>
+</body>
+</html>

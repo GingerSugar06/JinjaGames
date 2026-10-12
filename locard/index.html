@@ -31,7 +31,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-sm.webp 960w, img/hero.webp 1657w" imagesizes="100vw" fetchpriority="high" />
 <link rel="stylesheet" href="../assets/fonts.css" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","mainEntityOfPage":"https://jinjagames.com/locard/","image":"https://jinjagames.com/locard/locard-og.jpg","description":"A first person detective game. Work a branching murder case in the city of Meridian on foot and by car, build an evidence board, catch contradictions in testimony and reach one of seven outcomes, alone or with up to three friends.","slogan":"Every contact leaves a trace.","author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"gamePlatform":["PC","Windows","macOS"],"applicationCategory":"Game","genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"],"numberOfPlayers":{"@type":"QuantitativeValue","minValue":1,"maxValue":4},"inLanguage":["tr","en"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Locard","item":"https://jinjagames.com/locard/"}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","mainEntityOfPage":"https://jinjagames.com/locard/","image":"https://jinjagames.com/locard/locard-og.jpg","description":"A first person detective game. Work a branching murder case in the city of Meridian on foot and by car, build an evidence board, catch contradictions in testimony and reach one of seven outcomes, alone or with up to three friends.","slogan":"Every contact leaves a trace.","sameAs":["https://store.steampowered.com/app/5296440/Locard/"],"trailer":{"@type":"VideoObject","name":"Locard gameplay trailer","contentUrl":"https://jinjagames.com/locard/media/locard-trailer.mp4","thumbnailUrl":"https://jinjagames.com/locard/img/keyart.webp","uploadDate":"2026-10-11","description":"Gameplay trailer for Locard, a detective game for one to four players."},"author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"},"gamePlatform":["PC","Windows"],"applicationCategory":"Game","genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"],"numberOfPlayers":{"@type":"QuantitativeValue","minValue":1,"maxValue":4},"inLanguage":["tr"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Locard","item":"https://jinjagames.com/locard/"}]}]}
 </script>
 
 <!-- Steam durumu: tek yerden yönetilir (assets/steam.js). Senkron yüklenir. -->
@@ -521,8 +521,25 @@ html,body{overflow-x:hidden;overflow-x:clip}
   .brand{min-width:44px;justify-content:center}
   .crumb a::after{left:-10px;right:-10px}
 }
+
+/* ---------------- FRAGMAN ---------------- */
+.reel{position:relative;aspect-ratio:16/9;background:#0A0807;border:1px solid var(--line-2);box-shadow:var(--shadow-2);overflow:hidden}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0A0807}
+.reel::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 40%,rgba(0,0,0,.55));transition:opacity .4s}
+.reel-play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:14px;padding:14px 22px 14px 14px;background:rgba(10,8,7,.72);color:#F3EFEA;border:1px solid rgba(243,239,234,.28);cursor:pointer;font-family:'Courier Prime',monospace;font-size:15px;letter-spacing:.06em;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .35s var(--ease),opacity .3s,border-color .25s}
+.reel-play i{width:46px;height:46px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 0 0 8px rgba(176,59,50,.18)}
+.reel-play i::before{content:"";margin-left:4px;border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.reel-play em{font-style:normal;opacity:.6;font-size:12px}
+.reel-play:hover{transform:translate(-50%,-50%) scale(1.04);border-color:var(--accent)}
+.reel-tag{position:absolute;z-index:2;left:16px;top:14px;font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:.2em;color:rgba(243,239,234,.75);background:rgba(10,8,7,.6);padding:5px 9px;border:1px solid rgba(243,239,234,.18);transform:rotate(-1.5deg);transition:opacity .3s}
+.reel.playing::before,.reel.playing .reel-play,.reel.playing .reel-tag{opacity:0;pointer-events:none}
+.btn svg.play{width:16px;height:16px;fill:currentColor;stroke:none}
+.gal-thumbs{flex-wrap:wrap;justify-content:flex-end;max-width:560px}
+.gal-thumbs .thumb{width:96px}
+@media(max-width:680px){.reel-play{padding:10px 16px 10px 10px;font-size:13px}.reel-play i{width:38px;height:38px}.reel-play em{display:none}.gal-thumbs{flex-wrap:nowrap;max-width:none}.reel-tag{font-size:12px}}
 </style>
 <script src="../assets/clean-scroll.js" defer></script>
+<script src="../assets/local-links.js"></script>
 </head>
 <body>
 
@@ -534,7 +551,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     </a>
     <div class="nav-end">
       <a class="nav-wl sx-live" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist</span><span class="tr i">İstek listesi</span></a>
-      <a class="back" href="../">&larr; <span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+      <a class="back" href="../games/">&larr; <span class="en i">All games</span><span class="tr i">Tüm oyunlar</span></a>
       <div class="lang-menu">
         <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
         <div class="lang-popover" id="language-menu" role="menu">
@@ -563,7 +580,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <nav class="crumb fx" style="--d:50" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
+      <nav class="crumb fx" style="--d:50" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><a href="../games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a><span aria-hidden="true">/</span><span>Locard</span></nav>
       <div class="fileline fx" style="--d:120">
         <span class="tag"><span class="en i">Regional Investigation Bureau · File 01</span><span class="tr i">Bölgesel Soruşturma Bürosu · Dosya 01</span></span>
         <span class="stamp"><span class="en i">Open investigation</span><span class="tr i">Açık soruşturma</span></span>
@@ -576,7 +593,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
       <div class="cta fx" style="--d:600">
         <span class="sx-live" style="display:contents"><a class="btn p big" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span></a></span>
         <span class="sx-soon" style="display:contents"><a class="btn soon big" href="#wishlist"><i class="pulse" aria-hidden="true"></i><span class="en i">Steam page opens soon</span><span class="tr i">Steam sayfası yakında</span></a></span>
-        <a class="btn g big" href="#case"><span class="en i">Read the file</span><span class="tr i">Dosyayı oku</span> <span class="arw">&rarr;</span></a>
+        <a class="btn g big" href="#trailer"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg><span class="en i">Watch the trailer</span><span class="tr i">Fragmanı izle</span></a>
       </div>
     </div>
   </div>
@@ -584,8 +601,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
     <div class="wrap ledger-in">
       <div><b><span class="en i">Release</span><span class="tr i">Çıkış</span></b><span class="en i">Early Access · Q1 2027</span><span class="tr i">Erken Erişim · 2027 ilk çeyrek</span></div>
       <div><b><span class="en i">Players</span><span class="tr i">Oyuncu</span></b><span class="en i">Solo, or up to four</span><span class="tr i">Tek, ya da dört kişiye kadar</span></div>
-      <div><b><span class="en i">Platform</span><span class="tr i">Platform</span></b><span>Windows, macOS</span></div>
-      <div><b><span class="en i">Language</span><span class="tr i">Dil</span></b><span class="en i">Turkish, English</span><span class="tr i">Türkçe, İngilizce</span></div>
+      <div><b><span class="en i">Platform</span><span class="tr i">Platform</span></b><span class="en i">Windows · macOS planned</span><span class="tr i">Windows · macOS planlanıyor</span></div>
+      <div><b><span class="en i">Language</span><span class="tr i">Dil</span></b><span class="en i">Turkish · English planned</span><span class="tr i">Türkçe · İngilizce planlanıyor</span></div>
     </div>
   </div>
   </header>
@@ -633,6 +650,23 @@ html,body{overflow-x:hidden;overflow-x:clip}
     </div>
   </section>
 
+  <!-- FRAGMAN -->
+  <section id="trailer" class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <h2 class="en">The city, <span class="hl">in motion.</span></h2>
+        <h2 class="tr">Şehir, <span class="hl">hareket hâlinde.</span></h2>
+        <p class="en">The gameplay trailer, cut from the current build. No spoilers: nothing in it gives the case away.</p>
+        <p class="tr">Mevcut sürümden kesilmiş oynanış fragmanı. Spoiler yok: içindeki hiçbir şey vakayı ele vermiyor.</p>
+      </div>
+      <div class="reel rv" id="reel">
+        <video id="reelvid" src="media/locard-trailer.mp4" poster="img/keyart.webp" preload="none" playsinline controls></video>
+        <button class="reel-play" type="button" id="reelplay"><i aria-hidden="true"></i><span class="en i">Play the trailer</span><span class="tr i">Fragmanı oynat</span><em>0:33</em></button>
+        <span class="reel-tag" aria-hidden="true">EXHIBIT · TRAILER</span>
+      </div>
+    </div>
+  </section>
+
   <!-- GALERİ -->
   <section id="gallery" class="blk">
     <div class="wrap">
@@ -649,7 +683,9 @@ html,body{overflow-x:hidden;overflow-x:clip}
           <img src="img/shot-bureau.webp" width="1600" height="900" alt="Team members in the Bureau elevator" decoding="async" />
           <img src="img/shot-menu.webp" width="1580" height="762" alt="The Locard main menu: a desk lamp, a typewriter and an evidence board" decoding="async" />
           <img src="img/shot-files.webp" width="1579" height="881" alt="The case files screen, with a field for an eight character room code" decoding="async" />
-          <span class="gal-count" id="galcount" aria-live="polite">01 / 05</span>
+          <img src="img/shot-pistols.webp" width="1600" height="900" alt="The Bureau firing range, with service pistols laid out on the counter" decoding="async" loading="lazy" />
+          <img src="img/shot-rifle.webp" width="1600" height="900" alt="First person view on the firing range, holding a rifle" decoding="async" loading="lazy" />
+          <span class="gal-count" id="galcount" aria-live="polite">01 / 07</span>
           <div class="gal-nav">
             <button type="button" id="galprev" aria-label="Previous frame"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
             <button type="button" id="galnext" aria-label="Next frame"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
@@ -662,6 +698,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
             <p class="en">The Bureau lift, and the team you have known for years.</p><p class="tr">Büro asansörü ve yıllardır tanıdığın ekip.</p>
             <p class="en">The Bureau after hours.</p><p class="tr">Mesai sonrası Büro.</p>
             <p class="en">Case files, and a room code for whoever you bring.</p><p class="tr">Vaka dosyaları ve yanında getirdiğin kişi için oda kodu.</p>
+            <p class="en">The Bureau range. The service weapon is for the rare tense scene, not the answer.</p><p class="tr">Büro atış alanı. Hizmet silahı nadir gergin sahneler için, cevap o değil.</p>
+            <p class="en">Training before the field. Words come first; this is for when they fail.</p><p class="tr">Sahadan önce eğitim. Önce sözler gelir; bu, sözler yetmediğinde.</p>
           </div>
           <div class="gal-thumbs" role="tablist" aria-label="Frames">
             <button class="thumb" role="tab" aria-selected="true" type="button" aria-label="Frame 1"><img src="img/shot-hall-t.webp" width="480" height="270" alt="" loading="lazy"></button>
@@ -669,6 +707,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
             <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 3"><img src="img/shot-bureau-t.webp" width="480" height="270" alt="" loading="lazy"></button>
             <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 4"><img src="img/shot-menu-t.webp" width="480" height="232" alt="" loading="lazy"></button>
             <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 5"><img src="img/shot-files-t.webp" width="480" height="268" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 6"><img src="img/shot-pistols-t.webp" width="640" height="360" alt="" loading="lazy"></button>
+            <button class="thumb" role="tab" aria-selected="false" type="button" aria-label="Frame 7"><img src="img/shot-rifle-t.webp" width="640" height="360" alt="" loading="lazy"></button>
           </div>
         </div>
       </div>
@@ -924,7 +964,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
             <li><span><b><span class="en i">One complete case.</span><span class="tr i">Eksiksiz bir vaka.</span></b> <span class="en i">Case 01 plays from the first call to the last decision, and closes in one of seven ways.</span><span class="tr i">Dosya 01 ilk ihbardan son karara kadar oynanır ve yedi yoldan biriyle kapanır.</span></span></li>
             <li><span><b><span class="en i">A lot to look at.</span><span class="tr i">İncelenecek çok şey.</span></b> <span class="en i">Ten places to walk into, 18 characters and 64 records to examine. The archive and the lab are reached through the Bureau.</span><span class="tr i">Girilecek on mekân, 18 karakter ve incelenecek 64 kayıt. Arşive ve laboratuvara Büro üzerinden ulaşılır.</span></span></li>
             <li><span><b><span class="en i">Solo or together.</span><span class="tr i">Tek başına ya da birlikte.</span></b> <span class="en i">One to four players. The evidence board is shared, but the conclusion still has to be argued between you.</span><span class="tr i">Bir ile dört oyuncu. Delil panosu ortaktır, ama sonucu yine kendi aranızda tartışmanız gerekir.</span></span></li>
-            <li><span><b><span class="en i">Turkish and English text.</span><span class="tr i">Türkçe ve İngilizce metin.</span></b> <span class="en i">There is no voice acting.</span><span class="tr i">Seslendirme yok.</span></span></li>
+            <li><span><b><span class="en i">Turkish first.</span><span class="tr i">Önce Türkçe.</span></b> <span class="en i">The game is written in Turkish and the Steam page lists Turkish today; an English translation is planned once the case content is locked. There is no voice acting.</span><span class="tr i">Oyun Türkçe yazılıyor ve Steam sayfası bugün Türkçe listeliyor; İngilizce çeviri, vaka içeriği kilitlendikten sonra planlanıyor. Seslendirme yok.</span></span></li>
             <li><span><b><span class="en i">A serious crime story.</span><span class="tr i">Ciddi bir suç öyküsü.</span></b> <span class="en i">The game opens with a content warning screen, and it means it. A few tense scenes put a service weapon in your hand, but this is an investigation game, not a shooter.</span><span class="tr i">Oyun bir içerik uyarısı ekranıyla açılır ve bunu ciddiye alır. Birkaç gergin sahnede eline hizmet silahı verilir, ama bu bir soruşturma oyunudur, nişancı oyunu değil.</span></span></li>
           </ul>
         </div>
@@ -933,6 +973,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
           <span class="tag"><span class="en i">Said plainly</span><span class="tr i">Açıkça söylüyoruz</span></span>
           <ul class="plain not">
             <li><span><b><span class="en i">Early Access.</span><span class="tr i">Erken Erişim.</span></b> <span class="en i">The first file is complete. The files after it are built in the open, with feedback from the people playing. Players who join early get the full game at no extra cost.</span><span class="tr i">İlk dosya tamam. Sonraki dosyalar, oynayanların geri bildirimiyle açık açık yapılacak. Erken katılanlar tam sürüme ek ücret ödemeden erişir.</span></span></li>
+            <li><span><b><span class="en i">macOS.</span><span class="tr i">macOS.</span></b> <span class="en i">The Steam page lists Windows only. A Mac build is planned; it will be added to the store only after it has been tested on a real Mac.</span><span class="tr i">Steam sayfası yalnız Windows listeliyor. Mac sürümü planlanıyor; gerçek bir Mac üzerinde test edildikten sonra mağazaya eklenecek.</span></span></li>
             <li><span><b><span class="en i">The next files.</span><span class="tr i">Sonraki dosyalar.</span></b> <span class="en i">Case 02 is sealed until Case 01 is closed. We will not rush it to hit a date.</span><span class="tr i">Dosya 02, Dosya 01 kapanana kadar mühürlü. Bir tarihi tutturmak için acele etmeyeceğiz.</span></span></li>
           </ul>
         </div>
@@ -967,7 +1008,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
           <div class="cta">
             <a class="btn p big" data-steam-link href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span></a>
             <a class="btn g big" href="https://www.instagram.com/jinja.games/" target="_blank" rel="noopener">Instagram</a>
-            <a class="btn g big" href="../#games"><span class="en i">All work</span><span class="tr i">Tüm işler</span></a>
+            <a class="btn g big" href="../games/"><span class="en i">All games</span><span class="tr i">Tüm oyunlar</span></a>
           </div>
         </div>
       </div>
@@ -1183,6 +1224,15 @@ html,body{overflow-x:hidden;overflow-x:clip}
   })();
 
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+<script>
+(function(){
+  var reel=document.getElementById('reel'), v=document.getElementById('reelvid'), b=document.getElementById('reelplay');
+  if(!reel||!v||!b) return;
+  b.addEventListener('click',function(){ v.preload='auto'; var p=v.play(); if(p&&p.catch) p.catch(function(){}); });
+  v.addEventListener('play',function(){ reel.classList.add('playing'); });
+  v.addEventListener('ended',function(){ reel.classList.remove('playing'); });
 })();
 </script>
 </body>

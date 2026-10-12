@@ -28,7 +28,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-400.woff2" crossorigin />
 <link rel="stylesheet" href="assets/fonts.css" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/","logo":"https://jinjagames.com/logo-512.png","email":"jinjagamesofficial@gmail.com","sameAs":["https://www.instagram.com/jinja.games/","https://www.linkedin.com/company/jinjagamesofficial"]},{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JinjaGames?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is an indie game studio based in Ankara, Türkiye."}},{"@type":"Question","name":"What kind of games does JinjaGames make?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames makes deep, honest games with systems that reward curiosity."}},{"@type":"Question","name":"What is JinjaGames working on right now?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is building three projects: Cyber Academy, a cybersecurity game; Locard, a first person investigation game; and DayPot, an offline cooking assistant for Android."}},{"@type":"Question","name":"Where is JinjaGames based?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is based in Ankara, Türkiye."}},{"@type":"Question","name":"Can I join the team?","acceptedAnswer":{"@type":"Answer","text":"When new roles open, JinjaGames announces them on the site and social media."}},{"@type":"Question","name":"Can I send feedback?","acceptedAnswer":{"@type":"Answer","text":"Feedback, ideas and bug reports can be sent to jinjagamesofficial@gmail.com."}}]},{"@type":"VideoGame","name":"Cyber Academy","url":"https://jinjagames.com/cyberacademy/","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS","Linux"],"genre":["Educational","Strategy","Simulation"]},{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","slogan":"Every contact leaves a trace.","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS"],"genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"]},{"@type":"MobileApplication","name":"DayPot","url":"https://jinjagames.com/daypot/","applicationCategory":"FoodAndDrinkApplication","operatingSystem":"Android","publisher":{"@type":"Organization","name":"JinjaGames"}}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/","logo":"https://jinjagames.com/logo-512.png","email":"jinjagamesofficial@gmail.com","sameAs":["https://www.instagram.com/jinja.games/","https://www.linkedin.com/company/jinjagamesofficial"]},{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},{"@type":"CollectionPage","name":"Games by JinjaGames","url":"https://jinjagames.com/games/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is JinjaGames?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is an indie game studio based in Ankara, Türkiye."}},{"@type":"Question","name":"What kind of games does JinjaGames make?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames makes deep, honest games with systems that reward curiosity."}},{"@type":"Question","name":"What is JinjaGames working on right now?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is building three projects: Cyber Academy, a cybersecurity game out now in Steam Early Access; Locard, a first person co-op detective game coming to Steam; and DayPot, an offline cooking assistant for Android."}},{"@type":"Question","name":"Where is JinjaGames based?","acceptedAnswer":{"@type":"Answer","text":"JinjaGames is based in Ankara, Türkiye."}},{"@type":"Question","name":"Can I join the team?","acceptedAnswer":{"@type":"Answer","text":"When new roles open, JinjaGames announces them on the site and social media."}},{"@type":"Question","name":"Can I send feedback?","acceptedAnswer":{"@type":"Answer","text":"Feedback, ideas and bug reports can be sent to jinjagamesofficial@gmail.com."}}]},{"@type":"VideoGame","name":"Cyber Academy","url":"https://jinjagames.com/cyberacademy/","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows","macOS","Linux"],"genre":["Educational","Strategy","Simulation"],"datePublished":"2026-09-11","sameAs":["https://store.steampowered.com/app/5067820/Cyber_Academy/"]},{"@type":"VideoGame","name":"Locard","url":"https://jinjagames.com/locard/","slogan":"Every contact leaves a trace.","publisher":{"@type":"Organization","name":"JinjaGames"},"gamePlatform":["Windows"],"sameAs":["https://store.steampowered.com/app/5296440/Locard/"],"genre":["Adventure","Mystery","Detective"],"playMode":["SinglePlayer","CoOp"]},{"@type":"MobileApplication","name":"DayPot","url":"https://jinjagames.com/daypot/","applicationCategory":"FoodAndDrinkApplication","operatingSystem":"Android","publisher":{"@type":"Organization","name":"JinjaGames"}}]}
 </script>
 
 <script src="assets/steam.js"></script>
@@ -164,16 +164,18 @@ nav.down{transform:translateY(-100%)}
 html[data-theme="dark"] .ic-sun{display:block}
 html[data-theme="dark"] .ic-moon{display:none}
 .ic-sun{display:none}.ic-moon{display:block}
-.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border-radius:9px;background:transparent;border:1px solid var(--line-2);cursor:pointer;align-items:center}
-.burger span{width:15px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .28s var(--ease),opacity .2s}
-.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.mmenu{position:fixed;inset:0;z-index:150;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility .3s}
-.mmenu.open{opacity:1;visibility:visible;pointer-events:auto}
-.mmenu a{font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.04em;color:var(--ink);padding:12px 24px;border-radius:12px}
-.mmenu a:active{background:var(--bg-soft)}
-.mmenu .mrow{display:flex;gap:10px;margin-top:26px;align-items:center}
+/* ---------------- TELEFON: ALT GEZİNME ----------------
+   Sağ üstteki üç çizgi yerine, başparmağın uzandığı yerde duran
+   yüzen bir çubuk. Dil ve tema sağ üstte kalır; bölümler aşağıda. */
+.dock{display:none}
+.dock{position:fixed;z-index:110;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(440px,calc(100% - 24px));padding:6px;gap:4px;background:var(--nav-bg-solid);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 40px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.06);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .35s var(--ease),opacity .3s}
+html[data-theme="dark"] .dock{box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.dock a{flex:1;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:14px;color:var(--ink-3);font-size:11.5px;font-weight:600;letter-spacing:.01em;position:relative;transition:color .2s,background .25s}
+.dock a svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease)}
+.dock a.on{color:var(--brand);background:var(--brand-soft)}
+.dock a.on svg{transform:translateY(-1px) scale(1.06)}
+.dock a:active{transform:scale(.96)}
+.dock.hide{transform:translate(-50%,calc(100% + 30px));opacity:0}
 
 /* ---------------- ORTAK ---------------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:15px 26px;border-radius:10px;font-family:var(--f-body);font-weight:600;font-size:15.5px;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .2s,color .2s,border-color .2s}
@@ -224,64 +226,59 @@ section.blk{padding:112px 0;position:relative}
 .head p{color:var(--ink-2);font-size:18px;max-width:none;text-align:left;margin-top:26px}
 .hl{color:var(--brand)}
 
-/* ---------------- DÜNYALAR ---------------- */
-.world{border-top:1px solid var(--line);padding:64px 0}
-.world:last-of-type{border-bottom:1px solid var(--line)}
-.world-in{display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:64px;align-items:center}
-.world.flip .world-in>.wtext{order:2}
-.wtop{display:flex;align-items:baseline;gap:16px;margin-bottom:22px}
-.wtop .num{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--accent)}
-.wtop .kind{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.wtext h3{font-size:clamp(34px,4.4vw,52px);margin-bottom:16px;letter-spacing:-.035em}
-.wtext .say{color:var(--ink-2);font-size:17.5px;margin-bottom:12px}
-.wtext .say b{color:var(--ink);font-weight:600}
-.wmeta{display:flex;flex-wrap:wrap;gap:0;margin:28px 0 30px;border-top:1px solid var(--line)}
-.wmeta div{flex:1 1 108px;padding:16px 16px 0 0}
-.wmeta b{display:block;font-family:var(--f-display);font-size:21px;font-weight:700;letter-spacing:-.03em;color:var(--accent)}
-.wmeta span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.wlink{display:inline-flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:500;font-size:16px;color:var(--ink);padding-bottom:5px;border-bottom:1px solid var(--accent);transition:gap .3s var(--ease),color .2s}
-.wlink:hover{gap:17px;color:var(--accent)}
-.wart{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center}
-
-/* Her dünyanın başlığı kendi sayfasının yazı tipiyle yazılır:
-   siteyi gezerken üç ayrı dünyanın olduğu okumadan önce hissedilsin. */
-.w-cyber .wtext h3{font-family:var(--f-mono);font-weight:700;letter-spacing:-.045em;font-size:clamp(30px,3.9vw,46px)}
-.w-noir .wtext h3{font-family:var(--f-noir);font-weight:900;letter-spacing:-.005em}
-.w-warm .wtext h3{font-family:var(--f-warm);font-weight:700;letter-spacing:-.022em}
+/* ---------------- İŞLER: DERLİ TOPLU VİTRİN ----------------
+   Üç proje ana sayfada uzun satırlar yerine yan yana üç kart.
+   Ayrıntı /games/ sayfasında; burası yalnız kapı. */
+.showcase{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.gcard{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s}
+.gcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-2);border-color:var(--line-2)}
+.gcard .art{position:relative;aspect-ratio:16/11;overflow:hidden;display:grid;place-items:center}
+.gcard .art img,.gcard .art video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.gcard:hover .art img,.gcard:hover .art video{transform:scale(1.05)}
+.gcard .status{position:absolute;z-index:3;left:14px;top:14px;display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border-radius:999px;background:rgba(12,10,11,.72);color:#F6F1EF;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gcard .status i{width:7px;height:7px;border-radius:50%;background:var(--dot,#8a8a8a)}
+.gcard .status.live i{--dot:#45D49A;box-shadow:0 0 0 0 rgba(69,212,154,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(69,212,154,0)}100%{box-shadow:0 0 0 0 rgba(69,212,154,0)}}
+.gcard .body{display:flex;flex-direction:column;gap:12px;padding:24px 24px 22px;flex:1}
+.gcard .kind{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.gcard h3{font-size:30px;letter-spacing:-.03em;line-height:1.05}
+.gcard p{color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.gcard .tags{display:flex;flex-wrap:wrap;margin-top:2px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-3)}
+.gcard .tags span+span::before{content:"·";margin:0 9px;color:var(--ink-3);opacity:.6}
+.gcard .links{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.gcard .go{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-display);font-weight:500;font-size:15.5px;color:var(--ink);transition:gap .3s var(--ease),color .2s}
+.gcard .go::after{content:"";position:absolute;inset:0;z-index:2}
+.gcard:hover .go{gap:14px;color:var(--accent)}
+.gcard .ext{position:relative;z-index:4;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .2s}
+.gcard .ext:hover{color:var(--accent)}
+.gcard::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:4;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.gcard:hover::before{transform:scaleX(1)}
+.g-cyber{--accent:var(--w-cyber)}
+.g-cyber .art{background:#080B0E}
+.g-cyber .art::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,11,14,.05),rgba(8,11,14,.55)),linear-gradient(rgba(47,179,201,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(47,179,201,.08) 1px,transparent 1px);background-size:auto,30px 30px,30px 30px}
+.g-cyber h3{font-family:var(--f-mono);font-weight:700;letter-spacing:-.05em;font-size:27px}
+.g-noir{--accent:var(--w-noir)}
+.g-noir .art{background:#0C0D10}
+.g-noir .art img{object-position:62% 50%;opacity:.82}
+.g-noir .art::after{content:"";position:absolute;inset:12px;z-index:1;border:1px solid rgba(255,255,255,.14)}
+.g-noir .nmark{position:relative;z-index:2;font-family:'Spartan Locard',var(--f-body);font-weight:600;font-size:clamp(30px,3.3vw,44px);letter-spacing:.17em;margin-right:-.17em;color:#F3EFEA;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.g-noir h3{font-family:var(--f-noir);font-weight:900;letter-spacing:-.005em}
+.g-warm{--accent:var(--w-warm)}
+.g-warm .art{background:linear-gradient(150deg,#EFEADC,#DCE7D6)}
+html[data-theme="dark"] .g-warm .art{background:linear-gradient(150deg,#1B2419,#1F2A22)}
+.g-warm .art::before{content:"";position:absolute;width:58%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.34)}
+html[data-theme="dark"] .g-warm .art::before{background:rgba(255,255,255,.05)}
+.g-warm .art img.pot{position:relative;inset:auto;width:40%;height:auto;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.22))}
+.g-warm h3{font-family:var(--f-warm);font-weight:700;letter-spacing:-.022em}
+/* Locard logo harfleri: oyunun kendi yazı tipi (Spartan SemiBold, SIL OFL), yalnız L O C A R D alt kümesi */
+@font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/spartan-semibold-locard.woff') format('woff')}
+.allgames{margin-top:34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:24px 28px;border:1px dashed var(--line-2);border-radius:6px}
+.allgames p{color:var(--ink-2);font-size:15.5px;max-width:620px}
 .hero-index a:nth-child(1) .t{font-family:var(--f-mono);font-weight:400;font-size:15px;letter-spacing:-.01em}
 .hero-index a:nth-child(2) .t{font-family:var(--f-noir);font-weight:700;font-size:19px;letter-spacing:0}
 .hero-index a:nth-child(3) .t{font-family:var(--f-warm);font-weight:600;font-size:18px;letter-spacing:-.015em}
-
-/* dünya derileri — her proje kendi sayfasının dilini burada duyuruyor */
-.world.w-cyber{--accent:var(--w-cyber)}
-.w-cyber .wart{background:#080B0E}
-.w-cyber .wart::before{content:"";position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(47,179,201,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(47,179,201,.09) 1px,transparent 1px);background-size:34px 34px;pointer-events:none}
-.w-cyber .stagevid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.w-cyber .wart::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,11,14,.1),rgba(8,11,14,.66))}
-.w-cyber .wtag{position:absolute;z-index:3;left:20px;bottom:18px;font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FE3F0;text-shadow:0 1px 6px rgba(0,0,0,.85)}
-
-.world.w-noir{--accent:var(--w-noir)}
 html[data-steam="soon"] .sx-live{display:none!important}
 html[data-steam="live"] .sx-soon{display:none!important}
-.wlinks{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
-/* Locard logo harfleri: oyunun kendi yazı tipi (Spartan SemiBold, SIL OFL), yalnız L O C A R D alt kümesi */
-@font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/spartan-semibold-locard.woff') format('woff')}
-.w-noir .wart{background:#0C0D10;flex-direction:column;gap:14px;text-align:center;padding:36px}
-.w-noir .wimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;opacity:.8;transition:transform 1.6s var(--ease)}
-.w-noir:hover .wimg{transform:scale(1.045)}
-.w-noir .wart::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,7,6,.78) 0,rgba(8,7,6,.28) 46%,rgba(8,7,6,.8) 100%)}
-.w-noir .wart::after{content:"";position:absolute;inset:14px;z-index:2;border:1px solid rgba(255,255,255,.12)}
-.w-noir .nmark{position:relative;z-index:3;font-family:'Spartan Locard',var(--f-body);font-weight:600;font-size:clamp(36px,5.2vw,64px);letter-spacing:.17em;margin-right:-.17em;color:#F3EFEA;line-height:1}
-.w-noir .nsub{position:relative;z-index:3;font-family:'Courier Prime',monospace;font-size:13.5px;letter-spacing:.06em;color:rgba(243,239,234,.92);text-shadow:0 1px 8px rgba(0,0,0,.9)}
-.w-noir .nstamp{position:relative;z-index:3;margin-top:8px;display:inline-block;font-family:'Courier Prime',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#F08A7E;background:rgba(8,7,6,.55);border:1px solid rgba(240,138,126,.6);padding:6px 13px;transform:rotate(-2deg)}
-
-.world.w-warm{--accent:var(--w-warm)}
-.w-warm .wart{background:linear-gradient(150deg,#EFEADC,#DCE7D6)}
-html[data-theme="dark"] .w-warm .wart{background:linear-gradient(150deg,#1B2419,#1F2A22)}
-.w-warm .wart::before{content:"";position:absolute;width:62%;padding-top:62%;border-radius:50%;background:rgba(255,255,255,.34)}
-html[data-theme="dark"] .w-warm .wart::before{background:rgba(255,255,255,.05)}
-/* height:auto olmadan HTML height="512" özniteliği devrede kalıyor ve logo eziliyor. */
-.w-warm .wpot{position:relative;z-index:2;width:44%;max-width:230px;height:auto;filter:drop-shadow(0 22px 34px rgba(0,0,0,.24))}
 
 /* ---------------- STÜDYO ---------------- */
 .studio-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);gap:76px;align-items:start}
@@ -347,12 +344,11 @@ footer{border-top:1px solid var(--line);padding:64px 0 36px}
 /* ---------------- RESPONSIVE ---------------- */
 @media(max-width:1060px){
   .nav-links{display:none}
-  .lang-menu.deskonly{display:none}
-  .burger{display:flex}
+  .dock{display:flex}
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  .showcase{grid-template-columns:1fr 1fr}
   .hero-in{grid-template-columns:1fr;gap:48px;align-items:start}
   .head{margin-bottom:46px}
-  .world-in{grid-template-columns:1fr;gap:38px}
-  .world.flip .world-in>.wtext{order:0}
   .studio-in{grid-template-columns:1fr;gap:48px}
   .founder{position:static;max-width:420px}
   .fgrid{grid-template-columns:1fr 1fr;gap:34px}
@@ -365,13 +361,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 36px}
   section.blk{padding:72px 0}
   .hero{padding:calc(var(--navh) + 58px) 0 56px}
   .hero .cta{flex-direction:column;align-items:stretch}
-  .world{padding:46px 0}
-  .wart{aspect-ratio:16/11}
+  .showcase{grid-template-columns:1fr}
+  .allgames{padding:20px}
   .contact{padding:52px 26px}
   .fa>div{padding-right:0}
   .fgrid{grid-template-columns:1fr;gap:30px;padding:0 22px}
   .fbot{flex-direction:column;align-items:flex-start;gap:10px;padding:26px 22px 0}
-  .mmenu a{font-size:25px}
   .tseg i{font-size:11px;padding:0 18px;gap:18px}
 }
 
@@ -389,16 +384,17 @@ html,body{overflow-x:hidden;overflow-x:clip}
    altına inmiyor. */
 @media(max-width:680px){
   .brand{min-height:44px}
-  .fcol a,.fbrand a,.socials a,.fmeta a,.wlink,.hero-index a{position:relative}
-  .fcol a::after,.fmeta a::after,.wlink::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
-  .label,.wtop .kind,.wtop .num,.wmeta span,.hero-index .n,.hero-index .d,
-  .creed .n,.fcol h5,.fbot,.w-cyber .wtag{font-size:12px}
+  .fcol a,.fbrand a,.socials a,.fmeta a,.hero-index a{position:relative}
+  .fcol a::after,.fmeta a::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+  .label,.gcard .kind,.gcard .tags span,.gcard .status,.gcard .ext,.hero-index .n,.hero-index .d,
+  .creed .n,.fcol h5,.fbot,.dock a{font-size:12px}
   .tseg i{font-size:11.5px}
   .tseg i{font-size:12px}
-  .w-noir .nstamp,.founder .role,.founder .role span{font-size:12px}
+  .founder .role,.founder .role span{font-size:12px}
 }
 </style>
 <script src="assets/clean-scroll.js" defer></script>
+<script src="assets/local-links.js"></script>
 </head>
 <body>
 
@@ -411,27 +407,6 @@ html,body{overflow-x:hidden;overflow-x:clip}
 
 <div id="shell">
 
-<div class="mmenu" id="mmenu">
-  <a href="#games" data-close><span class="en i">Work</span><span class="tr i">İşler</span></a>
-  <a href="#studio" data-close><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
-  <a href="#faq" data-close><span class="en i">FAQ</span><span class="tr i">SSS</span></a>
-  <a href="#contact" data-close><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
-  <div class="mrow">
-    <div class="lang-menu">
-      <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="mobile-language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
-      <div class="lang-popover" id="mobile-language-menu" role="menu">
-        <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
-        <button class="lang-option" type="button" role="menuitem" data-lang-set="en"><span class="lang-code">GB</span> English</button>
-        <button class="lang-option" type="button" role="menuitem" data-lang-set="tr"><span class="lang-code">TR</span> Türkçe</button>
-      </div>
-    </div>
-    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme" title="Light / Dark">
-      <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
-    </button>
-  </div>
-</div>
-
 <header>
   <nav id="nav">
     <div class="nav-in">
@@ -441,13 +416,13 @@ html,body{overflow-x:hidden;overflow-x:clip}
         JinjaGames
       </a>
       <ul class="nav-links">
-        <li><a href="#games"><span class="en i">Work</span><span class="tr i">İşler</span></a></li>
+        <li><a href="games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a></li>
         <li><a href="#studio"><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a></li>
         <li><a href="#faq"><span class="en i">FAQ</span><span class="tr i">SSS</span></a></li>
         <li><a href="#contact"><span class="en i">Contact</span><span class="tr i">İletişim</span></a></li>
       </ul>
       <div class="nav-end">
-        <div class="lang-menu deskonly">
+        <div class="lang-menu">
           <button class="lang-trigger" type="button" data-lang-toggle aria-expanded="false" aria-controls="desktop-language-menu"><svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9S14.6 18.5 12 21M12 3C9.4 5.5 8.1 8.5 8.1 12s1.3 6.5 3.9 9"></path></svg><span data-current-lang>EN</span><svg class="lang-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"></path></svg></button>
           <div class="lang-popover" id="desktop-language-menu" role="menu">
             <div class="lang-menu-title"><span class="en i">Site language</span><span class="tr i">Site dili</span></div>
@@ -459,7 +434,6 @@ html,body{overflow-x:hidden;overflow-x:clip}
           <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
           <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
         </button>
-        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
   </nav>
@@ -477,14 +451,14 @@ html,body{overflow-x:hidden;overflow-x:clip}
         <p class="tagline en">Three worlds in progress. They all want the same thing: that you enjoy yourself, that you learn something while you play, or that your day gets a little easier.</p>
         <p class="tagline tr">Üretimde üç dünya. Hepsinin amacı aynı: oynarken eğlenmen, oynarken bir şey öğrenmen ya da günlük işinin biraz kolaylaşması.</p>
         <div class="cta">
-          <a class="btn p" href="#games"><span class="en i">See the work</span><span class="tr i">Yaptıklarımıza bak</span> <span class="arw">&rarr;</span></a>
+          <a class="btn p" href="games/"><span class="en i">See the games</span><span class="tr i">Oyunlara bak</span> <span class="arw">&rarr;</span></a>
           <a class="btn g" href="#studio"><span class="en i">About the studio</span><span class="tr i">Stüdyo hakkında</span></a>
         </div>
       </div>
       <div class="hero-index">
-        <a href="#cyber"><span class="n">01</span><span class="t">Cyber Academy</span><span class="d en i">Cybersecurity</span><span class="d tr i">Siber güvenlik</span></a>
-        <a href="#locard"><span class="n">02</span><span class="t">Locard</span><span class="d en i">Investigation</span><span class="d tr i">Soruşturma</span></a>
-        <a href="#daypot"><span class="n">03</span><span class="t">DayPot</span><span class="d en i">Kitchen</span><span class="d tr i">Mutfak</span></a>
+        <a href="#cyber"><span class="n">01</span><span class="t">Cyber Academy</span><span class="d en i">Out now</span><span class="d tr i">Çıktı</span></a>
+        <a href="#locard"><span class="n">02</span><span class="t">Locard</span><span class="d en i">Q1 2027</span><span class="d tr i">2027 Q1</span></a>
+        <a href="#daypot"><span class="n">03</span><span class="t">DayPot</span><span class="d en i">Android</span><span class="d tr i">Android</span></a>
       </div>
     </div>
   </section>
@@ -513,85 +487,67 @@ html,body{overflow-x:hidden;overflow-x:clip}
         </div>
       </div>
 
-      <!-- 01 CYBER ACADEMY -->
-      <article id="cyber" class="world w-cyber rv">
-        <div class="world-in">
-          <div class="wtext">
-            <div class="wtop"><span class="num">01</span><span class="kind en i">Cybersecurity game · Steam</span><span class="kind tr i">Siber güvenlik oyunu · Steam</span></div>
+      <div class="showcase">
+        <!-- 01 CYBER ACADEMY -->
+        <article id="cyber" class="gcard g-cyber rv">
+          <div class="art">
+            <video class="stagevid" data-src="cyberacademy/media/darknet-loop.mp4" muted loop playsinline preload="none" poster="cyberacademy/img/darknet-cover-t.webp" aria-hidden="true"></video>
+          </div>
+          <div class="body">
+            <span class="kind"><span class="en i">01 · Cybersecurity game</span><span class="tr i">01 · Siber güvenlik oyunu</span></span>
             <h3>Cyber Academy</h3>
-            <p class="say en"><b>Learn real cybersecurity by doing.</b> Hands on modules teach you to attack and defend through puzzles instead of lectures.</p>
-            <p class="say tr"><b>Gerçek siber güvenliği yaparak öğren.</b> Uygulamalı modüller saldırıyı ve savunmayı ders anlatımıyla değil bulmacalarla öğretir.</p>
-            <p class="say en">Then step into a living dark web: run your own machine, raid other players, plant traps, build defences and grow an economy.</p>
-            <p class="say tr">Sonra canlı bir karanlık ağa adım at: kendi makineni yönet, diğer oyunculara saldır, tuzak kur, savunma yap ve ekonomini büyüt.</p>
-            <div class="wmeta">
-              <div><b>25+</b><span class="en i">Modules</span><span class="tr i">Modül</span></div>
-              <div><b>25</b><span class="en i">Languages</span><span class="tr i">Dil</span></div>
-              <div><b>3</b><span class="en i">Platforms</span><span class="tr i">Platform</span></div>
-              <div><b>PvP</b><span class="en i">Online</span><span class="tr i">Çevrimiçi</span></div>
+            <p class="en">Learn real security by doing it inside a virtual OS, then step into the Dark Net to attack, defend and trace other players.</p>
+            <p class="tr">Gerçek güvenliği sanal bir işletim sisteminin içinde yaparak öğren, sonra diğer oyunculara saldırmak, savunmak ve iz sürmek için Karanlık Ağ'a gir.</p>
+            <div class="tags"><span>Windows · macOS · Linux</span><span class="en i">25 languages</span><span class="tr i">25 dil</span><span>PvP</span></div>
+            <div class="links">
+              <a class="go" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span aria-hidden="true">&rarr;</span></a>
+              <a class="ext" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a>
             </div>
-            <a class="wlink" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span class="arw">&rarr;</span></a>
           </div>
-          <div class="wart">
-            <video class="stagevid" data-src="newss_And_trailer/CyberAcademy_Steam_Trailer_v1.mp4" muted loop playsinline preload="none" poster="newss_And_trailer/main_capsule_1232x706_v1.png"></video>
-            <span class="wtag">// attack · defend · adapt</span>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- 02 LOCARD -->
-      <article id="locard" class="world w-noir flip rv">
-        <div class="world-in">
-          <div class="wtext">
-            <div class="wtop"><span class="num">02</span><span class="kind en i">Detective game · Windows, macOS · Early Access</span><span class="kind tr i">Dedektif oyunu · Windows, macOS · Erken Erişim</span></div>
+        <!-- 02 LOCARD -->
+        <article id="locard" class="gcard g-noir rv">
+          <div class="art">
+            <img src="locard/img/hero-sm.webp" width="960" height="550" alt="" loading="lazy" decoding="async" />
+            <span class="nmark" aria-hidden="true">LOCARD</span>
+          </div>
+          <div class="body">
+            <span class="kind"><span class="en i">02 · Detective game</span><span class="tr i">02 · Dedektif oyunu</span></span>
             <h3>Locard</h3>
-            <p class="say en"><b>Everybody is hiding something, but not every secret is a murder.</b> You are a senior detective in the coastal city of Meridian, and the file only closes when you can say what your evidence proves.</p>
-            <p class="say tr"><b>Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir.</b> Kıyı kenti Meridian'da kıdemli bir dedektifsin ve dosya, ancak delilinin neyi ispatladığını söyleyebildiğinde kapanır.</p>
-            <p class="say en">Read the room, catch the contradiction in a statement, build the chain on your board. Drive the city yourself, alone or with up to three friends. Every decision opens a different route, and closes another one.</p>
-            <p class="say tr">Odayı oku, ifadedeki çelişkiyi yakala, zinciri panonda kur. Şehirde aracı kendin sür, tek başına ya da üç arkadaşınla. Her karar başka bir yol açar, bir başkasını kapatır.</p>
-            <div class="wmeta">
-              <div><b>10</b><span class="en i">Locations</span><span class="tr i">Mekân</span></div>
-              <div><b>18</b><span class="en i">Characters</span><span class="tr i">Karakter</span></div>
-              <div><b>64</b><span class="en i">Records</span><span class="tr i">Kayıt</span></div>
-              <div><b>7</b><span class="en i">Outcomes</span><span class="tr i">Sonuç</span></div>
-            </div>
-            <div class="wlinks">
-              <a class="wlink sx-live" data-steam-link href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesine ekle</span> <span class="arw">&rarr;</span></a>
-              <a class="wlink" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a>
+            <p class="en">A first person case in the city of Meridian, solved on evidence, not hunches. Alone or with up to three friends.</p>
+            <p class="tr">Meridian kentinde, önseziyle değil delille çözülen birinci şahıs bir dosya. Tek başına ya da üç arkadaşınla.</p>
+            <div class="tags"><span>Windows</span><span class="en i">1 to 4 players</span><span class="tr i">1 ile 4 oyuncu</span><span class="en i">Early Access</span><span class="tr i">Erken Erişim</span></div>
+            <div class="links">
+              <a class="go" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span aria-hidden="true">&rarr;</span></a>
+              <a class="ext sx-live" data-steam-link href="#">Steam ↗</a>
             </div>
           </div>
-          <div class="wart">
-            <img class="wimg" src="locard/img/hero-sm.webp" width="960" height="550" alt="" loading="lazy" decoding="async" />
-            <span class="nmark">LOCARD</span>
-            <span class="nsub">Every contact leaves a trace.</span>
-            <span class="nstamp sx-soon"><span class="en i">Steam page soon</span><span class="tr i">Steam sayfası yakında</span></span>
-            <span class="nstamp sx-live"><span class="en i">Wishlist open</span><span class="tr i">İstek listesi açık</span></span>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- 03 DAYPOT -->
-      <article id="daypot" class="world w-warm rv">
-        <div class="world-in">
-          <div class="wtext">
-            <div class="wtop"><span class="num">03</span><span class="kind en i">Kitchen assistant · Android</span><span class="kind tr i">Mutfak yardımcısı · Android</span></div>
+        <!-- 03 DAYPOT -->
+        <article id="daypot" class="gcard g-warm rv">
+          <div class="art">
+            <img class="pot" src="daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy">
+          </div>
+          <div class="body">
+            <span class="kind"><span class="en i">03 · Kitchen assistant</span><span class="tr i">03 · Mutfak yardımcısı</span></span>
             <h3>DayPot</h3>
-            <p class="say en"><b>What should I cook today?</b> The question every household asks at six in the evening. Mark what is in your kitchen and DayPot shows you what you can actually make right now.</p>
-            <p class="say tr"><b>Bugün ne pişirsem?</b> Her evde akşam altıda sorulan soru. Dolabındakini işaretle, DayPot sana şu anda gerçekten yapabileceğini göstersin.</p>
-            <p class="say en">Ask it out loud with your hands full, keep a shopping list that knows quantities, plan the week. It works with no signal, asks for no account and shows no ads.</p>
-            <p class="say tr">Ellerin doluyken sesle sor, miktarı bilen bir alışveriş listesi tut, haftayı planla. İnternetsiz çalışır, hesap istemez, reklam göstermez.</p>
-            <div class="wmeta">
-              <div><b>250+</b><span class="en i">Recipes</span><span class="tr i">Tarif</span></div>
-              <div><b>19</b><span class="en i">Categories</span><span class="tr i">Kategori</span></div>
-              <div><b>100%</b><span class="en i">Offline</span><span class="tr i">Çevrimdışı</span></div>
-              <div><b>0</b><span class="en i">Trackers</span><span class="tr i">İzleyici</span></div>
+            <p class="en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
+            <p class="tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
+            <div class="tags"><span>Android</span><span class="en i">250+ recipes</span><span class="tr i">250+ tarif</span><span class="en i">Offline</span><span class="tr i">Çevrimdışı</span></div>
+            <div class="links">
+              <a class="go" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span aria-hidden="true">&rarr;</span></a>
             </div>
-            <a class="wlink" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span class="arw">&rarr;</span></a>
           </div>
-          <div class="wart">
-            <img class="wpot" src="daypot/img/daypot-icon.png" alt="DayPot" width="512" height="512" loading="lazy">
-          </div>
-        </div>
-      </article>
+        </article>
+      </div>
+
+      <div class="allgames rv">
+        <p class="en">Platforms, release status, languages and what each one is really for, side by side.</p>
+        <p class="tr">Platformlar, çıkış durumu, diller ve her birinin asıl amacı, yan yana.</p>
+        <a class="btn g" href="games/"><span class="en i">All games</span><span class="tr i">Tüm oyunlar</span> <span class="arw">&rarr;</span></a>
+      </div>
     </div>
   </section>
 
@@ -651,7 +607,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
         </div>
         <div class="fitem">
           <button class="fq" data-faq><span><span class="en i">What are you working on right now?</span><span class="tr i">Şu an neler üzerinde çalışıyorsunuz?</span></span><span class="fi"></span></button>
-          <div class="fa"><div><span class="en i">Three projects: <a href="cyberacademy/">Cyber Academy</a>, a cybersecurity game; <a href="locard/">Locard</a>, a first person investigation game; and <a href="daypot/">DayPot</a>, an offline cooking assistant.</span><span class="tr i">Üç proje: siber güvenlik oyunu <a href="cyberacademy/">Cyber Academy</a>, birinci şahıs soruşturma oyunu <a href="locard/">Locard</a> ve çevrimdışı yemek yardımcısı <a href="daypot/">DayPot</a>.</span></div></div>
+          <div class="fa"><div><span class="en i">Three projects: <a href="cyberacademy/">Cyber Academy</a>, a cybersecurity game that is out now in Steam Early Access; <a href="locard/">Locard</a>, a first person detective game you can wishlist on Steam; and <a href="daypot/">DayPot</a>, an offline cooking assistant for Android. All three are on the <a href="games/">games page</a>.</span><span class="tr i">Üç proje: Steam Erken Erişimde çıkmış siber güvenlik oyunu <a href="cyberacademy/">Cyber Academy</a>, Steam'de istek listesine eklenebilen birinci şahıs dedektif oyunu <a href="locard/">Locard</a> ve Android için çevrimdışı yemek yardımcısı <a href="daypot/">DayPot</a>. Üçü de <a href="games/">oyunlar sayfasında</a>.</span></div></div>
         </div>
         <div class="fitem">
           <button class="fq" data-faq><span><span class="en i">Why do the three projects look so different?</span><span class="tr i">Neden üç proje birbirinden bu kadar farklı görünüyor?</span></span><span class="fi"></span></button>
@@ -707,7 +663,8 @@ html,body{overflow-x:hidden;overflow-x:clip}
       <p class="tr">Ankara, Türkiye merkezli bağımsız oyun stüdyosu. Geri dönmeye değer, dürüst ve derin işler.</p>
     </div>
     <div class="fcol">
-      <h5><span class="en i">Work</span><span class="tr i">İşler</span></h5>
+      <h5><span class="en i">Games</span><span class="tr i">Oyunlar</span></h5>
+      <a href="games/"><span class="en i">All games</span><span class="tr i">Tüm oyunlar</span></a>
       <a href="cyberacademy/">Cyber Academy</a>
       <a href="locard/">Locard</a>
       <a href="daypot/">DayPot</a>
@@ -732,6 +689,13 @@ html,body{overflow-x:hidden;overflow-x:clip}
   </div>
 </footer>
 
+<div class="dock" id="dock" role="navigation" aria-label="Sections">
+  <a href="games/" data-dock="games"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg><span class="en i">Games</span><span class="tr i">Oyunlar</span></a>
+  <a href="#studio" data-dock="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9.5 20v-5.5h5V20"/></svg><span class="en i">Studio</span><span class="tr i">Stüdyo</span></a>
+  <a href="#faq" data-dock="faq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.7"/><path d="M12 16.9v.2"/></svg><span class="en i">FAQ</span><span class="tr i">SSS</span></a>
+  <a href="#contact" data-dock="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg><span class="en i">Contact</span><span class="tr i">İletişim</span></a>
+</div>
+
 </div><!-- /shell -->
 
 <script>
@@ -755,7 +719,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     root.setAttribute('data-lang',l); root.lang=l; store('jg_lang',l); paintLang(l); closeLangMenus();
   }
   $$('[data-lang-set]').forEach(function(b){
-    b.addEventListener('click',function(){ setLang(b.getAttribute('data-lang-set')); closeMenu(); });
+    b.addEventListener('click',function(){ setLang(b.getAttribute('data-lang-set')); });
   });
   paintLang(root.getAttribute('data-lang')||'en');
   $$('[data-lang-toggle]').forEach(function(t){
@@ -777,14 +741,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
     });
   });
 
-  /* ---------- MOBİL MENÜ ---------- */
-  var burger=$('#burger'), mmenu=$('#mmenu');
-  function openMenu(){ if(!mmenu) return; mmenu.classList.add('open'); burger.classList.add('open'); burger.setAttribute('aria-expanded','true'); d.body.style.overflow='hidden'; }
-  function closeMenu(){ if(!mmenu) return; mmenu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); d.body.style.overflow=''; }
-  if(burger) burger.addEventListener('click',function(){ mmenu.classList.contains('open')?closeMenu():openMenu(); });
-  $$('[data-close]').forEach(function(a){ a.addEventListener('click',closeMenu); });
-  d.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeMenu(); closeLangMenus(); } });
-  window.addEventListener('resize',function(){ if(window.innerWidth>1060) closeMenu(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLangMenus(); });
 
   /* ---------- SSS ---------- */
   $$('[data-faq]').forEach(function(btn){
@@ -800,16 +757,23 @@ html,body{overflow-x:hidden;overflow-x:clip}
      (alt sayfadan dönüş, #bağlantıyla giriş) bar kendini gizlemesin. */
   var nav=$('#nav'), lastY=window.scrollY||window.pageYOffset||0;
   var secs=$$('main section[id]');
+  /* Alt çubuk: bulunulan bölümü işaretler. İşler bölümündeyken "Oyunlar" yanar. */
+  var dockLinks=$$('[data-dock]');
+  function paintDock(cur){
+    var key = cur==='games' ? 'games' : cur;
+    dockLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-dock')===key); });
+  }
   function showNav(){ nav.classList.remove('down'); }
   window.addEventListener('scroll',function(){
     var y=window.scrollY||window.pageYOffset||0, delta=y-lastY;
     nav.classList.toggle('stuck', y>10);
-    if(y<200 || delta<-4 || mmenu.classList.contains('open')) showNav();
+    if(y<200 || delta<-4) showNav();
     else if(delta>6) nav.classList.add('down');
     lastY=y;
     var cur='';
     secs.forEach(function(s){ if(y >= s.offsetTop-160) cur=s.id; });
     $$('.nav-links a').forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+cur); });
+    paintDock(cur);
   },{passive:true});
   d.addEventListener('mousemove',function(e){ if(e.clientY<90) showNav(); },{passive:true});
   nav.addEventListener('focusin',showNav);

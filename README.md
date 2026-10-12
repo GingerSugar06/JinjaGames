@@ -38,12 +38,24 @@ Fraunces, Nunito. Hepsi açık lisanslıdır (SIL OFL).
 ## Dosyalar
 Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 
-- `index.html` — ana sayfa (hero, üç proje satırı, stüdyo, SSS, iletişim).
+- `index.html` — ana sayfa (hero, üç projelik derli toplu kart vitrini, stüdyo, SSS, iletişim).
+  Ayrıntı ana sayfada değil `games/` sayfasında; ana sayfa yalnız kapı.
+- `games/index.html` — oyunlar merkezi (jinjagames.com/games/): filtrelenebilir oyun satırları,
+  karşılaştırma tablosu ve BaneBender wikisine açılan kapı. Oyun sayfalarının adresleri
+  (`/cyberacademy/`, `/locard/`, `/daypot/`) bilerek TAŞINMADI: Steam, Play Console ve dış
+  bağlantılar bu adreslere bakıyor.
+- `banebender/` — kardeşimin (BaneBender) Minecraft mod wikisi. Sitenin geri kalanıyla
+  bilerek ortak tasarım dili yok; ana sayfada görünmez, `games/` sayfasındaki kapıdan ve
+  oradaki alt bilgiden girilir. Ayrıntı aşağıda, "BaneBender wikisi".
 - `assets/fonts.css` + `assets/fonts/` — yazı tipleri; her sayfa bunu bağlar.
-- `cyberacademy/index.html` — Cyber Academy tanıtım sayfası.
+- `cyberacademy/index.html` — Cyber Academy tanıtım sayfası. Fragman `cyberacademy/media/darknet-trailer.mp4`
+  (kaynak: `steam_cyberacademy/steam_darknet_trailer/DarkNet_Trailer_EN_final.mp4`, web için yeniden
+  sıkıştırıldı), kısa sessiz döngü `darknet-loop.mp4` ana sayfa ve oyunlar kartında; ekran
+  görüntüleri `cyberacademy/img/` (WebP).
 - `locard/index.html` — Locard tanıtım sayfası (`locard-og.jpg` paylaşım görseli,
   `locard/img/` oyun içi kareler ve kapak sahnesi, WebP). Sayfada etkileşimli delil
-  panosu, galeri, sekmeli sistem listesi ve birlikte oynama bölümü var.
+  panosu, fragman (`locard/media/locard-trailer.mp4`, kaynak `steam_locard/06_Fragman/Locard_Gameplay_Trailer_16x9.mp4`;
+  spoiler içermiyor), galeri, sekmeli sistem listesi ve birlikte oynama bölümü var.
 - `assets/steam.js` — **Locard Steam anahtarı.** Mağaza sayfası açılınca değiştirilecek tek
   yer burası (aşağıya bak). Hem `locard/` hem ana sayfa bunu okur.
 - `daypot/index.html` — DayPot tanıtım sayfası; görseller `daypot/img/`.
@@ -81,6 +93,46 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
   konumlanıyor. Son bölümdekinin aşağı sarkması sayfanın altına boş alan ekler;
   son bölümde leke yukarı alınır.
 
+- **`<nav>` etiketini üst bar dışında kullanma.** Ana sayfadaki `nav{position:fixed}` kuralı
+  her `<nav>`'ı yakalar; telefondaki alt gezinme çubuğu bu yüzden `div role="navigation"`.
+
+## Siteyi bilgisayarda açmak
+
+`index.html` çift tıklanarak (sunucusuz, `file://`) açılabilir. Bu durumda klasör
+bağlantıları (`cyberacademy/`, `../`) tarayıcıda klasör listesi açardı; her sayfanın
+`<head>`'indeki `assets/local-links.js` yalnız `file://` altında bu bağlantıların sonuna
+`index.html` ekler, yayındaki sitede hiçbir şey yapmaz. Yeni sayfa eklenince bu betik de bağlanmalı.
+
+## Telefonda gezinme
+
+Sağ üstteki üç çizgili menü kaldırıldı. 1060 pikselin altında ana sayfada ve `games/`
+sayfasında ekranın altında yüzen bir çubuk (`.dock`) var: Oyunlar · Stüdyo · SSS · İletişim.
+Bulunulan bölüm çubukta yanar. Dil ve tema düğmeleri sağ üstte kalır. Çubuk içeriğin
+üstüne binmesin diye `body` altına çubuk kadar boşluk alır.
+
+## BaneBender wikisi
+
+- `banebender/index.html` iskelet, `app.css` görünüm, `app.js` arayüz ve mod sayfaları
+  (adres çubuğunda # görünmez; mod sayfaları geçmişe adres değiştirmeden yazılır, geri tuşu çalışır), `scene.js` hero'daki 3B voksel ada.
+- `banebender/vendor/three.min.js` — three.js r149 (MIT), klasik betik olarak yerel kopya
+  (ES modülü değil; modüller dosyadan açınca yüklenmiyor). Dönen eşya simgeleri
+  `banebender/data/hero-sprites.js` içinde veri URI'si. Sitede
+  üçüncü taraf isteği olmaması kuralı burada da geçerli.
+- `assets/fonts/pixelify-sans-var.woff2` — Pixelify Sans (SIL OFL), Türkçe karakterleri içerir.
+- `banebender/data/mods.js` — **elle yazılmış içerik** (İngilizce + Türkçe). Kaynak yalnızca
+  modların CurseForge açıklamaları ve modların kendi dosyaları; açıklamada olmayan bir
+  özellik yazılmaz. İndirme sayıları 12 Ekim 2026 tarihli; güncellenirken tarih de değişmeli.
+- `banebender/data/generated.js` + `banebender/img/<slug>/` — **otomatik üretilir**:
+  `tools/build_banebender.py`, mod jar dosyalarından (dil dosyaları, dokular) eşya adlarını,
+  sprite atlaslarını (`items.png`), yaratık/yapı/büyü listelerini ve logodan vurgu rengini çıkarır.
+  CurseForge logo ve galeri görselleri `$CF_CACHE_PARENT/dl/<slug>/` altında beklenir.
+- Yeni mod eklenince: jar'ı CurseForge örneğine kur, `build_banebender.py` içindeki `JARS`
+  listesine ekle, betiği çalıştır, sonra `mods.js`'e o modun metnini yaz.
+- Bilinen tuzak: Frontier Structures'ın `tr_tr.json` dosyasında bazı adlar çift kodlanmış
+  (Ã¼ gibi). Betik bunu düzeltiyor (`fix()`); asıl düzeltme modun kendisinde yapılmalı.
+- YouTube videosu (Chest Hauler) tıklanana kadar yüklenmez, tıklanınca youtube-nocookie.com
+  açılır; gizlilik sayfası bunu söylüyor.
+
 ## Yazı kuralları
 
 - **Sitede uzun tire (—), kısa tire (–) ve kelime içi tire kullanılmaz.** Cümle
@@ -93,9 +145,9 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
 
 ## Locard: Steam sayfası açılınca
 
-`assets/steam.js` içinde `live:false` yazıyor; bu durumda sitede "Steam sayfası yakında"
-görünür ve istek listesi düğmeleri gizlidir (mağaza henüz kapalıyken ölü bağlantı olmasın).
-Mağaza sayfası yayına girince:
+**Mağaza sayfası yayında (Ekim 2026):** `assets/steam.js` içinde `live:true`. `live:false`
+yapılırsa sitede "Steam sayfası yakında" görünür ve istek listesi düğmeleri gizlenir.
+Başka bir oyun için aynı düzen gerekirse adımlar şunlardı:
 
 1. `live:true` yap (ya da `liveAt:'2026-10-09T17:00:00Z'` gibi bir an yaz; o andan sonra
    site kendiliğinden açılır, elle müdahale gerekmez), commit + push.
@@ -157,23 +209,22 @@ Apex (kök) domain için **A** kayıtları, `www` için **CNAME**:
 DNS yayılması 10 dk – 24 saat sürebilir.
 
 ## Yapılacaklar
-- [ ] Locard: Steam mağaza sayfası açılınca `assets/steam.js` içinde `live:true` yapılacak
-      (ayrıntı yukarıda, "Locard: Steam sayfası açılınca").
-- [ ] Locard sayfası ve ana sayfa kartı Windows ve macOS diyor (kullanıcı kararı). Steamworks'te
-      macOS platformu ve gerçek bir Mac derlemesi henüz yoksa mağaza sayfası ile site çelişir;
-      Steam'e macOS eklenene kadar düzeltilmeli ya da site geri alınmalı. Plan değişirse künye
-      şeridi, ana sayfa kartı ve JSON-LD (`gamePlatform`) birlikte güncellenmeli.
+- [x] Locard: Steam mağaza sayfası açıldı, `assets/steam.js` içinde `live:true`.
+- [ ] Locard: Steam sayfası şu an yalnız Windows ve yalnız Türkçe listeliyor; site de böyle
+      diyor ("macOS planlanıyor", "İngilizce planlanıyor"). Steam'e Mac derlemesi ya da İngilizce
+      eklenince künye şeridi, "Henüz değil" listesi, ana sayfa kartı, `games/` sayfası ve
+      JSON-LD (`gamePlatform`, `inLanguage`) birlikte güncellenmeli.
 - [ ] Locard sayfasındaki rakamlar (10 mekân, 18 karakter, 64 kayıt, 7 son) ve "Erken Erişim ·
       Q1 2027" ibaresi Steam mağaza metniyle birebir aynı olmalı. Çıkış tarihi kesinleşince ya da
       mağaza "yakında" yerine tarih gösterirse `locard/index.html` künyesi güncellenmeli.
-- [ ] Cyber Academy sayfası çıkışta Windows, macOS ve Linux diyor (önceden "çıkışta
-      Windows, macOS ve Linux sonra" yazıyordu). Bu da kullanıcı kararıdır; plan
-      değişirse künye şeridi, "Üç platform" kartı, rakam şeridi ve JSON-LD
-      (`gamePlatform`) birlikte güncellenmeli.
+- [ ] Cyber Academy 11 Eylül 2026'da Steam Erken Erişime çıktı; site "istek listesi" yerine
+      "Steam'de al" diyor. Modül sayısı sitede "25 modül planlanıyor, ilkleri oynanabilir"
+      olarak yazılı; yeni modüller duyurulunca kesin sayı yazılabilir. Steam'deki Erken Erişim
+      SSS'si hâlâ "25+ modules … English + Turkish" diyor, mağazadaki dil listesi 23 dil; oyun
+      ise 25 arayüz dili taşıyor. Steamworks'teki bu metinler güncellenmeli (site doğru olanı söylüyor).
 - [ ] DayPot tarif sayısı sayfada "250+" olarak yazılıyor; katalog büyüdükçe bu eşik
       güncellenebilir (ana sayfadaki rakam satırı ve DayPot sayfası).
-- [ ] Locard: galeride 5 kare var (3 oyun içi ekran görüntüsü + ana menü + vaka dosyaları).
-      Fragman çıkınca galeriye ya da hero'ya eklenecek. `Locard_Bolum01_Senaryo.mp4` katili
+- [x] Locard: oynanış fragmanı eklendi, galeri 7 kare. `Locard_Bolum01_Senaryo.mp4` katili
       açıkladığı için siteye konmaz.
 - [ ] DayPot: Play yayını açılınca "Yakında Google Play'de" durumu mağaza rozetiyle
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
