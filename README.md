@@ -96,6 +96,16 @@ Bu sitede iki kez ısırdılar, üçüncüsü olmasın diye buraya yazıyoruz:
 - **`<nav>` etiketini üst bar dışında kullanma.** Ana sayfadaki `nav{position:fixed}` kuralı
   her `<nav>`'ı yakalar; telefondaki alt gezinme çubuğu bu yüzden `div role="navigation"`.
 
+## Canlı katmanlar
+
+- Ana sayfa hero'su: `assets/home3d.js`, üç dünyanın biçimleri (küp, parmak izi, tencere)
+  arasında dönüşen parçacık bulutu; hero listesindeki adların üzerine gelince biçim değişir.
+  Renkleri temadan (`--brand`, `--w-cyber` …) okur.
+- Ana sayfa "Yaptıklarımız": yan yana üç panel; üzerine gelinen açılır. Telefonda alt alta.
+- Cyber Academy: hero'da canlı ağ animasyonu ve yazı yazan terminal, "Karanlık Ağ'da bir
+  operasyon" adımları (kareler `cyberacademy/img/run/`, Karanlık Ağ fragmanından), imleci
+  izleyen kart ışığı, sayan rakamlar. Hepsi `prefers-reduced-motion` açıkken durur.
+
 ## Siteyi bilgisayarda açmak
 
 `index.html` çift tıklanarak (sunucusuz, `file://`) açılabilir. Bu durumda klasör
@@ -114,7 +124,7 @@ Bulunulan bölüm çubukta yanar. Dil ve tema düğmeleri sağ üstte kalır. Ç
 
 - `banebender/index.html` iskelet, `app.css` görünüm, `app.js` arayüz ve mod sayfaları
   (adres çubuğunda # görünmez; mod sayfaları geçmişe adres değiştirmeden yazılır, geri tuşu çalışır), `scene.js` hero'daki 3B voksel ada.
-- `banebender/vendor/three.min.js` — three.js r149 (MIT), klasik betik olarak yerel kopya
+- `assets/vendor/three.min.js` — three.js r149 (MIT; hem ana sayfa hem wiki kullanır), klasik betik olarak yerel kopya
   (ES modülü değil; modüller dosyadan açınca yüklenmiyor). Dönen eşya simgeleri
   `banebender/data/hero-sprites.js` içinde veri URI'si. Sitede
   üçüncü taraf isteği olmaması kuralı burada da geçerli.

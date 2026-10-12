@@ -391,6 +391,57 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
 .shot img{aspect-ratio:auto}
 @media(max-width:900px){.feat{grid-template-columns:1fr 1fr}.ea{grid-template-columns:1fr}}
 @media(max-width:640px){.feat{grid-template-columns:1fr}.ea-col{padding:26px 22px}.livebadge{font-size:12px}}
+
+/* ---------------- CANLI KATMAN ---------------- */
+.net{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.85}
+.hero .grid{z-index:0}
+.term{position:absolute;z-index:2;right:max(28px,calc((100vw - var(--W)) / 2 + 24px));top:50%;width:min(430px,34vw);transform:translateY(-38%) perspective(900px) rotateY(-8deg) rotateX(3deg);background:rgba(6,9,13,.82);border:1px solid rgba(56,199,180,.35);border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04),0 0 60px rgba(56,199,180,.12);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow:hidden;transition:transform .6s var(--ease)}
+.term:hover{transform:translateY(-38%) perspective(900px) rotateY(-2deg)}
+.term-bar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid rgba(56,199,180,.18);font-family:var(--f-mono);font-size:11px;color:#7fa7a5}
+.term-bar i{width:9px;height:9px;border-radius:50%;background:#3a4650}.term-bar i:first-child{background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
+.term-bar span{margin-left:8px}
+.term-body{margin:0;padding:14px 16px 16px;height:250px;overflow:hidden;font-family:var(--f-mono);font-size:12.5px;line-height:1.7;color:#bdeee6;white-space:pre-wrap}
+.term-body .ok{color:#45d49a}.term-body .warn{color:#ff8a7a}.term-body .dim{color:#5d7b80}
+.term-body .cur{display:inline-block;width:8px;height:15px;background:#38c7b4;vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+html[data-theme="light"] .term{background:rgba(9,16,20,.88)}
+@media(max-width:1100px){.term{display:none}}
+
+/* operasyon */
+.op{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;margin-top:34px;align-items:start}
+.op-tabs{display:grid;gap:6px}
+.op-tab{position:relative;display:flex;align-items:center;gap:14px;padding:13px 16px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;cursor:pointer;overflow:hidden;transition:border-color .25s,background .25s,transform .25s var(--ease)}
+.op-tab:hover{transform:translateX(4px);border-color:var(--line-2)}
+.op-tab[aria-selected="true"]{border-color:rgba(56,199,180,.6);background:linear-gradient(90deg,rgba(56,199,180,.12),var(--surface))}
+.op-n{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.op-tab[aria-selected="true"] .op-n{color:var(--cy)}
+.op-t{font-family:var(--f-mono);font-weight:700;font-size:14.5px;letter-spacing:-.02em;color:var(--ink)}
+.op-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,var(--cy),var(--brand));transform:scaleX(0);transform-origin:left}
+.op-tab[aria-selected="true"] .op-bar{animation:opbar var(--opdur,4.2s) linear forwards}
+.op.paused .op-tab[aria-selected="true"] .op-bar{animation:none;transform:scaleX(1)}
+@keyframes opbar{to{transform:scaleX(1)}}
+.op-screen{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid rgba(56,199,180,.3);background:#05080c;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.op-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 4.5s linear;clip-path:inset(0 0 0 0)}
+.op-screen img.on{opacity:1;transform:scale(1)}
+.op-screen img.glitch{animation:glitch .45s steps(2) 1}
+@keyframes glitch{0%{clip-path:inset(10% 0 60% 0);transform:translateX(-6px)}25%{clip-path:inset(50% 0 20% 0);transform:translateX(6px)}50%{clip-path:inset(30% 0 40% 0);transform:translateX(-3px)}100%{clip-path:inset(0 0 0 0);transform:none}}
+.op-scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),linear-gradient(180deg,transparent 0,rgba(56,199,180,.12) 50%,transparent 100%);background-size:100% 100%,100% 30%;background-repeat:repeat,no-repeat;animation:scan 3.5s linear infinite}
+@keyframes scan{from{background-position:0 0,0 -40%}to{background-position:0 0,0 140%}}
+.op-corner{position:absolute;right:14px;top:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:#ff6b5e;background:rgba(0,0,0,.5);padding:4px 8px;border-radius:6px}
+.op-caps{position:relative;min-height:56px;margin-top:16px}
+.op-cap{position:absolute;inset:0;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .5s var(--ease);font-size:17px;color:var(--ink-2)}
+.op-cap.on{opacity:1;transform:none;position:relative}
+@media(max-width:900px){.op{grid-template-columns:1fr}.op-tabs{grid-template-columns:repeat(2,1fr)}.op-tab:hover{transform:none}}
+@media(max-width:640px){.op-t{font-size:13px}.op-tab{padding:11px 12px;gap:10px}}
+
+/* imleci izleyen ışık + eğim */
+.story,.fcard,.support-card,.ea-col{--mx:50%;--my:50%}
+.story::before,.fcard::before,.support-card::before,.ea-col::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(360px circle at var(--mx) var(--my),rgba(56,199,180,.16),transparent 45%);opacity:0;transition:opacity .3s;z-index:0}
+.story:hover::before,.fcard:hover::before,.support-card:hover::before,.ea-col:hover::before{opacity:1}
+.story>*,.fcard>*,.support-card>*,.ea-col>*{position:relative;z-index:1}
+.ea-col{position:relative;overflow:hidden}
+.shot{transform-style:preserve-3d}
+[data-decode]{display:inline-block}
 </style>
 <script src="../assets/clean-scroll.js" defer></script>
 <script src="../assets/local-links.js"></script>
@@ -430,8 +481,13 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
 
 <!-- HERO -->
 <div class="hero">
+  <canvas class="net" id="net" aria-hidden="true"></canvas>
   <div class="grid"></div>
   <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="term" id="term" aria-hidden="true">
+    <div class="term-bar"><i></i><i></i><i></i><span>operator@darknet: ~</span></div>
+    <pre class="term-body" id="termbody"></pre>
+  </div>
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span class="sep" aria-hidden="true">/</span><a href="../games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a><span class="sep" aria-hidden="true">/</span><span>Cyber Academy</span></nav>
     <img class="herologo" src="../app_icon.png?v=20260825" alt="Cyber Academy" onerror="this.style.display='none'">
@@ -483,8 +539,8 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
     <div class="wrap">
       <div class="rv">
         <span class="eyebrow"><span class="en i">What it is</span><span class="tr i">Nedir</span></span>
-        <h2 class="en">Two sides, <span class="grad">one game.</span></h2>
-        <h2 class="tr">İki taraf, <span class="grad">tek oyun.</span></h2>
+        <h2 class="en">Two sides, <span class="grad" data-decode>one game.</span></h2>
+        <h2 class="tr">İki taraf, <span class="grad" data-decode>tek oyun.</span></h2>
       </div>
       <div class="duo">
         <div class="story rv">
@@ -517,13 +573,33 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
     </div>
   </section>
 
+  <!-- OPERASYON -->
+  <section class="blk op-sec" id="run">
+    <div class="wrap">
+      <div class="rv">
+        <span class="eyebrow"><span class="en i">A run on the Dark Net</span><span class="tr i">Karanlık Ağ'da bir operasyon</span></span>
+        <h2 class="en">Eight moves, <span class="grad" data-decode>one night.</span></h2>
+        <h2 class="tr">Sekiz hamle, <span class="grad" data-decode>tek gece.</span></h2>
+        <p class="sub en">Frames from the Dark Net trailer. Pick a step, or let it play.</p>
+        <p class="sub tr">Kareler Karanlık Ağ fragmanından. Bir adım seç ya da kendi aksın.</p>
+      </div>
+      <div class="op rv" id="op">
+        <div class="op-tabs" role="tablist" aria-label="Operation steps"><button class="op-tab" type="button" role="tab" data-op="0" aria-selected="true"><span class="op-n">01</span><span class="op-t"><span class="en i">Find a target</span><span class="tr i">Hedefi bul</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="1" aria-selected="false"><span class="op-n">02</span><span class="op-t"><span class="en i">Choose your path</span><span class="tr i">Yolunu seç</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="2" aria-selected="false"><span class="op-n">03</span><span class="op-t"><span class="en i">Break in</span><span class="tr i">İçeri sız</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="3" aria-selected="false"><span class="op-n">04</span><span class="op-t"><span class="en i">Plant a keylogger</span><span class="tr i">Keylogger yerleştir</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="4" aria-selected="false"><span class="op-n">05</span><span class="op-t"><span class="en i">Drain their vault</span><span class="tr i">Kasayı boşalt</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="5" aria-selected="false"><span class="op-n">06</span><span class="op-t"><span class="en i">They’re coming</span><span class="tr i">Sıra sende</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="6" aria-selected="false"><span class="op-n">07</span><span class="op-t"><span class="en i">Trace</span><span class="tr i">İz sür</span></span><i class="op-bar"></i></button><button class="op-tab" type="button" role="tab" data-op="7" aria-selected="false"><span class="op-n">08</span><span class="op-t"><span class="en i">Defend</span><span class="tr i">Savun</span></span><i class="op-bar"></i></button></div>
+        <div class="op-stage">
+          <div class="op-screen"><img src="img/run/step1.webp" width="1280" height="720" alt="" loading="lazy" class="on" data-opimg="0"><img src="img/run/step2.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="1"><img src="img/run/step3.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="2"><img src="img/run/step4.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="3"><img src="img/run/step5.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="4"><img src="img/run/step6.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="5"><img src="img/run/step7.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="6"><img src="img/run/step8.webp" width="1280" height="720" alt="" loading="lazy" class="" data-opimg="7"><span class="op-scan" aria-hidden="true"></span><span class="op-corner" aria-hidden="true">REC ●</span></div>
+          <div class="op-caps" aria-live="polite"><p class="op-cap on" data-opcap="0"><span class="en i">Scan the network and pick a fictional operator’s machine to go after.</span><span class="tr i">Ağı tara ve peşine düşeceğin kurgusal bir operatörün makinesini seç.</span></p><p class="op-cap" data-opcap="1"><span class="en i">Every target opens a branching route. Decide which tools you will chain, and in what order.</span><span class="tr i">Her hedef dallanan bir yol açar. Hangi araçları hangi sırayla zincirleyeceğine sen karar verirsin.</span></p><p class="op-cap" data-opcap="2"><span class="en i">Each tool is a puzzle of its own: crack the checksum in CRYPTLINE, drill under the firewall in TUNNELBORE.</span><span class="tr i">Her araç kendi başına bir bulmaca: CRYPTLINE’da sağlamayı çöz, TUNNELBORE’la güvenlik duvarının altından geç.</span></p><p class="op-cap" data-opcap="3"><span class="en i">KEYTRACE watches what the target types, for as long as the slot stays open.</span><span class="tr i">KEYTRACE, yuva açık kaldığı sürece hedefin ne yazdığını izler.</span></p><p class="op-cap" data-opcap="4"><span class="en i">Take their ZeroBit. The attack history keeps a record of every hit.</span><span class="tr i">ZeroBit’lerini al. Saldırı geçmişi her vuruşun kaydını tutar.</span></p><p class="op-cap" data-opcap="5"><span class="en i">Intrusion detected. Someone is inside your machine now.</span><span class="tr i">İzinsiz giriş tespit edildi. Şimdi biri senin makinende.</span></p><p class="op-cap" data-opcap="6"><span class="en i">Follow the trail back through logs and hops while the evidence is still fresh.</span><span class="tr i">Delil tazeyken kayıtlar ve atlamalar üzerinden izi geriye doğru sür.</span></p><p class="op-cap" data-opcap="7"><span class="en i">Answer with defence puzzles of your own, and make the next attempt cost more.</span><span class="tr i">Kendi savunma bulmacalarınla cevap ver ve bir sonraki denemeyi daha pahalı hâle getir.</span></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ÖZELLİKLER -->
   <section class="blk band">
     <div class="wrap">
       <div class="rv">
         <span class="eyebrow"><span class="en i">Inside the Dark Net</span><span class="tr i">Karanlık Ağ'ın içi</span></span>
-        <h2 class="en">Deep systems, <span class="grad">real depth.</span></h2>
-        <h2 class="tr">Derin sistemler, <span class="grad">gerçek derinlik.</span></h2>
+        <h2 class="en">Deep systems, <span class="grad" data-decode>real depth.</span></h2>
+        <h2 class="tr">Derin sistemler, <span class="grad" data-decode>gerçek derinlik.</span></h2>
         <p class="sub en">No fake terminals and no hand holding. Every tool is a puzzle, and every move has a cost.</p>
         <p class="sub tr">Sahte terminal yok, el tutma yok. Her araç bir bulmaca, her hamlenin bir bedeli var.</p>
       </div>
@@ -597,8 +673,8 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
     <div class="wrap">
       <div class="rv">
         <span class="eyebrow"><span class="en i">Trailer</span><span class="tr i">Fragman</span></span>
-        <h2 class="en">There is <span class="grad">another network.</span></h2>
-        <h2 class="tr">Başka bir <span class="grad">ağ daha var.</span></h2>
+        <h2 class="en">There is <span class="grad" data-decode>another network.</span></h2>
+        <h2 class="tr">Başka bir <span class="grad" data-decode>ağ daha var.</span></h2>
         <p class="sub en">The Dark Net trailer: find a target, choose your path, break in, and then watch them come for you.</p>
         <p class="sub tr">Karanlık Ağ fragmanı: hedefi bul, yolunu seç, içeri gir; sonra onların sana gelişini izle.</p>
       </div>
@@ -625,8 +701,8 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
     <div class="wrap">
       <div class="rv">
         <span class="eyebrow"><span class="en i">Early Access, said plainly</span><span class="tr i">Erken Erişim, açıkça</span></span>
-        <h2 class="en">What is in, <span class="grad">what is coming.</span></h2>
-        <h2 class="tr">Neler var, <span class="grad">neler geliyor.</span></h2>
+        <h2 class="en">What is in, <span class="grad" data-decode>what is coming.</span></h2>
+        <h2 class="tr">Neler var, <span class="grad" data-decode>neler geliyor.</span></h2>
       </div>
       <div class="ea rv">
         <div class="ea-col">
@@ -751,6 +827,119 @@ html[data-theme="light"] .story-k,html[data-theme="light"] .fk{color:#0B6F68}
   }
 
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
+
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- hero: canlı ağ ---------- */
+  (function(){
+    var c=$('#net'); if(!c||reduce) return;
+    var x=c.getContext('2d'), W, H, dpr=Math.min(window.devicePixelRatio||1,2), nodes=[], packets=[], mouse={x:-999,y:-999};
+    function size(){ W=c.offsetWidth; H=c.offsetHeight; c.width=W*dpr; c.height=H*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+      var n=Math.round(Math.min(70,W*H/18000)); nodes=[];
+      for(var i=0;i<n;i++) nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()<.12?2.6:1.4,red:Math.random()<.14}); }
+    size(); window.addEventListener('resize',size);
+    c.parentNode.addEventListener('pointermove',function(e){ var r=c.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+    c.parentNode.addEventListener('pointerleave',function(){ mouse.x=mouse.y=-999; });
+    var vis=true; if('IntersectionObserver' in window) new IntersectionObserver(function(es){ vis=es[0].isIntersecting; if(vis) requestAnimationFrame(tick); }).observe(c);
+    var LINK=150;
+    function tick(){
+      if(!vis||document.hidden) return;
+      x.clearRect(0,0,W,H);
+      for(var i=0;i<nodes.length;i++){ var a=nodes[i]; a.x+=a.vx; a.y+=a.vy; if(a.x<0||a.x>W) a.vx*=-1; if(a.y<0||a.y>H) a.vy*=-1;
+        var dxm=a.x-mouse.x, dym=a.y-mouse.y, dm=Math.sqrt(dxm*dxm+dym*dym); if(dm<120){ a.x+=dxm/dm*.8; a.y+=dym/dm*.8; } }
+      for(i=0;i<nodes.length;i++){ for(var j=i+1;j<nodes.length;j++){ var p=nodes[i], q=nodes[j], dx=p.x-q.x, dy=p.y-q.y, dd=Math.sqrt(dx*dx+dy*dy);
+        if(dd<LINK){ var near=Math.min(1,Math.max(0,1-Math.hypot((p.x+q.x)/2-mouse.x,(p.y+q.y)/2-mouse.y)/220));
+          x.strokeStyle='rgba(56,199,180,'+((1-dd/LINK)*.22+near*.35)+')'; x.lineWidth=1; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke();
+          if(packets.length<26&&Math.random()<.0009) packets.push({a:p,b:q,t:0,red:Math.random()<.3}); } } }
+      for(i=packets.length-1;i>=0;i--){ var k=packets[i]; k.t+=.012; if(k.t>=1){ packets.splice(i,1); continue; }
+        var px=k.a.x+(k.b.x-k.a.x)*k.t, py=k.a.y+(k.b.y-k.a.y)*k.t; x.fillStyle=k.red?'#ff6b5e':'#9ff0e4'; x.shadowColor=x.fillStyle; x.shadowBlur=10; x.fillRect(px-1.5,py-1.5,3,3); x.shadowBlur=0; }
+      for(i=0;i<nodes.length;i++){ var n=nodes[i]; x.fillStyle=n.red?'rgba(255,107,94,.9)':'rgba(159,240,228,.75)'; x.beginPath(); x.arc(n.x,n.y,n.r,0,6.283); x.fill(); }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---------- hero: terminal ---------- */
+  (function(){
+    var body=$('#termbody'); if(!body) return;
+    var L=[
+      ['> route --hops 7 --mask',''],['  handshake ........ ','OK','ok'],['  connecting to the dark net',''],['  tunnel up · 203.0.113.7','', 'dim'],
+      ['> scan --target 198.51.100.24',''],['  firewall ........ ','ACTIVE','warn'],['> chain spectr2 > cryptline > tunnelbore',''],
+      ['  checksum cracked · ','OK','ok'],['  breach ........... ','DONE','ok'],['> keytrace --watch 3',''],['  !! intrusion detected: someone is inside your machine','', 'warn'],
+      ['> trace --from last','']
+    ];
+    var out='', li=0, ci=0;
+    function render(cur){ body.innerHTML=out+(cur||'')+'<span class="cur"></span>'; }
+    function line(){
+      if(li>=L.length){ setTimeout(function(){ out=''; li=0; ci=0; line(); },2600); return; }
+      var l=L[li], txt=l[0];
+      (function type(){
+        if(ci<=txt.length){ render(esc(txt.slice(0,ci))); ci++; setTimeout(type, txt.charAt(0)==='>'?34:12); return; }
+        var tail=l[1]?'<span class="'+(l[2]||'')+'">'+esc(l[1])+'</span>':'';
+        var cls=!l[1]&&l[2]?l[2]:'';
+        out+=(cls?'<span class="'+cls+'">'+esc(txt)+'</span>':esc(txt))+tail+'\n';
+        var lines=out.split('\n'); if(lines.length>13){ out=lines.slice(lines.length-13).join('\n'); }
+        li++; ci=0; render(''); setTimeout(line, txt.charAt(0)==='>'?420:220);
+      })();
+    }
+    function esc(s){ return s.replace(/[&<>]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+    if(reduce){ out=L.map(function(l){ return l[0]+(l[1]||''); }).join('\n')+'\n'; render(''); } else line();
+  })();
+
+  /* ---------- operasyon adımları ---------- */
+  (function(){
+    var op=$('#op'); if(!op) return;
+    var tabs=$$('.op-tab'), imgs=$$('[data-opimg]'), caps=$$('[data-opcap]'), cur=0, timer=null, DUR=4200, inView=false;
+    op.style.setProperty('--opdur',DUR+'ms');
+    function show(i,user){
+      cur=(i+tabs.length)%tabs.length;
+      tabs.forEach(function(t,k){ t.setAttribute('aria-selected',k===cur?'true':'false'); var b=t.querySelector('.op-bar'); if(b&&k===cur){ b.style.animation='none'; void b.offsetWidth; b.style.animation=''; } });
+      imgs.forEach(function(m,k){ m.classList.toggle('on',k===cur); if(k===cur&&!reduce){ m.classList.remove('glitch'); void m.offsetWidth; m.classList.add('glitch'); } });
+      caps.forEach(function(c,k){ c.classList.toggle('on',k===cur); });
+      if(user){ op.classList.add('paused'); clearTimeout(timer); timer=setTimeout(function(){ op.classList.remove('paused'); schedule(); },9000); }
+    }
+    function schedule(){ clearTimeout(timer); if(reduce||!inView||op.classList.contains('paused')) return; timer=setTimeout(function(){ show(cur+1); schedule(); },DUR); }
+    tabs.forEach(function(t,k){ t.addEventListener('click',function(){ show(k,true); }); t.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='ArrowRight'){ e.preventDefault(); show(cur+1,true); tabs[cur].focus(); } if(e.key==='ArrowUp'||e.key==='ArrowLeft'){ e.preventDefault(); show(cur-1,true); tabs[cur].focus(); } }); });
+    if('IntersectionObserver' in window) new IntersectionObserver(function(es){ inView=es[0].isIntersecting; if(inView){ show(cur); schedule(); } else clearTimeout(timer); },{threshold:.3}).observe(op);
+    else { inView=true; schedule(); }
+  })();
+
+  /* ---------- başlıklar: şifre çözülür gibi ---------- */
+  (function(){
+    if(reduce) return;
+    var CH='!<>-_\\/[]{}=+*^?#01';
+    function decode(el){
+      if(el.dataset.done) return; el.dataset.done='1';
+      var final=el.textContent, n=0, len=final.length;
+      (function step(){
+        var s=''; for(var i=0;i<len;i++){ s+= (i<n||final[i]===' ')?final[i]:CH[Math.floor(Math.random()*CH.length)]; }
+        el.textContent=s; n+=.6; if(n<=len) requestAnimationFrame(step); else el.textContent=final;
+      })();
+    }
+    var els=$$('[data-decode]');
+    if('IntersectionObserver' in window){ var o=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&e.target.offsetParent!==null){ decode(e.target); o.unobserve(e.target); } }); },{threshold:.6}); els.forEach(function(e){ o.observe(e); }); }
+  })();
+
+  /* ---------- kartlar: ışık ve eğim ---------- */
+  if(fine&&!reduce){
+    $$('.story,.fcard,.support-card,.ea-col,.shot').forEach(function(c){
+      c.addEventListener('mousemove',function(e){ var r=c.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        c.style.setProperty('--mx',(px*100)+'%'); c.style.setProperty('--my',(py*100)+'%');
+        c.style.transform='perspective(900px) rotateY('+((px-.5)*6)+'deg) rotateX('+((.5-py)*5)+'deg) translateY(-4px)'; });
+      c.addEventListener('mouseleave',function(){ c.style.transform=''; });
+    });
+  }
+
+  /* ---------- rakamlar: sayarak gelsin ---------- */
+  (function(){
+    var bs=$$('.castats b'); if(!bs.length||reduce||!('IntersectionObserver' in window)) return;
+    var o=new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return; o.unobserve(e.target);
+      var b=e.target, end=parseInt(b.textContent,10); if(isNaN(end)) return; var t0=performance.now();
+      (function f(now){ var k=Math.min(1,(now-t0)/1100); b.textContent=Math.round(end*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(f); })(t0);
+    }); },{threshold:.6});
+    bs.forEach(function(b){ o.observe(b); });
+  })();
 })();
 </script>
 </body>
