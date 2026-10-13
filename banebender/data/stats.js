@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1397,
+ "total": 1477,
  "projects": 20,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 132,
+   "dl": 135,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -23,25 +23,25 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 4,
+   "dl": 7,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
-   "dl": 82,
+   "dl": 83,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 14,
+   "dl": 15,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 177,
+   "dl": 179,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -53,31 +53,31 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 253,
+   "dl": 259,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 4,
+   "dl": 28,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 6,
+   "dl": 25,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 10,
+   "dl": 13,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 66,
+   "dl": 71,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -89,19 +89,19 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 84,
+   "dl": 92,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 43,
+   "dl": 46,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-05T11:03Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 42,
+   "dl": 44,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-12T15:06Z",
+ "updated": "2026-10-13T02:30Z",
  "source": "profile",
  "datesAt": "2026-10-12T15:06Z"
 };
