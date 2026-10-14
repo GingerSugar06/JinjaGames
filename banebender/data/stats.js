@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1664,
+ "total": 1693,
  "projects": 20,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 138,
+   "dl": 141,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
   "chest-hauler": {
    "name": "Chest Hauler",
-   "dl": 27,
+   "dl": 28,
    "created": "2026-10-05T11:28Z",
    "updated": "2026-10-05T11:28Z"
   },
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 191,
+   "dl": 193,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -53,55 +53,55 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 288,
+   "dl": 296,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 62,
+   "dl": 64,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 64,
+   "dl": 69,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 16,
+   "dl": 17,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 75,
+   "dl": 76,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 128,
+   "dl": 129,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 118,
+   "dl": 120,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 49,
+   "dl": 51,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-05T11:03Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 47,
+   "dl": 48,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-14T19:16Z",
+ "updated": "2026-10-14T23:49Z",
  "source": "profile",
  "datesAt": "2026-10-14T19:16Z"
 };
