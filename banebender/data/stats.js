@@ -1,17 +1,17 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1618,
+ "total": 1638,
  "projects": 20,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 118,
+   "dl": 119,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 136,
+   "dl": 137,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
-   "dl": 83,
+   "dl": 84,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
   },
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 185,
+   "dl": 188,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -53,19 +53,19 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 285,
+   "dl": 287,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 55,
+   "dl": 60,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 56,
+   "dl": 58,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -89,7 +89,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 109,
+   "dl": 112,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -101,7 +101,7 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 45,
+   "dl": 47,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-14T08:35Z",
+ "updated": "2026-10-14T14:27Z",
  "source": "profile",
  "datesAt": "2026-10-13T20:35Z"
 };
