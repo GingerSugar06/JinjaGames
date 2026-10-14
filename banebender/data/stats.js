@@ -1,17 +1,17 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1638,
+ "total": 1664,
  "projects": 20,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 119,
+   "dl": 120,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 137,
+   "dl": 138,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -35,13 +35,13 @@ window.BB_STATS={
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 19,
+   "dl": 20,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 188,
+   "dl": 191,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -53,25 +53,25 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 287,
+   "dl": 288,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 60,
+   "dl": 62,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 58,
+   "dl": 64,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 15,
+   "dl": 16,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -89,7 +89,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 112,
+   "dl": 118,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -107,7 +107,7 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 106,
+   "dl": 108,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -119,13 +119,13 @@ window.BB_STATS={
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 91,
+   "dl": 93,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
  },
  "unlisted": [],
- "updated": "2026-10-14T14:27Z",
+ "updated": "2026-10-14T19:16Z",
  "source": "profile",
- "datesAt": "2026-10-13T20:35Z"
+ "datesAt": "2026-10-14T19:16Z"
 };
