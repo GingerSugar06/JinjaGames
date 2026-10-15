@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1724,
+ "total": 1737,
  "projects": 20,
  "mods": {
   "all-irons": {
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 194,
+   "dl": 197,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,13 +59,13 @@ window.BB_STATS={
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 72,
+   "dl": 73,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 72,
+   "dl": 77,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -77,7 +77,7 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 78,
+   "dl": 79,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -89,7 +89,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 126,
+   "dl": 127,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -113,7 +113,7 @@ window.BB_STATS={
   },
   "variantide": {
    "name": "Variantide",
-   "dl": 12,
+   "dl": 14,
    "created": "2026-10-11T12:32Z",
    "updated": "2026-10-11T12:32Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-15T08:10Z",
+ "updated": "2026-10-15T14:05Z",
  "source": "profile",
  "datesAt": "2026-10-14T19:16Z"
 };
