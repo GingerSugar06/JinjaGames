@@ -1,7 +1,7 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1820,
- "projects": 20,
+ "total": 1849,
+ "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
@@ -9,9 +9,15 @@ window.BB_STATS={
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
+  "board-games": {
+   "name": "Board Games",
+   "dl": 2,
+   "created": "2026-10-16T07:48Z",
+   "updated": "2026-10-16T07:48Z"
+  },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 142,
+   "dl": 144,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -35,13 +41,13 @@ window.BB_STATS={
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 21,
+   "dl": 22,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 200,
+   "dl": 201,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,25 +65,25 @@ window.BB_STATS={
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 86,
+   "dl": 87,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 88,
+   "dl": 95,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 20,
+   "dl": 21,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 81,
+   "dl": 82,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -89,19 +95,19 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 137,
+   "dl": 141,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 79,
+   "dl": 88,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 49,
+   "dl": 50,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -113,7 +119,7 @@ window.BB_STATS={
   },
   "variantide": {
    "name": "Variantide",
-   "dl": 15,
+   "dl": 16,
    "created": "2026-10-11T12:32Z",
    "updated": "2026-10-11T12:32Z"
   },
@@ -124,8 +130,10 @@ window.BB_STATS={
    "updated": "2026-09-15T08:51Z"
   }
  },
- "unlisted": [],
- "updated": "2026-10-15T23:38Z",
+ "unlisted": [
+  "board-games"
+ ],
+ "updated": "2026-10-16T08:03Z",
  "source": "profile",
- "datesAt": "2026-10-15T18:59Z"
+ "datesAt": "2026-10-16T08:03Z"
 };
