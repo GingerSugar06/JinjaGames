@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1849,
+ "total": 1876,
  "projects": 21,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 2,
+   "dl": 8,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -47,37 +47,37 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 201,
+   "dl": 202,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
   "gilded-gambit": {
    "name": "Gilded Gambit",
-   "dl": 12,
+   "dl": 13,
    "created": "2026-10-11T12:41Z",
    "updated": "2026-10-11T12:41Z"
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 303,
+   "dl": 305,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 87,
+   "dl": 90,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 95,
+   "dl": 101,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 21,
+   "dl": 22,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -89,25 +89,25 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 130,
+   "dl": 131,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 141,
+   "dl": 143,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 88,
+   "dl": 90,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 50,
+   "dl": 51,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 93,
+   "dl": 94,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-16T08:03Z",
+ "updated": "2026-10-16T13:53Z",
  "source": "profile",
  "datesAt": "2026-10-16T08:03Z"
 };
