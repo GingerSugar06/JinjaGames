@@ -1,23 +1,23 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1893,
+ "total": 1921,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 120,
+   "dl": 121,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 10,
+   "dl": 14,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 144,
+   "dl": 145,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -47,13 +47,13 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 203,
+   "dl": 205,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
   "gilded-gambit": {
    "name": "Gilded Gambit",
-   "dl": 13,
+   "dl": 14,
    "created": "2026-10-11T12:41Z",
    "updated": "2026-10-11T12:41Z"
   },
@@ -65,13 +65,13 @@ window.BB_STATS={
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 91,
+   "dl": 92,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 108,
+   "dl": 120,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -83,7 +83,7 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 82,
+   "dl": 83,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -95,13 +95,13 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 144,
+   "dl": 146,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 90,
+   "dl": 93,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-16T18:44Z",
+ "updated": "2026-10-16T23:25Z",
  "source": "profile",
  "datesAt": "2026-10-16T08:03Z"
 };
