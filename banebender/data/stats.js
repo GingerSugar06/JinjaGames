@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 1876,
+ "total": 1893,
  "projects": 21,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 8,
+   "dl": 10,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -41,13 +41,13 @@ window.BB_STATS={
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 22,
+   "dl": 23,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 202,
+   "dl": 203,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,19 +59,19 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 305,
+   "dl": 306,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 90,
+   "dl": 91,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 101,
+   "dl": 108,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,7 +95,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 143,
+   "dl": 144,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -107,13 +107,13 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 51,
+   "dl": 52,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 108,
+   "dl": 110,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-16T13:53Z",
+ "updated": "2026-10-16T18:44Z",
  "source": "profile",
  "datesAt": "2026-10-16T08:03Z"
 };
