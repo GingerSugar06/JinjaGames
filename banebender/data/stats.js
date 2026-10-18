@@ -1,11 +1,11 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2138,
+ "total": 2174,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 122,
+   "dl": 123,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
@@ -17,7 +17,7 @@ window.BB_STATS={
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 147,
+   "dl": 150,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 14,
+   "dl": 16,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
@@ -47,7 +47,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 213,
+   "dl": 218,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,7 +59,7 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 320,
+   "dl": 321,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
@@ -71,49 +71,49 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 171,
+   "dl": 181,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 25,
+   "dl": 26,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 91,
+   "dl": 92,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 133,
+   "dl": 134,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 169,
+   "dl": 170,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 107,
+   "dl": 114,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 69,
+   "dl": 70,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 121,
+   "dl": 122,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 97,
+   "dl": 98,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-18T07:56Z",
+ "updated": "2026-10-18T13:09Z",
  "source": "profile",
  "datesAt": "2026-10-18T07:56Z"
 };
