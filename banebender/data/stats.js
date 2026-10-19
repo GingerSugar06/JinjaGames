@@ -1,29 +1,29 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2286,
+ "total": 2332,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 129,
+   "dl": 132,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 41,
+   "dl": 43,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 153,
+   "dl": 155,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
   "chest-hauler": {
    "name": "Chest Hauler",
-   "dl": 33,
+   "dl": 34,
    "created": "2026-10-05T11:28Z",
    "updated": "2026-10-05T11:28Z"
   },
@@ -47,7 +47,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 223,
+   "dl": 227,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,19 +59,19 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 322,
+   "dl": 329,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 127,
+   "dl": 134,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 202,
+   "dl": 210,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -83,37 +83,37 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 94,
+   "dl": 95,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 135,
+   "dl": 136,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 190,
+   "dl": 195,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 116,
+   "dl": 118,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 72,
+   "dl": 73,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 127,
+   "dl": 129,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-19T08:43Z",
+ "updated": "2026-10-19T16:24Z",
  "source": "profile",
  "datesAt": "2026-10-19T08:43Z"
 };
