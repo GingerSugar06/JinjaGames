@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+@@HEAD@@
+<style>
+:root{
+  --bg:#FBF7FF; --bg-soft:#F2EAFD; --surface:#FFFFFF; --ink:#2A2140; --ink-2:#5E5478; --ink-3:#6E6488;
+  --line:#E9DEF7; --line-2:#D9C9EE;
+  --accent:#7A4FD6; --accent-2:#9166E6; --accent-rgb:122,79,214; --on-accent:#fff;
+  --pop:#FF6F8E; --pop-rgb:255,111,142;
+  --nav-bg:rgba(251,247,255,.78); --nav-bg-solid:rgba(251,247,255,.97);
+  --shadow-1:0 2px 4px rgba(42,33,64,.04),0 14px 34px rgba(90,60,150,.10);
+  --shadow-2:0 26px 64px rgba(90,60,150,.20);
+  --sky1:#CFE6FF; --sky2:#F1E4FF; --sky3:#FFE3EE;
+  --W:1180px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px; --r:28px;
+  --f-body:'Nunito',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-display:'Fraunces',Georgia,'Times New Roman',serif;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#15101E; --bg-soft:#1B1527; --surface:#221B31; --ink:#F4EFFC; --ink-2:#C9BFDD; --ink-3:#A196B8;
+  --line:#2D2440; --line-2:#3D3256;
+  --accent:#B79BFF; --accent-2:#CDB8FF; --accent-rgb:183,155,255; --on-accent:#1A1226;
+  --pop:#FF8FA9; --pop-rgb:255,143,169;
+  --nav-bg:rgba(21,16,30,.78); --nav-bg-solid:rgba(21,16,30,.97);
+  --shadow-1:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.34);
+  --shadow-2:0 26px 64px rgba(0,0,0,.55);
+  --sky1:#241B45; --sky2:#2B1D4A; --sky3:#3A1F44;
+}
+@@BASE_CSS@@
+
+/* ================= JELLY TRAILS: kendine özgü ================= */
+/* HERO: gökyüzü, bulutlar, havada uçuşan jöleler */
+.hero{position:relative;padding:calc(var(--navh) + 40px) 0 110px;overflow:hidden;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,var(--bg) 100%)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(2px);pointer-events:none}
+html[data-theme="dark"] .hero::before,html[data-theme="dark"] .hero::after{background:rgba(183,155,255,.10)}
+.hero::before{width:420px;height:130px;left:-80px;top:150px;box-shadow:120px -50px 0 -10px rgba(255,255,255,.55),230px 20px 0 -30px rgba(255,255,255,.5)}
+.hero::after{width:360px;height:110px;right:-60px;bottom:140px;box-shadow:-140px -40px 0 -8px rgba(255,255,255,.5)}
+html[data-theme="dark"] .hero::before{box-shadow:120px -50px 0 -10px rgba(183,155,255,.09),230px 20px 0 -30px rgba(183,155,255,.08)}
+html[data-theme="dark"] .hero::after{box-shadow:-140px -40px 0 -8px rgba(183,155,255,.08)}
+.hero .wrap{position:relative;z-index:2}
+.crumb{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;color:var(--ink-2);margin-bottom:22px;flex-wrap:wrap}
+.crumb a:hover{color:var(--accent)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:40px;align-items:center}
+.logo{width:min(100%,560px);margin:0 0 8px -10px;filter:drop-shadow(0 18px 24px rgba(255,111,142,.28));animation:logoin 1.1s var(--ease) both}
+@keyframes logoin{from{opacity:0;transform:translateY(24px) scale(.9) rotate(-3deg)}to{opacity:1;transform:none}}
+.claim{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,3vw,32px);line-height:1.25;color:var(--accent);margin-top:4px}
+.lead{max-width:540px;margin-top:16px;color:var(--ink-2);font-size:18px}
+.cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
+.badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.badges span{font-size:13.5px;font-weight:800;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid var(--line-2);padding:5px 14px;border-radius:999px}
+html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
+.stage{position:relative;height:min(680px,78vw);display:grid;place-items:center}
+.phone{position:relative;width:min(100%,300px);border-radius:42px;overflow:hidden;border:9px solid var(--surface);box-shadow:var(--shadow-2);background:var(--surface);transform:rotate(3deg) translate(var(--px,0),var(--py,0));transition:transform .25s ease-out}
+.phone img{width:100%;aspect-ratio:9/16;object-fit:cover}
+.fj{position:absolute;width:var(--s,84px);left:var(--x);top:var(--y);z-index:3;animation:bob var(--t,5s) ease-in-out var(--dl,0s) infinite;transform:translate(var(--px,0),var(--py,0));-webkit-tap-highlight-color:transparent;cursor:pointer}
+.fj img{width:100%;filter:drop-shadow(0 12px 12px rgba(80,40,140,.25));transition:transform .2s}
+.fj:active img{transform:scale(.9,1.12)}
+.fj.sq img{animation:squish .6s var(--ease)}
+@keyframes bob{0%,100%{margin-top:0}50%{margin-top:-14px}}
+@keyframes squish{0%{transform:scale(1)}25%{transform:scale(1.28,.72)}50%{transform:scale(.82,1.2)}75%{transform:scale(1.1,.92)}100%{transform:scale(1)}}
+.heart{position:absolute;width:26px;pointer-events:none;z-index:6;animation:heart 1.1s ease-out forwards}
+@keyframes heart{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),-90px) scale(1.2) rotate(var(--rot))}}
+.hint-tap{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);font-size:13px;font-weight:800;color:var(--ink-3);white-space:nowrap}
+
+/* ŞERİT: kayan sayılar */
+.band{background:var(--accent);color:var(--on-accent);padding:22px 0;overflow:hidden;transform:rotate(-1.2deg);margin:-30px -10px 0;position:relative;z-index:4;box-shadow:0 14px 30px rgba(var(--accent-rgb),.25)}
+.band-t{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:mq 34s linear infinite}
+.band b{font-family:var(--f-display);font-size:clamp(22px,3vw,34px);display:inline-flex;align-items:center;gap:14px}
+.band b i{width:26px;height:26px;background-size:contain;background-repeat:no-repeat;display:inline-block}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* OYNA: gerçek bulmaca */
+.try{display:grid;grid-template-columns:minmax(0,.9fr) minmax(300px,1.1fr);gap:56px;align-items:center}
+.try h2{font-size:clamp(34px,5vw,58px);margin:12px 0 14px}
+.try p.lead2{color:var(--ink-2);font-size:18px;max-width:470px}
+.picker{display:flex;gap:10px;margin:26px 0 18px;flex-wrap:wrap}
+.pk{height:46px;min-width:46px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);font-weight:800;color:var(--ink-2);transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.pk:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.pk.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pk.done::after{content:"★";color:#FFC93C}
+.pk.on.done::after{color:#FFE27A}
+.meter{display:flex;gap:18px;flex-wrap:wrap;font-weight:800;color:var(--ink-2);font-size:15.5px;margin-bottom:18px}
+.meter span b{color:var(--accent);font-family:var(--f-display);font-size:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions .btn{padding:12px 22px;font-size:15px}
+.board-card{position:relative;background:var(--surface);border-radius:36px;padding:22px;box-shadow:var(--shadow-2);border:1px solid var(--line);max-width:520px;margin:0 auto;width:100%}
+.board-card::before{content:"";position:absolute;inset:-26px;z-index:-1;border-radius:60px;background:radial-gradient(circle at 30% 20%,rgba(var(--pop-rgb),.22),transparent 60%),radial-gradient(circle at 80% 90%,rgba(var(--accent-rgb),.22),transparent 60%)}
+.board{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0;touch-action:none;user-select:none;-webkit-user-select:none;aspect-ratio:1;border-radius:22px;overflow:hidden;background:var(--bg-soft)}
+.cell{position:relative;display:grid;place-items:center;box-shadow:inset 0 0 0 3px var(--surface);border-radius:14px;background:var(--bg-soft)}
+.cell img{position:relative;z-index:3;width:84%;height:auto;pointer-events:none;transition:transform .3s var(--ease)}
+.cell img.ok{animation:hop .55s var(--ease)}
+@keyframes hop{30%{transform:translateY(-14%) scale(1.1)}60%{transform:scale(1.08,.9)}100%{transform:none}}
+.board svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+.board svg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.board.won .cell img{animation:hop .7s var(--ease) both}
+.win{position:absolute;inset:0;z-index:8;display:none;place-items:center;text-align:center;background:rgba(255,255,255,.72);backdrop-filter:blur(3px);border-radius:36px}
+html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
+.win.on{display:grid;animation:labin .4s ease}
+.win h3{font-size:34px;margin:6px 0 4px}
+.win p{color:var(--ink-2);margin-bottom:16px}
+.stars{display:flex;gap:6px;justify-content:center}
+.stars img{width:62px;opacity:0;transform:scale(.3) rotate(-30deg)}
+.win.on .stars img{animation:starin .6s var(--ease) forwards}
+.win.on .stars img:nth-child(2){animation-delay:.18s}.win.on .stars img:nth-child(3){animation-delay:.36s}
+@keyframes starin{60%{transform:scale(1.25) rotate(8deg);opacity:1}100%{opacity:1;transform:none}}
+.conf{position:absolute;width:30px;z-index:9;pointer-events:none;animation:conf 1.4s ease-out forwards}
+@keyframes conf{from{opacity:1;transform:translate(0,0) scale(.4)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--rot))}}
+
+/* DÜNYALAR */
+.worlds{background:linear-gradient(180deg,var(--bg),var(--bg-soft) 18%,var(--bg-soft) 82%,var(--bg))}
+.wx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:60px;align-items:center}
+.wx-grid .wx-view{max-width:300px;margin-left:auto}
+.wx-info h2{font-size:clamp(32px,4.6vw,52px);margin:12px 0 18px}
+.wx-info>p{color:var(--ink-2);font-size:18px;max-width:480px;margin-bottom:26px}
+
+/* SÜRPRİZLER */
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.lab-tab{padding:8px 18px 8px 10px;background:var(--surface);border-color:var(--line)}
+.lab-tab img{width:34px;height:34px}
+.lab-card{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:40px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:36px;padding:44px 48px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.lab-card::before{content:"";position:absolute;width:380px;height:380px;left:-110px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(var(--pop-rgb),.2),transparent 66%)}
+.lab-card>*{position:relative}
+.lab-tip{margin-top:18px;font-size:14px;font-weight:800;color:var(--ink-3)}
+
+/* SAKİN BAŞLA */
+.stickers{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.sticker{background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:34px 30px 30px;position:relative;box-shadow:var(--shadow-1);transition:transform .35s var(--ease)}
+.sticker:nth-child(1){transform:rotate(-1.6deg)}.sticker:nth-child(2){transform:rotate(1.2deg) translateY(10px)}.sticker:nth-child(3){transform:rotate(-.8deg)}
+.sticker:hover{transform:rotate(0) translateY(-8px)}
+.sticker .row{display:flex;gap:8px;align-items:center;min-height:76px;margin-bottom:16px}
+.sticker .row img{height:70px;width:auto;object-fit:contain}
+.sticker h4{font-size:22px;margin-bottom:8px}
+.sticker p{color:var(--ink-2);font-size:16px}
+.starbtn{display:flex;gap:2px}
+.starbtn button{width:58px;height:58px;padding:0}
+.starbtn img{width:100%;transition:transform .25s var(--ease),filter .25s}
+.starbtn button:not(.on) img{filter:grayscale(1) opacity(.45)}
+.starbtn button:hover img{transform:scale(1.15) rotate(-8deg)}
+
+.gwrap{overflow:hidden}
+@media(max-width:960px){
+  .hero-in,.try,.wx-grid{grid-template-columns:1fr}
+  .stage{height:560px;max-width:420px;margin:0 auto;width:100%}
+  .wx-grid .wx-view{margin:0 auto}
+  .stickers{grid-template-columns:1fr}
+  .sticker:nth-child(n){transform:none}
+  .lab-card{grid-template-columns:1fr;padding:32px 24px;gap:22px}
+}
+@media(max-width:680px){
+  .hero{padding:calc(var(--navh) + 24px) 0 90px}
+  .cta{flex-direction:column;align-items:stretch}
+  .board-card{padding:14px;border-radius:28px}
+  .win{border-radius:28px}
+}
+</style>
+<script src="../assets/clean-scroll.js?v=20261012d" defer></script>
+<script src="../assets/local-links.js?v=20261012d"></script>
+</head>
+<body>
+@@NAV@@
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><a href="../games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a><span aria-hidden="true">/</span><span>Jelly Trails</span></nav>
+    <div class="hero-in">
+      <div>
+        <h1 class="logo"><img src="img/logo.webp" alt="Jelly Trails" width="720" height="360"></h1>
+        <p class="claim en">Link the jellies. Fill the board.</p>
+        <p class="claim tr">Jöleleri bağla. Tahtayı doldur.</p>
+        <p class="lead en">A cozy color-connect puzzle. Drag your finger to draw a glossy trail between two matching jellies, link every pair and fill every single square. Easy to learn, very hard to put down.</p>
+        <p class="lead tr">Rahatlatıcı bir renk bağlama bulmacası. Parmağını sürükleyerek aynı renkli iki jöle arasında parlak bir yol çiz, tüm çiftleri bağla ve tahtadaki her kareyi doldur. Öğrenmesi kolay, bırakması zor.</p>
+        <div class="cta">
+          @@PLAY_BTN@@
+          <a class="btn g" href="#try"><span class="en i">Try a puzzle now</span><span class="tr i">Hemen bir bulmaca dene</span></a>
+        </div>
+        <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span>EN · TR</span></div>
+      </div>
+      <div class="stage" id="stage">
+        <div class="phone"><img src="img/shot-1.webp" alt="" width="540" height="960" loading="eager"></div>
+        <button class="fj" style="--x:2%;--y:8%;--s:92px;--t:5.2s" data-d="14" aria-label="Jelly"><img src="img/s/flow_node_0_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:78%;--y:2%;--s:78px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Jelly"><img src="img/s/flow_node_5_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:-2%;--y:56%;--s:84px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Jelly"><img src="img/s/flow_node_4_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:84%;--y:46%;--s:96px;--t:5s;--dl:-.5s" data-d="26" aria-label="Jelly"><img src="img/s/flow_node_3_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:14%;--y:84%;--s:70px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Jelly"><img src="img/s/flow_node_2_done.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:70%;--y:84%;--s:74px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Jelly"><img src="img/s/flow_node_6_done.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:46%;--y:-3%;--s:60px;--t:4.1s;--dl:-2.4s" data-d="10" aria-label="Jelly"><img src="img/s/flow_node_7_idle.webp" alt="" width="192" height="192"></button>
+        <span class="hint-tap en">Psst, tap the jellies</span><span class="hint-tap tr">Pst, jölelere dokun</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="band" aria-hidden="true"><div class="band-t">
+@@BAND@@
+</div></div>
+
+<main>
+
+  <!-- OYNA -->
+  <section id="try" class="blk">
+    <div class="wrap">
+      <div class="try">
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Connect the jellies.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Jöleleri bağla.</span></h2>
+          <p class="lead2 en">Press a jelly and drag to its twin. Trails cannot cross, and every square has to be filled. Cut an old trail and it simply springs back.</p>
+          <p class="lead2 tr">Bir jöleye bas ve eşine doğru sürükle. Yollar kesişemez ve her kare dolmalı. Eski bir yolu kesersen yol geri zıplar.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Linked</span><span class="tr i">Bağlı</span> <b id="m-link">0/0</b></span><span><span class="en i">Filled</span><span class="tr i">Dolu</span> <b id="m-fill">0%</b></span></div>
+          <div class="actions">
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <div class="board" id="board" role="application" aria-label="Jelly Trails puzzle"></div>
+            <div class="win" id="win"><div>
+              <div class="stars"><img src="img/s/ui_star_full.webp" alt=""><img src="img/s/ui_star_full.webp" alt=""><img src="img/s/ui_star_full.webp" alt=""></div>
+              <h3 class="en">Level cleared!</h3><h3 class="tr">Bölüm tamam!</h3>
+              <p class="en">Every jelly linked, every square filled.</p><p class="tr">Tüm jöleler bağlı, tüm kareler dolu.</p>
+              <button class="btn p" id="b-next" type="button"><span class="en i">Next puzzle</span><span class="tr i">Sonraki bulmaca</span> <span class="arw">&rarr;</span></button>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÜNYALAR -->
+  <section class="blk worlds">
+    <div class="wrap">
+      <div class="wx-grid">
+        <div class="wx-info rv">
+          <span class="eyebrow"><span class="en i">The worlds</span><span class="tr i">Dünyalar</span></span>
+          <h2 class="en">50 sweet worlds <span class="hl">to wander through.</span></h2>
+          <h2 class="tr">Gezecek 50 <span class="hl">tatlı dünya.</span></h2>
+          <p class="en">Jelly Garden, Candy River, Cloud Field, Rainbow Bridge and many more. Every world has its own painted backdrop; these are the real ones from the game.</p>
+          <p class="tr">Jöle Bahçesi, Şeker Nehri, Bulut Tarlası, Gökkuşağı Köprüsü ve çok daha fazlası. Her dünyanın kendi çizilmiş arka planı var; bunlar oyundaki gerçekleri.</p>
+          <div class="wx" id="wx" tabindex="0" aria-label="World explorer">
+            <div class="wx-num"></div>
+            <div class="wx-name"><span class="en"></span><span class="tr"></span></div>
+            <div class="wx-ctl">
+              <button class="wx-btn wx-prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+              <button class="wx-btn wx-next" type="button" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+            </div>
+            <div class="wx-strip" id="wxstrip"></div>
+          </div>
+        </div>
+        <div class="wx-view rv" id="wxview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SÜRPRİZLER -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">The twists</span><span class="tr i">Sürprizler</span></span>
+        <h2 class="en">A new twist every few worlds, <span class="hl">never a wall.</span></h2>
+        <h2 class="tr">Her birkaç dünyada yeni bir sürpriz, <span class="hl">hiç duvar yok.</span></h2>
+        <p class="en">Tap a twist to see what it does. They arrive one at a time, with a little tutorial each.</p>
+        <p class="tr">Bir sürprize dokun, ne yaptığını gör. Teker teker gelirler ve her birinin küçük bir anlatımı var.</p>
+      </div>
+      <div id="lab" class="rv">
+        <div class="pills" role="tablist">
+@@LAB_TABS@@
+        </div>
+        <div class="lab-card lab-detail">
+@@LAB_PANES@@
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAKİN BAŞLA -->
+  <section class="blk" style="padding-top:20px">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">Take your time</span><span class="tr i">Acele yok</span></span>
+        <h2 class="en">Calm first. <span class="hl">Spicy when you ask for it.</span></h2>
+        <h2 class="tr">Önce sakin. <span class="hl">Acılı, sen isteyince.</span></h2>
+      </div>
+      <div class="stickers">
+        <div class="sticker rv">
+          <div class="row"><img src="img/s/flow_node_3_done.webp" alt=""><img src="img/s/flow_node_4_done.webp" alt=""><img src="img/s/flow_node_6_done.webp" alt=""></div>
+          <h4><span class="en i">20 levels, zero pressure</span><span class="tr i">20 bölüm, sıfır baskı</span></h4>
+          <p class="en">The first 20 levels have no time or move limits at all. Learn at your own pace, nobody is watching.</p>
+          <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. Kendi hızında öğren, kimse bakmıyor.</p>
+        </div>
+        <div class="sticker rv">
+          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/flow_wanderer_hop.webp" alt=""></div>
+          <h4><span class="en i">Boss levels</span><span class="tr i">Patron bölümleri</span></h4>
+          <p class="en">Boss levels bring a clock and a move limit together, for the moments you want a real challenge.</p>
+          <p class="tr">Patron bölümleri süre ve hamle sınırını bir arada getirir; gerçek bir meydan okuma istediğin anlar için.</p>
+        </div>
+        <div class="sticker rv">
+          <div class="row starbtn" id="stars"><button type="button" class="on" aria-label="1"><img src="img/s/ui_star_full.webp" alt=""></button><button type="button" class="on" aria-label="2"><img src="img/s/ui_star_full.webp" alt=""></button><button type="button" aria-label="3"><img src="img/s/ui_star_full.webp" alt=""></button></div>
+          <h4><span class="en i">Up to three stars</span><span class="tr i">En fazla üç yıldız</span></h4>
+          <p class="en">Replay any level for a better score. Stars and daily gifts turn into gems for the shop. Stuck? A hint is one tap away.</p>
+          <p class="tr">Daha iyi skor için her bölümü tekrar oyna. Yıldızlar ve günlük hediyeler mağaza için elmasa dönüşür. Takıldın mı? İpucu bir dokunuş uzakta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERİ -->
+  <section class="blk gwrap" style="padding-top:30px">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">From the game</span><span class="tr i">Oyundan</span></span>
+        <h2 class="en">Soft, glossy and <span class="hl">a little bit squishy.</span></h2>
+        <h2 class="tr">Yumuşak, parlak ve <span class="hl">biraz da jöle gibi.</span></h2>
+      </div>
+    </div>
+    <div class="wrap"><div class="gal rv">
+@@GALLERY@@
+    </div></div>
+  </section>
+
+  <!-- GİZLİLİK -->
+  <section class="blk" style="padding-top:30px">
+    <div class="wrap">
+@@PRIVACY@@
+      <a class="sib rv" href="../jellypipes/" style="margin-top:26px">
+        <img src="../jellypipes/img/icon.png" alt="" width="512" height="512" loading="lazy">
+        <div><b>Jelly Pipes</b><span class="en">Jelly Pipes: rotate glassy pipes and make the water reach every flower.</span><span class="tr">Jelly Pipes: cam boruları çevir, su her çiçeğe ulaşsın.</span></div>
+        <span class="arw" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="blk" style="padding-top:10px">
+    <div class="wrap">
+@@CTA@@
+    </div>
+  </section>
+</main>
+
+@@FOOT@@
+<div class="lb" id="lb" role="dialog" aria-modal="true"><button class="lb-x" type="button" aria-label="Close">&times;</button><button class="lb-n l" type="button" aria-label="Previous">&lsaquo;</button><img alt=""><button class="lb-n r" type="button" aria-label="Next">&rsaquo;</button></div>
+
+<script>
+window.JG_WORLDS=@@WORLDS@@;
+window.JG_WBASE='img/w/';
+window.JT_PUZZLES=@@PUZZLES@@;
+</script>
+<script>
+@@BASE_JS@@
+</script>
+<script>
+/* ============ Jelly Trails: hero jöleleri ============ */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$;
+  var stage=$('#stage'); if(!stage) return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('.fj',stage).forEach(function(j){
+    j.addEventListener('click',function(){
+      j.classList.remove('sq'); var im=$('img',j); im.style.animation='none'; void im.offsetWidth; im.style.animation=''; j.classList.add('sq');
+      var r=j.getBoundingClientRect(), s=stage.getBoundingClientRect();
+      for(var k=0;k<3;k++){
+        var h=document.createElement('img'); h.src='img/s/fx_heart.webp'; h.className='heart'; h.alt='';
+        h.style.left=(r.left-s.left+r.width/2-13+(k-1)*16)+'px'; h.style.top=(r.top-s.top)+'px';
+        h.style.setProperty('--dx',((k-1)*34)+'px'); h.style.setProperty('--rot',((k-1)*24)+'deg');
+        stage.appendChild(h); setTimeout(function(x){return function(){x.remove();};}(h),1200);
+      }
+    });
+  });
+  if(!reduce && window.matchMedia('(pointer: fine)').matches){
+    var hero=$('.hero');
+    hero.addEventListener('pointermove',function(e){
+      var r=stage.getBoundingClientRect(), nx=(e.clientX-(r.left+r.width/2))/r.width, ny=(e.clientY-(r.top+r.height/2))/r.height;
+      $$('.fj',stage).forEach(function(j){ var dd=+j.getAttribute('data-d')||12; j.style.setProperty('--px',(-nx*dd).toFixed(1)+'px'); j.style.setProperty('--py',(-ny*dd).toFixed(1)+'px'); });
+      var ph=$('.phone',stage); ph.style.setProperty('--px',(nx*10).toFixed(1)+'px'); ph.style.setProperty('--py',(ny*10).toFixed(1)+'px');
+    });
+  }
+})();
+</script>
+<script>
+/* ============ Jelly Trails: oynanabilir bulmaca ============ */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$;
+  var P=window.JT_PUZZLES, board=$('#board'); if(!board||!P) return;
+  var COL=['#FF8A8A','#FFB36B','#FFE066','#6FE3A6','#6AA8FF','#A78BFA','#FF8FC7','#5FD8E8'];
+  var SPR=[0,1,2,3,4,5,6,7];
+  var order=[0,4,3,5,2,6,1,7];            /* renk sırası: kırmızı, mavi, yeşil, mor... */
+  var cur=0, n, pairs, paths, drawing=-1, solved=P.map(function(){return false;});
+  var svgNS='http://www.w3.org/2000/svg', svg, cellEls=[], nodeAt={};
+
+  function rc(c){return [Math.floor(c/n),c%n];}
+  function load(i){
+    cur=i; var pz=P[i]; n=pz.n; pairs=pz.pairs; paths=pairs.map(function(p){return [p[0]];}); drawing=-1;
+    nodeAt={}; pairs.forEach(function(p,k){ nodeAt[p[0]]=k; nodeAt[p[1]]=k; });
+    board.innerHTML=''; board.style.setProperty('--n',n); board.classList.remove('won'); $('#win').classList.remove('on');
+    cellEls=[];
+    for(var c=0;c<n*n;c++){
+      var d=document.createElement('div'); d.className='cell'; d.setAttribute('data-c',c);
+      if(nodeAt[c]!==undefined){ var im=document.createElement('img'); im.alt=''; im.src='img/s/flow_node_'+order[nodeAt[c]]+'_idle.webp'; d.appendChild(im); }
+      board.appendChild(d); cellEls.push(d);
+    }
+    svg=document.createElementNS(svgNS,'svg'); svg.setAttribute('viewBox','0 0 '+n+' '+n); svg.setAttribute('preserveAspectRatio','none'); board.appendChild(svg);
+    pairs.forEach(function(p,k){ var g=document.createElementNS(svgNS,'g'); g.setAttribute('data-k',k);
+      ['o','i'].forEach(function(t){ var pa=document.createElementNS(svgNS,'path'); pa.setAttribute('data-t',t);
+        pa.setAttribute('stroke',t==='o'?COL[order[k]]:'rgba(255,255,255,.55)'); pa.setAttribute('stroke-width',t==='o'?'.54':'.2'); g.appendChild(pa); });
+      svg.appendChild(g); });
+    renderPicker(); render();
+  }
+  function renderPicker(){
+    var pk=$('#picker'); pk.innerHTML='';
+    P.forEach(function(pz,i){ var b=document.createElement('button'); b.type='button'; b.className='pk'+(i===cur?' on':'')+(solved[i]?' done':'');
+      b.innerHTML=pz.n+'&times;'+pz.n; b.addEventListener('click',function(){ load(i); }); pk.appendChild(b); });
+  }
+  function pathD(p){
+    if(p.length<1) return '';
+    return p.map(function(c,i){ var r=rc(c); return (i?'L':'M')+(r[1]+.5)+' '+(r[0]+.5); }).join('');
+  }
+  function complete(k){ var p=paths[k]; return p.length>1 && p[p.length-1]===pairs[k][1]; }
+  function render(){
+    var filled={};
+    pairs.forEach(function(pp,k){
+      var g=svg.children[k], d=paths[k].length>1?pathD(paths[k]):'';
+      $$('path',g).forEach(function(pa){ pa.setAttribute('d',d); });
+      paths[k].forEach(function(c){ filled[c]=1; });
+      var ok=complete(k);
+      [pp[0],pp[1]].forEach(function(c){ var im=$('img',cellEls[c]); var want='img/s/flow_node_'+order[k]+(ok?'_done':'_idle')+'.webp';
+        if(im.getAttribute('src')!==want){ im.setAttribute('src',want); if(ok){ im.classList.remove('ok'); void im.offsetWidth; im.classList.add('ok'); } } });
+    });
+    var f=Object.keys(filled).length, linked=pairs.filter(function(_,k){return complete(k);}).length;
+    $('#m-link').textContent=linked+'/'+pairs.length; $('#m-fill').textContent=Math.round(f/(n*n)*100)+'%';
+    if(linked===pairs.length && f===n*n && !board.classList.contains('won')) win();
+  }
+  function owner(c){ for(var k=0;k<paths.length;k++){ if(paths[k].indexOf(c)>-1) return k; } return -1; }
+  function adj(a,b){ var A=rc(a),B=rc(b); return Math.abs(A[0]-B[0])+Math.abs(A[1]-B[1])===1; }
+  function step(c){
+    if(drawing<0) return; var p=paths[drawing], head=p[p.length-1];
+    if(c===head) return;
+    if(!adj(head,c)) return;
+    if(p.length>1 && c===p[p.length-2]){ p.pop(); return; }
+    if(complete(drawing)) return;
+    var idx=p.indexOf(c);
+    if(idx>-1){ paths[drawing]=p.slice(0,idx+1); return; }
+    if(nodeAt[c]!==undefined && nodeAt[c]!==drawing) return;
+    var o=owner(c);
+    if(o>-1 && o!==drawing){ var q=paths[o], at=q.indexOf(c); paths[o]=at<=0?[q[0]]:q.slice(0,at); if(nodeAt[c]===o) return; }
+    p.push(c);
+  }
+  function cellAt(e){
+    var r=board.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    if(x<0||y<0||x>=1||y>=1) return -1;
+    return Math.floor(y*n)*n+Math.floor(x*n);
+  }
+  var last=-1;
+  board.addEventListener('pointerdown',function(e){
+    if(board.classList.contains('won')) return;
+    var c=cellAt(e); if(c<0) return;
+    var k=-1;
+    if(nodeAt[c]!==undefined){ k=nodeAt[c]; paths[k]=[pairs[k][0]===c?pairs[k][0]:pairs[k][1]]; if(c===pairs[k][1]){ /* ikinci uçtan başlarsa yönü çevir */ pairs[k]=[pairs[k][1],pairs[k][0]]; } }
+    else { k=owner(c); if(k>-1){ paths[k]=paths[k].slice(0,paths[k].indexOf(c)+1); } }
+    if(k<0) return;
+    drawing=k; last=c; board.setPointerCapture(e.pointerId); render(); e.preventDefault();
+  });
+  board.addEventListener('pointermove',function(e){
+    if(drawing<0) return; var c=cellAt(e); if(c<0||c===last) return;
+    /* hızlı sürüklemede atlanan kareleri sırayla geç */
+    var guard=0; while(last!==c && guard++<8 && drawing>-1){
+      var A=rc(last), B=rc(c), nr=A[0], nc=A[1];
+      if(A[0]!==B[0]) nr+=B[0]>A[0]?1:-1; else if(A[1]!==B[1]) nc+=B[1]>A[1]?1:-1;
+      var nx=nr*n+nc; step(nx); last=nx;
+    }
+    render();
+  });
+  function end(){ drawing=-1; last=-1; }
+  board.addEventListener('pointerup',end); board.addEventListener('pointercancel',end);
+  function win(){
+    board.classList.add('won'); solved[cur]=true; renderPicker();
+    var w=$('#win'); setTimeout(function(){ w.classList.add('on'); burst(); },450);
+  }
+  function burst(){
+    var card=$('#bcard'); var imgs=['fx_star','fx_heart','flow_node_6_done','flow_node_2_done'];
+    for(var i=0;i<22;i++){
+      var im=document.createElement('img'); im.src='img/s/'+imgs[i%imgs.length]+'.webp'; im.className='conf'; im.alt='';
+      var a=Math.random()*Math.PI*2, dist=120+Math.random()*190;
+      im.style.left='50%'; im.style.top='46%'; im.style.setProperty('--dx',Math.cos(a)*dist+'px'); im.style.setProperty('--dy',(Math.sin(a)*dist-40)+'px'); im.style.setProperty('--rot',(Math.random()*360-180)+'deg');
+      card.appendChild(im); setTimeout(function(x){return function(){x.remove();};}(im),1500);
+    }
+  }
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-hint').addEventListener('click',function(){
+    var sol=P[cur].solution; for(var k=0;k<pairs.length;k++){ if(!complete(k)){
+      /* çözümde bu çiftin yolunu bul */
+      var s=sol.filter(function(p){ return (p[0]===pairs[k][0]&&p[p.length-1]===pairs[k][1])||(p[0]===pairs[k][1]&&p[p.length-1]===pairs[k][0]); })[0];
+      if(!s) continue; if(s[0]!==pairs[k][0]) s=s.slice().reverse();
+      s.forEach(function(c){ var o=owner(c); if(o>-1&&o!==k){ var q=paths[o],at=q.indexOf(c); paths[o]=at<=0?[q[0]]:q.slice(0,at); } });
+      paths[k]=s.slice(); render(); return; } }
+  });
+  /* yıldız düğmeleri */
+  $$('#stars button').forEach(function(b,i,all){ b.addEventListener('click',function(){ all.forEach(function(x,k){ x.classList.toggle('on',k<=i); }); }); });
+  load(0);
+})();
+</script>
+</body>
+</html>

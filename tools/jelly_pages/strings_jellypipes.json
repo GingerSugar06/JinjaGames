@@ -1,0 +1,378 @@
+{
+ "world.1": {
+  "tr": "Damla Bahçesi",
+  "en": "Droplet Garden"
+ },
+ "world.2": {
+  "tr": "Çiçek Deresi",
+  "en": "Flower Brook"
+ },
+ "world.3": {
+  "tr": "Şelale Mağarası",
+  "en": "Waterfall Cave"
+ },
+ "world.4": {
+  "tr": "Gökkuşağı Havuzu",
+  "en": "Rainbow Pool"
+ },
+ "world.5": {
+  "tr": "Kristal Göl",
+  "en": "Crystal Lake"
+ },
+ "world.6": {
+  "tr": "Mercan Resifi",
+  "en": "Coral Reef"
+ },
+ "world.7": {
+  "tr": "Nilüfer Gölü",
+  "en": "Lily Pond"
+ },
+ "world.8": {
+  "tr": "Bulut Fıskiyesi",
+  "en": "Cloud Fountain"
+ },
+ "world.9": {
+  "tr": "Yıldız Kaynağı",
+  "en": "Star Spring"
+ },
+ "world.10": {
+  "tr": "Büyük Çiçek Havuzu",
+  "en": "Grand Blossom Pool"
+ },
+ "twist.teleport": {
+  "tr": "Işınlayıcı",
+  "en": "Teleporter"
+ },
+ "twist.teleport.desc": {
+  "tr": "Aynı renkli iki ışınlayıcı bağlı: birine su gelince diğerinden akmaya başlar.",
+  "en": "Two teleporters of the same colour are linked: water reaching one starts flowing from the other."
+ },
+ "twist.link": {
+  "tr": "Bağlı borular",
+  "en": "Linked pipes"
+ },
+ "twist.link.desc": {
+  "tr": "Mor halkalı iki boru birbirine bağlı: birini çevirince diğeri de döner.",
+  "en": "Two pipes with matching rings are linked: turning one turns the other."
+ },
+ "twist.valve": {
+  "tr": "Tek yönlü vana",
+  "en": "One-way valve"
+ },
+ "twist.valve.desc": {
+  "tr": "Vanadan su yalnız okun gösterdiği yönde geçer. Musluğu doğru tarafa bağla.",
+  "en": "Water passes a valve only in the arrow direction. Connect the tap on the right side."
+ },
+ "world.11": {
+  "tr": "Gün Doğumu Gölü",
+  "en": "Sunrise Lake"
+ },
+ "world.12": {
+  "tr": "Lale Bahçesi",
+  "en": "Tulip Garden"
+ },
+ "world.13": {
+  "tr": "Şelale Kıyısı",
+  "en": "Waterfall Shore"
+ },
+ "world.14": {
+  "tr": "Bulut Havzası",
+  "en": "Cloud Basin"
+ },
+ "world.15": {
+  "tr": "Mercan Koyu",
+  "en": "Coral Cove"
+ },
+ "world.16": {
+  "tr": "Kristal Mağara",
+  "en": "Crystal Cave"
+ },
+ "world.17": {
+  "tr": "Gökkuşağı Deresi",
+  "en": "Rainbow Creek"
+ },
+ "world.18": {
+  "tr": "Yıldız Havuzu",
+  "en": "Star Pool"
+ },
+ "world.19": {
+  "tr": "Altın Vaha",
+  "en": "Golden Oasis"
+ },
+ "world.20": {
+  "tr": "Büyük Çağlayan",
+  "en": "Grand Cascade"
+ },
+ "world.21": {
+  "tr": "Damla Kanalları",
+  "en": "Droplet Canals"
+ },
+ "world.22": {
+  "tr": "Nilüfer Havuzu",
+  "en": "Lily Basin"
+ },
+ "world.23": {
+  "tr": "Sis Bahçesi",
+  "en": "Mist Garden"
+ },
+ "world.24": {
+  "tr": "Buzul Pınarı",
+  "en": "Glacier Spring"
+ },
+ "world.25": {
+  "tr": "Mercan Koyu",
+  "en": "Coral Cove"
+ },
+ "world.26": {
+  "tr": "Lale Bendi",
+  "en": "Tulip Dam"
+ },
+ "world.27": {
+  "tr": "Çağlayan Terası",
+  "en": "Cascade Terrace"
+ },
+ "world.28": {
+  "tr": "Gölet Köyü",
+  "en": "Pond Village"
+ },
+ "world.29": {
+  "tr": "Çiğ Çayırı",
+  "en": "Dew Meadow"
+ },
+ "world.30": {
+  "tr": "Gökkuşağı Çeşmesi",
+  "en": "Rainbow Fountain"
+ },
+ "world.31": {
+  "tr": "Su Değirmeni",
+  "en": "Water Mill"
+ },
+ "world.32": {
+  "tr": "Köpük Kıyısı",
+  "en": "Foam Shore"
+ },
+ "world.33": {
+  "tr": "Kristal Dere",
+  "en": "Crystal Brook"
+ },
+ "world.34": {
+  "tr": "Yağmur Ormanı",
+  "en": "Rain Forest"
+ },
+ "world.35": {
+  "tr": "Sulak Alan",
+  "en": "Wetlands"
+ },
+ "world.36": {
+  "tr": "Mavi Mağara",
+  "en": "Blue Cave"
+ },
+ "world.37": {
+  "tr": "Lotus Gölü",
+  "en": "Lotus Lake"
+ },
+ "world.38": {
+  "tr": "Şelale Vadisi",
+  "en": "Waterfall Valley"
+ },
+ "world.39": {
+  "tr": "Buharlı Pınar",
+  "en": "Steam Spring"
+ },
+ "world.40": {
+  "tr": "Zümrüt Gölet",
+  "en": "Emerald Pond"
+ },
+ "world.41": {
+  "tr": "Gelgit Bahçesi",
+  "en": "Tide Garden"
+ },
+ "world.42": {
+  "tr": "Deniz Yıldızı Plajı",
+  "en": "Starfish Beach"
+ },
+ "world.43": {
+  "tr": "Ilık Kaynaklar",
+  "en": "Warm Springs"
+ },
+ "world.44": {
+  "tr": "Bulut Çeşmesi",
+  "en": "Cloud Fountain"
+ },
+ "world.45": {
+  "tr": "İnci Koyu",
+  "en": "Pearl Bay"
+ },
+ "world.46": {
+  "tr": "Su Zambağı Çayırı",
+  "en": "Water Lily Meadow"
+ },
+ "world.47": {
+  "tr": "Sakin Nehir",
+  "en": "Calm River"
+ },
+ "world.48": {
+  "tr": "Buz Çiçeği Vadisi",
+  "en": "Ice Flower Valley"
+ },
+ "world.49": {
+  "tr": "Işıltılı Nehir Ağzı",
+  "en": "Sparkling Delta"
+ },
+ "world.50": {
+  "tr": "Çiçek Çağlayanı",
+  "en": "Flower Cascade"
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "Çift renkli çiçek",
+  "en": "Two-colour flower"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu çiçek iki musluğun suyunu birden ister. İki rengin suyu da ona ulaşsın.",
+  "en": "This flower needs the water of two taps. Both colours must reach it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü borusu",
+  "en": "Bridge pipe"
+ },
+ "twist.bridges.desc": {
+  "tr": "Çapraz boruda su düz geçer: iki yol birbirine karışmaz, komşu borudan karşı tarafa atlar.",
+  "en": "Water goes straight across a bridge pipe: the two paths never mix."
+ },
+ "twist.worn": {
+  "tr": "Eskimiş borular",
+  "en": "Worn pipes"
+ },
+ "twist.worn.desc": {
+  "tr": "Eskimiş borular en çok birkaç kez döner; altındaki noktalar kalan hakkı gösterir. Hak bitince boru donar, dikkatli çevir.",
+  "en": "Worn pipes can only be turned a few times; the dots show how many turns are left. Turn carefully."
+ },
+ "twist.frozen.desc": {
+  "tr": "Buzlu borular donuktur, döndürülemez. Her buzun köşesinde ve bir çiçeğin üstünde aynı renkte güneş rozeti var; renkli çizgi onları bağlar. O çiçek açınca ısı çizgiden akar ve buz erir.",
+  "en": "Frozen pipes cannot be turned. Each ice and one flower share a sun badge of the same colour, joined by a coloured line. When that flower blooms, heat flows along the line and the ice melts."
+ },
+ "twist.cactus": {
+  "tr": "Kaktüs",
+  "en": "Cactus"
+ },
+ "twist.cactus.desc": {
+  "tr": "Kaktüs suyu sevmez! Islak bir borunun ucu kaktüse bakarsa kaktüs sulanır ve bölüm tamamlanmaz. Boruları kaktüsü sulamayacak şekilde çevir.",
+  "en": "Cacti hate water! If the open end of a wet pipe points at a cactus, it gets watered and the level cannot finish. Turn the pipes so none of them sprays a cactus."
+ },
+ "twist.swap": {
+  "tr": "Takas",
+  "en": "Swap"
+ },
+ "twist.swap.desc": {
+  "tr": "İki borunun arasındaki oklu işarete dokununca iki boru yer değiştirir. Doğru şekil doğru yere gelsin.",
+  "en": "Tap the arrow badge between two pipes to swap their places, so each shape ends up where it belongs."
+ },
+ "twist.wheel": {
+  "tr": "Çark",
+  "en": "Wheel"
+ },
+ "twist.wheel.desc": {
+  "tr": "Çarkın çevresindeki dört boru (turuncu noktalı) tek tek çevrilemez; yalnız çarka dokununca birlikte döner. Çarkı doğru sayıda çevir.",
+  "en": "The four pipes around a wheel (orange dots) cannot be turned one by one; they only turn together when you tap the wheel. Turn it the right number of times."
+ },
+ "twist.pump": {
+  "tr": "Pompa",
+  "en": "Pump"
+ },
+ "twist.pump.desc": {
+  "tr": "Pompa suyu gerisinden alır, önündeki hücrenin üstünden atlatıp ötesine verir. Dokununca döner.",
+  "en": "A pump takes water from behind and throws it over the next cell. Tap to turn it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.rocks": {
+  "tr": "Kayalar",
+  "en": "Rocks"
+ },
+ "twist.rocks.desc": {
+  "tr": "Kayaların içinden boru geçmez. Suyu kayaların etrafından dolaştır.",
+  "en": "Pipes cannot go through rocks. Guide the water around them."
+ },
+ "twist.frozen": {
+  "tr": "Buzlu borular",
+  "en": "Frozen pipes"
+ },
+ "twist.twin": {
+  "tr": "Yeni musluk",
+  "en": "Extra tap"
+ },
+ "twist.twin.desc": {
+  "tr": "Birden çok musluk var; her musluğun kendi renkli çiçekleri var. Çiçeğe kendi renginin suyunu ulaştır.",
+  "en": "There are several taps and each waters the flowers of its own colour. Send each flower its own colour."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "twist.snow": {
+  "tr": "Kar yığınları",
+  "en": "Snow piles"
+ },
+ "twist.snow.desc": {
+  "tr": "Kar yığınına girince patenci durur.",
+  "en": "The skater stops when it enters a snow pile."
+ }
+}

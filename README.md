@@ -71,12 +71,17 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
   bağlanır; site haritasında yok, `noindex`. `tools/make_jelly_privacy.py` ile üretilir;
   metin oyunların kodundan çıkarıldı (AdMob, Google Play satın alma, veriler cihazda). Oyunlara
   Firebase, çökme raporu ya da rıza formu eklenirse betikteki metin güncellenip yeniden çalıştırılmalı.
-- `jellytrails/index.html`, `jellypipes/index.html` — Jelly Trails ve Jelly Pipes tanıtım sayfaları
-  (`https://jinjagames.com/jellytrails/`, `/jellypipes/`); görseller `<oyun>/img/` (simge, paylaşım görseli,
-  5 ekran görüntüsü, kart başlığı). **Tek kaynak `tools/make_jelly_pages.py`:** metin, renkler ve görseller
-  (`Puzzles/store/...` altından) oradan üretilir; sayfaları elle değil betikle değiştir. Oyunlar
-  `games/` listesinde 04/05, ana sayfada 04/05 paneli olarak yer alır. Google Play bağlantısı
-  yayına çıkınca betikteki `PLAY_URL` sözlüğüne yazılıp betik yeniden çalıştırılır (şimdilik "Yakında" rozeti).
+- `jellytrails/index.html`, `jellypipes/index.html` — Jelly Trails ve Jelly Pipes oyun sayfaları
+  (`https://jinjagames.com/jellytrails/`, `/jellypipes/`). Her biri kendine özgü ve oynanabilir: Trails'te sayfanın
+  içinde gerçekten oynanan bir renk bağlama bulmacası, Pipes'ta anında üretilen, akan sulu bir boru bulmacası;
+  ikisinde de oyunun kendi çizimleriyle dünya gezgini (50 arka plan), mekanik laboratuvarı (oyunun kendi
+  açıklamalarıyla) ve galeri. **Tek kaynak `tools/jelly_pages/`:** `trails.html` / `pipes.html` sayfaya özel
+  yerleşim+CSS+demo, `base.css`/`base.js` ortak iskelet, `build.py` birleştirir. Sırayla:
+  `extract_strings.py` (oyunun l10n dosyasından metin), `prep_assets.py` (çizimler `Puzzles/apps/*/assets/art`
+  ve `Puzzles/store` altından `<oyun>/img/` içine), `gen_trails_puzzles.py` (tek çözümlü demo bulmacaları, bir kez),
+  `build.py`. Sayfaları elle değil bu betiklerle değiştir. Oyunlar `games/` listesinde 04/05, ana sayfada 04/05
+  paneli olarak yer alır. Google Play bağlantısı yayına çıkınca `build.py` içindeki `PLAY_URL` sözlüğüne yazılıp
+  çalıştırılır (şimdilik "Yakında" rozeti).
 - **Adreslerde `.html` yok:** her sayfa klasör adresiyle açılır (`/privacy/`, `/daypot/gizlilik/`).
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
 - `CNAME` — özel domain (`jinjagames.com`); GitHub Pages bunu okur.
@@ -284,4 +289,4 @@ DNS yayılması 10 dk – 24 saat sürebilir.
 - [ ] DayPot: Play yayını açılınca "Yakında Google Play'de" durumu mağaza rozetiyle
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
 - [ ] DayPot: gizlilik politikasındaki tarih, yayın gününde güncellensin.
-- [ ] Jelly Trails / Jelly Pipes: Play yayını açılınca `tools/make_jelly_pages.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki "Google Play yakında" etiketi güncellensin. Mağaza ekran görüntüleri değişirse betik görselleri `Puzzles/store`'dan yeniden üretir.
+- [ ] Jelly Trails / Jelly Pipes: Play yayını açılınca `tools/jelly_pages/build.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki "Google Play yakında" etiketi güncellensin. Mağaza ekran görüntüleri değişirse betik görselleri `Puzzles/store`'dan yeniden üretir.
