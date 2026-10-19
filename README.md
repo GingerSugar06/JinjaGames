@@ -74,14 +74,19 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 - `jellytrails/index.html`, `jellypipes/index.html` — Jelly Trails ve Jelly Pipes oyun sayfaları
   (`https://jinjagames.com/jellytrails/`, `/jellypipes/`). Her biri kendine özgü ve oynanabilir: Trails'te sayfanın
   içinde gerçekten oynanan bir renk bağlama bulmacası, Pipes'ta anında üretilen, akan sulu bir boru bulmacası;
-  ikisinde de oyunun kendi çizimleriyle dünya gezgini (50 arka plan), mekanik laboratuvarı (oyunun kendi
-  açıklamalarıyla) ve galeri. **Tek kaynak `tools/jelly_pages/`:** `trails.html` / `pipes.html` sayfaya özel
+  ikisinde de hero'da kendiliğinden oynayan bir gösterim, oyunun kendi çizim ve açıklamalarıyla mekanik
+  laboratuvarı (yalnız oyunda GERÇEKTEN bulunanlar: Trails 11, Pipes 12; kaynak `puzzle_core/level.dart`
+  `_flowMechanics` / `_pipesMechanics`) ve galeri. Demo kuralları oyunun kodundan alındı: Trails'te kesilen
+  renk tamamen başa döner, yarım bırakılan yol geri çekilip silinir; Pipes'ta su yalnız çiçeğe giden yolda akar. **Tek kaynak `tools/jelly_pages/`:** `trails.html` / `pipes.html` sayfaya özel
   yerleşim+CSS+demo, `base.css`/`base.js` ortak iskelet, `build.py` birleştirir. Sırayla:
   `extract_strings.py` (oyunun l10n dosyasından metin), `prep_assets.py` (çizimler `Puzzles/apps/*/assets/art`
   ve `Puzzles/store` altından `<oyun>/img/` içine), `gen_trails_puzzles.py` (tek çözümlü demo bulmacaları, bir kez),
   `build.py`. Sayfaları elle değil bu betiklerle değiştir. Oyunlar `games/` listesinde 04/05, ana sayfada 04/05
   paneli olarak yer alır. Google Play bağlantısı yayına çıkınca `build.py` içindeki `PLAY_URL` sözlüğüne yazılıp
   çalıştırılır (şimdilik "Yakında" rozeti).
+- Ana sayfa hero'su sayfalıdır: JinjaGames → Cyber Academy → Locard → Jelly Trails → Jelly Pipes → DayPot → başa.
+  Yeni oyun eklerken `index.html` içindeki `.slide` listesine bir sayfa, `assets/home3d.js` içine bir parçacık biçimi
+  ekle (`data-shape` adı eşleşmeli). `home3d.js` değişince `index.html`'deki `?v=` sürümünü artır.
 - **Adreslerde `.html` yok:** her sayfa klasör adresiyle açılır (`/privacy/`, `/daypot/gizlilik/`).
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
 - `CNAME` — özel domain (`jinjagames.com`); GitHub Pages bunu okur.

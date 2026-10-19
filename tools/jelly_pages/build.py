@@ -25,13 +25,10 @@ GAMES = {
         'og_desc': 'Şirin jöleleri aynı renkle bağla, tüm kareleri doldur. 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A cozy color-connect puzzle: drag a finger between two matching jellies, link every pair and fill every square. 500 handcrafted levels in 50 worlds.',
         'shots_alt': ['Home screen', 'World map', 'A level in progress', 'A harder board', 'Level complete'],
-        'lab': [('twist.portal', 'flow_portal_0'), ('twist.fence', 'flow_fence'), ('twist.turncap', 'flow_turncap_badge'),
-                ('twist.counter', 'flow_node_1_idle'), ('twist.gates', 'flow_gate_0'), ('twist.doors', 'flow_door_closed'),
-                ('twist.bridges', 'flow_bridge'), ('twist.wander', 'flow_wanderer_idle'), ('twist.hub', 'flow_quad_idle'),
-                ('twist.stones', 'flow_stone'), ('twist.straight', 'flow_straight'), ('twist.turn', 'flow_turn')],
-        'band': [('500', 'handcrafted levels', 'özenle hazırlanmış bölüm', 'flow_node_0_idle'), ('50', 'sweet worlds', 'tatlı dünya', 'flow_node_4_idle'),
-                 ('3', 'stars on every level', 'her bölümde yıldız', 'ui_star_full'), ('0', 'accounts needed', 'hesap gerekmez', 'flow_node_3_idle'),
-                 ('2', 'languages: English, Turkish', 'dil: İngilizce, Türkçe', 'flow_node_5_idle')],
+        'lab': [('twist.stones', 'flow_stone', 21, None), ('twist.dual', 'flow_node_0_idle', 61, 'dual'), ('twist.straight', 'flow_straight', 101, None),
+                ('twist.turn', 'flow_turn', 141, None), ('twist.portal', 'flow_portal_0', 181, 'portal'), ('twist.gates', 'flow_gate_0', 221, None),
+                ('twist.hub', 'flow_quad_idle', 261, None), ('twist.doors', 'flow_door_closed', 301, 'door'), ('twist.bridges', 'flow_bridge', 341, None),
+                ('twist.counter', 'flow_node_1_idle', 421, 'counter'), ('twist.turncap', 'flow_turncap_badge', 461, None)],
         'cta_h': ('Almost on Google Play.', 'Neredeyse Google Play\'de.'),
         'cta_p': ('Jelly Trails is in release preparation for Google Play. Want to know the day it lands, or have an idea for a new twist? Write to us.',
                   'Jelly Trails\'in Google Play yayın hazırlığı sürüyor. Çıktığı günü öğrenmek ya da yeni bir sürpriz için fikrin varsa bize yaz.'),
@@ -44,10 +41,10 @@ GAMES = {
         'og_desc': 'Cam boruları çevir, su her çiçeğe ulaşsın. Gerçek akan su, 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A calming water puzzle: rotate sparkling glass pipes so water travels from the tap to every flower. 500 handcrafted levels in 50 worlds.',
         'shots_alt': ['Home screen', 'World map', 'A level in progress', 'A harder board', 'Level complete'],
-        'lab': [('twist.twin', 'pipe_source_1'), ('twist.dual', 'pipe_flower_open_dual'), ('twist.locked', 'pipe_lock'), ('twist.rocks', 'flow_stone'),
-                ('twist.frozen', 'pipe_frozen_cross'), ('twist.valve', 'pipe_valve'), ('twist.link', 'pipe_link_badge'), ('twist.worn', 'pipe_worn_3'),
-                ('twist.pump', 'pipe_pump_active'), ('twist.cactus', 'pipe_cactus'), ('twist.swap', 'pipe_swap_badge'), ('twist.wheel', 'pipe_wheel'),
-                ('twist.bridges', 'pipe_bridge_badge'), ('twist.teleport', 'flow_portal_0')],
+        'lab': [('twist.locked', 'pipe_lock', 21, None), ('twist.rocks', 'flow_stone', 61, None), ('twist.frozen', 'pipe_frozen_cross', 101, None),
+                ('twist.valve', 'pipe_valve', 141, None), ('twist.twin', 'pipe_source_1', 181, None), ('twist.link', 'pipe_link_badge', 221, None),
+                ('twist.dual', 'pipe_flower_open_dual', 261, None), ('twist.worn', 'pipe_worn_3', 301, None), ('twist.pump', 'pipe_pump_active', 341, None),
+                ('twist.cactus', 'pipe_cactus', 381, None), ('twist.swap', 'pipe_swap_badge', 421, None), ('twist.wheel', 'pipe_wheel', 461, None)],
         'cta_h': ('Almost on Google Play.', 'Neredeyse Google Play\'de.'),
         'cta_p': ('Jelly Pipes is in release preparation for Google Play. Want to know the day it lands, or have an idea for a new pipe? Write to us.',
                   'Jelly Pipes\'in Google Play yayın hazırlığı sürüyor. Çıktığı günü öğrenmek ya da yeni bir boru için fikrin varsa bize yaz.'),
@@ -185,22 +182,28 @@ def sub(s, vals):
 
 def build(slug, g):
     strings = json.load(open(os.path.join(HERE, 'strings_%s.json' % slug), encoding='utf8'))
-    worlds = [{'en': strings['world.%d' % i]['en'], 'tr': strings['world.%d' % i]['tr']} for i in range(1, 51)]
     tabs, panes = [], []
-    for n, (key, sprite) in enumerate(g['lab']):
+    ART = {
+        'dual': '<span class="art-dual"><img src="img/s/flow_node_0_idle.webp" alt=""><img src="img/s/flow_node_4_idle.webp" alt=""></span>',
+        'portal': '<span class="art-pair"><img src="img/s/flow_portal_0.webp" alt=""><img src="img/s/flow_portal_0.webp" alt=""></span>',
+        'door': '<span class="art-pair"><img src="img/s/flow_door_closed.webp" alt=""><img src="img/s/flow_key_badge.webp" alt=""></span>',
+        'counter': '<span class="art-counter"><img src="img/s/flow_node_1_idle.webp" alt=""><b>7</b></span>',
+    }
+    for n, (key, sprite, level, art) in enumerate(g['lab']):
         nm = strings[key]
         desc = strings[key + '.desc']
         tabs.append('          <button class="lab-tab" type="button" role="tab"><img src="img/s/%s.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">%s</span><span class="tr i">%s</span></span></button>'
                     % (sprite, esc(nm['en']), esc(nm['tr'])))
+        art_html = ART[art] if art else '<img src="img/s/%s.webp" alt="" width="192" height="192" loading="lazy">' % sprite
         panes.append('''          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/%s.webp" alt="" width="192" height="192" loading="lazy"></div>
+            <div class="lab-art">%s</div>
             <div>
               <h3><span class="en i">%s</span><span class="tr i">%s</span></h3>
               <p class="en">%s</p>
               <p class="tr">%s</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level %d</span><span class="tr i">İlk %d. bölümde karşına çıkar</span></p>
             </div>
-          </div>''' % (sprite, esc(nm['en']), esc(nm['tr']), esc(desc['en']), esc(desc['tr'])))
+          </div>''' % (art_html, esc(nm['en']), esc(nm['tr']), esc(desc['en']), esc(desc['tr']), level, level))
     gallery = '\n'.join('      <button type="button" data-full="img/shot-%d.webp" aria-label="%s"><img src="img/shot-%d.webp" alt="%s" width="540" height="960" loading="lazy"></button>'
                         % (i, g['shots_alt'][i - 1], i, g['shots_alt'][i - 1]) for i in range(1, 6))
     play = PLAY_URL[slug]
@@ -210,10 +213,6 @@ def build(slug, g):
     else:
         play_btn = ('<span class="btn soon"><span class="dotlive" aria-hidden="true"></span><span class="en i">Coming soon to Google Play</span>'
                     '<span class="tr i">Yakında Google Play\'de</span></span>')
-    band = ''
-    if 'band' in g:
-        item = ''.join('<b><i style="background-image:url(img/s/%s.webp)"></i>%s <span class="en i">%s</span><span class="tr i">%s</span></b>' % (sp, n, e, t) for n, e, t, sp in g['band'])
-        band = item + item
     rr = random.Random(3)
     bubbles = ''.join('<i style="--x:%d%%;--s:%dpx;--t:%.1fs;--dl:-%.1fs;--dr:%dpx"></i>' % (rr.randint(2, 96), rr.randint(14, 54), rr.uniform(9, 18), rr.uniform(0, 14), rr.randint(-60, 60)) for _ in range(18))
     ld = ('{"@context":"https://schema.org","@graph":[{"@type":"MobileApplication","name":"%(name)s","url":"https://jinjagames.com/%(slug)s/",'
@@ -235,8 +234,8 @@ def build(slug, g):
     html = html.replace('@@HEAD@@', HEAD).replace('@@NAV@@', NAV).replace('@@FOOT@@', FOOT).replace('@@PRIVACY@@', PRIVACY).replace('@@CTA@@', CTA)
     html = html.replace('@@BASE_CSS@@', read('base.css')).replace('@@BASE_JS@@', read('base.js'))
     html = html.replace('@@LAB_TABS@@', '\n'.join(tabs)).replace('@@LAB_PANES@@', '\n'.join(panes)).replace('@@GALLERY@@', gallery)
-    html = html.replace('@@PLAY_BTN@@', play_btn).replace('@@BAND@@', band).replace('@@BUBBLES@@', bubbles)
-    html = html.replace('@@WORLDS@@', json.dumps(worlds, ensure_ascii=False)).replace('@@PUZZLES@@', puzzles)
+    html = html.replace('@@PLAY_BTN@@', play_btn).replace('@@BUBBLES@@', bubbles)
+    html = html.replace('@@PUZZLES@@', puzzles)
     html = sub(html, tags)
     import re
     left = set(re.findall(r'@@(\w+)@@', html))

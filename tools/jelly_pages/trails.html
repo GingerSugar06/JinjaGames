@@ -50,9 +50,6 @@ html[data-theme="dark"] .hero::after{box-shadow:-140px -40px 0 -8px rgba(183,155
 .badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
 .badges span{font-size:13.5px;font-weight:800;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid var(--line-2);padding:5px 14px;border-radius:999px}
 html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
-.stage{position:relative;height:min(680px,78vw);display:grid;place-items:center}
-.phone{position:relative;width:min(100%,300px);border-radius:42px;overflow:hidden;border:9px solid var(--surface);box-shadow:var(--shadow-2);background:var(--surface);transform:rotate(3deg) translate(var(--px,0),var(--py,0));transition:transform .25s ease-out}
-.phone img{width:100%;aspect-ratio:9/16;object-fit:cover}
 .fj{position:absolute;width:var(--s,84px);left:var(--x);top:var(--y);z-index:3;animation:bob var(--t,5s) ease-in-out var(--dl,0s) infinite;transform:translate(var(--px,0),var(--py,0));-webkit-tap-highlight-color:transparent;cursor:pointer}
 .fj img{width:100%;filter:drop-shadow(0 12px 12px rgba(80,40,140,.25));transition:transform .2s}
 .fj:active img{transform:scale(.9,1.12)}
@@ -61,14 +58,25 @@ html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
 @keyframes squish{0%{transform:scale(1)}25%{transform:scale(1.28,.72)}50%{transform:scale(.82,1.2)}75%{transform:scale(1.1,.92)}100%{transform:scale(1)}}
 .heart{position:absolute;width:26px;pointer-events:none;z-index:6;animation:heart 1.1s ease-out forwards}
 @keyframes heart{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),-90px) scale(1.2) rotate(var(--rot))}}
-.hint-tap{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);font-size:13px;font-weight:800;color:var(--ink-3);white-space:nowrap}
 
-/* ŞERİT: kayan sayılar */
-.band{background:var(--accent);color:var(--on-accent);padding:22px 0;overflow:hidden;transform:rotate(-1.2deg);margin:-30px -10px 0;position:relative;z-index:4;box-shadow:0 14px 30px rgba(var(--accent-rgb),.25)}
-.band-t{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:mq 34s linear infinite}
-.band b{font-family:var(--f-display);font-size:clamp(22px,3vw,34px);display:inline-flex;align-items:center;gap:14px}
-.band b i{width:26px;height:26px;background-size:contain;background-repeat:no-repeat;display:inline-block}
-@keyframes mq{to{transform:translateX(-50%)}}
+/* HERO SAHNESİ: kendiliğinden oynayan bir bulmaca, süzülen yollar, parıldayan jöleler */
+.ribbons{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.ribbons path{fill:none;stroke-width:30;stroke-linecap:round;opacity:.55;stroke-dasharray:260 1100;animation:flowrib var(--t,16s) linear infinite}
+@keyframes flowrib{from{stroke-dashoffset:0}to{stroke-dashoffset:-1360}}
+.stage{position:relative;display:grid;place-items:center;padding:34px 0 24px}
+.reel-card{position:relative;width:min(100%,400px);background:var(--surface);border-radius:38px;padding:16px;box-shadow:var(--shadow-2);border:1px solid var(--line);transform:rotate(2.2deg);pointer-events:none;animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{50%{transform:rotate(1deg) translateY(-8px)}}
+.reel-card::before{content:"";position:absolute;inset:-30px;z-index:-1;border-radius:64px;background:radial-gradient(circle at 25% 20%,rgba(var(--pop-rgb),.32),transparent 60%),radial-gradient(circle at 80% 85%,rgba(var(--accent-rgb),.3),transparent 62%)}
+.reel{max-width:none}
+.spark{position:absolute;width:var(--s,18px);aspect-ratio:1;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:twinkle var(--t,3s) ease-in-out var(--dl,0s) infinite;left:var(--x);top:var(--y);z-index:4;filter:drop-shadow(0 0 6px rgba(255,255,255,.9))}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(90deg)}}
+.lab-art .art-pair,.lab-art .art-dual,.lab-art .art-counter{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;height:190px}
+.lab-art .art-pair img{width:46%;max-height:150px}
+.lab-art .art-dual img{position:absolute;width:62%;max-height:none;filter:drop-shadow(0 18px 20px rgba(var(--accent-rgb),.22))}
+.lab-art .art-dual img:first-child{clip-path:inset(0 50% 0 0);left:calc(50% - 31%)}
+.lab-art .art-dual img:last-child{clip-path:inset(0 0 0 50%);left:calc(50% - 31%)}
+.lab-art .art-counter img{width:62%}
+.lab-art .art-counter b{position:absolute;right:calc(50% - 45px);top:6px;width:42px;height:42px;border-radius:50%;background:var(--surface);color:var(--accent);display:grid;place-items:center;font-family:var(--f-display);font-size:22px;box-shadow:var(--shadow-1);border:2px solid var(--accent)}
 
 /* OYNA: gerçek bulmaca */
 .try{display:grid;grid-template-columns:minmax(0,.9fr) minmax(300px,1.1fr);gap:56px;align-items:center}
@@ -107,13 +115,6 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 .conf{position:absolute;width:30px;z-index:9;pointer-events:none;animation:conf 1.4s ease-out forwards}
 @keyframes conf{from{opacity:1;transform:translate(0,0) scale(.4)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--rot))}}
 
-/* DÜNYALAR */
-.worlds{background:linear-gradient(180deg,var(--bg),var(--bg-soft) 18%,var(--bg-soft) 82%,var(--bg))}
-.wx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:60px;align-items:center}
-.wx-grid .wx-view{max-width:300px;margin-left:auto}
-.wx-info h2{font-size:clamp(32px,4.6vw,52px);margin:12px 0 18px}
-.wx-info>p{color:var(--ink-2);font-size:18px;max-width:480px;margin-bottom:26px}
-
 /* SÜRPRİZLER */
 .pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
 .lab-tab{padding:8px 18px 8px 10px;background:var(--surface);border-color:var(--line)}
@@ -140,9 +141,8 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 
 .gwrap{overflow:hidden}
 @media(max-width:960px){
-  .hero-in,.try,.wx-grid{grid-template-columns:1fr}
-  .stage{height:560px;max-width:420px;margin:0 auto;width:100%}
-  .wx-grid .wx-view{margin:0 auto}
+  .hero-in,.try{grid-template-columns:1fr}
+  .stage{max-width:440px;margin:0 auto;width:100%}
   .stickers{grid-template-columns:1fr}
   .sticker:nth-child(n){transform:none}
   .lab-card{grid-template-columns:1fr;padding:32px 24px;gap:22px}
@@ -161,6 +161,11 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 @@NAV@@
 
 <header class="hero">
+  <svg class="ribbons" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-40 520C160 380 300 640 520 520S800 300 1000 420 1180 520 1260 380" stroke="#FF8FC7" style="--t:19s"/>
+    <path d="M-40 250C200 330 330 120 560 220S860 420 1040 240 1180 140 1260 260" stroke="#6FE3A6" style="--t:23s;animation-delay:-6s"/>
+    <path d="M-40 620C140 700 360 520 600 640S900 560 1080 640 1200 600 1260 560" stroke="#FFE066" style="--t:27s;animation-delay:-11s"/>
+  </svg>
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><a href="../games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a><span aria-hidden="true">/</span><span>Jelly Trails</span></nav>
     <div class="hero-in">
@@ -177,23 +182,19 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
         <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span>EN · TR</span></div>
       </div>
       <div class="stage" id="stage">
-        <div class="phone"><img src="img/shot-1.webp" alt="" width="540" height="960" loading="eager"></div>
-        <button class="fj" style="--x:2%;--y:8%;--s:92px;--t:5.2s" data-d="14" aria-label="Jelly"><img src="img/s/flow_node_0_idle.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:78%;--y:2%;--s:78px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Jelly"><img src="img/s/flow_node_5_idle.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:-2%;--y:56%;--s:84px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Jelly"><img src="img/s/flow_node_4_idle.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:84%;--y:46%;--s:96px;--t:5s;--dl:-.5s" data-d="26" aria-label="Jelly"><img src="img/s/flow_node_3_idle.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:14%;--y:84%;--s:70px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Jelly"><img src="img/s/flow_node_2_done.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:70%;--y:84%;--s:74px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Jelly"><img src="img/s/flow_node_6_done.webp" alt="" width="192" height="192"></button>
-        <button class="fj" style="--x:46%;--y:-3%;--s:60px;--t:4.1s;--dl:-2.4s" data-d="10" aria-label="Jelly"><img src="img/s/flow_node_7_idle.webp" alt="" width="192" height="192"></button>
-        <span class="hint-tap en">Psst, tap the jellies</span><span class="hint-tap tr">Pst, jölelere dokun</span>
+        <div class="reel-card"><div class="board reel" id="reel" aria-hidden="true"></div></div>
+        <button class="fj" style="--x:-2%;--y:6%;--s:96px;--t:5.2s" data-d="14" aria-label="Jelly"><img src="img/s/flow_node_0_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:84%;--y:-1%;--s:80px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Jelly"><img src="img/s/flow_node_5_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:-6%;--y:60%;--s:88px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Jelly"><img src="img/s/flow_node_4_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:90%;--y:48%;--s:98px;--t:5s;--dl:-.5s" data-d="26" aria-label="Jelly"><img src="img/s/flow_node_3_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:12%;--y:90%;--s:74px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Jelly"><img src="img/s/flow_node_2_done.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:72%;--y:92%;--s:78px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Jelly"><img src="img/s/flow_node_6_done.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:44%;--y:-6%;--s:62px;--t:4.1s;--dl:-2.4s" data-d="10" aria-label="Jelly"><img src="img/s/flow_node_7_idle.webp" alt="" width="192" height="192"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i><i class="spark" style="--x:50%;--y:-2%;--s:12px;--t:2.4s;--dl:-1.4s"></i>
       </div>
     </div>
   </div>
 </header>
-
-<div class="band" aria-hidden="true"><div class="band-t">
-@@BAND@@
-</div></div>
 
 <main>
 
@@ -229,40 +230,15 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
     </div>
   </section>
 
-  <!-- DÜNYALAR -->
-  <section class="blk worlds">
-    <div class="wrap">
-      <div class="wx-grid">
-        <div class="wx-info rv">
-          <span class="eyebrow"><span class="en i">The worlds</span><span class="tr i">Dünyalar</span></span>
-          <h2 class="en">50 sweet worlds <span class="hl">to wander through.</span></h2>
-          <h2 class="tr">Gezecek 50 <span class="hl">tatlı dünya.</span></h2>
-          <p class="en">Jelly Garden, Candy River, Cloud Field, Rainbow Bridge and many more. Every world has its own painted backdrop; these are the real ones from the game.</p>
-          <p class="tr">Jöle Bahçesi, Şeker Nehri, Bulut Tarlası, Gökkuşağı Köprüsü ve çok daha fazlası. Her dünyanın kendi çizilmiş arka planı var; bunlar oyundaki gerçekleri.</p>
-          <div class="wx" id="wx" tabindex="0" aria-label="World explorer">
-            <div class="wx-num"></div>
-            <div class="wx-name"><span class="en"></span><span class="tr"></span></div>
-            <div class="wx-ctl">
-              <button class="wx-btn wx-prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
-              <button class="wx-btn wx-next" type="button" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
-            </div>
-            <div class="wx-strip" id="wxstrip"></div>
-          </div>
-        </div>
-        <div class="wx-view rv" id="wxview"></div>
-      </div>
-    </div>
-  </section>
-
   <!-- SÜRPRİZLER -->
   <section class="blk">
     <div class="wrap">
       <div class="head rv">
         <span class="eyebrow"><span class="en i">The twists</span><span class="tr i">Sürprizler</span></span>
-        <h2 class="en">A new twist every few worlds, <span class="hl">never a wall.</span></h2>
-        <h2 class="tr">Her birkaç dünyada yeni bir sürpriz, <span class="hl">hiç duvar yok.</span></h2>
-        <p class="en">Tap a twist to see what it does. They arrive one at a time, with a little tutorial each.</p>
-        <p class="tr">Bir sürprize dokun, ne yaptığını gör. Teker teker gelirler ve her birinin küçük bir anlatımı var.</p>
+        <h2 class="en">Eleven twists, <span class="hl">one at a time.</span></h2>
+        <h2 class="tr">On bir sürpriz, <span class="hl">tek tek gelir.</span></h2>
+        <p class="en">Every new twist arrives alone, in a gentle level with a little tutorial. Tap one to see what it does and when you will meet it.</p>
+        <p class="tr">Her yeni sürpriz, küçük bir anlatımla ve kolay bir bölümde tek başına gelir. Birine dokun, ne yaptığını ve ne zaman karşına çıkacağını gör.</p>
       </div>
       <div id="lab" class="rv">
         <div class="pills" role="tablist">
@@ -291,7 +267,7 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
           <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. Kendi hızında öğren, kimse bakmıyor.</p>
         </div>
         <div class="sticker rv">
-          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/flow_wanderer_hop.webp" alt=""></div>
+          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/ui_boss_badge.webp" alt=""></div>
           <h4><span class="en i">Boss levels</span><span class="tr i">Patron bölümleri</span></h4>
           <p class="en">Boss levels bring a clock and a move limit together, for the moments you want a real challenge.</p>
           <p class="tr">Patron bölümleri süre ve hamle sınırını bir arada getirir; gerçek bir meydan okuma istediğin anlar için.</p>
@@ -344,8 +320,6 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 <div class="lb" id="lb" role="dialog" aria-modal="true"><button class="lb-x" type="button" aria-label="Close">&times;</button><button class="lb-n l" type="button" aria-label="Previous">&lsaquo;</button><img alt=""><button class="lb-n r" type="button" aria-label="Next">&rsaquo;</button></div>
 
 <script>
-window.JG_WORLDS=@@WORLDS@@;
-window.JG_WBASE='img/w/';
 window.JT_PUZZLES=@@PUZZLES@@;
 </script>
 <script>
@@ -360,7 +334,7 @@ window.JT_PUZZLES=@@PUZZLES@@;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   $$('.fj',stage).forEach(function(j){
     j.addEventListener('click',function(){
-      j.classList.remove('sq'); var im=$('img',j); im.style.animation='none'; void im.offsetWidth; im.style.animation=''; j.classList.add('sq');
+      var im=$('img',j); im.style.animation='none'; void im.offsetWidth; im.style.animation=''; j.classList.remove('sq'); void j.offsetWidth; j.classList.add('sq');
       var r=j.getBoundingClientRect(), s=stage.getBoundingClientRect();
       for(var k=0;k<3;k++){
         var h=document.createElement('img'); h.src='img/s/fx_heart.webp'; h.className='heart'; h.alt='';
@@ -371,82 +345,117 @@ window.JT_PUZZLES=@@PUZZLES@@;
     });
   });
   if(!reduce && window.matchMedia('(pointer: fine)').matches){
-    var hero=$('.hero');
-    hero.addEventListener('pointermove',function(e){
+    $('.hero').addEventListener('pointermove',function(e){
       var r=stage.getBoundingClientRect(), nx=(e.clientX-(r.left+r.width/2))/r.width, ny=(e.clientY-(r.top+r.height/2))/r.height;
       $$('.fj',stage).forEach(function(j){ var dd=+j.getAttribute('data-d')||12; j.style.setProperty('--px',(-nx*dd).toFixed(1)+'px'); j.style.setProperty('--py',(-ny*dd).toFixed(1)+'px'); });
-      var ph=$('.phone',stage); ph.style.setProperty('--px',(nx*10).toFixed(1)+'px'); ph.style.setProperty('--py',(ny*10).toFixed(1)+'px');
     });
   }
 })();
 </script>
 <script>
-/* ============ Jelly Trails: oynanabilir bulmaca ============ */
+/* ============ Jelly Trails: tahta görünümü, hero gösterimi ve oynanabilir bulmaca ============
+   Kurallar oyunun kendi kodundan (controllers.dart, FlowController): yol yalnız komşuya uzar, kendi yoluna
+   dönersen o noktaya kısalır, başka rengin yolunu KESERSEN o renk tamamen başa döner, bağ tamamlanmadan
+   bırakılan yol geri çekilerek silinir, başka rengin jölesine girilemez. */
 (function(){
   'use strict';
   var JG=window.JG,$=JG.$,$$=JG.$$;
-  var P=window.JT_PUZZLES, board=$('#board'); if(!board||!P) return;
+  var P=window.JT_PUZZLES; if(!P) return;
   var COL=['#FF8A8A','#FFB36B','#FFE066','#6FE3A6','#6AA8FF','#A78BFA','#FF8FC7','#5FD8E8'];
-  var SPR=[0,1,2,3,4,5,6,7];
-  var order=[0,4,3,5,2,6,1,7];            /* renk sırası: kırmızı, mavi, yeşil, mor... */
-  var cur=0, n, pairs, paths, drawing=-1, solved=P.map(function(){return false;});
-  var svgNS='http://www.w3.org/2000/svg', svg, cellEls=[], nodeAt={};
+  var order=[0,4,3,5,2,6,1,7];
+  var NS='http://www.w3.org/2000/svg';
+  var rc=function(c,n){return [Math.floor(c/n),c%n];};
 
-  function rc(c){return [Math.floor(c/n),c%n];}
-  function load(i){
-    cur=i; var pz=P[i]; n=pz.n; pairs=pz.pairs; paths=pairs.map(function(p){return [p[0]];}); drawing=-1;
-    nodeAt={}; pairs.forEach(function(p,k){ nodeAt[p[0]]=k; nodeAt[p[1]]=k; });
-    board.innerHTML=''; board.style.setProperty('--n',n); board.classList.remove('won'); $('#win').classList.remove('on');
-    cellEls=[];
+  function View(el,pz){
+    var n=pz.n, self=this; this.el=el; this.n=n; this.pairs=pz.pairs; this.cells=[]; this.nodeAt={};
+    pz.pairs.forEach(function(p,k){ self.nodeAt[p[0]]=k; self.nodeAt[p[1]]=k; });
+    el.innerHTML=''; el.style.setProperty('--n',n); el.classList.remove('won');
     for(var c=0;c<n*n;c++){
-      var d=document.createElement('div'); d.className='cell'; d.setAttribute('data-c',c);
-      if(nodeAt[c]!==undefined){ var im=document.createElement('img'); im.alt=''; im.src='img/s/flow_node_'+order[nodeAt[c]]+'_idle.webp'; d.appendChild(im); }
-      board.appendChild(d); cellEls.push(d);
+      var d=document.createElement('div'); d.className='cell';
+      if(this.nodeAt[c]!==undefined){ var im=document.createElement('img'); im.alt=''; im.src='img/s/flow_node_'+order[this.nodeAt[c]]+'_idle.webp'; d.appendChild(im); }
+      el.appendChild(d); this.cells.push(d);
     }
-    svg=document.createElementNS(svgNS,'svg'); svg.setAttribute('viewBox','0 0 '+n+' '+n); svg.setAttribute('preserveAspectRatio','none'); board.appendChild(svg);
-    pairs.forEach(function(p,k){ var g=document.createElementNS(svgNS,'g'); g.setAttribute('data-k',k);
-      ['o','i'].forEach(function(t){ var pa=document.createElementNS(svgNS,'path'); pa.setAttribute('data-t',t);
+    this.svg=document.createElementNS(NS,'svg'); this.svg.setAttribute('viewBox','0 0 '+n+' '+n); this.svg.setAttribute('preserveAspectRatio','none'); el.appendChild(this.svg);
+    pz.pairs.forEach(function(p,k){ var g=document.createElementNS(NS,'g');
+      ['o','i'].forEach(function(t){ var pa=document.createElementNS(NS,'path');
         pa.setAttribute('stroke',t==='o'?COL[order[k]]:'rgba(255,255,255,.55)'); pa.setAttribute('stroke-width',t==='o'?'.54':'.2'); g.appendChild(pa); });
-      svg.appendChild(g); });
-    renderPicker(); render();
+      self.svg.appendChild(g); });
+  }
+  View.prototype.complete=function(k,p){ var a=this.pairs[k][0], b=this.pairs[k][1]; return p.length>1 && ((p[0]===a&&p[p.length-1]===b)||(p[0]===b&&p[p.length-1]===a)); };
+  View.prototype.draw=function(paths){
+    var self=this, n=this.n, filled={}, linked=0;
+    this.pairs.forEach(function(pp,k){
+      var p=paths[k], d=p.length>1?p.map(function(c,i){ var r=rc(c,n); return (i?'L':'M')+(r[1]+.5)+' '+(r[0]+.5); }).join(''):'';
+      Array.prototype.forEach.call(self.svg.children[k].children,function(pa){ pa.setAttribute('d',d); });
+      if(p.length>1) p.forEach(function(c){ filled[c]=1; });
+      var ok=self.complete(k,p); if(ok) linked++;
+      [pp[0],pp[1]].forEach(function(c){ var im=self.cells[c].querySelector('img'); var want='img/s/flow_node_'+order[k]+(ok?'_done':'_idle')+'.webp';
+        if(im.getAttribute('src')!==want){ im.setAttribute('src',want); if(ok){ im.classList.remove('ok'); void im.offsetWidth; im.classList.add('ok'); } } });
+    });
+    return {filled:Object.keys(filled).length, linked:linked};
+  };
+
+  /* ---------- hero: kendiliğinden çözülen bulmacalar ---------- */
+  var reelEl=$('#reel');
+  if(reelEl){
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, visible=true, idx=1;
+    var sleep=function(ms){ return new Promise(function(r){ setTimeout(r,ms); }); };
+    if('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible=es[0].isIntersecting; }).observe(reelEl);
+    var idle=function(){ return new Promise(function(r){ (function w(){ if(visible&&!document.hidden) r(); else setTimeout(w,400); })(); }); };
+    (async function loop(){
+      for(;;){
+        var pz=P[idx%P.length]; idx++;
+        var v=new View(reelEl,pz), paths=pz.pairs.map(function(p){ return [p[0]]; });
+        v.draw(paths);
+        if(reduce){ paths=pz.solution.map(function(p){return p.slice();}); v.draw(paths); reelEl.classList.add('won'); return; }
+        await idle(); await sleep(900);
+        for(var k=0;k<pz.solution.length;k++){
+          var sol=pz.solution[k];
+          for(var i=1;i<sol.length;i++){ paths[k]=sol.slice(0,i+1); v.draw(paths); await sleep(115); }
+          await sleep(260);
+        }
+        reelEl.classList.add('won'); await sleep(2400);
+        var more=true;
+        while(more){ more=false; paths.forEach(function(p){ if(p.length>1){ p.pop(); more=true; } }); v.draw(paths); await sleep(34); }
+        reelEl.classList.remove('won'); await sleep(500);
+      }
+    })();
+  }
+
+  /* ---------- oynanabilir bulmaca ---------- */
+  var board=$('#board'); if(!board) return;
+  var cur=0, n, pairs, paths, view, drawing=-1, last=-1, solved=P.map(function(){return false;});
+  var retract={}, rtimer=null;
+
+  function load(i){
+    finishRetract(); cur=i; var pz=P[i]; n=pz.n; pairs=pz.pairs; paths=pairs.map(function(p){return [p[0]];}); drawing=-1;
+    view=new View(board,pz); $('#win').classList.remove('on'); renderPicker(); render();
   }
   function renderPicker(){
     var pk=$('#picker'); pk.innerHTML='';
     P.forEach(function(pz,i){ var b=document.createElement('button'); b.type='button'; b.className='pk'+(i===cur?' on':'')+(solved[i]?' done':'');
       b.innerHTML=pz.n+'&times;'+pz.n; b.addEventListener('click',function(){ load(i); }); pk.appendChild(b); });
   }
-  function pathD(p){
-    if(p.length<1) return '';
-    return p.map(function(c,i){ var r=rc(c); return (i?'L':'M')+(r[1]+.5)+' '+(r[0]+.5); }).join('');
-  }
-  function complete(k){ var p=paths[k]; return p.length>1 && p[p.length-1]===pairs[k][1]; }
   function render(){
-    var filled={};
-    pairs.forEach(function(pp,k){
-      var g=svg.children[k], d=paths[k].length>1?pathD(paths[k]):'';
-      $$('path',g).forEach(function(pa){ pa.setAttribute('d',d); });
-      paths[k].forEach(function(c){ filled[c]=1; });
-      var ok=complete(k);
-      [pp[0],pp[1]].forEach(function(c){ var im=$('img',cellEls[c]); var want='img/s/flow_node_'+order[k]+(ok?'_done':'_idle')+'.webp';
-        if(im.getAttribute('src')!==want){ im.setAttribute('src',want); if(ok){ im.classList.remove('ok'); void im.offsetWidth; im.classList.add('ok'); } } });
-    });
-    var f=Object.keys(filled).length, linked=pairs.filter(function(_,k){return complete(k);}).length;
-    $('#m-link').textContent=linked+'/'+pairs.length; $('#m-fill').textContent=Math.round(f/(n*n)*100)+'%';
-    if(linked===pairs.length && f===n*n && !board.classList.contains('won')) win();
+    var st=view.draw(paths);
+    $('#m-link').textContent=st.linked+'/'+pairs.length; $('#m-fill').textContent=Math.round(st.filled/(n*n)*100)+'%';
+    if(st.linked===pairs.length && st.filled===n*n && !board.classList.contains('won')) win();
   }
+  function complete(k){ return view.complete(k,paths[k]); }
   function owner(c){ for(var k=0;k<paths.length;k++){ if(paths[k].indexOf(c)>-1) return k; } return -1; }
-  function adj(a,b){ var A=rc(a),B=rc(b); return Math.abs(A[0]-B[0])+Math.abs(A[1]-B[1])===1; }
+  function adj(a,b){ var A=rc(a,n),B=rc(b,n); return Math.abs(A[0]-B[0])+Math.abs(A[1]-B[1])===1; }
+  function twinOf(k){ return paths[k][0]===pairs[k][0]?pairs[k][1]:pairs[k][0]; }
   function step(c){
     if(drawing<0) return; var p=paths[drawing], head=p[p.length-1];
-    if(c===head) return;
-    if(!adj(head,c)) return;
-    if(p.length>1 && c===p[p.length-2]){ p.pop(); return; }
-    if(complete(drawing)) return;
+    if(c===head || !adj(head,c)) return;
+    if(p.length>1 && c===p[p.length-2]){ p.pop(); return; }          /* bir adım geri */
+    if(complete(drawing)) return;                                      /* bağlandı: yalnız geri alınabilir */
     var idx=p.indexOf(c);
     if(idx>-1){ paths[drawing]=p.slice(0,idx+1); return; }
-    if(nodeAt[c]!==undefined && nodeAt[c]!==drawing) return;
+    var nk=view.nodeAt[c];
+    if(nk!==undefined && !(nk===drawing && c===twinOf(drawing))) return; /* başka rengin jölesine girilmez */
     var o=owner(c);
-    if(o>-1 && o!==drawing){ var q=paths[o], at=q.indexOf(c); paths[o]=at<=0?[q[0]]:q.slice(0,at); if(nodeAt[c]===o) return; }
+    if(o>-1 && o!==drawing){ paths[o]=[]; }                           /* kesilen renk tamamen başa döner */
     p.push(c);
   }
   function cellAt(e){
@@ -454,34 +463,48 @@ window.JT_PUZZLES=@@PUZZLES@@;
     if(x<0||y<0||x>=1||y>=1) return -1;
     return Math.floor(y*n)*n+Math.floor(x*n);
   }
-  var last=-1;
+  function finishRetract(){ if(rtimer){ clearInterval(rtimer); rtimer=null; } Object.keys(retract).forEach(function(k){ if(paths&&paths[k]) paths[k]=[]; }); retract={}; }
   board.addEventListener('pointerdown',function(e){
     if(board.classList.contains('won')) return;
-    var c=cellAt(e); if(c<0) return;
-    var k=-1;
-    if(nodeAt[c]!==undefined){ k=nodeAt[c]; paths[k]=[pairs[k][0]===c?pairs[k][0]:pairs[k][1]]; if(c===pairs[k][1]){ /* ikinci uçtan başlarsa yönü çevir */ pairs[k]=[pairs[k][1],pairs[k][0]]; } }
-    else { k=owner(c); if(k>-1){ paths[k]=paths[k].slice(0,paths[k].indexOf(c)+1); } }
-    if(k<0) return;
-    drawing=k; last=c; board.setPointerCapture(e.pointerId); render(); e.preventDefault();
+    var c=cellAt(e); if(c<0) return; finishRetract();
+    var k=view.nodeAt[c];
+    if(k!==undefined){ paths[k]=[c]; }
+    else { k=owner(c); if(k===undefined||k<0) return; paths[k]=paths[k].slice(0,paths[k].indexOf(c)+1); }
+    /* kesilen/boş yolların başlangıcı her zaman kendi jölesidir */
+    paths.forEach(function(p,j){ if(!p.length) paths[j]=[pairs[j][0]]; });
+    drawing=k; last=c; try{ board.setPointerCapture(e.pointerId); }catch(x){} render(); e.preventDefault();
   });
   board.addEventListener('pointermove',function(e){
     if(drawing<0) return; var c=cellAt(e); if(c<0||c===last) return;
-    /* hızlı sürüklemede atlanan kareleri sırayla geç */
-    var guard=0; while(last!==c && guard++<8 && drawing>-1){
-      var A=rc(last), B=rc(c), nr=A[0], nc=A[1];
+    var guard=0; while(last!==c && guard++<8){
+      var A=rc(last,n), B=rc(c,n), nr=A[0], nc=A[1];
       if(A[0]!==B[0]) nr+=B[0]>A[0]?1:-1; else if(A[1]!==B[1]) nc+=B[1]>A[1]?1:-1;
       var nx=nr*n+nc; step(nx); last=nx;
     }
+    /* kesilen yol tek hücreye inmiş olabilir: kendi jölesine döndür */
+    paths.forEach(function(p,j){ if(!p.length) paths[j]=[pairs[j][0]]; });
     render();
   });
-  function end(){ drawing=-1; last=-1; }
+  function end(){
+    drawing=-1; last=-1;
+    /* tamamlanmayan yol, oyundaki gibi geri çekilerek silinir */
+    paths.forEach(function(p,k){ if(!complete(k) && p.length>1) retract[k]=1; });
+    if(Object.keys(retract).length && !rtimer){
+      rtimer=setInterval(function(){
+        Object.keys(retract).forEach(function(k){ var p=paths[k]; if(p.length>1) p.pop(); if(p.length<=1){ paths[k]=[pairs[k][0]]; delete retract[k]; } });
+        if(!Object.keys(retract).length){ clearInterval(rtimer); rtimer=null; }
+        render();
+      },24);
+    }
+    render();
+  }
   board.addEventListener('pointerup',end); board.addEventListener('pointercancel',end);
   function win(){
     board.classList.add('won'); solved[cur]=true; renderPicker();
     var w=$('#win'); setTimeout(function(){ w.classList.add('on'); burst(); },450);
   }
   function burst(){
-    var card=$('#bcard'); var imgs=['fx_star','fx_heart','flow_node_6_done','flow_node_2_done'];
+    var card=$('#bcard'), imgs=['fx_star','fx_heart','flow_node_6_done','flow_node_2_done'];
     for(var i=0;i<22;i++){
       var im=document.createElement('img'); im.src='img/s/'+imgs[i%imgs.length]+'.webp'; im.className='conf'; im.alt='';
       var a=Math.random()*Math.PI*2, dist=120+Math.random()*190;
@@ -492,14 +515,12 @@ window.JT_PUZZLES=@@PUZZLES@@;
   $('#b-reset').addEventListener('click',function(){ load(cur); });
   $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
   $('#b-hint').addEventListener('click',function(){
-    var sol=P[cur].solution; for(var k=0;k<pairs.length;k++){ if(!complete(k)){
-      /* çözümde bu çiftin yolunu bul */
-      var s=sol.filter(function(p){ return (p[0]===pairs[k][0]&&p[p.length-1]===pairs[k][1])||(p[0]===pairs[k][1]&&p[p.length-1]===pairs[k][0]); })[0];
-      if(!s) continue; if(s[0]!==pairs[k][0]) s=s.slice().reverse();
-      s.forEach(function(c){ var o=owner(c); if(o>-1&&o!==k){ var q=paths[o],at=q.indexOf(c); paths[o]=at<=0?[q[0]]:q.slice(0,at); } });
+    finishRetract();
+    for(var k=0;k<pairs.length;k++){ if(!complete(k)){
+      var s=P[cur].solution[k]; if(!s) continue;
+      s.forEach(function(c){ var o=owner(c); if(o>-1&&o!==k) paths[o]=[pairs[o][0]]; });
       paths[k]=s.slice(); render(); return; } }
   });
-  /* yıldız düğmeleri */
   $$('#stars button').forEach(function(b,i,all){ b.addEventListener('click',function(){ all.forEach(function(x,k){ x.classList.toggle('on',k<=i); }); }); });
   load(0);
 })();

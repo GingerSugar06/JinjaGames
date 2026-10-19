@@ -86,7 +86,7 @@ html[data-theme="dark"]{
   --nav-bg:rgba(14,12,13,.78); --nav-bg-solid:rgba(14,12,13,.96);
   --shadow-1:0 1px 2px rgba(0,0,0,.36), 0 8px 22px rgba(0,0,0,.3);
   --shadow-2:0 22px 56px rgba(0,0,0,.52);
-  --w-cyber:#4FD0E4; --w-noir:#F16A5C; --w-warm:#6FBF87;
+  --w-cyber:#4FD0E4; --w-noir:#F16A5C; --w-warm:#6FBF87; --w-trails:#B79BFF; --w-pipes:#79C8F2;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -193,31 +193,51 @@ html[data-theme="dark"] .btn.p{color:#17110F}
 .rv.in{opacity:1;transform:none}
 
 /* ---------------- HERO ---------------- */
-.hero{padding:calc(var(--navh) + 108px) 0 82px;position:relative;overflow:hidden}
+.hero{padding:calc(var(--navh) + 96px) 0 64px;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;width:760px;height:760px;right:-240px;top:-300px;border-radius:50%;background:radial-gradient(circle,rgba(var(--brand-rgb),.085),transparent 66%);pointer-events:none}
-.hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:end}
+.hero-in{position:relative;display:block}
 .brandword{font-size:clamp(58px,10.4vw,132px);letter-spacing:-.055em;line-height:.92;margin:24px 0 0}
 .brandword .w2{color:var(--brand)}
 .tagline{max-width:540px;margin-top:30px;color:var(--ink-2);font-size:19.5px;line-height:1.62}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px}
-.hero-index{border-top:1px solid var(--line);padding-top:4px}
-.hero-index a{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease)}
-.hero-index a:hover{padding-left:8px}
-.hero-index .n{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
-.hero-index .t{font-family:var(--f-display);font-weight:500;font-size:17px;letter-spacing:-.02em}
-.hero-index .d{margin-left:auto;font-size:13px;color:var(--ink-3)}
-.hero-index a:hover .t{color:var(--brand)}
-
 /* Hero'daki 3B parçacık sahnesi: üç dünyanın biçimleri arasında dönüşür. */
 #hero3d{position:absolute;right:0;top:0;width:58%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
 #hero3d.ready{opacity:1}
 .hero-in{z-index:1}
-.hero-index{background:linear-gradient(180deg,transparent,var(--bg) 18%);padding-bottom:2px}
-.hero-index a{position:relative}
-.hero-index a::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
-.hero-index a:hover::after,.hero-index a.on::after{transform:scaleX(1)}
-.hero-index a.on{padding-left:8px}
 .brandword .w1,.brandword .w2{display:inline-block}
+
+/* HERO SAYFALARI: JinjaGames, Cyber Academy, Locard, Jelly Trails, Jelly Pipes, DayPot; sonda başa sarar. */
+.slides{display:grid;position:relative;min-height:min(470px,62vh)}
+.slide{grid-area:1/1;max-width:640px;opacity:0;visibility:hidden;transform:translateX(34px);transition:opacity .55s ease,transform .7s var(--ease),visibility 0s .55s;pointer-events:none}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease .12s,transform .8s var(--ease) .12s,visibility 0s;pointer-events:auto}
+.slide.out{transform:translateX(-34px)}
+.gtitle{font-size:clamp(50px,8.6vw,112px);line-height:.94;margin:24px 0 0;letter-spacing:-.045em}
+.slide[data-shape="cyber"] .gtitle{font-family:var(--f-mono);font-weight:700;letter-spacing:-.06em;font-size:clamp(40px,7vw,92px);color:var(--w-cyber)}
+.slide[data-shape="noir"] .gtitle{font-family:var(--f-noir);font-weight:900;letter-spacing:-.02em;color:var(--w-noir)}
+.slide[data-shape="jelly"] .gtitle,.slide[data-shape="drop"] .gtitle,.slide[data-shape="warm"] .gtitle{font-family:var(--f-warm);font-weight:700;letter-spacing:-.03em}
+.slide[data-shape="jelly"] .gtitle{color:var(--w-trails)}
+.slide[data-shape="drop"] .gtitle{color:var(--w-pipes)}
+.slide[data-shape="warm"] .gtitle{color:var(--w-warm)}
+.slide[data-shape="cyber"] .btn.p{background:var(--w-cyber)}
+.slide[data-shape="noir"] .btn.p{background:var(--w-noir)}
+.slide[data-shape="jelly"] .btn.p{background:var(--w-trails)}
+.slide[data-shape="drop"] .btn.p{background:var(--w-pipes)}
+.slide[data-shape="warm"] .btn.p{background:var(--w-warm)}
+html[data-theme="dark"] .slide .btn.p{color:#10100F}
+.pager{position:relative;z-index:2;display:flex;align-items:center;gap:14px;margin-top:46px;max-width:640px}
+.pg-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink-2);background:transparent;cursor:pointer;flex-shrink:0;transition:.22s}
+.pg-arrow:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-2px)}
+.pg-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pg-segs{display:flex;gap:8px;flex:1;min-width:0}
+.pg-seg{flex:1;height:30px;position:relative;cursor:pointer;background:none;border:0;padding:0}
+.pg-seg::before{content:"";position:absolute;left:0;right:0;top:13px;height:4px;border-radius:4px;background:var(--line-2)}
+.pg-seg i{position:absolute;left:0;top:13px;height:4px;border-radius:4px;background:var(--brand);width:0}
+.pg-seg.done i{width:100%}
+.pg-seg.on i{animation:pgfill var(--pgdur,8s) linear forwards}
+.pager.paused .pg-seg.on i{animation-play-state:paused}
+@keyframes pgfill{to{width:100%}}
+.pg-seg:hover::before{background:var(--ink-3)}
+.pg-name{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);min-width:110px;text-align:right}
 .brandword .ch{display:inline-block;transition:transform .5s var(--ease),color .3s}
 .brandword .ch:hover{transform:translateY(-8px) rotate(-4deg)}
 @media(max-width:1060px){#hero3d{width:100%;opacity:.28}#hero3d.ready{opacity:.28}}
@@ -303,10 +323,6 @@ section.blk{padding:112px 0;position:relative}
 @font-face{font-family:'Spartan Locard';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/spartan-semibold-locard.woff') format('woff')}
 .allgames{margin-top:34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:24px 28px;border:1px dashed var(--line-2);border-radius:6px}
 .allgames p{color:var(--ink-2);font-size:15.5px;max-width:620px}
-.hero-index a:nth-child(1) .t{font-family:var(--f-mono);font-weight:400;font-size:15px;letter-spacing:-.01em}
-.hero-index a:nth-child(2) .t{font-family:var(--f-noir);font-weight:700;font-size:19px;letter-spacing:0}
-.hero-index a:nth-child(3) .t{font-family:var(--f-warm);font-weight:600;font-size:18px;letter-spacing:-.015em}
-.hero-index a:nth-child(4) .t,.hero-index a:nth-child(5) .t{font-family:var(--f-warm);font-weight:600;font-size:18px;letter-spacing:-.015em}
 html[data-steam="soon"] .sx-live{display:none!important}
 html[data-steam="live"] .sx-soon{display:none!important}
 
@@ -532,22 +548,58 @@ html,body{overflow-x:hidden;overflow-x:clip}
   <section class="hero">
     <canvas id="hero3d" aria-hidden="true"></canvas>
     <div class="wrap hero-in">
-      <div>
-        <span class="label"><span class="en i">Indie game studio · Ankara, Türkiye</span><span class="tr i">Bağımsız oyun stüdyosu · Ankara, Türkiye</span></span>
-        <h1 class="brandword"><span class="w1">Jinja</span><span class="w2">Games</span></h1>
-        <p class="tagline en">Five worlds in progress. They all want the same thing: that you enjoy yourself, that you learn something while you play, or that your day gets a little easier.</p>
-        <p class="tagline tr">Üretimde beş dünya. Hepsinin amacı aynı: oynarken eğlenmen, oynarken bir şey öğrenmen ya da günlük işinin biraz kolaylaşması.</p>
-        <div class="cta">
-          <a class="btn p" href="games/"><span class="en i">See the games</span><span class="tr i">Oyunlara bak</span> <span class="arw">&rarr;</span></a>
-          <a class="btn g" href="#studio"><span class="en i">About the studio</span><span class="tr i">Stüdyo hakkında</span></a>
-        </div>
+      <div class="slides" id="slides">
+        <article class="slide on" data-shape="base" data-name="JinjaGames">
+          <span class="label"><span class="en i">Indie game studio · Ankara, Türkiye</span><span class="tr i">Bağımsız oyun stüdyosu · Ankara, Türkiye</span></span>
+          <h1 class="brandword"><span class="w1">Jinja</span><span class="w2">Games</span></h1>
+          <p class="tagline en">Five worlds in progress. They all want the same thing: that you enjoy yourself, that you learn something while you play, or that your day gets a little easier.</p>
+          <p class="tagline tr">Üretimde beş dünya. Hepsinin amacı aynı: oynarken eğlenmen, oynarken bir şey öğrenmen ya da günlük işinin biraz kolaylaşması.</p>
+          <div class="cta">
+            <a class="btn p" href="games/"><span class="en i">See the games</span><span class="tr i">Oyunlara bak</span> <span class="arw">&rarr;</span></a>
+            <a class="btn g" href="#studio"><span class="en i">About the studio</span><span class="tr i">Stüdyo hakkında</span></a>
+          </div>
+        </article>
+        <article class="slide" data-shape="cyber" data-name="Cyber Academy" aria-hidden="true">
+          <span class="label"><span class="en i">Cybersecurity game · Out now on Steam</span><span class="tr i">Siber güvenlik oyunu · Steam'de çıktı</span></span>
+          <h2 class="gtitle">Cyber Academy</h2>
+          <p class="tagline en">Learn real security by doing it inside a virtual OS, then step into the Dark Net to attack, defend and trace other players.</p>
+          <p class="tagline tr">Gerçek güvenliği sanal bir işletim sisteminin içinde yaparak öğren, sonra diğer oyunculara saldırmak, savunmak ve iz sürmek için Karanlık Ağ'a gir.</p>
+          <div class="cta"><a class="btn p" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span class="arw">&rarr;</span></a><a class="btn g" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener"><span class="en i">Steam ↗</span><span class="tr i">Steam ↗</span></a></div>
+        </article>
+        <article class="slide" data-shape="noir" data-name="Locard" aria-hidden="true">
+          <span class="label"><span class="en i">Detective game · Q1 2027</span><span class="tr i">Dedektif oyunu · 2027 Q1</span></span>
+          <h2 class="gtitle">Locard</h2>
+          <p class="tagline en">Everybody is hiding something, but not every secret is a murder. A first person case in the coastal city of Meridian, alone or with up to three friends.</p>
+          <p class="tagline tr">Herkesin sakladığı bir şey vardır; fakat her sır cinayet değildir. Kıyı kenti Meridian'da birinci şahıs bir dosya, tek başına ya da üç arkadaşınla.</p>
+          <div class="cta"><a class="btn p" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span class="arw">&rarr;</span></a><a class="btn g" href="locard/#trailer"><span class="en i">Trailer</span><span class="tr i">Fragman</span></a></div>
+        </article>
+        <article class="slide" data-shape="jelly" data-name="Jelly Trails" aria-hidden="true">
+          <span class="label"><span class="en i">Color-connect puzzle · Android</span><span class="tr i">Renk bağlama bulmacası · Android</span></span>
+          <h2 class="gtitle">Jelly Trails</h2>
+          <p class="tagline en">Link matching jellies with glossy trails and fill every square. 500 handcrafted levels across 50 sweet worlds.</p>
+          <p class="tagline tr">Aynı renkli jöleleri parlak yollarla bağla ve her kareyi doldur. 50 tatlı dünyada özenle hazırlanmış 500 bölüm.</p>
+          <div class="cta"><a class="btn p" href="jellytrails/"><span class="en i">Meet the jellies</span><span class="tr i">Jölelerle tanış</span> <span class="arw">&rarr;</span></a><a class="btn g" href="jellytrails/#try"><span class="en i">Try a puzzle</span><span class="tr i">Bir bulmaca dene</span></a></div>
+        </article>
+        <article class="slide" data-shape="drop" data-name="Jelly Pipes" aria-hidden="true">
+          <span class="label"><span class="en i">Water pipe puzzle · Android</span><span class="tr i">Su borusu bulmacası · Android</span></span>
+          <h2 class="gtitle">Jelly Pipes</h2>
+          <p class="tagline en">Rotate glassy pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 refreshing worlds.</p>
+          <p class="tagline tr">Cam boruları çevir, gerçek akan su her çiçeğe ulaşsın. 50 ferahlatıcı dünyada özenle hazırlanmış 500 bölüm.</p>
+          <div class="cta"><a class="btn p" href="jellypipes/"><span class="en i">Let the water flow</span><span class="tr i">Suyu akıt</span> <span class="arw">&rarr;</span></a><a class="btn g" href="jellypipes/#try"><span class="en i">Try a puzzle</span><span class="tr i">Bir bulmaca dene</span></a></div>
+        </article>
+        <article class="slide" data-shape="warm" data-name="DayPot" aria-hidden="true">
+          <span class="label"><span class="en i">Kitchen assistant · Android</span><span class="tr i">Mutfak yardımcısı · Android</span></span>
+          <h2 class="gtitle">DayPot</h2>
+          <p class="tagline en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
+          <p class="tagline tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
+          <div class="cta"><a class="btn p" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span class="arw">&rarr;</span></a><a class="btn g" href="daypot/gizlilik/"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a></div>
+        </article>
       </div>
-      <div class="hero-index">
-        <a href="#cyber" data-shape="cyber"><span class="n">01</span><span class="t">Cyber Academy</span><span class="d en i">Out now</span><span class="d tr i">Çıktı</span></a>
-        <a href="#locard" data-shape="noir"><span class="n">02</span><span class="t">Locard</span><span class="d en i">Q1 2027</span><span class="d tr i">2027 Q1</span></a>
-        <a href="#daypot" data-shape="warm"><span class="n">03</span><span class="t">DayPot</span><span class="d en i">Android</span><span class="d tr i">Android</span></a>
-        <a href="#jellytrails"><span class="n">04</span><span class="t">Jelly Trails</span><span class="d en i">Android</span><span class="d tr i">Android</span></a>
-        <a href="#jellypipes"><span class="n">05</span><span class="t">Jelly Pipes</span><span class="d en i">Android</span><span class="d tr i">Android</span></a>
+      <div class="pager" id="pager">
+        <button class="pg-arrow" id="pg-prev" type="button" aria-label="Previous page"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+        <div class="pg-segs" id="pg-segs"></div>
+        <button class="pg-arrow" id="pg-next" type="button" aria-label="Next page"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
+        <span class="pg-name" id="pg-name">JinjaGames</span>
       </div>
     </div>
   </section>
@@ -606,25 +658,12 @@ html,body{overflow-x:hidden;overflow-x:clip}
           </div>
         </article>
 
-        <!-- 03 DAYPOT -->
-        <article id="daypot" class="wp g-warm rv" tabindex="0" aria-label="DayPot">
-          <div class="wp-media"><span class="steam" aria-hidden="true"><i></i><i></i><i></i></span><img class="pot" src="daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">03</span><span class="v">DayPot</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">03 · Kitchen assistant · Android</span><span class="tr i">03 · Mutfak yardımcısı · Android</span></span>
-            <h3>DayPot</h3>
-            <p class="en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
-            <p class="tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
-            <div class="tags"><span>Android</span><span class="en i">250+ recipes</span><span class="tr i">250+ tarif</span><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
-            <div class="links"><a class="go" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span aria-hidden="true">&rarr;</span></a></div>
-          </div>
-        </article>
-        <!-- 04 JELLY TRAILS -->
+        <!-- 03 JELLY TRAILS -->
         <article id="jellytrails" class="wp g-trails rv" tabindex="0" aria-label="Jelly Trails">
           <div class="wp-media"><img src="jellytrails/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">04</span><span class="v">Jelly Trails</span><span class="plus">+</span></div>
+          <div class="wp-rail" aria-hidden="true"><span class="n">03</span><span class="v">Jelly Trails</span><span class="plus">+</span></div>
           <div class="wp-body">
-            <span class="kind"><span class="en i">04 · Color-connect puzzle · Android</span><span class="tr i">04 · Renk bağlama bulmacası · Android</span></span>
+            <span class="kind"><span class="en i">03 · Color-connect puzzle · Android</span><span class="tr i">03 · Renk bağlama bulmacası · Android</span></span>
             <h3>Jelly Trails</h3>
             <p class="en">Link matching jellies with glossy trails and fill every square. 500 handcrafted levels across 50 sweet worlds.</p>
             <p class="tr">Aynı renkli jöleleri parlak yollarla bağla ve her kareyi doldur. 50 tatlı dünyada özenle hazırlanmış 500 bölüm.</p>
@@ -632,17 +671,31 @@ html,body{overflow-x:hidden;overflow-x:clip}
             <div class="links"><a class="go" href="jellytrails/"><span class="en i">Meet the jellies</span><span class="tr i">Jölelerle tanış</span> <span aria-hidden="true">&rarr;</span></a></div>
           </div>
         </article>
-        <!-- 05 JELLY PIPES -->
+        <!-- 04 JELLY PIPES -->
         <article id="jellypipes" class="wp g-pipes rv" tabindex="0" aria-label="Jelly Pipes">
           <div class="wp-media"><img src="jellypipes/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">05</span><span class="v">Jelly Pipes</span><span class="plus">+</span></div>
+          <div class="wp-rail" aria-hidden="true"><span class="n">04</span><span class="v">Jelly Pipes</span><span class="plus">+</span></div>
           <div class="wp-body">
-            <span class="kind"><span class="en i">05 · Water pipe puzzle · Android</span><span class="tr i">05 · Su borusu bulmacası · Android</span></span>
+            <span class="kind"><span class="en i">04 · Water pipe puzzle · Android</span><span class="tr i">04 · Su borusu bulmacası · Android</span></span>
             <h3>Jelly Pipes</h3>
             <p class="en">Rotate glassy pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 refreshing worlds.</p>
             <p class="tr">Cam boruları çevir, gerçek akan su her çiçeğe ulaşsın. 50 ferahlatıcı dünyada özenle hazırlanmış 500 bölüm.</p>
             <div class="tags"><span>Android</span><span class="en i">500 levels</span><span class="tr i">500 bölüm</span><span class="en i">Coming to Google Play</span><span class="tr i">Google Play yakında</span></div>
             <div class="links"><a class="go" href="jellypipes/"><span class="en i">Let the water flow</span><span class="tr i">Suyu akıt</span> <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <!-- 05 DAYPOT -->
+        <article id="daypot" class="wp g-warm rv" tabindex="0" aria-label="DayPot">
+          <div class="wp-media"><span class="steam" aria-hidden="true"><i></i><i></i><i></i></span><img class="pot" src="daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy"></div>
+          <div class="wp-rail" aria-hidden="true"><span class="n">05</span><span class="v">DayPot</span><span class="plus">+</span></div>
+          <div class="wp-body">
+            <span class="kind"><span class="en i">05 · Kitchen assistant · Android</span><span class="tr i">05 · Mutfak yardımcısı · Android</span></span>
+            <h3>DayPot</h3>
+            <p class="en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
+            <p class="tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
+            <div class="tags"><span>Android</span><span class="en i">250+ recipes</span><span class="tr i">250+ tarif</span><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
+            <div class="links"><a class="go" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span aria-hidden="true">&rarr;</span></a></div>
           </div>
         </article>
       </div>
@@ -946,7 +999,7 @@ html,body{overflow-x:hidden;overflow-x:clip}
 })();
 </script>
 <script src="assets/vendor/three.min.js?v=20261012d"></script>
-<script src="assets/home3d.js?v=20261012d"></script>
+<script src="assets/home3d.js?v=20261019"></script>
 <script>
 /* Dünyalar: üzerine gelinen ya da odaklanan panel açılır. */
 (function(){
@@ -959,14 +1012,48 @@ html,body{overflow-x:hidden;overflow-x:clip}
     p.addEventListener('focusin',function(){ if(!narrow()) open(p); });
     p.addEventListener('click',function(e){ if(!p.classList.contains('on')){ e.preventDefault(); open(p); } });
   });
-  /* hero listesinden gelince ilgili panel açılsın */
-  [].slice.call(document.querySelectorAll('.hero-index a')).forEach(function(a){
-    a.addEventListener('click',function(){ var t=document.querySelector(a.getAttribute('href')); if(t&&t.classList.contains('wp')) open(t); });
-  });
   /* başlık harfleri tek tek oynasın */
   [].slice.call(document.querySelectorAll('.brandword .w1,.brandword .w2')).forEach(function(w){
     w.innerHTML=w.textContent.split('').map(function(c){ return '<span class="ch">'+c+'</span>'; }).join('');
   });
+})();
+</script>
+<script>
+/* Hero sayfaları: JinjaGames → Cyber Academy → Locard → Jelly Trails → Jelly Pipes → DayPot → başa.
+   Kendiliğinden ilerler (üzerine gelince/odaklanınca durur), ok tuşları ve kaydırma çalışır;
+   her sayfa 3B parçacık bulutunu kendi biçimine çevirir. */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('#slides .slide')), box=document.getElementById('pg-segs'), pager=document.getElementById('pager');
+  if(!slides.length||!box) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches, DUR=8000, cur=0, timer=null, hold=false, nameEl=document.getElementById('pg-name');
+  var segs=slides.map(function(sl,i){
+    var b=document.createElement('button'); b.type='button'; b.className='pg-seg'; b.setAttribute('aria-label',sl.getAttribute('data-name')); b.title=sl.getAttribute('data-name');
+    b.innerHTML='<i></i>'; b.addEventListener('click',function(){ go(i,true); }); box.appendChild(b); return b;
+  });
+  pager.style.setProperty('--pgdur',(DUR/1000)+'s');
+  function go(i,user){
+    i=(i+slides.length)%slides.length; if(i===cur&&!user&&slides[i].classList.contains('on')) return;
+    var prev=slides[cur]; prev.classList.remove('on'); prev.classList.add('out'); prev.setAttribute('aria-hidden','true');
+    setTimeout(function(p){ return function(){ p.classList.remove('out'); }; }(prev),700);
+    cur=i; var sl=slides[cur]; sl.classList.add('on'); sl.setAttribute('aria-hidden','false'); nameEl.textContent=sl.getAttribute('data-name');
+    segs.forEach(function(sg,k){ sg.classList.remove('on','done'); if(k<cur) sg.classList.add('done'); });
+    void segs[cur].offsetWidth; segs[cur].classList.add('on');
+    if(window.__heroMorph) window.__heroMorph(sl.getAttribute('data-shape'));
+    restart();
+  }
+  function restart(){ clearTimeout(timer); if(reduce||hold) return; timer=setTimeout(function(){ go(cur+1); },DUR); }
+  function setHold(h){ hold=h; pager.classList.toggle('paused',h); if(h){ clearTimeout(timer); } else { go(cur,true); } }
+  document.getElementById('pg-prev').addEventListener('click',function(){ go(cur-1,true); });
+  document.getElementById('pg-next').addEventListener('click',function(){ go(cur+1,true); });
+  var hero=document.querySelector('.hero');
+  hero.addEventListener('mouseenter',function(){ if(!hold&&window.matchMedia('(pointer: fine)').matches){ hold=true; pager.classList.add('paused'); clearTimeout(timer); } });
+  hero.addEventListener('mouseleave',function(){ if(hold){ hold=false; pager.classList.remove('paused'); restart(); } });
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) clearTimeout(timer); else restart(); });
+  document.addEventListener('keydown',function(e){ var r=hero.getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight*.6) return; if(e.key==='ArrowRight') go(cur+1,true); if(e.key==='ArrowLeft') go(cur-1,true); });
+  var x0=null; var sw=document.getElementById('slides');
+  sw.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+  sw.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; x0=null; if(Math.abs(dx)>50) go(cur+(dx<0?1:-1),true); },{passive:true});
+  segs[0].classList.add('on'); restart();
 })();
 </script>
 </body>

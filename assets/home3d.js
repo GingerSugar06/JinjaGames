@@ -1,7 +1,6 @@
 /* Ana sayfa hero'su: üç dünyanın biçimleri arasında dönüşen 3B parçacık bulutu.
    Boşta: küre. Cyber Academy: tel kafes küp ve ağ. Locard: parmak izi.
-   DayPot: tencere ve buhar. Hero listesindeki adların üzerine gelince ya da
-   birkaç saniyede bir kendiliğinden biçim değişir; fare bulutu döndürür.
+   DayPot: tencere ve buhar. Hero sayfaları değişince bulut o sayfanın biçimine döner; fare bulutu döndürür.
    three.js klasik betik (assets/vendor/three.min.js); dosyadan açınca da çalışır. */
 (function () {
   'use strict';
@@ -76,8 +75,42 @@
     }
     return a;
   }
-  var SHAPES = { base: sphere(), cyber: cube(), noir: fingerprint(), warm: pot() };
-  var ORDER = ['base', 'cyber', 'noir', 'warm'];
+  function jelly() {
+    /* gövde: yarım elipsoit (jöle kubbesi), iki göz ve gülümseme */
+    var a = new Float32Array(N * 3), r = rand(19), g = function () { return (r() + r() + r() - 1.5) * .5; };
+    for (var i = 0; i < N; i++) {
+      var x, y, z;
+      if (i < N * .8) {
+        var u = r() * Math.PI * 2, v = Math.acos(1 - r() * 1.0);       /* üst yarım küre */
+        x = Math.cos(u) * Math.sin(v) * 2.3; z = Math.sin(u) * Math.sin(v) * 2.0; y = Math.cos(v) * 1.75 - 1;
+        if (r() < .12) { y = -1; x *= r(); z *= r(); }                  /* zemin */
+      } else if (i < N * .93) {
+        var side = i % 2 ? 1 : -1; x = side * .72 + g() * .22; y = .25 + g() * .3; z = 1.72 + Math.abs(g()) * .05;
+      } else {
+        var t = r() * 2 - 1; x = t * .55; y = -.18 - (1 - t * t) * .22; z = 1.82;
+      }
+      a[i * 3] = x; a[i * 3 + 1] = y; a[i * 3 + 2] = z;
+    }
+    return a;
+  }
+  function drop() {
+    /* damla: yüzeyi döndürülmüş gözyaşı eğrisi + altında halkalanan dalgalar */
+    var a = new Float32Array(N * 3), r = rand(23);
+    for (var i = 0; i < N; i++) {
+      var x, y, z;
+      if (i < N * .82) {
+        var tt = Math.acos(1 - r() * 2) , rad = Math.sin(tt) * Math.pow(Math.sin(tt / 2), 1.15) * 2.1, ph = r() * Math.PI * 2;
+        y = Math.cos(tt) * 2.1 + .35; x = Math.cos(ph) * rad; z = Math.sin(ph) * rad;
+      } else {
+        var ring = 1 + Math.floor(r() * 3), ph2 = r() * Math.PI * 2;
+        x = Math.cos(ph2) * ring * .95; z = Math.sin(ph2) * ring * .95; y = -2.05 + (r() - .5) * .04;
+      }
+      a[i * 3] = x; a[i * 3 + 1] = y; a[i * 3 + 2] = z;
+    }
+    return a;
+  }
+  var SHAPES = { base: sphere(), cyber: cube(), noir: fingerprint(), jelly: jelly(), drop: drop(), warm: pot() };
+  var ORDER = ['base', 'cyber', 'noir', 'jelly', 'drop', 'warm'];
 
   /* ---------- nokta bulutu ---------- */
   var pos = new Float32Array(SHAPES.base), jitter = new Float32Array(N);
@@ -105,7 +138,7 @@
   function readColors() {
     var cs = getComputedStyle(document.documentElement);
     var v = function (n, f) { return (cs.getPropertyValue(n) || f).trim() || f; };
-    COLORS = { base: v('--brand', '#C42B2B'), cyber: v('--w-cyber', '#0E7A8A'), noir: v('--w-noir', '#B03B32'), warm: v('--w-warm', '#2F6B48') };
+    COLORS = { base: v('--brand', '#C42B2B'), cyber: v('--w-cyber', '#0E7A8A'), noir: v('--w-noir', '#B03B32'), jelly: v('--w-trails', '#7A4FD6'), drop: v('--w-pipes', '#1C7FB8'), warm: v('--w-warm', '#2F6B48') };
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
     ringMat.blending = mat.blending; mat.needsUpdate = true; ringMat.needsUpdate = true;
@@ -121,18 +154,7 @@
   function morph(name) {
     if (!SHAPES[name] || name === current) return;
     current = name; target = SHAPES[name]; setColor(name); lastSwitch = performance.now();
-    var links = document.querySelectorAll('.hero-index a');
-    for (var i = 0; i < links.length; i++) links[i].classList.toggle('on', links[i].getAttribute('data-shape') === name);
   }
-  var idx = document.querySelectorAll('.hero-index a[data-shape]');
-  for (var i = 0; i < idx.length; i++) {
-    (function (a) {
-      a.addEventListener('mouseenter', function () { pinned = true; morph(a.getAttribute('data-shape')); });
-      a.addEventListener('focus', function () { pinned = true; morph(a.getAttribute('data-shape')); });
-      a.addEventListener('mouseleave', function () { pinned = false; lastSwitch = performance.now(); });
-    })(idx[i]);
-  }
-
   /* ---------- fare ---------- */
   var mx = 0, my = 0, tx = 0, ty = 0;
   window.addEventListener('pointermove', function (e) { tx = e.clientX / window.innerWidth - .5; ty = e.clientY / window.innerHeight - .5; }, { passive: true });
@@ -152,7 +174,6 @@
 
   function frame(now) {
     var t = (now - t0) / 1000;
-    if (!pinned && !reduce && now - lastSwitch > 5200) morph(ORDER[(ORDER.indexOf(current) + 1) % ORDER.length]);
     mx += (tx - mx) * .05; my += (ty - my) * .05;
     var p = geo.attributes.position.array;
     for (var i = 0; i < N; i++) {

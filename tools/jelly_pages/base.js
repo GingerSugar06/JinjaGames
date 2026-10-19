@@ -46,41 +46,6 @@
   } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
 
-  /* ---------- Dünya gezgini ---------- */
-  var wx=$('#wx');
-  if(wx && window.JG_WORLDS){
-    var W=window.JG_WORLDS, cur=0, timer=null, N=W.length;
-    var view=$('.wx-view',wx)||$('#wxview'), numEl=$('.wx-num',wx), nmEn=$('.wx-name .en',wx), nmTr=$('.wx-name .tr',wx), strip=$('.wx-strip',wx);
-    var pad=function(i){return (i<10?'0':'')+i;};
-    var ths=W.map(function(w,i){
-      var b=d.createElement('button'); b.type='button'; b.className='wx-th'; b.setAttribute('aria-label',w.en);
-      b.innerHTML='<img src="'+window.JG_WBASE+pad(i+1)+'.webp" alt="" width="320" height="569" loading="lazy">';
-      b.addEventListener('click',function(){ go(i,true); });
-      strip.appendChild(b); return b;
-    });
-    function go(i,user){
-      i=(i+N)%N; var img=d.createElement('img');
-      img.src=window.JG_WBASE+pad(i+1)+'.webp'; img.alt=''; img.className='out';
-      var old=$('img:not(.out)',view);
-      view.appendChild(img);
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ img.classList.remove('out'); if(old) old.classList.add('out'); setTimeout(function(){ if(old&&old.parentNode) old.parentNode.removeChild(old); },500); }); });
-      cur=i; numEl.textContent=(i+1)+' / '+N; nmEn.textContent=W[i].en; nmTr.textContent=W[i].tr;
-      ths.forEach(function(t,k){ t.classList.toggle('on',k===i); });
-      var t=ths[i]; strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
-      if(user) stop();
-    }
-    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-    function play(){ if(!timer) timer=setInterval(function(){ go(cur+1); },3800); }
-    $('.wx-prev',wx).addEventListener('click',function(){ go(cur-1,true); });
-    $('.wx-next',wx).addEventListener('click',function(){ go(cur+1,true); });
-    wx.addEventListener('keydown',function(e){ if(e.key==='ArrowRight') go(cur+1,true); if(e.key==='ArrowLeft') go(cur-1,true); });
-    var first=d.createElement('img'); first.src=window.JG_WBASE+'01.webp'; first.alt=''; view.appendChild(first);
-    go(0);
-    if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.35}).observe(wx);
-    }
-  }
-
   /* ---------- Mekanik laboratuvarı ---------- */
   var lab=$('#lab');
   if(lab){

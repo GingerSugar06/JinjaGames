@@ -1,6 +1,5 @@
 """Jelly sayfaları için görselleri hazırlar (oyunların kendi çizimlerinden):
   <slug>/img/logo.webp       oyun logosu (şeffaf)
-  <slug>/img/w/NN.webp       50 dünya arka planı (320 px genişlik)
   <slug>/img/s/<ad>.webp     mekanik / karakter çizimleri (şeffaf, 192 px)
   <slug>/img/icon.png, og.jpg, banner.webp, shot-N.webp   (mağaza dosyalarından)
 Kaynak: C:\\Users\\user\\Desktop\\Puzzles. Bir çizim değişirse bu betik yeniden çalıştırılır."""
@@ -46,16 +45,11 @@ for slug, g in GAMES.items():
     art = os.path.join(PUZ, 'apps', g['app'], 'assets', 'art')
     store = os.path.join(PUZ, 'store', g['store'])
     out = os.path.join(ROOT, slug, 'img')
-    for d in ('w', 's'):
+    for d in ('s',):
         os.makedirs(os.path.join(out, d), exist_ok=True)
     # logo
     im = shrink(Image.open(os.path.join(art, g['logo'])).convert('RGBA'), 720)
     im.save(os.path.join(out, 'logo.webp'), 'WEBP', quality=90, method=6)
-    # dünyalar
-    for i in range(1, 51):
-        p = os.path.join(art, 'bg_world%02d.webp' % i)
-        im = shrink(Image.open(p).convert('RGB'), 320)
-        im.save(os.path.join(out, 'w', '%02d.webp' % i), 'WEBP', quality=70, method=6)
     # çizimler
     for name in g['sprites']:
         p = os.path.join(art, name + '.png')

@@ -68,25 +68,6 @@ section.blk{padding:104px 0;position:relative}
 .head p{color:var(--ink-2);font-size:18px}
 .head.center{margin-left:auto;margin-right:auto;text-align:center}
 
-/* DÜNYA GEZGİNİ (JS kurar) */
-.wx{position:relative}
-.wx-stage{position:relative}
-.wx-view{position:relative;border-radius:34px;overflow:hidden;border:8px solid var(--surface);box-shadow:var(--shadow-2);background:var(--bg-soft);aspect-ratio:9/16;width:100%}
-.wx-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .9s var(--ease)}
-.wx-view img.out{opacity:0}
-.wx-view::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(0,0,0,.35));pointer-events:none}
-.wx-num{font-family:var(--f-display);font-weight:700;color:var(--accent);font-size:15px;letter-spacing:.1em}
-.wx-name{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:6px 0 10px;min-height:2.2em}
-.wx-ctl{display:flex;gap:10px;align-items:center;margin-top:20px}
-.wx-btn{width:52px;height:52px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line-2);display:grid;place-items:center;transition:.22s;color:var(--ink)}
-.wx-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.wx-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.wx-strip{display:flex;gap:10px;overflow-x:auto;padding:12px 4px 16px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
-.wx-th{flex:0 0 62px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:3px solid transparent;opacity:.6;transition:.25s;scroll-snap-align:center;background:var(--bg-soft)}
-.wx-th img{width:100%;height:100%;object-fit:cover}
-.wx-th:hover{opacity:1;transform:translateY(-3px)}
-.wx-th.on{opacity:1;border-color:var(--accent);transform:translateY(-6px)}
-
 /* MEKANİK LABORATUVARI */
 .lab-detail{position:relative}
 .lab-pane{display:none}

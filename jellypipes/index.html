@@ -52,7 +52,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
   --nav-bg:rgba(242,250,255,.78); --nav-bg-solid:rgba(242,250,255,.97);
   --shadow-1:0 2px 4px rgba(16,48,63,.04),0 14px 34px rgba(28,127,184,.12);
   --shadow-2:0 26px 64px rgba(28,127,184,.22);
-  --sky1:#7FD0F7; --sky2:#CBF1F2; --water:#38B6F2; --glass-o:#86C3E2; --glass-i:#E6F5FD;
+  --sky1:#7FD0F7; --sky2:#CBF1F2; --water:#55B2F2; --glass-o:#B5A8DE; --glass-i:#F3F0FC;
   --W:1180px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px; --r:28px;
   --f-body:'Nunito',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --f-display:'Fraunces',Georgia,'Times New Roman',serif;
@@ -66,7 +66,7 @@ html[data-theme="dark"]{
   --nav-bg:rgba(12,22,28,.78); --nav-bg-solid:rgba(12,22,28,.97);
   --shadow-1:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.36);
   --shadow-2:0 26px 64px rgba(0,0,0,.55);
-  --sky1:#0F2C3C; --sky2:#10333A; --water:#4CC3FA; --glass-o:#3C7690; --glass-i:#21475A;
+  --sky1:#0F2C3C; --sky2:#10333A; --water:#5CC2FA; --glass-o:#5F5390; --glass-i:#2D2748;
 }
 /* Jelly sayfaları ortak iskelet: gezinti, dil/tema, düğmeler, dünya gezgini, mekanik laboratuvarı,
    galeri, ışık kutusu, gizlilik, alt bilgi. Renkler ve yerleşim sayfaya göre :root ve sayfa CSS'inde. */
@@ -137,25 +137,6 @@ section.blk{padding:104px 0;position:relative}
 .head h2{font-size:clamp(32px,4.6vw,52px);margin:14px 0 16px}
 .head p{color:var(--ink-2);font-size:18px}
 .head.center{margin-left:auto;margin-right:auto;text-align:center}
-
-/* DÜNYA GEZGİNİ (JS kurar) */
-.wx{position:relative}
-.wx-stage{position:relative}
-.wx-view{position:relative;border-radius:34px;overflow:hidden;border:8px solid var(--surface);box-shadow:var(--shadow-2);background:var(--bg-soft);aspect-ratio:9/16;width:100%}
-.wx-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .9s var(--ease)}
-.wx-view img.out{opacity:0}
-.wx-view::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(0,0,0,.35));pointer-events:none}
-.wx-num{font-family:var(--f-display);font-weight:700;color:var(--accent);font-size:15px;letter-spacing:.1em}
-.wx-name{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:6px 0 10px;min-height:2.2em}
-.wx-ctl{display:flex;gap:10px;align-items:center;margin-top:20px}
-.wx-btn{width:52px;height:52px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line-2);display:grid;place-items:center;transition:.22s;color:var(--ink)}
-.wx-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.wx-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.wx-strip{display:flex;gap:10px;overflow-x:auto;padding:12px 4px 16px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
-.wx-th{flex:0 0 62px;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:3px solid transparent;opacity:.6;transition:.25s;scroll-snap-align:center;background:var(--bg-soft)}
-.wx-th img{width:100%;height:100%;object-fit:cover}
-.wx-th:hover{opacity:1;transform:translateY(-3px)}
-.wx-th.on{opacity:1;border-color:var(--accent);transform:translateY(-6px)}
 
 /* MEKANİK LABORATUVARI */
 .lab-detail{position:relative}
@@ -256,8 +237,12 @@ html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
 .scene{position:relative}
 .scene-card{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);border-radius:36px;padding:18px;box-shadow:var(--shadow-2);backdrop-filter:blur(6px)}
 html[data-theme="dark"] .scene-card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
-.scene-tip{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-weight:800;color:var(--ink-2);font-size:14.5px}
-.scene-tip img{width:22px}
+.scene-card{transform:rotate(-1.6deg);animation:floaty 8s ease-in-out infinite}
+@keyframes floaty{50%{transform:rotate(-.6deg) translateY(-8px)}}
+.deco{position:absolute;z-index:4;pointer-events:none;transform-origin:50% 100%;animation:sway var(--t,5s) ease-in-out var(--dl,0s) infinite;filter:drop-shadow(0 10px 12px rgba(16,48,63,.25))}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.drop{position:absolute;z-index:4;width:20px;pointer-events:none;animation:dropfall 2.6s ease-in var(--dl,0s) infinite;left:var(--x);top:var(--y);opacity:0}
+@keyframes dropfall{0%{opacity:0;transform:translateY(-14px)}15%{opacity:1}100%{opacity:0;transform:translateY(120px)}}
 .wave{position:absolute;left:0;right:0;bottom:-1px;height:90px;pointer-events:none}
 .wave svg{width:100%;height:100%;display:block}
 .wave path{fill:var(--bg)}
@@ -265,28 +250,33 @@ html[data-theme="dark"] .scene-card{background:rgba(255,255,255,.05);border-colo
 
 /* BORU TAHTASI (hem sahne hem oyun) */
 .pgrid{position:relative;display:grid;grid-template-columns:repeat(var(--cols),1fr);user-select:none;-webkit-user-select:none;touch-action:manipulation}
-.pc{position:relative;aspect-ratio:1;border-radius:16px;background:rgba(var(--accent-rgb),.07);margin:2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.pc.fix{cursor:default;background:transparent}
-.pc.void{background:rgba(var(--accent-rgb),.04);cursor:default}
+.pc{position:relative;aspect-ratio:1;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pc::before{content:"";position:absolute;inset:3px;border-radius:16px;background:rgba(var(--accent-rgb),.09)}
+.pc.fix{cursor:default}
+.pc.fix::before{background:transparent}
+.pc.void{cursor:default}
+.pc.void::before{background:rgba(var(--accent-rgb),.04)}
 .pc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .pc .rot{transform-origin:50px 50px;transition:transform .32s var(--ease)}
-.pc .g1{fill:none;stroke:var(--glass-o);stroke-width:35}
-.pc .g2{fill:none;stroke:var(--glass-i);stroke-width:26}
+.pc .g1{fill:none;stroke:var(--glass-o);stroke-width:40}
+.pc .g2{fill:none;stroke:var(--glass-i);stroke-width:31}
 .pc .jt{fill:var(--glass-o)}.pc .jt2{fill:var(--glass-i)}
-.pc .wt{fill:none;stroke:var(--water);stroke-width:17;stroke-dasharray:52;stroke-dashoffset:52;stroke-linecap:butt}
+.pc .wt{fill:none;stroke:var(--water);stroke-width:22;stroke-dasharray:52;stroke-dashoffset:52;stroke-linecap:butt}
 .pc .wt.on{animation:wfill .34s linear forwards}
 @keyframes wfill{to{stroke-dashoffset:0}}
 .pc .wj{fill:var(--water);opacity:0}
 .pc .wj.on{animation:wj .2s ease forwards}
 @keyframes wj{to{opacity:1}}
-.pc img{position:absolute;left:50%;top:50%;width:92%;height:auto;transform:translate(-50%,-50%);pointer-events:none}
-.pc img.src{width:92%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.pc img{position:absolute;left:50%;top:50%;width:64%;height:auto;transform:translate(-50%,-50%);pointer-events:none;transition:left .3s var(--ease),top .3s var(--ease)}
+.pc img.src{width:88%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
 .pc img.fl{transition:transform .5s var(--ease)}
 .pc img.fl.bl{animation:bloom .8s var(--ease)}
 @keyframes bloom{30%{transform:translate(-50%,-62%) scale(1.25)}60%{transform:translate(-50%,-48%) scale(.94)}100%{transform:translate(-50%,-50%)}}
 .pc img.stone{width:78%;opacity:.9}
-.pc.tap:not(.fix)::after{content:"";position:absolute;inset:0;border-radius:16px;box-shadow:inset 0 0 0 0 rgba(var(--accent-rgb),.5);transition:box-shadow .2s}
+.pc:not(.fix):not(.void)::after{content:"";position:absolute;inset:3px;border-radius:16px;box-shadow:inset 0 0 0 0 rgba(var(--accent-rgb),.5);transition:box-shadow .2s;pointer-events:none}
 .pc:not(.fix):not(.void):hover::after{box-shadow:inset 0 0 0 3px rgba(var(--accent-rgb),.45)}
+.reel .pc::after{display:none}
+.reel{pointer-events:none}
 .drip{position:absolute;width:16px;z-index:5;pointer-events:none;animation:drip 1s ease-in forwards}
 @keyframes drip{from{opacity:1;transform:translate(0,0)}to{opacity:0;transform:translate(var(--dx),70px)}}
 
@@ -330,27 +320,24 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
 
 /* ÇİÇEKLER */
 .flowers{background:linear-gradient(180deg,var(--bg),var(--bg-soft) 20%,var(--bg-soft) 80%,var(--bg))}
-.fl-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:10px}
+.fl-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+.fl .pair{display:flex;align-items:center;justify-content:center;gap:2px;margin-bottom:8px;min-height:104px}
+.fl .pair img{width:46%;max-width:none;margin:0}
+.fl .pair img.t{width:40%}
+.fl .pair.tri img.t{width:26%}.fl .pair.tri img.f{width:40%}
 .fl{background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:24px 12px 18px;text-align:center;transition:transform .35s var(--ease),box-shadow .35s;box-shadow:var(--shadow-1)}
 .fl:hover{transform:translateY(-8px)}
-.fl img{width:100%;max-width:130px;margin:0 auto 8px;transition:transform .5s var(--ease)}
-.fl.open img{animation:bloom2 .8s var(--ease)}
+.fl img{transition:transform .5s var(--ease)}
+.fl.open img.f{animation:bloom2 .8s var(--ease)}
 @keyframes bloom2{30%{transform:scale(1.2) translateY(-6%)}60%{transform:scale(.95)}100%{transform:none}}
 .fl span{font-weight:800;font-size:14.5px;color:var(--ink-2);display:block}
 
-/* DÜNYALAR */
-.wx-grid{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:60px;align-items:center}
-.wx-info h2{font-size:clamp(32px,4.6vw,52px);margin:12px 0 18px}
-.wx-info>p{color:var(--ink-2);font-size:18px;max-width:480px;margin-bottom:26px}
-.wx-grid .wx-view{max-width:300px}
-
 .gwrap{overflow:hidden}
 @media(max-width:960px){
-  .hero-in,.try,.labx,.wx-grid{grid-template-columns:1fr}
+  .hero-in,.try,.labx{grid-template-columns:1fr}
   .lab-detail{position:relative;top:0}
-  .fl-row{grid-template-columns:repeat(3,1fr)}
+  .fl-row{grid-template-columns:repeat(2,1fr)}
   .tiles{grid-template-columns:repeat(4,1fr)}
-  .wx-grid .wx-view{margin:0 auto}
   .try .board-wrap{order:2}
 }
 @media(max-width:680px){
@@ -358,7 +345,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
   .cta{flex-direction:column;align-items:stretch}
   .tiles{grid-template-columns:repeat(3,1fr);gap:9px}
   .lab-tab{min-height:104px;font-size:12.5px}
-  .fl-row{grid-template-columns:repeat(2,1fr);gap:12px}
+  .fl-row{gap:12px}
   .board-card{padding:10px;border-radius:28px}.win{border-radius:28px}
   .scene-card{padding:10px;border-radius:28px}
 }
@@ -409,8 +396,12 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
         <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span>EN · TR</span></div>
       </div>
       <div class="scene">
-        <div class="scene-card"><div class="pgrid" id="scene"></div></div>
-        <p class="scene-tip"><img src="img/s/pipe_source.webp" alt=""><span class="en">Tap the tap and let it run</span><span class="tr">Musluğa dokun, suyu akıt</span></p>
+        <div class="scene-card"><div class="pgrid reel" id="scene" aria-hidden="true"></div></div>
+        <img class="deco" src="img/s/pipe_flower_open_c0.webp" alt="" style="left:-5%;bottom:-8%;width:19%;--t:5.4s">
+        <img class="deco" src="img/s/pipe_flower_open_c1.webp" alt="" style="left:11%;bottom:-13%;width:15%;--t:4.6s;--dl:-1.2s">
+        <img class="deco" src="img/s/pipe_flower_open_c2.webp" alt="" style="right:-4%;bottom:-9%;width:18%;--t:5s;--dl:-2s">
+        <img class="deco" src="img/s/pipe_flower_open_c0.webp" alt="" style="right:14%;bottom:-14%;width:13%;--t:4.2s;--dl:-.6s">
+        <img class="drop" src="img/s/fx_drop.webp" alt="" style="--x:8%;--y:-4%;--dl:0s"><img class="drop" src="img/s/fx_drop.webp" alt="" style="--x:52%;--y:-6%;--dl:-1.1s"><img class="drop" src="img/s/fx_drop.webp" alt="" style="--x:86%;--y:-3%;--dl:-1.8s">
       </div>
     </div>
   </div>
@@ -456,54 +447,34 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
     <div class="wrap">
       <div class="head rv">
         <span class="eyebrow"><span class="en i">The pipe lab</span><span class="tr i">Boru laboratuvarı</span></span>
-        <h2 class="en">Fresh mechanics keep every world <span class="hl">surprising.</span></h2>
-        <h2 class="tr">Yeni mekanikler her dünyayı <span class="hl">sürprizli tutar.</span></h2>
-        <p class="en">These are the real pieces from the game, with the game's own explanations. Tap one.</p>
-        <p class="tr">Bunlar oyundaki gerçek parçalar ve oyunun kendi açıklamaları. Birine dokun.</p>
+        <h2 class="en">Twelve mechanics, <span class="hl">one at a time.</span></h2>
+        <h2 class="tr">On iki mekanik, <span class="hl">tek tek gelir.</span></h2>
+        <p class="en">Each new piece arrives alone in a gentle level with a little tutorial. These are the real pieces and the game's own explanations; tap one to see when you will meet it.</p>
+        <p class="tr">Her yeni parça küçük bir anlatımla ve kolay bir bölümde tek başına gelir. Bunlar oyundaki gerçek parçalar ve oyunun kendi açıklamaları; birine dokun, ne zaman karşına çıkacağını gör.</p>
       </div>
       <div class="labx rv" id="lab">
         <div class="tiles" role="tablist">
-          <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_source_1.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Extra tap</span><span class="tr i">Yeni musluk</span></span></button>
-          <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_flower_open_dual.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Two-colour flower</span><span class="tr i">Çift renkli çiçek</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_lock.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Locked pipes</span><span class="tr i">Kilitli borular</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/flow_stone.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Rocks</span><span class="tr i">Kayalar</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_frozen_cross.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Frozen pipes</span><span class="tr i">Buzlu borular</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_valve.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">One-way valve</span><span class="tr i">Tek yönlü vana</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_source_1.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Extra tap</span><span class="tr i">Yeni musluk</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_link_badge.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Linked pipes</span><span class="tr i">Bağlı borular</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_flower_open_dual.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Two-colour flower</span><span class="tr i">Çift renkli çiçek</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_worn_3.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Worn pipes</span><span class="tr i">Eskimiş borular</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_pump_active.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Pump</span><span class="tr i">Pompa</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_cactus.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Cactus</span><span class="tr i">Kaktüs</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_swap_badge.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Swap</span><span class="tr i">Takas</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_wheel.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Wheel</span><span class="tr i">Çark</span></span></button>
-          <button class="lab-tab" type="button" role="tab"><img src="img/s/pipe_bridge_badge.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Bridge pipe</span><span class="tr i">Köprü borusu</span></span></button>
-          <button class="lab-tab" type="button" role="tab"><img src="img/s/flow_portal_0.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Teleporter</span><span class="tr i">Işınlayıcı</span></span></button>
         </div>
         <div class="lab-detail">
-          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/pipe_source_1.webp" alt="" width="192" height="192" loading="lazy"></div>
-            <div>
-              <h3><span class="en i">Extra tap</span><span class="tr i">Yeni musluk</span></h3>
-              <p class="en">There are several taps and each waters the flowers of its own colour. Send each flower its own colour.</p>
-              <p class="tr">Birden çok musluk var; her musluğun kendi renkli çiçekleri var. Çiçeğe kendi renginin suyunu ulaştır.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
-            </div>
-          </div>
-          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/pipe_flower_open_dual.webp" alt="" width="192" height="192" loading="lazy"></div>
-            <div>
-              <h3><span class="en i">Two-colour flower</span><span class="tr i">Çift renkli çiçek</span></h3>
-              <p class="en">This flower needs the water of two taps. Both colours must reach it.</p>
-              <p class="tr">Bu çiçek iki musluğun suyunu birden ister. İki rengin suyu da ona ulaşsın.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
-            </div>
-          </div>
           <div class="lab-pane" role="tabpanel">
             <div class="lab-art"><img src="img/s/pipe_lock.webp" alt="" width="192" height="192" loading="lazy"></div>
             <div>
               <h3><span class="en i">Locked pipes</span><span class="tr i">Kilitli borular</span></h3>
               <p class="en">Locked pipes cannot be rotated. Plan around them.</p>
               <p class="tr">Kilitli borular döndürülemez. Çevresini ona göre ayarla.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 21</span><span class="tr i">İlk 21. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -512,7 +483,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Rocks</span><span class="tr i">Kayalar</span></h3>
               <p class="en">Pipes cannot go through rocks. Guide the water around them.</p>
               <p class="tr">Kayaların içinden boru geçmez. Suyu kayaların etrafından dolaştır.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 61</span><span class="tr i">İlk 61. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -521,7 +492,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Frozen pipes</span><span class="tr i">Buzlu borular</span></h3>
               <p class="en">Frozen pipes cannot be turned. Each ice and one flower share a sun badge of the same colour, joined by a coloured line. When that flower blooms, heat flows along the line and the ice melts.</p>
               <p class="tr">Buzlu borular donuktur, döndürülemez. Her buzun köşesinde ve bir çiçeğin üstünde aynı renkte güneş rozeti var; renkli çizgi onları bağlar. O çiçek açınca ısı çizgiden akar ve buz erir.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 101</span><span class="tr i">İlk 101. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -530,7 +501,16 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">One-way valve</span><span class="tr i">Tek yönlü vana</span></h3>
               <p class="en">Water passes a valve only in the arrow direction. Connect the tap on the right side.</p>
               <p class="tr">Vanadan su yalnız okun gösterdiği yönde geçer. Musluğu doğru tarafa bağla.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 141</span><span class="tr i">İlk 141. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/pipe_source_1.webp" alt="" width="192" height="192" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Extra tap</span><span class="tr i">Yeni musluk</span></h3>
+              <p class="en">There are several taps and each waters the flowers of its own colour. Send each flower its own colour.</p>
+              <p class="tr">Birden çok musluk var; her musluğun kendi renkli çiçekleri var. Çiçeğe kendi renginin suyunu ulaştır.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 181</span><span class="tr i">İlk 181. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -539,7 +519,16 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Linked pipes</span><span class="tr i">Bağlı borular</span></h3>
               <p class="en">Two pipes with matching rings are linked: turning one turns the other.</p>
               <p class="tr">Mor halkalı iki boru birbirine bağlı: birini çevirince diğeri de döner.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 221</span><span class="tr i">İlk 221. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/pipe_flower_open_dual.webp" alt="" width="192" height="192" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Two-colour flower</span><span class="tr i">Çift renkli çiçek</span></h3>
+              <p class="en">This flower needs the water of two taps. Both colours must reach it.</p>
+              <p class="tr">Bu çiçek iki musluğun suyunu birden ister. İki rengin suyu da ona ulaşsın.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 261</span><span class="tr i">İlk 261. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -548,7 +537,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Worn pipes</span><span class="tr i">Eskimiş borular</span></h3>
               <p class="en">Worn pipes can only be turned a few times; the dots show how many turns are left. Turn carefully.</p>
               <p class="tr">Eskimiş borular en çok birkaç kez döner; altındaki noktalar kalan hakkı gösterir. Hak bitince boru donar, dikkatli çevir.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 301</span><span class="tr i">İlk 301. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -557,7 +546,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Pump</span><span class="tr i">Pompa</span></h3>
               <p class="en">A pump takes water from behind and throws it over the next cell. Tap to turn it.</p>
               <p class="tr">Pompa suyu gerisinden alır, önündeki hücrenin üstünden atlatıp ötesine verir. Dokununca döner.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 341</span><span class="tr i">İlk 341. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -566,7 +555,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Cactus</span><span class="tr i">Kaktüs</span></h3>
               <p class="en">Cacti hate water! If the open end of a wet pipe points at a cactus, it gets watered and the level cannot finish. Turn the pipes so none of them sprays a cactus.</p>
               <p class="tr">Kaktüs suyu sevmez! Islak bir borunun ucu kaktüse bakarsa kaktüs sulanır ve bölüm tamamlanmaz. Boruları kaktüsü sulamayacak şekilde çevir.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 381</span><span class="tr i">İlk 381. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -575,7 +564,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Swap</span><span class="tr i">Takas</span></h3>
               <p class="en">Tap the arrow badge between two pipes to swap their places, so each shape ends up where it belongs.</p>
               <p class="tr">İki borunun arasındaki oklu işarete dokununca iki boru yer değiştirir. Doğru şekil doğru yere gelsin.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 421</span><span class="tr i">İlk 421. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -584,25 +573,7 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
               <h3><span class="en i">Wheel</span><span class="tr i">Çark</span></h3>
               <p class="en">The four pipes around a wheel (orange dots) cannot be turned one by one; they only turn together when you tap the wheel. Turn it the right number of times.</p>
               <p class="tr">Çarkın çevresindeki dört boru (turuncu noktalı) tek tek çevrilemez; yalnız çarka dokununca birlikte döner. Çarkı doğru sayıda çevir.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
-            </div>
-          </div>
-          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/pipe_bridge_badge.webp" alt="" width="192" height="192" loading="lazy"></div>
-            <div>
-              <h3><span class="en i">Bridge pipe</span><span class="tr i">Köprü borusu</span></h3>
-              <p class="en">Water goes straight across a bridge pipe: the two paths never mix.</p>
-              <p class="tr">Çapraz boruda su düz geçer: iki yol birbirine karışmaz, komşu borudan karşı tarafa atlar.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
-            </div>
-          </div>
-          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/flow_portal_0.webp" alt="" width="192" height="192" loading="lazy"></div>
-            <div>
-              <h3><span class="en i">Teleporter</span><span class="tr i">Işınlayıcı</span></h3>
-              <p class="en">Two teleporters of the same colour are linked: water reaching one starts flowing from the other.</p>
-              <p class="tr">Aynı renkli iki ışınlayıcı bağlı: birine su gelince diğerinden akmaya başlar.</p>
-              <p class="lab-tip"><span class="en i">Tap the picture</span><span class="tr i">Çizime dokun</span></p>
+              <p class="lab-tip"><span class="en i">First shows up at level 461</span><span class="tr i">İlk 461. bölümde karşına çıkar</span></p>
             </div>
           </div>
         </div>
@@ -614,43 +585,17 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
   <section class="blk flowers">
     <div class="wrap">
       <div class="head center rv">
-        <span class="eyebrow"><span class="en i">The flowers</span><span class="tr i">Çiçekler</span></span>
-        <h2 class="en">Every flower is <span class="hl">thirsty in its own way.</span></h2>
-        <h2 class="tr">Her çiçeğin <span class="hl">susuzluğu kendine göre.</span></h2>
-        <p class="en">Extra taps water flowers of their own color, and some flowers need two taps at once. Tap a flower to wake it up.</p>
-        <p class="tr">Ek musluklar kendi renklerindeki çiçekleri sular, bazı çiçekler ise iki musluğa birden ihtiyaç duyar. Bir çiçeğe dokun, uyansın.</p>
+        <span class="eyebrow"><span class="en i">Taps and flowers</span><span class="tr i">Musluklar ve çiçekler</span></span>
+        <h2 class="en">Every tap waters <span class="hl">its own colour.</span></h2>
+        <h2 class="tr">Her musluk <span class="hl">kendi rengini sular.</span></h2>
+        <p class="en">Levels with several taps send each flower the water of its own colour, and some flowers need two taps at once. Tap a card to wake the flowers.</p>
+        <p class="tr">Birden çok musluklu bölümlerde her çiçek kendi renginin suyunu bekler, bazı çiçekler ise iki musluğa birden ihtiyaç duyar. Bir karta dokun, çiçekler uyansın.</p>
       </div>
       <div class="fl-row rv">
-        <button class="fl" type="button" data-b="pipe_flower_bud" data-o="pipe_flower_open"><img src="img/s/pipe_flower_bud.webp" alt=""><span class="en">The classic</span><span class="tr">Klasik</span></button>
-        <button class="fl" type="button" data-b="pipe_flower_bud_c0" data-o="pipe_flower_open_c0"><img src="img/s/pipe_flower_bud_c0.webp" alt=""><span class="en">Pink tap</span><span class="tr">Pembe musluk</span></button>
-        <button class="fl" type="button" data-b="pipe_flower_bud_c1" data-o="pipe_flower_open_c1"><img src="img/s/pipe_flower_bud_c1.webp" alt=""><span class="en">Blue tap</span><span class="tr">Mavi musluk</span></button>
-        <button class="fl" type="button" data-b="pipe_flower_bud_c2" data-o="pipe_flower_open_c2"><img src="img/s/pipe_flower_bud_c2.webp" alt=""><span class="en">Green tap</span><span class="tr">Yeşil musluk</span></button>
-        <button class="fl" type="button" data-b="pipe_flower_bud_dual" data-o="pipe_flower_open_dual"><img src="img/s/pipe_flower_bud_dual.webp" alt=""><span class="en">Needs two taps</span><span class="tr">İki musluk ister</span></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- DÜNYALAR -->
-  <section class="blk">
-    <div class="wrap">
-      <div class="wx-grid">
-        <div class="wx-view rv" id="wxview"></div>
-        <div class="wx-info rv">
-          <span class="eyebrow"><span class="en i">The worlds</span><span class="tr i">Dünyalar</span></span>
-          <h2 class="en">50 refreshing worlds <span class="hl">to dive into.</span></h2>
-          <h2 class="tr">Dalacak 50 <span class="hl">ferahlatıcı dünya.</span></h2>
-          <p class="en">Droplet Garden, Flower Brook, Waterfall Cave, Rainbow Pool, Crystal Lake, Coral Reef and many more, each with its own aqua-glass backdrop straight from the game.</p>
-          <p class="tr">Damla Bahçesi, Çiçek Deresi, Şelale Mağarası, Gökkuşağı Havuzu, Kristal Göl, Mercan Resifi ve çok daha fazlası; her birinin oyundan gelen kendi su camı arka planı var.</p>
-          <div class="wx" id="wx" tabindex="0" aria-label="World explorer">
-            <div class="wx-num"></div>
-            <div class="wx-name"><span class="en"></span><span class="tr"></span></div>
-            <div class="wx-ctl">
-              <button class="wx-btn wx-prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
-              <button class="wx-btn wx-next" type="button" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>
-            </div>
-            <div class="wx-strip" id="wxstrip"></div>
-          </div>
-        </div>
+        <button class="fl" type="button" data-b="pipe_flower_bud_c0" data-o="pipe_flower_open_c0"><span class="pair"><img class="t" src="img/s/pipe_source.webp" alt=""><img class="f" src="img/s/pipe_flower_bud_c0.webp" alt=""></span><span class="en">Blue tap, blue flower</span><span class="tr">Mavi musluk, mavi çiçek</span></button>
+        <button class="fl" type="button" data-b="pipe_flower_bud_c1" data-o="pipe_flower_open_c1"><span class="pair"><img class="t" src="img/s/pipe_source_1.webp" alt=""><img class="f" src="img/s/pipe_flower_bud_c1.webp" alt=""></span><span class="en">Pink tap, pink flower</span><span class="tr">Pembe musluk, pembe çiçek</span></button>
+        <button class="fl" type="button" data-b="pipe_flower_bud_c2" data-o="pipe_flower_open_c2"><span class="pair"><img class="t" src="img/s/pipe_source_2.webp" alt=""><img class="f" src="img/s/pipe_flower_bud_c2.webp" alt=""></span><span class="en">Mint tap, mint flower</span><span class="tr">Nane musluk, nane çiçek</span></button>
+        <button class="fl" type="button" data-b="pipe_flower_bud_dual" data-o="pipe_flower_open_dual"><span class="pair tri"><img class="t" src="img/s/pipe_source.webp" alt=""><img class="f" src="img/s/pipe_flower_bud_dual.webp" alt=""><img class="t" src="img/s/pipe_source_1.webp" alt=""></span><span class="en">Two taps, one flower</span><span class="tr">İki musluk, tek çiçek</span></button>
       </div>
     </div>
   </section>
@@ -738,10 +683,6 @@ html[data-theme="dark"] .win{background:rgba(12,22,28,.78)}
 <div class="lb" id="lb" role="dialog" aria-modal="true"><button class="lb-x" type="button" aria-label="Close">&times;</button><button class="lb-n l" type="button" aria-label="Previous">&lsaquo;</button><img alt=""><button class="lb-n r" type="button" aria-label="Next">&rsaquo;</button></div>
 
 <script>
-window.JG_WORLDS=[{"en": "Droplet Garden", "tr": "Damla Bahçesi"}, {"en": "Flower Brook", "tr": "Çiçek Deresi"}, {"en": "Waterfall Cave", "tr": "Şelale Mağarası"}, {"en": "Rainbow Pool", "tr": "Gökkuşağı Havuzu"}, {"en": "Crystal Lake", "tr": "Kristal Göl"}, {"en": "Coral Reef", "tr": "Mercan Resifi"}, {"en": "Lily Pond", "tr": "Nilüfer Gölü"}, {"en": "Cloud Fountain", "tr": "Bulut Fıskiyesi"}, {"en": "Star Spring", "tr": "Yıldız Kaynağı"}, {"en": "Grand Blossom Pool", "tr": "Büyük Çiçek Havuzu"}, {"en": "Sunrise Lake", "tr": "Gün Doğumu Gölü"}, {"en": "Tulip Garden", "tr": "Lale Bahçesi"}, {"en": "Waterfall Shore", "tr": "Şelale Kıyısı"}, {"en": "Cloud Basin", "tr": "Bulut Havzası"}, {"en": "Coral Cove", "tr": "Mercan Koyu"}, {"en": "Crystal Cave", "tr": "Kristal Mağara"}, {"en": "Rainbow Creek", "tr": "Gökkuşağı Deresi"}, {"en": "Star Pool", "tr": "Yıldız Havuzu"}, {"en": "Golden Oasis", "tr": "Altın Vaha"}, {"en": "Grand Cascade", "tr": "Büyük Çağlayan"}, {"en": "Droplet Canals", "tr": "Damla Kanalları"}, {"en": "Lily Basin", "tr": "Nilüfer Havuzu"}, {"en": "Mist Garden", "tr": "Sis Bahçesi"}, {"en": "Glacier Spring", "tr": "Buzul Pınarı"}, {"en": "Coral Cove", "tr": "Mercan Koyu"}, {"en": "Tulip Dam", "tr": "Lale Bendi"}, {"en": "Cascade Terrace", "tr": "Çağlayan Terası"}, {"en": "Pond Village", "tr": "Gölet Köyü"}, {"en": "Dew Meadow", "tr": "Çiğ Çayırı"}, {"en": "Rainbow Fountain", "tr": "Gökkuşağı Çeşmesi"}, {"en": "Water Mill", "tr": "Su Değirmeni"}, {"en": "Foam Shore", "tr": "Köpük Kıyısı"}, {"en": "Crystal Brook", "tr": "Kristal Dere"}, {"en": "Rain Forest", "tr": "Yağmur Ormanı"}, {"en": "Wetlands", "tr": "Sulak Alan"}, {"en": "Blue Cave", "tr": "Mavi Mağara"}, {"en": "Lotus Lake", "tr": "Lotus Gölü"}, {"en": "Waterfall Valley", "tr": "Şelale Vadisi"}, {"en": "Steam Spring", "tr": "Buharlı Pınar"}, {"en": "Emerald Pond", "tr": "Zümrüt Gölet"}, {"en": "Tide Garden", "tr": "Gelgit Bahçesi"}, {"en": "Starfish Beach", "tr": "Deniz Yıldızı Plajı"}, {"en": "Warm Springs", "tr": "Ilık Kaynaklar"}, {"en": "Cloud Fountain", "tr": "Bulut Çeşmesi"}, {"en": "Pearl Bay", "tr": "İnci Koyu"}, {"en": "Water Lily Meadow", "tr": "Su Zambağı Çayırı"}, {"en": "Calm River", "tr": "Sakin Nehir"}, {"en": "Ice Flower Valley", "tr": "Buz Çiçeği Vadisi"}, {"en": "Sparkling Delta", "tr": "Işıltılı Nehir Ağzı"}, {"en": "Flower Cascade", "tr": "Çiçek Çağlayanı"}];
-window.JG_WBASE='img/w/';
-</script>
-<script>
 /* Jelly sayfaları ortak betik: dil/tema/gezinti, görünme animasyonu, dünya gezgini,
    mekanik laboratuvarı ve ışık kutusu. Sayfaya özel oyun demoları sayfanın kendi betiğinde. */
 (function(){
@@ -790,41 +731,6 @@ window.JG_WBASE='img/w/';
   } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
   var yr=$('#yr'); if(yr) yr.textContent=new Date().getFullYear();
 
-  /* ---------- Dünya gezgini ---------- */
-  var wx=$('#wx');
-  if(wx && window.JG_WORLDS){
-    var W=window.JG_WORLDS, cur=0, timer=null, N=W.length;
-    var view=$('.wx-view',wx)||$('#wxview'), numEl=$('.wx-num',wx), nmEn=$('.wx-name .en',wx), nmTr=$('.wx-name .tr',wx), strip=$('.wx-strip',wx);
-    var pad=function(i){return (i<10?'0':'')+i;};
-    var ths=W.map(function(w,i){
-      var b=d.createElement('button'); b.type='button'; b.className='wx-th'; b.setAttribute('aria-label',w.en);
-      b.innerHTML='<img src="'+window.JG_WBASE+pad(i+1)+'.webp" alt="" width="320" height="569" loading="lazy">';
-      b.addEventListener('click',function(){ go(i,true); });
-      strip.appendChild(b); return b;
-    });
-    function go(i,user){
-      i=(i+N)%N; var img=d.createElement('img');
-      img.src=window.JG_WBASE+pad(i+1)+'.webp'; img.alt=''; img.className='out';
-      var old=$('img:not(.out)',view);
-      view.appendChild(img);
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ img.classList.remove('out'); if(old) old.classList.add('out'); setTimeout(function(){ if(old&&old.parentNode) old.parentNode.removeChild(old); },500); }); });
-      cur=i; numEl.textContent=(i+1)+' / '+N; nmEn.textContent=W[i].en; nmTr.textContent=W[i].tr;
-      ths.forEach(function(t,k){ t.classList.toggle('on',k===i); });
-      var t=ths[i]; strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
-      if(user) stop();
-    }
-    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-    function play(){ if(!timer) timer=setInterval(function(){ go(cur+1); },3800); }
-    $('.wx-prev',wx).addEventListener('click',function(){ go(cur-1,true); });
-    $('.wx-next',wx).addEventListener('click',function(){ go(cur+1,true); });
-    wx.addEventListener('keydown',function(e){ if(e.key==='ArrowRight') go(cur+1,true); if(e.key==='ArrowLeft') go(cur-1,true); });
-    var first=d.createElement('img'); first.src=window.JG_WBASE+'01.webp'; first.alt=''; view.appendChild(first);
-    go(0);
-    if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      new IntersectionObserver(function(es){ es[0].isIntersecting?play():stop(); },{threshold:.35}).observe(wx);
-    }
-  }
-
   /* ---------- Mekanik laboratuvarı ---------- */
   var lab=$('#lab');
   if(lab){
@@ -851,44 +757,43 @@ window.JG_WBASE='img/w/';
 
 </script>
 <script>
-/* ============ Jelly Pipes: boru tahtası (sahne + oyun) ============ */
+/* ============ Jelly Pipes: boru tahtası ============
+   Su kuralı oyunun kendi simülasyonundan (water_sim.dart): su musluktan başlar, boru boyunca gerçekten ilerler
+   ve YALNIZ çiçeğe giden yolda akar; çiçeğe çıkmayan ya da ucu açık kalan kollara su girmez. Bağlantı kopunca
+   su çekilir. Tek musluklu bölümde su mavi, çiçekler mavi (pipe_flower_*_c0). */
 (function(){
   'use strict';
-  var JG=window.JG,$=JG.$,$$=JG.$$;
   var NS='http://www.w3.org/2000/svg';
   var DIRS=[[-1,0],[0,1],[1,0],[0,-1]];                 /* K D G B : bit 1,2,4,8 */
   var EDGE=[[50,0],[100,50],[50,100],[0,50]];
   var rotm=function(m,r){ r=((r%4)+4)%4; for(var i=0;i<r;i++) m=((m<<1)|(m>>3))&15; return m; };
   var deg=function(m){ var c=0; for(var i=0;i<4;i++) if(m&(1<<i)) c++; return c; };
+  var STEP=.2;                                          /* hücre başına su gecikmesi (sn) */
 
   function PipeBoard(el,rows,cols,cells,opts){
     this.el=el; this.rows=rows; this.cols=cols; this.cells=cells; this.opts=opts||{}; this.water=this.opts.water!==false;
-    this.keys={}; this.wet=[]; this.build();
+    this.keys={}; this.build();
   }
+  var mk=function(tag,cls,attrs){ var e=document.createElementNS(NS,tag); if(cls) e.setAttribute('class',cls); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; };
   PipeBoard.prototype.build=function(){
-    var self=this, el=this.el; el.innerHTML=''; el.style.setProperty('--cols',this.cols); this.nodes=[];
+    var self=this, el=this.el; el.innerHTML=''; el.style.setProperty('--cols',this.cols);
     for(var r=0;r<this.rows;r++){ for(var c=0;c<this.cols;c++){
-      var cell=this.cells[r][c], d=document.createElement('div'); d.className='pc'; var idx=r*this.cols+c; this.nodes.push(d);
+      var cell=this.cells[r][c], d=document.createElement('div'); d.className='pc';
       if(cell.k==='e'){ d.className+=' void'; if(cell.stone){ var s=document.createElement('img'); s.className='stone'; s.src='img/s/flow_stone.webp'; s.alt=''; d.appendChild(s);} el.appendChild(d); continue; }
       if(cell.fixed) d.className+=' fix';
-      var svg=document.createElementNS(NS,'svg'); svg.setAttribute('viewBox','0 0 100 100');
-      var g=document.createElementNS(NS,'g'); g.setAttribute('class','rot');
-      var glass='',inner='',wt=''; cell.segs=[];
-      for(var b=0;b<4;b++){ if(!(cell.m&(1<<b))) continue;
-        var e=EDGE[b]; var p1=document.createElementNS(NS,'path'); p1.setAttribute('class','g1'); p1.setAttribute('d','M50 50L'+e[0]+' '+e[1]); g.appendChild(p1);
-      }
-      for(var b2=0;b2<4;b2++){ if(!(cell.m&(1<<b2))) continue; var e2=EDGE[b2]; var p2=document.createElementNS(NS,'path'); p2.setAttribute('class','g2'); p2.setAttribute('d','M50 50L'+e2[0]+' '+e2[1]); g.appendChild(p2); }
-      var j1=document.createElementNS(NS,'circle'); j1.setAttribute('class','jt'); j1.setAttribute('cx',50); j1.setAttribute('cy',50); j1.setAttribute("r",17.5); g.appendChild(j1);
-      var j2=document.createElementNS(NS,'circle'); j2.setAttribute('class','jt2'); j2.setAttribute('cx',50); j2.setAttribute('cy',50); j2.setAttribute("r",13); g.appendChild(j2);
-      for(var b3=0;b3<4;b3++){ if(!(cell.m&(1<<b3))) continue; var w=document.createElementNS(NS,'path'); w.setAttribute('class','wt'); w.setAttribute('data-b',b3); w.setAttribute('d','M50 50L'+EDGE[b3][0]+' '+EDGE[b3][1]); g.appendChild(w); cell.segs.push(w); }
-      var wj=document.createElementNS(NS,'circle'); wj.setAttribute('class','wj'); wj.setAttribute('cx',50); wj.setAttribute('cy',50); wj.setAttribute("r",8.5); g.appendChild(wj); cell.wj=wj;
+      var svg=mk('svg','',{viewBox:'0 0 100 100'}), g=mk('g','rot',{});
+      for(var b=0;b<4;b++) if(cell.m&(1<<b)) g.appendChild(mk('path','g1',{d:'M50 50L'+EDGE[b][0]+' '+EDGE[b][1]}));
+      for(var b2=0;b2<4;b2++) if(cell.m&(1<<b2)) g.appendChild(mk('path','g2',{d:'M50 50L'+EDGE[b2][0]+' '+EDGE[b2][1]}));
+      g.appendChild(mk('circle','jt',{cx:50,cy:50,r:20})); g.appendChild(mk('circle','jt2',{cx:50,cy:50,r:15.5}));
+      cell.segs=[];
+      for(var b3=0;b3<4;b3++){ if(!(cell.m&(1<<b3))) continue; var w=mk('path','wt',{'data-b':b3,d:'M50 50L'+EDGE[b3][0]+' '+EDGE[b3][1]}); g.appendChild(w); cell.segs.push(w); }
+      cell.wj=mk('circle','wj',{cx:50,cy:50,r:11}); g.appendChild(cell.wj);
       cell.g=g; svg.appendChild(g); d.appendChild(svg);
       g.style.transform='rotate('+((cell.deg||0))+'deg)';
-      if(cell.k==='s'){ var im=document.createElement('img'); im.className='src'; im.src='img/s/pipe_source.webp'; im.alt=''; d.appendChild(im); cell.img=im; }
-      if(cell.flower){ var f=document.createElement('img'); f.className='fl'; f.src='img/s/pipe_flower_bud.webp'; f.alt=''; d.appendChild(f); cell.img=f; }
+      if(cell.k==='s'){ var im=document.createElement('img'); im.className='src'; im.src='img/s/pipe_source.webp'; im.alt=''; d.appendChild(im); }
+      if(cell.flower){ var f=document.createElement('img'); f.className='fl'; f.src='img/s/pipe_flower_bud_c0.webp'; f.alt=''; d.appendChild(f); cell.img=f; }
       cell.node=d;
-      if(!cell.fixed){ (function(rr,cc){ d.addEventListener('click',function(){ self.rotate(rr,cc,1); }); })(r,c); }
-      else if(cell.k==='s' && this.opts.onSource){ d.className+=' fix'; d.style.cursor='pointer'; d.addEventListener('click',this.opts.onSource); }
+      if(!cell.fixed && !this.opts.still){ (function(rr,cc){ d.addEventListener('click',function(){ self.rotate(rr,cc,1); }); })(r,c); }
       el.appendChild(d);
     } }
     this.update();
@@ -896,60 +801,96 @@ window.JG_WBASE='img/w/';
   PipeBoard.prototype.mask=function(cell){ return rotm(cell.m,Math.round((cell.deg||0)/90)); };
   PipeBoard.prototype.rotate=function(r,c,n){ var cell=this.cells[r][c]; cell.deg=(cell.deg||0)+90*n; cell.g.style.transform='rotate('+cell.deg+'deg)'; if(this.opts.onTap) this.opts.onTap(r,c); this.update(); };
   PipeBoard.prototype.update=function(){
-    var R=this.rows,C=this.cols,self=this, depth={}, entry={}, q=[], src=-1;
-    for(var i=0;i<R*C;i++){ var cl=this.cells[Math.floor(i/C)][i%C]; if(cl.k==='s') src=i; }
-    if(this.water && src>-1){ depth[src]=0; entry[src]=-1; q.push(src); }
+    var R=this.rows,C=this.cols,self=this,depth={},entry={},parent={},q=[],src=-1,i;
+    for(i=0;i<R*C;i++){ if(this.cells[Math.floor(i/C)][i%C].k==='s') src=i; }
+    if(this.water && src>-1){ depth[src]=0; entry[src]=-1; parent[src]=-1; q.push(src); }
     while(q.length){
       var cur=q.shift(), cr=Math.floor(cur/C), cc=cur%C, cm=this.mask(this.cells[cr][cc]);
       for(var b=0;b<4;b++){ if(!(cm&(1<<b))) continue; var nr=cr+DIRS[b][0], nc=cc+DIRS[b][1]; if(nr<0||nc<0||nr>=R||nc>=C) continue;
         var n=nr*C+nc; if(depth[n]!==undefined) continue; var ncell=this.cells[nr][nc]; if(ncell.k==='e') continue;
-        if(this.mask(ncell)&(1<<((b+2)%4))){ depth[n]=depth[cur]+1; entry[n]=(b+2)%4; q.push(n); } }
+        if(this.mask(ncell)&(1<<((b+2)%4))){ depth[n]=depth[cur]+1; entry[n]=(b+2)%4; parent[n]=cur; q.push(n); } }
     }
-    var fl=0, tot=0, wetFl=0;
+    /* yalnız çiçeğe giden yol: çiçeklerden musluğa doğru işaretle */
+    var useful={}, wdirs={}, tot=0, reached=0;
+    for(i=0;i<R*C;i++){ var cl=this.cells[Math.floor(i/C)][i%C]; if(!cl.flower) continue; tot++;
+      if(depth[i]!==undefined){ reached++; var x=i; while(x!==-1 && x!==undefined){ useful[x]=1; x=parent[x]; } } }
+    Object.keys(useful).forEach(function(k){ k=+k; var p=parent[k]; if(p>=0){ wdirs[k]=(wdirs[k]||0)|(1<<entry[k]); wdirs[p]=(wdirs[p]||0)|(1<<((entry[k]+2)%4)); } });
     for(var k=0;k<R*C;k++){
       var cell=this.cells[Math.floor(k/C)][k%C]; if(cell.k==='e') continue;
-      var wet=depth[k]!==undefined, rot=Math.round((cell.deg||0)/90)%4; if(rot<0) rot+=4;
-      var key=wet?(depth[k]+':'+entry[k]+':'+rot):'dry';
-      if(this.keys[k]!==key){
-        this.keys[k]=key;
-        cell.segs.forEach(function(s){ var base=+s.getAttribute('data-b'), wd=(base+rot)%4; s.classList.remove('on'); s.style.animationDelay='';
-          if(wet){ var isEntry=entry[k]===wd, e=EDGE[base];
-            s.setAttribute('d',isEntry?'M'+e[0]+' '+e[1]+'L50 50':'M50 50L'+e[0]+' '+e[1]);
-            void s.getBoundingClientRect(); s.style.animationDelay=(depth[k]*.3+(isEntry?0:.16))+'s'; s.classList.add('on'); }
-          else { s.style.strokeDashoffset=''; } });
-        cell.wj.classList.remove('on'); cell.wj.style.animationDelay=''; if(wet){ cell.wj.style.animationDelay=(depth[k]*.3+.16)+'s'; cell.wj.classList.add('on'); }
-        if(cell.flower){ var img=cell.img; clearTimeout(cell.t);
-          if(wet){ cell.t=setTimeout(function(im,c2){ return function(){ im.src='img/s/pipe_flower_open.webp'; im.classList.remove('bl'); void im.offsetWidth; im.classList.add('bl'); if(self.opts.onBloom) self.opts.onBloom(c2); }; }(img,cell),depth[k]*300+420); }
-          else { img.src='img/s/pipe_flower_bud.webp'; img.classList.remove('bl'); } }
-      }
-      if(cell.flower){ tot++; if(wet) wetFl++; }
+      var wet=!!useful[k], rot=((Math.round((cell.deg||0)/90)%4)+4)%4;
+      var key=wet?(depth[k]+':'+entry[k]+':'+(wdirs[k]||0)+':'+rot):'dry';
+      if(cell.flower){ /* çiçek, borunun kapalı ucuna kayık durur */
+        var m=this.mask(cell), od=0; for(var t=0;t<4;t++) if(m&(1<<t)) od=t; var cd=DIRS[(od+2)%4];
+        cell.img.style.left=(50+cd[1]*14)+'%'; cell.img.style.top=(50+cd[0]*14)+'%'; }
+      if(this.keys[k]===key) continue;
+      this.keys[k]=key;
+      cell.segs.forEach(function(sg){ var base=+sg.getAttribute('data-b'), wd=(base+rot)%4; sg.classList.remove('on'); sg.style.animationDelay='';
+        if(wet && (wdirs[k]&(1<<wd))){ var isEntry=entry[k]===wd, e=EDGE[base];
+          sg.setAttribute('d',isEntry?'M'+e[0]+' '+e[1]+'L50 50':'M50 50L'+e[0]+' '+e[1]);
+          void sg.getBoundingClientRect(); sg.style.animationDelay=(depth[k]*STEP+(isEntry?0:STEP/2))+'s'; sg.classList.add('on'); } });
+      cell.wj.classList.remove('on'); cell.wj.style.animationDelay=''; if(wet){ cell.wj.style.animationDelay=(depth[k]*STEP+STEP/2)+'s'; cell.wj.classList.add('on'); }
+      if(cell.flower){ var img=cell.img; clearTimeout(cell.t);
+        if(wet){ cell.t=setTimeout(function(im){ return function(){ im.src='img/s/pipe_flower_open_c0.webp'; im.classList.remove('bl'); void im.offsetWidth; im.classList.add('bl'); }; }(img),depth[k]*STEP*1000+STEP*500); }
+        else { img.src='img/s/pipe_flower_bud_c0.webp'; img.classList.remove('bl'); } }
     }
-    this.flowers=tot; this.wetFlowers=wetFl;
-    if(this.opts.onState) this.opts.onState(wetFl,tot,depth);
+    this.flowers=tot; this.wetFlowers=reached;
+    if(this.opts.onState) this.opts.onState(reached,tot);
   };
-  window.PipeBoard=PipeBoard;
-  PipeBoard.rotm=rotm; PipeBoard.deg=deg; PipeBoard.DIRS=DIRS;
+  window.PipeBoard=PipeBoard; PipeBoard.rotm=rotm; PipeBoard.deg=deg; PipeBoard.DIRS=DIRS;
+
+  /* rastgele çözülebilir bölüm: musluktan ağaç büyüt, yapraklar çiçek, sonra boruları karıştır */
+  var rnd=function(n){return Math.floor(Math.random()*n);};
+  PipeBoard.gen=function(R,C){
+    for(var attempt=0;attempt<300;attempt++){
+      var tree={}, order=[], edges={}, srow=1+rnd(R-2), s=srow*C;
+      tree[s]=1; order.push(s); edges[s]=2;
+      var first=s+1; tree[first]=1; order.push(first); edges[first]=8;
+      var target=Math.round(R*C*.62), guard=0;
+      while(order.length<target && guard++<600){
+        var from=order[Math.max(1,order.length-1-rnd(Math.min(order.length-1,6)))]; if(from===s) continue;
+        var fr=Math.floor(from/C), fc=from%C, b=rnd(4), nr=fr+DIRS[b][0], nc=fc+DIRS[b][1];
+        if(nr<0||nc<0||nr>=R||nc>=C) continue; var n=nr*C+nc; if(tree[n]) continue;
+        tree[n]=1; order.push(n); edges[from]|=(1<<b); edges[n]=(edges[n]||0)|(1<<((b+2)%4));
+      }
+      var leaves=order.filter(function(i){ return i!==s && deg(edges[i])===1; });
+      if(leaves.length<3||leaves.length>5) continue;
+      var cells=[];
+      for(var r=0;r<R;r++){ cells.push([]); for(var c=0;c<C;c++){ var i2=r*C+c;
+        if(!tree[i2]){ cells[r].push({k:'e',stone:Math.random()<.35}); continue; }
+        if(i2===s){ cells[r].push({k:'s',m:2,fixed:true}); continue; }
+        cells[r].push({k:'p',m:edges[i2],flower:leaves.indexOf(i2)>-1,deg:90*rnd(4)}); } }
+      return cells;
+    }
+    return null;
+  };
+  PipeBoard.fresh=function(R,C){ var cells; do{ cells=PipeBoard.gen(R,C); }while(!cells); return cells; };
 })();
 </script>
 <script>
-/* ============ Jelly Pipes: hero sahnesi ============ */
+/* ============ Jelly Pipes: hero gösterimi (kendiliğinden çözülen bahçe) ============ */
 (function(){
   'use strict';
   var JG=window.JG,$=JG.$, el=$('#scene'); if(!el) return;
-  /* K=1 D=2 G=4 B=8 */
-  var K=1,D=2,G=4,B=8;
-  var rows=3, cols=5, cells=[
-    [{k:'e'},{k:'e'},{k:'p',m:G,flower:true,fixed:true},{k:'e'},{k:'e'}],
-    [{k:'s',m:D,fixed:true},{k:'p',m:D|B,fixed:true},{k:'p',m:K|D|G|B,fixed:true},{k:'p',m:D|B,fixed:true},{k:'p',m:B,flower:true,fixed:true}],
-    [{k:'e'},{k:'e'},{k:'p',m:K,flower:true,fixed:true},{k:'e'},{k:'e'}]
-  ];
-  var on=false, board;
-  function toggle(){ on=!on; board.water=on; board.keys={}; board.update(); drip(); }
-  function drip(){ if(!on) return; var s=$('.pc img.src',el); if(!s) return; var r=s.getBoundingClientRect(), p=el.getBoundingClientRect();
-    for(var i=0;i<4;i++){ var im=document.createElement('img'); im.src='img/s/fx_drop.webp'; im.className='drip'; im.alt=''; im.style.left=(r.left-p.left+r.width*.3+i*8)+'px'; im.style.top=(r.top-p.top+r.height*.7)+'px'; im.style.setProperty('--dx',(i*6-10)+'px'); im.style.animationDelay=(i*.12)+'s'; el.appendChild(im); setTimeout(function(x){return function(){x.remove();};}(im),1400); } }
-  board=new PipeBoard(el,rows,cols,cells,{water:false,onSource:toggle});
-  /* uyuyan çiçeklerin ilk hâli: kapalı; sahne sessizce 1.2 sn sonra kendiliğinden akmaya başlar */
-  setTimeout(function(){ if(!on) toggle(); },1400);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, visible=true;
+  var sleep=function(ms){ return new Promise(function(r){ setTimeout(r,ms); }); };
+  if('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible=es[0].isIntersecting; }).observe(el);
+  var idle=function(){ return new Promise(function(r){ (function w(){ if(visible&&!document.hidden) r(); else setTimeout(w,400); })(); }); };
+  var R=4,C=5;
+  (async function loop(){
+    for(var round=0;;round++){
+      var cells=PipeBoard.fresh(R,C), pb=new PipeBoard(el,R,C,cells,{still:true});
+      if(reduce){ cells.forEach(function(row,r){ row.forEach(function(cl,c){ if(cl.k==='p'){ var g=0; while(PipeBoard.rotm(cl.m,Math.round(cl.deg/90))!==cl.m&&g++<4) pb.rotate(r,c,1); } }); }); return; }
+      await idle(); await sleep(1100);
+      var todo=[]; cells.forEach(function(row,r){ row.forEach(function(cl,c){ if(cl.k==='p') todo.push([r,c]); }); });
+      todo.sort(function(a,b){ return (a[1]+a[0]*.3)-(b[1]+b[0]*.3); });
+      for(var t=0;t<todo.length;t++){ var r=todo[t][0], c=todo[t][1], cl=cells[r][c], g=0;
+        while(PipeBoard.rotm(cl.m,Math.round(cl.deg/90))!==cl.m && g++<4){ pb.rotate(r,c,1); await sleep(330); } }
+      await sleep(3600);
+      /* tekrar karıştır: su çekilir, borular döner */
+      for(var u=0;u<todo.length;u++){ pb.rotate(todo[u][0],todo[u][1],1+(u%3)); await sleep(50); }
+      await sleep(900);
+    }
+  })();
 })();
 </script>
 <script>
@@ -958,46 +899,18 @@ window.JG_WBASE='img/w/';
   'use strict';
   var JG=window.JG,$=JG.$,$$=JG.$$;
   var el=$('#board'); if(!el) return;
-  var SIZES=[[4,4],[5,5],[6,5]], cur=0, board, taps=0, solved=false, solution;
-  var rnd=function(n){return Math.floor(Math.random()*n);};
-  var DIRS=PipeBoard.DIRS;
+  var SIZES=[[4,4],[5,5],[6,5]], cur=0, board, taps=0, solved=false;
 
-  function gen(R,C){
-    for(var attempt=0;attempt<200;attempt++){
-      var tree={}, order=[], edges={}, srow=1+rnd(R-2), s=srow*C;
-      tree[s]=1; order.push(s); edges[s]=2;                         /* kaynak yalnız doğuya açılır */
-      var first=s+1; tree[first]=1; order.push(first); edges[first]=8;
-      var target=Math.round(R*C*.62), guard=0;
-      while(order.length<target && guard++<600){
-        var from=order[Math.max(1,order.length-1-rnd(Math.min(order.length-1,6)))] ; if(from===s) continue;
-        var fr=Math.floor(from/C), fc=from%C, b=rnd(4), nr=fr+DIRS[b][0], nc=fc+DIRS[b][1];
-        if(nr<0||nc<0||nr>=R||nc>=C) continue; var n=nr*C+nc; if(tree[n]) continue;
-        tree[n]=1; order.push(n); edges[from]|=(1<<b); edges[n]=(edges[n]||0)|(1<<((b+2)%4));
-      }
-      var leaves=order.filter(function(i){ return i!==s && PipeBoard.deg(edges[i])===1; });
-      if(leaves.length<3||leaves.length>5) continue;
-      var cells=[], sol=[];
-      for(var r=0;r<R;r++){ cells.push([]); for(var c=0;c<C;c++){ var i2=r*C+c;
-        if(!tree[i2]){ cells[r].push({k:'e',stone:Math.random()<.35}); continue; }
-        if(i2===s){ cells[r].push({k:'s',m:2,fixed:true}); continue; }
-        cells[r].push({k:'p',m:edges[i2],flower:leaves.indexOf(i2)>-1,deg:90*rnd(4)}); } }
-      return cells;
-    }
-    return null;
-  }
-  function solved4(){ return board.wetFlowers===board.flowers && board.flowers>0; }
   function load(i,keep){
-    if(!keep) cur=i; var sz=SIZES[cur], cells, b;
-    do{ cells=gen(sz[0],sz[1]); }while(!cells);
+    if(!keep) cur=i; var sz=SIZES[cur], cells;
+    do{ cells=PipeBoard.fresh(sz[0],sz[1]); }while(0);
     taps=0; solved=false; $('#win').classList.remove('on'); $('#m-tap').textContent=0;
-    board=new PipeBoard(el,sz[0],sz[1],cells,{onTap:function(){ taps++; $('#m-tap').textContent=taps; },onState:function(w,t){ $('#m-fl').textContent=w+'/'+t; if(t&&w===t&&!solved){ solved=true; setTimeout(win,900+maxDepth()*0); } }});
+    board=new PipeBoard(el,sz[0],sz[1],cells,{onTap:function(){ taps++; $('#m-tap').textContent=taps; },onState:function(w,t){ $('#m-fl').textContent=w+'/'+t; if(t&&w===t&&!solved){ solved=true; setTimeout(win,1200); } }});
     el.__board=board;
-    /* en baştan çözülmüş doğmasın */
-    if(board.wetFlowers===board.flowers){ load(cur,true); return; }
+    if(board.wetFlowers===board.flowers){ load(cur,true); return; }   /* baştan çözülmüş doğmasın */
     $('#m-fl').textContent=board.wetFlowers+'/'+board.flowers;
     renderPicker();
   }
-  function maxDepth(){ return 0; }
   function renderPicker(){ var pk=$('#picker'); pk.innerHTML=''; SIZES.forEach(function(z,i){ var b=document.createElement('button'); b.type='button'; b.className='pk'+(i===cur?' on':''); b.innerHTML=z[1]+'&times;'+z[0]; b.addEventListener('click',function(){ load(i); }); pk.appendChild(b); }); }
   function win(){
     $('#win').classList.add('on');
@@ -1012,11 +925,10 @@ window.JG_WBASE='img/w/';
   $('#b-hint').addEventListener('click',function(){
     if(!board) return; var R=board.rows,C=board.cols, best=null;
     for(var r=0;r<R;r++) for(var c=0;c<C;c++){ var cl=board.cells[r][c]; if(cl.k!=='p') continue;
-      var rot=Math.round(cl.deg/90)%4; var m=cl.m; var cur2=PipeBoard.rotm(m,rot); if(cur2!==m){ var need=0; while(PipeBoard.rotm(m,rot+need)!==m && need<4) need++; var dist=Math.abs(r-1)+c; if(!best||dist<best.d) best={r:r,c:c,n:need,d:dist}; } }
+      var rot=Math.round(cl.deg/90)%4, m=cl.m; if(PipeBoard.rotm(m,rot)!==m){ var need=0; while(PipeBoard.rotm(m,rot+need)!==m && need<4) need++; var dist=Math.abs(r-1)+c; if(!best||dist<best.d) best={r:r,c:c,n:need,d:dist}; } }
     if(best){ var cl2=board.cells[best.r][best.c]; cl2.node.style.boxShadow='0 0 0 3px var(--accent)'; setTimeout(function(){ cl2.node.style.boxShadow=''; board.rotate(best.r,best.c,best.n); },450); }
   });
-  /* çiçek kartları */
-  $$('.fl').forEach(function(b){ b.addEventListener('click',function(){ var im=$('img',b), open=b.classList.toggle('open'); im.src='img/s/'+(open?b.getAttribute('data-o'):b.getAttribute('data-b'))+'.webp'; im.style.animation='none'; void im.offsetWidth; im.style.animation=''; }); });
+  $$('.fl').forEach(function(b){ b.addEventListener('click',function(){ var im=$('img.f',b), open=b.classList.toggle('open'); im.src='img/s/'+(open?b.getAttribute('data-o'):b.getAttribute('data-b'))+'.webp'; im.style.animation='none'; void im.offsetWidth; im.style.animation=''; }); });
   load(0);
 })();
 </script>
