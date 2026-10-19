@@ -59,9 +59,17 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 - `assets/steam.js` — **Locard Steam anahtarı.** Mağaza sayfası açılınca değiştirilecek tek
   yer burası (aşağıya bak). Hem `locard/` hem ana sayfa bunu okur.
 - `daypot/index.html` — DayPot tanıtım sayfası; görseller `daypot/img/`.
-- `daypot/gizlilik.html` — DayPot gizlilik politikası (TR + EN). Uygulamadaki
-  `privacyPolicyUrl` bu adrese bakmalı: `https://jinjagames.com/daypot/gizlilik.html`.
-- `privacy.html` — site gizlilik politikası.
+- `daypot/gizlilik/index.html` — DayPot gizlilik politikası (TR + EN), `https://jinjagames.com/daypot/gizlilik/`.
+  Eski `daypot/gizlilik.html` adresi uygulamada/Play Console'da kayıtlı olabileceği için silinmedi;
+  yeni adrese yönlendiriyor. Uygulamadaki `privacyPolicyUrl` yeni adrese çevrilebilir.
+- `privacy/index.html` — site gizlilik politikası (jinjagames.com/privacy/). Eski `privacy.html` yönlendirmedir.
+- `jellytrails/privacy/`, `jellypipes/privacy/` — Jelly Trails ve Jelly Pipes gizlilik politikaları
+  (Play Console'a girilecek adresler: `https://jinjagames.com/jellytrails/privacy/` ve
+  `https://jinjagames.com/jellypipes/privacy/`). Şimdilik yalnız bağlantıyla açılır: sitede hiçbir
+  yerden bağlanmaz, site haritasında yok, `noindex`. `tools/make_jelly_privacy.py` ile üretilir;
+  metin oyunların kodundan çıkarıldı (AdMob, Google Play satın alma, veriler cihazda). Oyunlara
+  Firebase, çökme raporu ya da rıza formu eklenirse betikteki metin güncellenip yeniden çalıştırılmalı.
+- **Adreslerde `.html` yok:** her sayfa klasör adresiyle açılır (`/privacy/`, `/daypot/gizlilik/`).
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
 - `CNAME` — özel domain (`jinjagames.com`); GitHub Pages bunu okur.
 
