@@ -14,6 +14,8 @@ kendi dünyasının yüzeyini kullanır. Ortak olan yapı, farklı olan ten:
 | Cyber Academy | Terminal, gece | JetBrains Mono | Inter | JetBrains Mono | Camgöbeği |
 | Locard | Dosya / gizem | Playfair Display | Inter | Courier Prime | Damga kırmızısı |
 | DayPot | Sakin mutfak | Fraunces | Nunito | Nunito | Orman yeşili |
+| Jelly Trails | Pastel jöle | Fraunces | Nunito | Nunito | Mor `#7A4FD6` |
+| Jelly Pipes | Pastel su camı | Fraunces | Nunito | Nunito | Mavi `#1C7FB8` |
 
 Locard'ın açık teması sararmış dosya kâğıdı, koyu teması gece bürosudur;
 ikisi de aynı ölçüleri kullanır. DayPot yuvarlak köşe ve geniş satır aralığı
@@ -65,10 +67,16 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 - `privacy/index.html` — site gizlilik politikası (jinjagames.com/privacy/). Eski `privacy.html` yönlendirmedir.
 - `jellytrails/privacy/`, `jellypipes/privacy/` — Jelly Trails ve Jelly Pipes gizlilik politikaları
   (Play Console'a girilecek adresler: `https://jinjagames.com/jellytrails/privacy/` ve
-  `https://jinjagames.com/jellypipes/privacy/`). Şimdilik yalnız bağlantıyla açılır: sitede hiçbir
-  yerden bağlanmaz, site haritasında yok, `noindex`. `tools/make_jelly_privacy.py` ile üretilir;
+  `https://jinjagames.com/jellypipes/privacy/`). Oyun sayfalarından ve ana sayfa altbilgisinden
+  bağlanır; site haritasında yok, `noindex`. `tools/make_jelly_privacy.py` ile üretilir;
   metin oyunların kodundan çıkarıldı (AdMob, Google Play satın alma, veriler cihazda). Oyunlara
   Firebase, çökme raporu ya da rıza formu eklenirse betikteki metin güncellenip yeniden çalıştırılmalı.
+- `jellytrails/index.html`, `jellypipes/index.html` — Jelly Trails ve Jelly Pipes tanıtım sayfaları
+  (`https://jinjagames.com/jellytrails/`, `/jellypipes/`); görseller `<oyun>/img/` (simge, paylaşım görseli,
+  5 ekran görüntüsü, kart başlığı). **Tek kaynak `tools/make_jelly_pages.py`:** metin, renkler ve görseller
+  (`Puzzles/store/...` altından) oradan üretilir; sayfaları elle değil betikle değiştir. Oyunlar
+  `games/` listesinde 04/05, ana sayfada 04/05 paneli olarak yer alır. Google Play bağlantısı
+  yayına çıkınca betikteki `PLAY_URL` sözlüğüne yazılıp betik yeniden çalıştırılır (şimdilik "Yakında" rozeti).
 - **Adreslerde `.html` yok:** her sayfa klasör adresiyle açılır (`/privacy/`, `/daypot/gizlilik/`).
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
 - `CNAME` — özel domain (`jinjagames.com`); GitHub Pages bunu okur.
@@ -276,3 +284,4 @@ DNS yayılması 10 dk – 24 saat sürebilir.
 - [ ] DayPot: Play yayını açılınca "Yakında Google Play'de" durumu mağaza rozetiyle
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
 - [ ] DayPot: gizlilik politikasındaki tarih, yayın gününde güncellensin.
+- [ ] Jelly Trails / Jelly Pipes: Play yayını açılınca `tools/make_jelly_pages.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki "Google Play yakında" etiketi güncellensin. Mağaza ekran görüntüleri değişirse betik görselleri `Puzzles/store`'dan yeniden üretir.

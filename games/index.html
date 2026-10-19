@@ -9,8 +9,8 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Games | JinjaGames: Cyber Academy, Locard, DayPot</title>
-<meta name="description" content="Every JinjaGames project in one place: Cyber Academy, out now in Steam Early Access; Locard, a detective game for one to four players you can wishlist on Steam; and DayPot, an offline cooking assistant for Android." />
+<title>Games | JinjaGames: Cyber Academy, Locard, DayPot, Jelly Trails, Jelly Pipes</title>
+<meta name="description" content="Every JinjaGames project in one place: Cyber Academy, out now in Steam Early Access; Locard, a detective game for one to four players you can wishlist on Steam; DayPot, an offline cooking assistant for Android; and the Jelly puzzle pair for Android, Jelly Trails and Jelly Pipes." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://jinjagames.com/games/" />
 <meta name="theme-color" content="#FCFAF8" media="(prefers-color-scheme: light)" />
@@ -19,7 +19,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="icon" type="image/png" sizes="48x48" href="../favicon-j-shuriken-48.png?v=2" />
 <link rel="apple-touch-icon" href="../favicon-j-shuriken-180.png?v=2" />
 <meta property="og:title" content="Games | JinjaGames" />
-<meta property="og:description" content="Cyber Academy, Locard and DayPot: status, platforms and languages, side by side." />
+<meta property="og:description" content="Cyber Academy, Locard, DayPot, Jelly Trails and Jelly Pipes: status, platforms and languages, side by side." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jinjagames.com/games/" />
 <meta property="og:image" content="https://jinjagames.com/JinjaGamesBanner.png" />
@@ -28,7 +28,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/inter-latin-400.woff2" crossorigin />
 <link rel="stylesheet" href="../assets/fonts.css?v=20261012d" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Games by JinjaGames","url":"https://jinjagames.com/games/","isPartOf":{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},"mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://jinjagames.com/cyberacademy/","name":"Cyber Academy"},{"@type":"ListItem","position":2,"url":"https://jinjagames.com/locard/","name":"Locard"},{"@type":"ListItem","position":3,"url":"https://jinjagames.com/daypot/","name":"DayPot"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Games by JinjaGames","url":"https://jinjagames.com/games/","isPartOf":{"@type":"WebSite","name":"JinjaGames","url":"https://jinjagames.com/"},"mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://jinjagames.com/cyberacademy/","name":"Cyber Academy"},{"@type":"ListItem","position":2,"url":"https://jinjagames.com/locard/","name":"Locard"},{"@type":"ListItem","position":3,"url":"https://jinjagames.com/daypot/","name":"DayPot"},{"@type":"ListItem","position":4,"url":"https://jinjagames.com/jellytrails/","name":"Jelly Trails"},{"@type":"ListItem","position":5,"url":"https://jinjagames.com/jellypipes/","name":"Jelly Pipes"}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"}]}]}
 </script>
 <script src="../assets/steam.js?v=20261012d"></script>
 <script>
@@ -58,7 +58,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
   --nav-bg:rgba(252,250,248,.82); --nav-bg-solid:rgba(252,250,248,.97);
   --shadow-1:0 1px 2px rgba(25,21,23,.04), 0 8px 22px rgba(25,21,23,.05);
   --shadow-2:0 20px 54px rgba(25,21,23,.11);
-  --w-cyber:#0E7A8A; --w-noir:#B03B32; --w-warm:#2F6B48;
+  --w-cyber:#0E7A8A; --w-noir:#B03B32; --w-warm:#2F6B48; --w-trails:#7A4FD6; --w-pipes:#1C7FB8;
   --W:1240px; --ease:cubic-bezier(.22,1,.36,1); --navh:74px;
   --f-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --f-display:'Space Grotesk',var(--f-body);
@@ -75,7 +75,7 @@ html[data-theme="dark"]{
   --nav-bg:rgba(14,12,13,.78); --nav-bg-solid:rgba(14,12,13,.96);
   --shadow-1:0 1px 2px rgba(0,0,0,.36), 0 8px 22px rgba(0,0,0,.3);
   --shadow-2:0 22px 56px rgba(0,0,0,.52);
-  --w-cyber:#4FD0E4; --w-noir:#F16A5C; --w-warm:#6FBF87;
+  --w-cyber:#4FD0E4; --w-noir:#F16A5C; --w-warm:#6FBF87; --w-trails:#B79BFF; --w-pipes:#79C8F2;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -208,6 +208,10 @@ html[data-theme="dark"] .btn.p{color:#12100F}
 .g-noir .media img{object-position:60% 50%}
 .g-noir .media::after{content:"";position:absolute;inset:14px;z-index:1;border:1px solid rgba(255,255,255,.14);pointer-events:none}
 .g-warm{--accent:var(--w-warm)}
+/* Jelly serisi: kartın görseli oyunun kendi özellik grafiği, başlık DayPot ile aynı yumuşak serif */
+.g-trails{--accent:var(--w-trails)}.g-pipes{--accent:var(--w-pipes)}
+.g-trails .media,.g-pipes .media{aspect-ratio:1024/500}
+.g-trails h2,.g-pipes h2{font-family:var(--f-warm);font-weight:700;letter-spacing:-.022em}
 .g-warm h2{font-family:var(--f-warm);font-weight:700;letter-spacing:-.022em}
 .g-warm .media{background:linear-gradient(150deg,#EFEADC,#DCE7D6);display:grid;place-items:center}
 html[data-theme="dark"] .g-warm .media{background:linear-gradient(150deg,#1B2419,#1F2A22)}
@@ -231,8 +235,8 @@ thead th{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-tran
 tbody th{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:400;width:170px}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle}
-.c-cy{color:var(--w-cyber)}.c-no{color:var(--w-noir)}.c-wa{color:var(--w-warm)}
-thead th.c-cy,thead th.c-no,thead th.c-wa{font-family:var(--f-display);font-size:16px;letter-spacing:-.02em;text-transform:none;font-weight:700}
+.c-cy{color:var(--w-cyber)}.c-no{color:var(--w-noir)}.c-wa{color:var(--w-warm)}.c-jt{color:var(--w-trails)}.c-jp{color:var(--w-pipes)}
+thead th.c-cy,thead th.c-no,thead th.c-wa,thead th.c-jt,thead th.c-jp{font-family:var(--f-display);font-size:16px;letter-spacing:-.02em;text-transform:none;font-weight:700}
 
 
 /* BaneBender menü bağlantısı: küçük çimen bloğuyla ayrışır */
@@ -355,18 +359,18 @@ footer{border-top:1px solid var(--line);padding:40px 0}
       <div class="counts">
         <div><i style="background:#45D49A"></i><b>1</b><span class="en i">Out now</span><span class="tr i">Çıktı</span></div>
         <div><i style="background:#F08A7E"></i><b>1</b><span class="en i">On Steam wishlist</span><span class="tr i">Steam istek listesinde</span></div>
-        <div><i style="background:#E3B341"></i><b>1</b><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
+        <div><i style="background:#E3B341"></i><b>3</b><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
       </div>
     </div>
   </header>
 
   <div class="filters" role="toolbar" aria-label="Filter games">
     <div class="wrap">
-      <button class="chip" type="button" data-filter="all" aria-pressed="true"><span class="en i">All</span><span class="tr i">Hepsi</span> <em>3</em></button>
+      <button class="chip" type="button" data-filter="all" aria-pressed="true"><span class="en i">All</span><span class="tr i">Hepsi</span> <em>5</em></button>
       <button class="chip" type="button" data-filter="steam" aria-pressed="false">Steam <em>2</em></button>
       <button class="chip" type="button" data-filter="out" aria-pressed="false"><span class="en i">Out now</span><span class="tr i">Çıktı</span> <em>1</em></button>
-      <button class="chip" type="button" data-filter="soon" aria-pressed="false"><span class="en i">Coming</span><span class="tr i">Yolda</span> <em>2</em></button>
-      <button class="chip" type="button" data-filter="mobile" aria-pressed="false"><span class="en i">Mobile</span><span class="tr i">Mobil</span> <em>1</em></button>
+      <button class="chip" type="button" data-filter="soon" aria-pressed="false"><span class="en i">Coming</span><span class="tr i">Yolda</span> <em>4</em></button>
+      <button class="chip" type="button" data-filter="mobile" aria-pressed="false"><span class="en i">Mobile</span><span class="tr i">Mobil</span> <em>3</em></button>
       <span class="note"><span class="en i">Updated October 2026</span><span class="tr i">Ekim 2026 itibarıyla</span></span>
     </div>
   </div>
@@ -461,6 +465,64 @@ footer{border-top:1px solid var(--line);padding:40px 0}
       </div>
     </article>
 
+    <!-- JELLY TRAILS -->
+    <article class="game g-trails rv" id="jellytrails" data-tags="all soon mobile">
+      <a class="media" href="../jellytrails/" aria-label="Jelly Trails">
+        <img src="../jellytrails/img/banner.webp" alt="" width="1024" height="500" loading="lazy">
+        <span class="sheen" aria-hidden="true"></span>
+      </a>
+      <div class="info">
+        <span class="num">04</span><span class="kind en i">Color-connect puzzle</span><span class="kind tr i">Renk bağlama bulmacası</span>
+        <h2>Jelly Trails</h2>
+        <p class="pitch en"><b>Link the jellies. Fill the board.</b> Drag a glossy trail between two matching jellies, connect every pair and fill every square across 50 sweet worlds.</p>
+        <p class="pitch tr"><b>Jöleleri bağla. Tahtayı doldur.</b> Aynı renkli iki jöle arasında parlak bir yol çiz, tüm çiftleri bağla ve 50 tatlı dünyada her kareyi doldur.</p>
+        <dl class="facts">
+          <div><dt><span class="en i">Status</span><span class="tr i">Durum</span></dt><dd><span class="en i">Release preparation, Google Play soon</span><span class="tr i">Yayın hazırlığında, Google Play yakında</span></dd></div>
+          <div><dt>Platform</dt><dd>Android</dd></div>
+          <div><dt><span class="en i">Levels</span><span class="tr i">Bölüm</span></dt><dd><span class="en i">500 in 50 worlds</span><span class="tr i">50 dünyada 500</span></dd></div>
+          <div><dt><span class="en i">Language</span><span class="tr i">Dil</span></dt><dd><span class="en i">English · Turkish</span><span class="tr i">İngilizce · Türkçe</span></dd></div>
+        </dl>
+        <ul class="hi">
+          <li><span class="en i">Portals, color gates, keyed gates, bridges and wandering blockers.</span><span class="tr i">Portallar, renk kapıları, anahtarlı kapılar, köprüler ve gezen engeller.</span></li>
+          <li><span class="en i">Boss levels with a time limit and a move limit together.</span><span class="tr i">Süre ve hamle sınırını bir arada getiren patron bölümleri.</span></li>
+          <li><span class="en i">No account. Free to play with optional ads and gems.</span><span class="tr i">Hesap yok. Ücretsiz; reklamlar ve elmaslar isteğe bağlı.</span></li>
+        </ul>
+        <div class="acts">
+          <a class="btn p" href="../jellytrails/"><span class="en i">Meet the jellies</span><span class="tr i">Jölelerle tanış</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="../jellytrails/privacy/"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- JELLY PIPES -->
+    <article class="game g-pipes flip rv" id="jellypipes" data-tags="all soon mobile">
+      <a class="media" href="../jellypipes/" aria-label="Jelly Pipes">
+        <img src="../jellypipes/img/banner.webp" alt="" width="1024" height="500" loading="lazy">
+        <span class="sheen" aria-hidden="true"></span>
+      </a>
+      <div class="info">
+        <span class="num">05</span><span class="kind en i">Water pipe puzzle</span><span class="kind tr i">Su borusu bulmacası</span>
+        <h2>Jelly Pipes</h2>
+        <p class="pitch en"><b>Tap, twist and let the water flow.</b> Rotate sparkling glass pipes so real flowing water reaches every flower, then watch each one bloom.</p>
+        <p class="pitch tr"><b>Dokun, çevir, suyu akıt.</b> Işıltılı cam boruları çevir, gerçek akan su her çiçeğe ulaşsın ve her birinin açışını izle.</p>
+        <dl class="facts">
+          <div><dt><span class="en i">Status</span><span class="tr i">Durum</span></dt><dd><span class="en i">Release preparation, Google Play soon</span><span class="tr i">Yayın hazırlığında, Google Play yakında</span></dd></div>
+          <div><dt>Platform</dt><dd>Android</dd></div>
+          <div><dt><span class="en i">Levels</span><span class="tr i">Bölüm</span></dt><dd><span class="en i">500 in 50 worlds</span><span class="tr i">50 dünyada 500</span></dd></div>
+          <div><dt><span class="en i">Language</span><span class="tr i">Dil</span></dt><dd><span class="en i">English · Turkish</span><span class="tr i">İngilizce · Türkçe</span></dd></div>
+        </dl>
+        <ul class="hi">
+          <li><span class="en i">Twelve special pipe mechanics: locks, frozen pipes, valves, pumps and more.</span><span class="tr i">On iki özel boru mekaniği: kilitler, donmuş borular, valfler, pompalar ve daha fazlası.</span></li>
+          <li><span class="en i">Boss levels with a time limit and a move limit together.</span><span class="tr i">Süre ve hamle sınırını bir arada getiren patron bölümleri.</span></li>
+          <li><span class="en i">No account. Free to play with optional ads and gems.</span><span class="tr i">Hesap yok. Ücretsiz; reklamlar ve elmaslar isteğe bağlı.</span></li>
+        </ul>
+        <div class="acts">
+          <a class="btn p" href="../jellypipes/"><span class="en i">Let the water flow</span><span class="tr i">Suyu akıt</span> <span class="arw">&rarr;</span></a>
+          <a class="btn g" href="../jellypipes/privacy/"><span class="en i">Privacy</span><span class="tr i">Gizlilik</span></a>
+        </div>
+      </div>
+    </article>
+
     <p class="empty" id="empty" hidden><span class="en i">Nothing here with that filter yet.</span><span class="tr i">Bu filtreyle henüz bir şey yok.</span></p>
   </div>
 
@@ -474,15 +536,15 @@ footer{border-top:1px solid var(--line);padding:40px 0}
       </div>
       <div class="tablewrap rv">
         <table>
-          <thead><tr><th></th><th class="c-cy">Cyber Academy</th><th class="c-no">Locard</th><th class="c-wa">DayPot</th></tr></thead>
+          <thead><tr><th></th><th class="c-cy">Cyber Academy</th><th class="c-no">Locard</th><th class="c-wa">DayPot</th><th class="c-jt">Jelly Trails</th><th class="c-jp">Jelly Pipes</th></tr></thead>
           <tbody>
-            <tr><th><span class="en i">Status</span><span class="tr i">Durum</span></th><td><span class="dot" style="background:#45D49A"></span><span class="en i">Out now, Early Access</span><span class="tr i">Çıktı, Erken Erişim</span></td><td><span class="dot" style="background:#F08A7E"></span><span class="en i">Q1 2027, wishlist open</span><span class="tr i">2027 Q1, istek listesi açık</span></td><td><span class="dot" style="background:#E3B341"></span><span class="en i">In development</span><span class="tr i">Yapımda</span></td></tr>
-            <tr><th><span class="en i">Genre</span><span class="tr i">Tür</span></th><td><span class="en i">Cybersecurity, strategy</span><span class="tr i">Siber güvenlik, strateji</span></td><td><span class="en i">Detective, mystery</span><span class="tr i">Dedektif, gizem</span></td><td><span class="en i">Kitchen assistant</span><span class="tr i">Mutfak yardımcısı</span></td></tr>
-            <tr><th>Platform</th><td>Windows, macOS, SteamOS + Linux</td><td><span class="en i">Windows (macOS planned)</span><span class="tr i">Windows (macOS planlanıyor)</span></td><td>Android</td></tr>
-            <tr><th><span class="en i">Players</span><span class="tr i">Oyuncu</span></th><td><span class="en i">Single player, online PvP</span><span class="tr i">Tek oyunculu, çevrimiçi PvP</span></td><td><span class="en i">1 to 4, online together</span><span class="tr i">1 ile 4 kişi, çevrimiçi birlikte</span></td><td><span class="en i">Not a game</span><span class="tr i">Oyun değil</span></td></tr>
-            <tr><th><span class="en i">Languages</span><span class="tr i">Diller</span></th><td><span class="en i">25 interface languages</span><span class="tr i">25 arayüz dili</span></td><td><span class="en i">Turkish, English planned</span><span class="tr i">Türkçe, İngilizce planlanıyor</span></td><td>&middot;</td></tr>
-            <tr><th><span class="en i">Internet</span><span class="tr i">İnternet</span></th><td><span class="en i">Required</span><span class="tr i">Gerekli</span></td><td><span class="en i">Online to play together</span><span class="tr i">Birlikte oynamak için çevrimiçi</span></td><td><span class="en i">Not needed</span><span class="tr i">Gerekmez</span></td></tr>
-            <tr><th><span class="en i">Where</span><span class="tr i">Nerede</span></th><td><a class="c-cy" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a></td><td><a class="c-no" href="https://store.steampowered.com/app/5296440/Locard/" target="_blank" rel="noopener">Steam ↗</a></td><td><span class="en i">Google Play, later</span><span class="tr i">Google Play, ileride</span></td></tr>
+            <tr><th><span class="en i">Status</span><span class="tr i">Durum</span></th><td><span class="dot" style="background:#45D49A"></span><span class="en i">Out now, Early Access</span><span class="tr i">Çıktı, Erken Erişim</span></td><td><span class="dot" style="background:#F08A7E"></span><span class="en i">Q1 2027, wishlist open</span><span class="tr i">2027 Q1, istek listesi açık</span></td><td><span class="dot" style="background:#E3B341"></span><span class="en i">In development</span><span class="tr i">Yapımda</span></td><td><span class="dot" style="background:#E3B341"></span><span class="en i">In development</span><span class="tr i">Yapımda</span></td><td><span class="dot" style="background:#E3B341"></span><span class="en i">In development</span><span class="tr i">Yapımda</span></td></tr>
+            <tr><th><span class="en i">Genre</span><span class="tr i">Tür</span></th><td><span class="en i">Cybersecurity, strategy</span><span class="tr i">Siber güvenlik, strateji</span></td><td><span class="en i">Detective, mystery</span><span class="tr i">Dedektif, gizem</span></td><td><span class="en i">Kitchen assistant</span><span class="tr i">Mutfak yardımcısı</span></td><td><span class="en i">Color-connect puzzle</span><span class="tr i">Renk bağlama bulmacası</span></td><td><span class="en i">Water pipe puzzle</span><span class="tr i">Su borusu bulmacası</span></td></tr>
+            <tr><th>Platform</th><td>Windows, macOS, SteamOS + Linux</td><td><span class="en i">Windows (macOS planned)</span><span class="tr i">Windows (macOS planlanıyor)</span></td><td>Android</td><td>Android</td><td>Android</td></tr>
+            <tr><th><span class="en i">Players</span><span class="tr i">Oyuncu</span></th><td><span class="en i">Single player, online PvP</span><span class="tr i">Tek oyunculu, çevrimiçi PvP</span></td><td><span class="en i">1 to 4, online together</span><span class="tr i">1 ile 4 kişi, çevrimiçi birlikte</span></td><td><span class="en i">Not a game</span><span class="tr i">Oyun değil</span></td><td><span class="en i">Single player</span><span class="tr i">Tek oyunculu</span></td><td><span class="en i">Single player</span><span class="tr i">Tek oyunculu</span></td></tr>
+            <tr><th><span class="en i">Languages</span><span class="tr i">Diller</span></th><td><span class="en i">25 interface languages</span><span class="tr i">25 arayüz dili</span></td><td><span class="en i">Turkish, English planned</span><span class="tr i">Türkçe, İngilizce planlanıyor</span></td><td>&middot;</td><td><span class="en i">English, Turkish</span><span class="tr i">İngilizce, Türkçe</span></td><td><span class="en i">English, Turkish</span><span class="tr i">İngilizce, Türkçe</span></td></tr>
+            <tr><th><span class="en i">Internet</span><span class="tr i">İnternet</span></th><td><span class="en i">Required</span><span class="tr i">Gerekli</span></td><td><span class="en i">Online to play together</span><span class="tr i">Birlikte oynamak için çevrimiçi</span></td><td><span class="en i">Not needed</span><span class="tr i">Gerekmez</span></td><td><span class="en i">Optional, for ads and purchases</span><span class="tr i">İsteğe bağlı, reklam ve satın alma için</span></td><td><span class="en i">Optional, for ads and purchases</span><span class="tr i">İsteğe bağlı, reklam ve satın alma için</span></td></tr>
+            <tr><th><span class="en i">Where</span><span class="tr i">Nerede</span></th><td><a class="c-cy" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a></td><td><a class="c-no" href="https://store.steampowered.com/app/5296440/Locard/" target="_blank" rel="noopener">Steam ↗</a></td><td><span class="en i">Google Play, later</span><span class="tr i">Google Play, ileride</span></td><td><span class="en i">Google Play, soon</span><span class="tr i">Google Play, yakında</span></td><td><span class="en i">Google Play, soon</span><span class="tr i">Google Play, yakında</span></td></tr>
           </tbody>
         </table>
       </div>
