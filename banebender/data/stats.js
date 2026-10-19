@@ -1,23 +1,23 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2251,
+ "total": 2286,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 125,
+   "dl": 129,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 37,
+   "dl": 41,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 152,
+   "dl": 153,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -29,13 +29,13 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 16,
+   "dl": 17,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
-   "dl": 99,
+   "dl": 101,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
   },
@@ -59,31 +59,31 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 321,
+   "dl": 322,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 121,
+   "dl": 127,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 194,
+   "dl": 202,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 28,
+   "dl": 29,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 93,
+   "dl": 94,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -95,7 +95,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 187,
+   "dl": 190,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -113,7 +113,7 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 125,
+   "dl": 127,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 101,
+   "dl": 102,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-18T22:57Z",
+ "updated": "2026-10-19T08:43Z",
  "source": "profile",
- "datesAt": "2026-10-18T07:56Z"
+ "datesAt": "2026-10-19T08:43Z"
 };
