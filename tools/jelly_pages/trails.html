@@ -60,8 +60,8 @@ html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
 @keyframes heart{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),-90px) scale(1.2) rotate(var(--rot))}}
 
 /* HERO SAHNESİ: kendiliğinden oynayan bir bulmaca, süzülen yollar, parıldayan jöleler */
-.ribbons{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.ribbons path{fill:none;stroke-width:30;stroke-linecap:round;opacity:.55;stroke-dasharray:260 1100;animation:flowrib var(--t,16s) linear infinite}
+.ribbons{position:absolute;top:0;right:0;width:64%;height:100%;z-index:0;pointer-events:none}
+.ribbons path{fill:none;stroke-width:30;stroke-linecap:round;opacity:.3;stroke-dasharray:260 1100;animation:flowrib var(--t,16s) linear infinite}
 @keyframes flowrib{from{stroke-dashoffset:0}to{stroke-dashoffset:-1360}}
 .stage{position:relative;display:grid;place-items:center;padding:34px 0 24px}
 .reel-card{position:relative;width:min(100%,400px);background:var(--surface);border-radius:38px;padding:16px;box-shadow:var(--shadow-2);border:1px solid var(--line);transform:rotate(2.2deg);pointer-events:none;animation:floaty 7s ease-in-out infinite}
@@ -94,9 +94,9 @@ html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
 .actions .btn{padding:12px 22px;font-size:15px}
 .board-card{position:relative;background:var(--surface);border-radius:36px;padding:22px;box-shadow:var(--shadow-2);border:1px solid var(--line);max-width:520px;margin:0 auto;width:100%}
 .board-card::before{content:"";position:absolute;inset:-26px;z-index:-1;border-radius:60px;background:radial-gradient(circle at 30% 20%,rgba(var(--pop-rgb),.22),transparent 60%),radial-gradient(circle at 80% 90%,rgba(var(--accent-rgb),.22),transparent 60%)}
-.board{position:relative;display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0;touch-action:none;user-select:none;-webkit-user-select:none;aspect-ratio:1;border-radius:22px;overflow:hidden;background:var(--bg-soft)}
-.cell{position:relative;display:grid;place-items:center;box-shadow:inset 0 0 0 3px var(--surface);border-radius:14px;background:var(--bg-soft)}
-.cell img{position:relative;z-index:3;width:84%;height:auto;pointer-events:none;transition:transform .3s var(--ease)}
+.board{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));grid-template-rows:repeat(var(--n),minmax(0,1fr));gap:0;touch-action:none;user-select:none;-webkit-user-select:none;aspect-ratio:1;border-radius:22px;overflow:hidden;background:var(--bg-soft)}
+.cell{position:relative;min-width:0;min-height:0;display:block;box-shadow:inset 0 0 0 3px var(--surface);border-radius:14px;background:var(--bg-soft)}
+.cell img{position:absolute;left:8%;top:8%;z-index:3;width:84%;height:auto;pointer-events:none;transition:transform .3s var(--ease)}
 .cell img.ok{animation:hop .55s var(--ease)}
 @keyframes hop{30%{transform:translateY(-14%) scale(1.1)}60%{transform:scale(1.08,.9)}100%{transform:none}}
 .board svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
@@ -130,7 +130,7 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 .sticker:nth-child(1){transform:rotate(-1.6deg)}.sticker:nth-child(2){transform:rotate(1.2deg) translateY(10px)}.sticker:nth-child(3){transform:rotate(-.8deg)}
 .sticker:hover{transform:rotate(0) translateY(-8px)}
 .sticker .row{display:flex;gap:8px;align-items:center;min-height:76px;margin-bottom:16px}
-.sticker .row img{height:70px;width:auto;object-fit:contain}
+.sticker .row img{height:70px;width:auto;max-width:30%;object-fit:contain}
 .sticker h4{font-size:22px;margin-bottom:8px}
 .sticker p{color:var(--ink-2);font-size:16px}
 .starbtn{display:flex;gap:2px}
@@ -267,7 +267,7 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
           <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. Kendi hızında öğren, kimse bakmıyor.</p>
         </div>
         <div class="sticker rv">
-          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/ui_boss_badge.webp" alt=""></div>
+          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""></div>
           <h4><span class="en i">Boss levels</span><span class="tr i">Patron bölümleri</span></h4>
           <p class="en">Boss levels bring a clock and a move limit together, for the moments you want a real challenge.</p>
           <p class="tr">Patron bölümleri süre ve hamle sınırını bir arada getirir; gerçek bir meydan okuma istediğin anlar için.</p>
