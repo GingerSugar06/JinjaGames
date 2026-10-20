@@ -1,23 +1,23 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2458,
+ "total": 2493,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 133,
+   "dl": 134,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 61,
+   "dl": 65,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 155,
+   "dl": 158,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -47,7 +47,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 231,
+   "dl": 232,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -59,25 +59,25 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 333,
+   "dl": 337,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 143,
+   "dl": 146,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 241,
+   "dl": 251,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 32,
+   "dl": 34,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -95,13 +95,13 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 206,
+   "dl": 210,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 119,
+   "dl": 120,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -113,7 +113,7 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 133,
+   "dl": 134,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-20T14:14Z",
+ "updated": "2026-10-20T19:07Z",
  "source": "profile",
  "datesAt": "2026-10-20T08:23Z"
 };
