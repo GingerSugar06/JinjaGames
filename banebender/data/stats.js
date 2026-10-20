@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2493,
+ "total": 2510,
  "projects": 21,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 65,
+   "dl": 68,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 18,
+   "dl": 19,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
@@ -53,25 +53,25 @@ window.BB_STATS={
   },
   "gilded-gambit": {
    "name": "Gilded Gambit",
-   "dl": 27,
+   "dl": 28,
    "created": "2026-10-11T12:41Z",
    "updated": "2026-10-11T12:41Z"
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 337,
+   "dl": 338,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 146,
+   "dl": 149,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 251,
+   "dl": 253,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,7 +95,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 210,
+   "dl": 216,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-20T19:07Z",
+ "updated": "2026-10-20T23:45Z",
  "source": "profile",
  "datesAt": "2026-10-20T08:23Z"
 };
