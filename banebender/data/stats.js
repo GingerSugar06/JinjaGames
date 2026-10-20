@@ -1,17 +1,17 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2332,
+ "total": 2409,
  "projects": 21,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 132,
+   "dl": 133,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-03T21:46Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 43,
+   "dl": 50,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -23,67 +23,67 @@ window.BB_STATS={
   },
   "chest-hauler": {
    "name": "Chest Hauler",
-   "dl": 34,
+   "dl": 37,
    "created": "2026-10-05T11:28Z",
    "updated": "2026-10-05T11:28Z"
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 17,
+   "dl": 18,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
-   "dl": 101,
+   "dl": 102,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 24,
+   "dl": 25,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 227,
+   "dl": 228,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
   "gilded-gambit": {
    "name": "Gilded Gambit",
-   "dl": 26,
+   "dl": 27,
    "created": "2026-10-11T12:41Z",
    "updated": "2026-10-11T12:41Z"
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 329,
+   "dl": 332,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 134,
+   "dl": 139,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 210,
+   "dl": 225,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 29,
+   "dl": 30,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 95,
+   "dl": 106,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -95,37 +95,37 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 195,
+   "dl": 204,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 118,
+   "dl": 119,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
   "towers": {
    "name": "Towers",
-   "dl": 73,
+   "dl": 82,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 129,
+   "dl": 131,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
   "variantide": {
    "name": "Variantide",
-   "dl": 18,
+   "dl": 21,
    "created": "2026-10-11T12:32Z",
    "updated": "2026-10-11T12:32Z"
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 102,
+   "dl": 104,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
@@ -133,7 +133,7 @@ window.BB_STATS={
  "unlisted": [
   "board-games"
  ],
- "updated": "2026-10-19T16:24Z",
+ "updated": "2026-10-20T00:12Z",
  "source": "profile",
  "datesAt": "2026-10-19T08:43Z"
 };
