@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2584,
+ "total": 2618,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 75,
+   "dl": 86,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 161,
+   "dl": 162,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 233,
+   "dl": 235,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,25 +65,25 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 345,
+   "dl": 348,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 152,
+   "dl": 153,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 274,
+   "dl": 282,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 35,
+   "dl": 37,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -95,19 +95,19 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 139,
+   "dl": 142,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 229,
+   "dl": 230,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 127,
+   "dl": 129,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -137,7 +137,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-21T19:11Z",
+ "updated": "2026-10-21T23:57Z",
  "source": "profile",
  "datesAt": "2026-10-21T14:26Z"
 };
