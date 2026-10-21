@@ -264,6 +264,12 @@ section.blk{padding:112px 0;position:relative}
    Üç proje yan yana eşit kart değil: yan yana üç panel, üzerine gelinen
    açılır ve kendi dünyasını gösterir, diğerleri dikey birer şeride çekilir.
    Telefonda paneller alt alta ve hepsi açık. */
+.wgroup{margin-top:52px}
+.wgroup:first-of-type{margin-top:0}
+.gh{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.gh .t{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em}
+.gh .sub{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.gh i{flex:1;height:1px;background:var(--line);align-self:center}
 .worlds{display:flex;gap:12px;height:clamp(500px,64vh,600px)}
 .wp{--accent:var(--brand);position:relative;flex:1 1 0;min-width:0;border-radius:6px;overflow:hidden;cursor:pointer;isolation:isolate;outline:none;transition:flex-grow .75s var(--ease),box-shadow .5s var(--ease);background:#0d0b0c}
 .wp.on{flex-grow:3.6;cursor:default;box-shadow:var(--shadow-2)}
@@ -628,76 +634,85 @@ html,body{overflow-x:hidden;overflow-x:clip}
         </div>
       </div>
 
-      <div class="worlds" id="worldsrow">
-        <!-- 01 CYBER ACADEMY -->
-        <article id="cyber" class="wp g-cyber on rv" tabindex="0" aria-label="Cyber Academy">
-          <div class="wp-media"><video class="stagevid" data-src="cyberacademy/media/darknet-loop.mp4" muted loop playsinline preload="none" poster="cyberacademy/img/shot-attack-t.webp" aria-hidden="true"></video></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">01</span><span class="v">Cyber Academy</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">01 · Cybersecurity game · Out now</span><span class="tr i">01 · Siber güvenlik oyunu · Çıktı</span></span>
-            <h3>Cyber Academy</h3>
-            <p class="en">Learn real security by doing it inside a virtual OS, then step into the Dark Net to attack, defend and trace other players.</p>
-            <p class="tr">Gerçek güvenliği sanal bir işletim sisteminin içinde yaparak öğren, sonra diğer oyunculara saldırmak, savunmak ve iz sürmek için Karanlık Ağ'a gir.</p>
-            <div class="tags"><span>Windows · macOS · Linux</span><span class="en i">25 languages</span><span class="tr i">25 dil</span><span><span class="en i">Steam Early Access</span><span class="tr i">Steam Erken Erişim</span></span></div>
-            <div class="links"><a class="go" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span aria-hidden="true">&rarr;</span></a><a class="ext" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a></div>
-          </div>
-        </article>
+      <div class="wgroup rv">
+        <h3 class="gh"><span class="t"><span class="en i">PC games</span><span class="tr i">PC oyunları</span></span><span class="sub"><span class="en i">Windows · macOS · Linux · Steam</span><span class="tr i">Windows · macOS · Linux · Steam</span></span><i aria-hidden="true"></i></h3>
+        <div class="worlds" id="worldsrow">
+  <!-- 01 CYBER ACADEMY -->
+          <article id="cyber" class="wp g-cyber on rv" tabindex="0" aria-label="Cyber Academy">
+            <div class="wp-media"><video class="stagevid" data-src="cyberacademy/media/darknet-loop.mp4" muted loop playsinline preload="none" poster="cyberacademy/img/shot-attack-t.webp" aria-hidden="true"></video></div>
+            <div class="wp-rail" aria-hidden="true"><span class="n">01</span><span class="v">Cyber Academy</span><span class="plus">+</span></div>
+            <div class="wp-body">
+              <span class="kind"><span class="en i">01 · Cybersecurity game · Out now</span><span class="tr i">01 · Siber güvenlik oyunu · Çıktı</span></span>
+              <h3>Cyber Academy</h3>
+              <p class="en">Learn real security by doing it inside a virtual OS, then step into the Dark Net to attack, defend and trace other players.</p>
+              <p class="tr">Gerçek güvenliği sanal bir işletim sisteminin içinde yaparak öğren, sonra diğer oyunculara saldırmak, savunmak ve iz sürmek için Karanlık Ağ'a gir.</p>
+              <div class="tags"><span>Windows · macOS · Linux</span><span class="en i">25 languages</span><span class="tr i">25 dil</span><span><span class="en i">Steam Early Access</span><span class="tr i">Steam Erken Erişim</span></span></div>
+              <div class="links"><a class="go" href="cyberacademy/"><span class="en i">Enter the academy</span><span class="tr i">Akademiye gir</span> <span aria-hidden="true">&rarr;</span></a><a class="ext" href="https://store.steampowered.com/app/5067820/Cyber_Academy/" target="_blank" rel="noopener">Steam ↗</a></div>
+            </div>
+          </article>
 
-        <!-- 02 LOCARD -->
-        <article id="locard" class="wp g-noir rv" tabindex="0" aria-label="Locard">
-          <div class="wp-media"><img src="locard/img/hero-sm.webp" width="960" height="550" alt="" loading="lazy" decoding="async" /><video class="stagevid" data-src="locard/media/locard-loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
-          <span class="nmark" aria-hidden="true">LOCARD</span>
-          <div class="wp-rail" aria-hidden="true"><span class="n">02</span><span class="v">Locard</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">02 · Detective game · Q1 2027</span><span class="tr i">02 · Dedektif oyunu · 2027 Q1</span></span>
-            <h3>Locard</h3>
-            <p class="en">A first person case in the city of Meridian, solved on evidence, not hunches. Alone or with up to three friends.</p>
-            <p class="tr">Meridian kentinde, önseziyle değil delille çözülen birinci şahıs bir dosya. Tek başına ya da üç arkadaşınla.</p>
-            <div class="tags"><span>Windows</span><span class="en i">1 to 4 players</span><span class="tr i">1 ile 4 oyuncu</span><span class="en i">Early Access</span><span class="tr i">Erken Erişim</span></div>
-            <div class="links"><a class="go" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span aria-hidden="true">&rarr;</span></a><a class="ext sx-live" data-steam-link href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesi</span> ↗</a></div>
-          </div>
-        </article>
+  <!-- 02 LOCARD -->
+          <article id="locard" class="wp g-noir rv" tabindex="0" aria-label="Locard">
+            <div class="wp-media"><img src="locard/img/hero-sm.webp" width="960" height="550" alt="" loading="lazy" decoding="async" /><video class="stagevid" data-src="locard/media/locard-loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+            <span class="nmark" aria-hidden="true">LOCARD</span>
+            <div class="wp-rail" aria-hidden="true"><span class="n">02</span><span class="v">Locard</span><span class="plus">+</span></div>
+            <div class="wp-body">
+              <span class="kind"><span class="en i">02 · Detective game · Q1 2027</span><span class="tr i">02 · Dedektif oyunu · 2027 Q1</span></span>
+              <h3>Locard</h3>
+              <p class="en">A first person case in the city of Meridian, solved on evidence, not hunches. Alone or with up to three friends.</p>
+              <p class="tr">Meridian kentinde, önseziyle değil delille çözülen birinci şahıs bir dosya. Tek başına ya da üç arkadaşınla.</p>
+              <div class="tags"><span>Windows</span><span class="en i">1 to 4 players</span><span class="tr i">1 ile 4 oyuncu</span><span class="en i">Early Access</span><span class="tr i">Erken Erişim</span></div>
+              <div class="links"><a class="go" href="locard/"><span class="en i">Open the case file</span><span class="tr i">Dosyayı aç</span> <span aria-hidden="true">&rarr;</span></a><a class="ext sx-live" data-steam-link href="#"><span class="en i">Wishlist on Steam</span><span class="tr i">Steam'de istek listesi</span> ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
 
-        <!-- 03 JELLY TRAILS -->
-        <article id="jellytrails" class="wp g-trails rv" tabindex="0" aria-label="Jelly Trails">
-          <div class="wp-media"><img src="jellytrails/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">03</span><span class="v">Jelly Trails</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">03 · Color-connect puzzle · Android</span><span class="tr i">03 · Renk bağlama bulmacası · Android</span></span>
-            <h3>Jelly Trails</h3>
-            <p class="en">Link matching jellies with glossy trails and fill every square. 500 handcrafted levels across 50 sweet worlds.</p>
-            <p class="tr">Aynı renkli jöleleri parlak yollarla bağla ve her kareyi doldur. 50 tatlı dünyada özenle hazırlanmış 500 bölüm.</p>
-            <div class="tags"><span>Android</span><span class="en i">500 levels</span><span class="tr i">500 bölüm</span><span class="en i">Coming to Google Play</span><span class="tr i">Google Play yakında</span></div>
-            <div class="links"><a class="go" href="jellytrails/"><span class="en i">Meet the jellies</span><span class="tr i">Jölelerle tanış</span> <span aria-hidden="true">&rarr;</span></a></div>
-          </div>
-        </article>
-        <!-- 04 JELLY PIPES -->
-        <article id="jellypipes" class="wp g-pipes rv" tabindex="0" aria-label="Jelly Pipes">
-          <div class="wp-media"><img src="jellypipes/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">04</span><span class="v">Jelly Pipes</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">04 · Water pipe puzzle · Android</span><span class="tr i">04 · Su borusu bulmacası · Android</span></span>
-            <h3>Jelly Pipes</h3>
-            <p class="en">Rotate glassy pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 refreshing worlds.</p>
-            <p class="tr">Cam boruları çevir, gerçek akan su her çiçeğe ulaşsın. 50 ferahlatıcı dünyada özenle hazırlanmış 500 bölüm.</p>
-            <div class="tags"><span>Android</span><span class="en i">500 levels</span><span class="tr i">500 bölüm</span><span class="en i">Coming to Google Play</span><span class="tr i">Google Play yakında</span></div>
-            <div class="links"><a class="go" href="jellypipes/"><span class="en i">Let the water flow</span><span class="tr i">Suyu akıt</span> <span aria-hidden="true">&rarr;</span></a></div>
-          </div>
-        </article>
+      <div class="wgroup rv">
+        <h3 class="gh"><span class="t"><span class="en i">Mobile</span><span class="tr i">Mobil</span></span><span class="sub"><span class="en i">Android · Google Play</span><span class="tr i">Android · Google Play</span></span><i aria-hidden="true"></i></h3>
+        <div class="worlds" id="worldsrow-mobile">
+  <!-- 01 JELLY TRAILS -->
+          <article id="jellytrails" class="wp g-trails on rv" tabindex="0" aria-label="Jelly Trails">
+            <div class="wp-media"><img src="jellytrails/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
+            <div class="wp-rail" aria-hidden="true"><span class="n">01</span><span class="v">Jelly Trails</span><span class="plus">+</span></div>
+            <div class="wp-body">
+              <span class="kind"><span class="en i">01 · Color-connect puzzle · Android</span><span class="tr i">01 · Renk bağlama bulmacası · Android</span></span>
+              <h3>Jelly Trails</h3>
+              <p class="en">Link matching jellies with glossy trails and fill every square. 500 handcrafted levels across 50 sweet worlds.</p>
+              <p class="tr">Aynı renkli jöleleri parlak yollarla bağla ve her kareyi doldur. 50 tatlı dünyada özenle hazırlanmış 500 bölüm.</p>
+              <div class="tags"><span>Android</span><span class="en i">500 levels</span><span class="tr i">500 bölüm</span><span class="en i">Coming to Google Play</span><span class="tr i">Google Play yakında</span></div>
+              <div class="links"><a class="go" href="jellytrails/"><span class="en i">Meet the jellies</span><span class="tr i">Jölelerle tanış</span> <span aria-hidden="true">&rarr;</span></a></div>
+            </div>
+          </article>
 
-        <!-- 05 DAYPOT -->
-        <article id="daypot" class="wp g-warm rv" tabindex="0" aria-label="DayPot">
-          <div class="wp-media"><span class="steam" aria-hidden="true"><i></i><i></i><i></i></span><img class="pot" src="daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy"></div>
-          <div class="wp-rail" aria-hidden="true"><span class="n">05</span><span class="v">DayPot</span><span class="plus">+</span></div>
-          <div class="wp-body">
-            <span class="kind"><span class="en i">05 · Kitchen assistant · Android</span><span class="tr i">05 · Mutfak yardımcısı · Android</span></span>
-            <h3>DayPot</h3>
-            <p class="en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
-            <p class="tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
-            <div class="tags"><span>Android</span><span class="en i">250+ recipes</span><span class="tr i">250+ tarif</span><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
-            <div class="links"><a class="go" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span aria-hidden="true">&rarr;</span></a></div>
-          </div>
-        </article>
+  <!-- 02 JELLY PIPES -->
+          <article id="jellypipes" class="wp g-pipes rv" tabindex="0" aria-label="Jelly Pipes">
+            <div class="wp-media"><img src="jellypipes/img/banner.webp" alt="" width="1024" height="500" loading="lazy"></div>
+            <div class="wp-rail" aria-hidden="true"><span class="n">02</span><span class="v">Jelly Pipes</span><span class="plus">+</span></div>
+            <div class="wp-body">
+              <span class="kind"><span class="en i">02 · Water pipe puzzle · Android</span><span class="tr i">02 · Su borusu bulmacası · Android</span></span>
+              <h3>Jelly Pipes</h3>
+              <p class="en">Rotate glassy pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 refreshing worlds.</p>
+              <p class="tr">Cam boruları çevir, gerçek akan su her çiçeğe ulaşsın. 50 ferahlatıcı dünyada özenle hazırlanmış 500 bölüm.</p>
+              <div class="tags"><span>Android</span><span class="en i">500 levels</span><span class="tr i">500 bölüm</span><span class="en i">Coming to Google Play</span><span class="tr i">Google Play yakında</span></div>
+              <div class="links"><a class="go" href="jellypipes/"><span class="en i">Let the water flow</span><span class="tr i">Suyu akıt</span> <span aria-hidden="true">&rarr;</span></a></div>
+            </div>
+          </article>
+
+  <!-- 03 DAYPOT -->
+          <article id="daypot" class="wp g-warm rv" tabindex="0" aria-label="DayPot">
+            <div class="wp-media"><span class="steam" aria-hidden="true"><i></i><i></i><i></i></span><img class="pot" src="daypot/img/daypot-icon.png" alt="" width="512" height="512" loading="lazy"></div>
+            <div class="wp-rail" aria-hidden="true"><span class="n">03</span><span class="v">DayPot</span><span class="plus">+</span></div>
+            <div class="wp-body">
+              <span class="kind"><span class="en i">03 · Kitchen assistant · Android</span><span class="tr i">03 · Mutfak yardımcısı · Android</span></span>
+              <h3>DayPot</h3>
+              <p class="en">What should I cook today? Mark what is in your kitchen and see what you can make right now. Offline, no account, no ads.</p>
+              <p class="tr">Bugün ne pişirsem? Dolabındakini işaretle, şu anda ne yapabileceğini gör. İnternetsiz, hesapsız, reklamsız.</p>
+              <div class="tags"><span>Android</span><span class="en i">250+ recipes</span><span class="tr i">250+ tarif</span><span class="en i">In development</span><span class="tr i">Yapımda</span></div>
+              <div class="links"><a class="go" href="daypot/"><span class="en i">Step into the kitchen</span><span class="tr i">Mutfağa gir</span> <span aria-hidden="true">&rarr;</span></a></div>
+            </div>
+          </article>
+        </div>
       </div>
       <div class="allgames rv">
         <p class="en">Platforms, release status, languages and what each one is really for, side by side.</p>
@@ -1003,14 +1018,16 @@ html,body{overflow-x:hidden;overflow-x:clip}
 <script>
 /* Dünyalar: üzerine gelinen ya da odaklanan panel açılır. */
 (function(){
-  var row=document.getElementById('worldsrow'); if(!row) return;
-  var panels=[].slice.call(row.querySelectorAll('.wp'));
+  var rows=[].slice.call(document.querySelectorAll('.worlds')); if(!rows.length) return;
   var narrow=function(){ return window.matchMedia('(max-width:680px)').matches; };
-  function open(p){ panels.forEach(function(x){ x.classList.toggle('on',x===p); }); var v=p.querySelector('video'); if(v&&v.dataset.src&&!v.src){ v.src=v.dataset.src; } if(v){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } }
-  panels.forEach(function(p){
-    p.addEventListener('mouseenter',function(){ if(!narrow()) open(p); });
-    p.addEventListener('focusin',function(){ if(!narrow()) open(p); });
-    p.addEventListener('click',function(e){ if(!p.classList.contains('on')){ e.preventDefault(); open(p); } });
+  rows.forEach(function(row){
+    var panels=[].slice.call(row.querySelectorAll('.wp'));
+    function open(p){ panels.forEach(function(x){ x.classList.toggle('on',x===p); }); var v=p.querySelector('video'); if(v&&v.dataset.src&&!v.src){ v.src=v.dataset.src; } if(v){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } }
+    panels.forEach(function(p){
+      p.addEventListener('mouseenter',function(){ if(!narrow()) open(p); });
+      p.addEventListener('focusin',function(){ if(!narrow()) open(p); });
+      p.addEventListener('click',function(e){ if(!p.classList.contains('on')){ e.preventDefault(); open(p); } });
+    });
   });
   /* başlık harfleri tek tek oynasın */
   [].slice.call(document.querySelectorAll('.brandword .w1,.brandword .w2')).forEach(function(w){

@@ -363,12 +363,21 @@
       toc.push({ id: gid, title: gt });
     }
 
+    /* CurseForge yorumları: data/comments.js (GitHub Actions ile 6 saatte bir) */
+    var cms = (window.BB_COMMENTS || {})[m.slug] || [], cid = 's' + (n++), ct = { en: 'Comments from CurseForge', tr: 'CurseForge yorumları' };
+    secs += '<h2 class="blockh" id="' + cid + '">' + bi(ct) + '</h2>' + (cms.length ? '<div class="cmts">' + cms.slice(0, 20).map(function (c) {
+      var dt = c.d ? fmtDate(c.d) : null;
+      return '<div class="cmt"><div class="who"><b>' + esc(c.n) + '</b>' + (c.p ? '<em>' + bi({ en: 'Pinned', tr: 'Sabit' }) + '</em>' : '') + (dt ? '<span>' + bi(dt) + '</span>' : '') + '</div><p>' + esc(c.t) + '</p></div>';
+    }).join('') + '</div>' : '<p>' + bi({ en: 'No comments yet.', tr: 'Henüz yorum yok.' }) + '</p>') +
+      '<p class="more"><a class="cflink" href="' + esc(g.url || PROF.curseforge) + '/comments" target="_blank" rel="noopener">' + bi({ en: 'Join the conversation on CurseForge', tr: 'Sohbete CurseForge’da katıl' }) + ' ↗</a></p>';
+    toc.push({ id: cid, title: ct });
+
     var file = fmtDate(g.fileDate || m.released);
-    var langs = (g.langs || []).length > 2 ? { en: g.langs.length + ' languages', tr: g.langs.length + ' dil' } : (g.langs || []).length === 2 ? { en: 'English, Turkish', tr: 'İngilizce, Türkçe' } : { en: 'No text to translate', tr: 'Çevrilecek metin yok' };
+    var langs = (g.langs || []).length > 2 ? { en: g.langs.length + ' languages', tr: g.langs.length + ' dil' } : (g.langs || []).length === 0 ? '—' : (g.langs || []).length === 2 ? { en: 'English, Turkish', tr: 'İngilizce, Türkçe' } : { en: 'No text to translate', tr: 'Çevrilecek metin yok' };
     var deps = (g.deps || []).length ? g.deps.join(', ') : { en: 'None', tr: 'Yok' };
     var info = [
       [{ en: 'Minecraft', tr: 'Minecraft' }, g.mc || '1.20.1'], [{ en: 'Loader', tr: 'Yükleyici' }, g.loader || 'Forge'],
-      [{ en: 'Version', tr: 'Sürüm' }, g.version || '1.0.0'], [{ en: 'Mod ID', tr: 'Mod kimliği' }, g.modid],
+      [{ en: 'Version', tr: 'Sürüm' }, g.version || '1.0.0'], [{ en: 'Mod ID', tr: 'Mod kimliği' }, g.modid || '—'],
       [{ en: 'Side', tr: 'Taraf' }, { en: 'Client + server', tr: 'İstemci + sunucu' }], [{ en: 'Requires', tr: 'Gerektirir' }, deps],
       [{ en: 'Languages', tr: 'Diller' }, langs],
       [{ en: 'Latest file', tr: 'Son dosya' }, file], [{ en: 'Downloads', tr: 'İndirme' }, { en: m.dl + ' (' + ASOF.en + ')', tr: m.dl + ' (' + ASOF.tr + ')' }]

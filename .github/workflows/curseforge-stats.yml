@@ -1,4 +1,4 @@
-# BaneBender wikisinin CurseForge indirme sayılarını ve tarihlerini 6 saatte bir günceller.
+# BaneBender wikisinin CurseForge indirme sayılarını, tarihlerini ve modların yorumlarını 6 saatte bir günceller.
 # 21:00, 03:00, 09:00, 15:00 UTC = Türkiye saatiyle 00.00, 06.00, 12.00, 18.00. Yeni bir mod bulunursa bir issue açar; o modun
 # wiki sayfası elle yazılır (tools/update_stats.py yalnızca sayıları değiştirir).
 name: CurseForge sayıları
@@ -38,11 +38,11 @@ jobs:
         run: |
           git config user.name "jinjagames-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add banebender/data/stats.js
+          git add banebender/data/stats.js banebender/data/comments.js
           if git diff --cached --quiet; then
             echo "Değişiklik yok."
           else
-            git commit -m "BaneBender: CurseForge indirme sayıları güncellendi"
+            git commit -m "BaneBender: CurseForge sayıları ve yorumları güncellendi"
             git pull --rebase --autostash
             git push
           fi

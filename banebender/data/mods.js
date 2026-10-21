@@ -1,7 +1,7 @@
 /* BaneBender mod wikisi: elle yazılmış içerik.
    Kaynak: her modun CurseForge açıklaması ve mod dosyalarının kendisi (dil dosyaları, dokular).
    Sayılar ve adlar oradan alındı; açıklamada olmayan bir özellik buraya yazılmaz.
-   İndirme sayıları 12 Ekim 2026 akşamı CurseForge profilinden (20 proje). */
+   İndirme sayıları GitHub Actions ile CurseForge’dan güncellenir (data/stats.js). */
 window.BB_PROFILE = {
   handle: 'BaneBender',
   curseforge: 'https://www.curseforge.com/members/banebender/projects',
@@ -535,6 +535,67 @@ window.BB_MODS = [
   },
   sections: [
     { h: { en: 'That is the whole mod', tr: 'Modun tamamı bu' }, p: { en: 'No new items, no new blocks, no configuration: just four cooking recipes that work with everything leather already works with.', tr: 'Yeni eşya yok, yeni blok yok, ayar yok: derinin zaten işe yaradığı her şeyle çalışan dört pişirme tarifi.' }, cook: true }
+  ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'board-games', cats: ['utility'], dl: 74, released: '2026-10-16',
+  tag: { en: 'Twenty-five playable tabletop games, with AI opponents and village game masters.', tr: 'Yirmi beş oynanabilir masa oyunu; yapay zekâ rakipler ve köy oyun ustalarıyla.' },
+  lede: {
+    en: 'Board Games turns Minecraft into a game night. Craft a game table in 15 wood and metal styles, right-click it, and pick from 25 fully playable games with real rules.',
+    tr: 'Board Games, Minecraft\u2019ı bir oyun gecesine çeviriyor. 15 ahşap ve metal tarzında bir oyun masası üret, sağ tıkla ve gerçek kurallarıyla tam oynanabilir 25 oyundan birini seç.'
+  },
+  sections: [
+    { h: { en: 'The games', tr: 'Oyunlar' }, p: {
+      en: 'Chess, draughts, Go, backgammon, shogi, xiangqi, Ludo, dominoes, dice combos, Shut the Box, mahjong, poker, Jenga, Mastermind, tangram, tic-tac-toe, Connect Four and Reversi. Then a colour-matching card race, an exploding-creeper card game, a team word game, a hidden-roles village mystery, a crossword tile game, a co-op dungeon adventure and a kingdom builder.',
+      tr: 'Satranç, dama, Go, tavla, shogi, xiangqi, Ludo, domino, zar kombinasyonları, Shut the Box, mahjong, poker, Jenga, Mastermind, tangram, üç taş, Connect Four ve Reversi. Ardından renk eşleştirmeli bir kart yarışı, patlayan creeper kart oyunu, takımlı bir kelime oyunu, gizli rollü bir köy gizemi, çapraz bulmaca taşı oyunu, kooperatif bir zindan macerası ve bir krallık kurma oyunu.' } },
+    { h: { en: 'Who you play with', tr: 'Kiminle oynarsın' }, list: [
+      { en: 'AI opponents at easy, normal and hard levels, with real search for chess, shogi and xiangqi.', tr: 'Kolay, normal ve zor seviyede yapay zekâ rakipler; satranç, shogi ve xiangqi için gerçek arama ile.' },
+      { en: 'Multiplayer tables: invite friends, open seats, and an AI takes over if someone drops out.', tr: 'Çok oyunculu masalar: arkadaşlarını davet et, koltukları açık bırak; biri düşerse yerine yapay zekâ geçer.' },
+      { en: 'Game Master villagers who sit at tables in villages and play you.', tr: 'Köylerdeki masalara oturup seninle oynayan Oyun Ustası köylüler.' }
+    ] },
+    { h: { en: 'Fair play and progress', tr: 'Adil oyun ve ilerleme' }, list: [
+      { en: 'Server-side rules: moves, dice, shuffles and hidden cards are validated and kept on the server.', tr: 'Kurallar sunucuda işler: hamleler, zarlar, karıştırmalar ve gizli kartlar sunucuda doğrulanır ve saklanır.' },
+      { en: 'A game in progress survives restarts and can be carried with the table.', tr: 'Süren bir oyun yeniden başlatmalardan etkilenmez ve masayla birlikte taşınabilir.' },
+      { en: 'Win games to earn tokens, then spend them on board themes, piece skins and victory effects.', tr: 'Oyun kazanıp jeton topla, sonra tahta temalarına, taş görünümlerine ve zafer efektlerine harca.' },
+      { en: 'English and Turkish, with in-game rules for every game.', tr: 'İngilizce ve Türkçe; her oyunun kuralları oyunun içinde.' }
+    ] }
+  ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'every-last-bite', cats: ['utility'], dl: 4, released: '2026-10-21',
+  tag: { en: 'Cook across eight world kitchens and eat every meal bite by bite.', tr: 'Sekiz dünya mutfağında pişir, her yemeği lokma lokma ye.' },
+  lede: {
+    en: 'Food in Minecraft is usually a single click. Here it is a meal: you hold the plate in both hands, take a spoonful, a slice or a piece at a time, and the dish gets smaller as you eat. On the last bite you scrape the bowl clean, and other players see you lifting the food to your mouth.',
+    tr: 'Minecraft\u2019ta yemek genelde tek bir tıktır. Burada bir öğündür: tabağı iki elinle tutarsın, her seferinde bir kaşık, bir dilim ya da bir parça alırsın ve yedikçe tabak küçülür. Son lokmada kâseyi sıyırırsın; diğer oyuncular da yemeği ağzına götürdüğünü görür.'
+  },
+  sections: [
+    { h: { en: 'Eight kitchens, 450+ foods', tr: 'Sekiz mutfak, 450+ yemek' }, p: {
+      en: 'Turkish, Italian, Spanish, Japanese, Vietnamese, Chinese, Indian and Mexican cooking, plus home meals and a bakery. Menemen and İskender, pizza from the oven, ramen with chopsticks, tacos, butter chicken, dumplings from a bamboo steamer. Every dish is a real 3D model, served on the plate of its own kitchen.',
+      tr: 'Türk, İtalyan, İspanyol, Japon, Vietnam, Çin, Hint ve Meksika mutfakları; üstüne ev yemekleri ve bir fırın. Menemen ve İskender, fırından pizza, çubukla ramen, taco, butter chicken, bambu buharlı pişiricide mantı gibi dumplingler. Her yemek gerçek bir 3D model ve kendi mutfağının tabağında servis edilir.' } },
+    { h: { en: 'A proper kitchen', tr: 'Gerçek bir mutfak' }, list: [
+      { en: 'Cooking Pot on a stove or campfire, with the broth taking the colour of what is in it.', tr: 'Ocakta ya da kamp ateşinde Pişirme Kazanı; çorba içindekilerin rengini alır.' },
+      { en: 'Cutting Board: look down at the board and cut the food stroke by stroke. Sneak and scroll to switch your knife between slices and dice.', tr: 'Kesme Tahtası: tahtaya bak ve yemeği vuruş vuruş doğra. Çömel ve kaydır; bıçağın dilim ile küp arasında değişir.' },
+      { en: 'Oven, Tandoor, Wok, Bamboo Steamer, Skillet and Charcoal Grill, each with its own recipes.', tr: 'Fırın, Tandır, Wok, Bambu Buharlı Pişirici, Tava ve Kömür Izgara; her birinin kendi tarifleri var.' },
+      { en: 'Samovar and Cezve for Turkish tea and coffee.', tr: 'Türk çayı ve kahvesi için Semaver ve Cezve.' },
+      { en: 'Pickling Barrel for pickles, olives and aged cheese.', tr: 'Turşu, zeytin ve olgunlaşmış peynir için Turşu Fıçısı.' },
+      { en: 'Butter Churn, kaymak, comb honey and yogurt.', tr: 'Tereyağı Yayığı, kaymak, petek bal ve yoğurt.' },
+      { en: 'A Fridge: food goes stale and spoils over time, but not in here.', tr: 'Buzdolabı: yemekler zamanla bayatlar ve bozulur, ama burada bozulmaz.' }
+    ] },
+    { h: { en: 'Grow it yourself', tr: 'Kendin yetiştir' }, p: {
+      en: 'New crops and fruit trees: tomatoes, peppers, eggplant, rice, tea, coffee, chickpeas, mango, olives and more. Find them wild, or in gardens hidden across the world: rice paddies in the jungle, olive groves on the savanna, bean fields in the badlands. Every fruit and vegetable can be sliced, diced, or roasted in a furnace or over a fire.',
+      tr: 'Yeni ürünler ve meyve ağaçları: domates, biber, patlıcan, pirinç, çay, kahve, nohut, mango, zeytin ve daha fazlası. Yabanda ya da dünyanın dört bir yanına saklanmış bahçelerde bul: ormanda pirinç tarlaları, savanada zeytinlikler, badlands\u2019te fasulye tarlaları. Her meyve ve sebze dilimlenebilir, doğranabilir, fırında ya da ateşte kızartılabilir.' } },
+    { h: { en: 'Reasons to keep cooking', tr: 'Pişirmeye devam etmek için nedenler' }, list: [
+      { en: 'Taste new dishes to earn extra hearts.', tr: 'Yeni yemekleri tat, fazladan kalp kazan.' },
+      { en: 'Eating the same thing over and over fills you less.', tr: 'Aynı şeyi tekrar tekrar yemek seni daha az doyurur.' },
+      { en: 'A Chef villager who trades recipes and meals.', tr: 'Tarif ve yemek takas eden bir Aşçı köylü.' },
+      { en: 'A Service Counter where villagers order food and pay in emeralds.', tr: 'Köylülerin yemek sipariş edip zümrütle ödediği bir Servis Tezgâhı.' },
+      { en: 'Kitchen houses that appear in villages.', tr: 'Köylerde beliren mutfak evleri.' }
+    ] },
+    { h: { en: 'Easy to learn', tr: 'Öğrenmesi kolay' }, p: {
+      en: 'The Cookbook explains every recipe step by step, from the field to the plate. JEI, EMI, Jade and AppleSkin are supported, but none of them are required. No other mods needed. Forge 1.20.1, singleplayer and servers.',
+      tr: 'Tarif Kitabı her tarifi tarladan tabağa adım adım anlatır. JEI, EMI, Jade ve AppleSkin desteklenir ama hiçbiri gerekli değil. Başka mod gerekmez. Forge 1.20.1; tek oyunculu ve sunucularda çalışır.' } }
   ]
 }
 ];

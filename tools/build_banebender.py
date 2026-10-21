@@ -19,7 +19,11 @@ JARS = {
     'hard-mobs-and-bosses': 'Hard Mobs', 'elemental-arcana': 'Elemental-Arcana', 'card-lootbags': 'Loot Bags',
     'all-irons': 'Irones', 'veinminer-all-types': "Banebender's Veinminer",
     'death-hand': 'Death Hand', 'hearthly': 'Hearthly', 'ore-elemental-golems': 'Ore and Elemental Golems',
+    'board-games': 'Board Games',
 }
+# Jar'ı bu makinede olmayan (ya da hiç indirilmemiş) projeler: yalnızca CurseForge verisiyle eklenir (tools/add_cf_mod.py).
+# BB_ONLY=slug1,slug2 ortam değişkeni verilirse yalnız o modlar yeniden üretilir, geri kalanı generated.js'te korunur.
+ONLY = {x for x in os.environ.get('BB_ONLY', '').split(',') if x}
 # gallery files worth showing (screenshots, not unreadable creative-tab strips)
 GALLERY_KEEP = {
     'towers': ['struct_', 'mobs_'],
@@ -90,7 +94,13 @@ def main():
     inst = json.load(open(INST, encoding='utf8'))
     meta = {a['webSiteURL'].rsplit('/', 1)[1]: a for a in inst['installedAddons']}
     gen = {}
+    gpath = os.path.join(OUT, 'data', 'generated.js')
+    if ONLY and os.path.exists(gpath):
+        t = open(gpath, encoding='utf8').read()
+        gen = json.loads(t[t.index('=') + 1:].rstrip().rstrip(';'))
     for slug, prefix in JARS.items():
+        if ONLY and slug not in ONLY:
+            continue
         jar = [j for j in glob.glob(os.path.join(MODS, '*.jar')) if os.path.basename(j).startswith(prefix)][0]
         z = zipfile.ZipFile(jar)
         names = z.namelist()

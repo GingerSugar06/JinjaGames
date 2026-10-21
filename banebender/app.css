@@ -403,3 +403,14 @@ footer a:hover{color:var(--ink)}
   .search kbd{display:none}
   .lb{padding:12px}.lb .pv{left:8px}.lb .nx{right:8px}
 }
+
+/* CurseForge yorumları */
+.cmts{display:grid;gap:12px;margin:6px 0 4px}
+.cmt{border:1px solid var(--line2);border-left:3px solid var(--ac);background:rgba(12,18,30,.7);padding:14px 18px}
+.cmt .who{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.cmt .who b{color:var(--ac);font-weight:700}
+.cmt .who em{font-style:normal;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.cmt .who span{margin-left:auto;font-size:13px;color:var(--ink3)}
+.cmt p{white-space:pre-line;overflow-wrap:anywhere;color:var(--ink2);margin:0}
+.cflink{color:var(--ac);font-weight:700}
+.cflink:hover{text-decoration:underline}

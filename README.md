@@ -87,6 +87,11 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
 - Ana sayfa hero'su sayfalıdır: JinjaGames → Cyber Academy → Locard → Jelly Trails → Jelly Pipes → DayPot → başa.
   Yeni oyun eklerken `index.html` içindeki `.slide` listesine bir sayfa, `assets/home3d.js` içine bir parçacık biçimi
   ekle (`data-shape` adı eşleşmeli). `home3d.js` değişince `index.html`'deki `?v=` sürümünü artır.
+- BaneBender yorumları: `tools/update_stats.py` sayılarla birlikte her modun CurseForge yorumlarını
+  (`https://www.curseforge.com/api/v1/mods/<id>/comments`, anahtar gerekmez) `banebender/data/comments.js`'e yazar;
+  GitHub Actions bunu 6 saatte bir çalıştırıp commit'ler. Mod sayfasında "CurseForge yorumları" bölümü olarak görünür.
+  Yeni mod eklerken: jar elindeyse `BB_ONLY=<slug> python tools/build_banebender.py` (JARS listesine ekle), yoksa
+  `python tools/add_cf_mod.py <slug> <logo>`; sonra metni `banebender/data/mods.js`'e yaz. Sayfadaki mod sayısı veriden gelir.
 - **Adreslerde `.html` yok:** her sayfa klasör adresiyle açılır (`/privacy/`, `/daypot/gizlilik/`).
 - `sitemap.xml`, `robots.txt` — yeni sayfa eklenince sitemap da güncellenmeli.
 - `CNAME` — özel domain (`jinjagames.com`); GitHub Pages bunu okur.

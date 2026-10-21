@@ -18,6 +18,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'banebender', 'data', 'stats.js')
 NEW = os.path.join(ROOT, 'banebender', 'data', 'new_mods.txt')
 MODS_JS = os.path.join(ROOT, 'banebender', 'data', 'mods.js')
+GEN_JS = os.path.join(ROOT, 'banebender', 'data', 'generated.js')
+COMMENTS = os.path.join(ROOT, 'banebender', 'data', 'comments.js')
 AUTHOR_ID = 127320626          # CurseForge yazar kimliği (BaneBender)
 MEMBER = 'banebender'
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
@@ -119,7 +121,71 @@ def from_cfwidget(slugs):
     return mods, sum(v['dl'] for v in mods.values())
 
 
+def project_ids():
+    """slug -> CurseForge proje kimliği (generated.js'ten)."""
+    t = open(GEN_JS, encoding='utf8').read()
+    g = json.loads(t[t.index('=') + 1:].rstrip().rstrip(';'))
+    return {k: v['projectId'] for k, v in g.items() if v.get('projectId')}
+
+
+def fetch_comments(pid):
+    """Bir projenin herkese açık yorumları (CurseForge'un kendi sitesinin yorum uç noktası; anahtar gerekmez)."""
+    out, idx = [], 0
+    while idx < 500:
+        d = json.loads(get('https://www.curseforge.com/api/v1/mods/%d/comments?index=%d&pageSize=50' % (pid, idx), {'Accept': 'application/json'}, tries=3))
+        rows = d.get('data', [])
+        for c in rows:
+            if c.get('status', 1) != 1:
+                continue
+            txt = (c.get('text') or re.sub(r'<[^>]+>', '', c.get('body') or '')).strip()
+            if not txt:
+                continue
+            at = c.get('datePosted')
+            out.append({'id': c.get('id'), 'n': ((c.get('author') or {}).get('displayName') or '').strip()[:60] or 'CurseForge',
+                        't': txt[:1500], 'd': iso(at)[:10] if at else '', 'p': bool(c.get('isPinned'))})
+        idx += len(rows)
+        if not rows or idx >= d.get('pagination', {}).get('totalCount', 0):
+            break
+        time.sleep(1)
+    out.sort(key=lambda c: (not c['p'], -(c['id'] or 0)))
+    return out
+
+
+def update_comments():
+    """Her modun CurseForge yorumlarını banebender/data/comments.js'e yazar; alınamayan modun eski yorumları korunur."""
+    old = {}
+    if os.path.exists(COMMENTS):
+        t = open(COMMENTS, encoding='utf8').read()
+        m = re.search(r'window\.BB_COMMENTS=(\{.*\});', t, re.S)
+        if m:
+            old = json.loads(m.group(1))
+    new = dict(old)
+    for slug, pid in sorted(project_ids().items()):
+        try:
+            new[slug] = fetch_comments(pid)
+        except Exception as e:
+            print('yorumlar alınamadı', slug, e)
+        time.sleep(1)
+    new = {k: new[k] for k in sorted(new) if new[k]}
+    if new == old and os.path.exists(COMMENTS):
+        print('Yorumlarda değişiklik yok.')
+        return
+    with open(COMMENTS, 'w', encoding='utf8', newline='\n') as f:
+        f.write('/* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). CurseForge yorumları; elle düzenleme. */\n')
+        f.write('window.BB_COMMENTS=' + json.dumps(new, ensure_ascii=False, indent=1) + ';\n')
+    print('Yorumlar güncellendi:', sum(len(v) for v in new.values()), 'yorum,', len(new), 'mod')
+
+
 def main():
+    rc = main_stats()
+    try:
+        update_comments()
+    except Exception as e:  # yorumlar sayıları engellemesin
+        print('Yorum güncellemesi başarısız:', e)
+    return rc
+
+
+def main_stats():
     mods = total = None
     source = ''
     key = os.environ.get('CF_API_KEY', '').strip()
