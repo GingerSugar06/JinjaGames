@@ -1,7 +1,7 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2545,
- "projects": 21,
+ "total": 2559,
+ "projects": 22,
  "mods": {
   "all-irons": {
    "name": "All irons",
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 70,
+   "dl": 73,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -23,7 +23,7 @@ window.BB_STATS={
   },
   "chest-hauler": {
    "name": "Chest Hauler",
-   "dl": 37,
+   "dl": 38,
    "created": "2026-10-05T11:28Z",
    "updated": "2026-10-05T11:28Z"
   },
@@ -38,6 +38,12 @@ window.BB_STATS={
    "dl": 102,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
+  },
+  "every-last-bite": {
+   "name": "Every Last Bite",
+   "dl": 4,
+   "created": "2026-10-21T09:15Z",
+   "updated": "2026-10-21T09:15Z"
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
@@ -59,7 +65,7 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 342,
+   "dl": 344,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
@@ -71,7 +77,7 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 263,
+   "dl": 264,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,13 +101,13 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 222,
+   "dl": 225,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 123,
+   "dl": 124,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -131,9 +137,10 @@ window.BB_STATS={
   }
  },
  "unlisted": [
-  "board-games"
+  "board-games",
+  "every-last-bite"
  ],
- "updated": "2026-10-21T08:27Z",
+ "updated": "2026-10-21T14:26Z",
  "source": "profile",
- "datesAt": "2026-10-21T08:27Z"
+ "datesAt": "2026-10-21T14:26Z"
 };
