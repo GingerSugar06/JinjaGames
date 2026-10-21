@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2559,
+ "total": 2584,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 73,
+   "dl": 75,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 158,
+   "dl": 161,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -65,7 +65,7 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 344,
+   "dl": 345,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
@@ -77,19 +77,19 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 264,
+   "dl": 274,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 34,
+   "dl": 35,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 110,
+   "dl": 111,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -101,13 +101,13 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 225,
+   "dl": 229,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 124,
+   "dl": 127,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -136,11 +136,8 @@ window.BB_STATS={
    "updated": "2026-09-15T08:51Z"
   }
  },
- "unlisted": [
-  "board-games",
-  "every-last-bite"
- ],
- "updated": "2026-10-21T14:26Z",
+ "unlisted": [],
+ "updated": "2026-10-21T19:11Z",
  "source": "profile",
  "datesAt": "2026-10-21T14:26Z"
 };
