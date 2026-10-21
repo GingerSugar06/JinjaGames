@@ -109,7 +109,49 @@
     }
     return a;
   }
-  var SHAPES = { base: sphere(), cyber: cube(), noir: fingerprint(), jelly: jelly(), drop: drop(), warm: pot() };
+  /* JinjaGames: marka işaretinin (kırmızı fırça halkası, J, shuriken) parçacık hâli. Maske, logo-512.png'den
+     üretildi: piksel başına 2 bit (0 boş, 1 kırmızı, 2 koyu/shuriken), 4 piksel bir bayt, base64. */
+  var LOGO = { w: 104, h: 105, d: 'AAAAAAAAAAAAAABQVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVFVVVRUAAAAAAAAAAAAAAAAAAAAAAAAAAFBVVVVVVVUAAAAAAAAAAAAAAAAAAAAAAABAVVVVVVVVVRUAAAAAAAAAAAAAAAAAAAAAAFVVVVVVVVVVVQUAAAAAAAAAAAAAAAAAAABUVVVVVVVVVVVVVQEAAAAAAAAAAAAAAAAAQFVVVVVVVVVVVVVVFQAAAAAAAAAAAAAAAABUVVVVVVVVVVVVVVVVAQAAAAAAAAAAAAAAQFVVVVVVVVVVVVVVVVUFAAAAAAAAAAAAAABQVVVVVVVVVVVVVVVVVVUAAAAAAAAAAAAAAFVVVVVVVVVVAVRVVVVVVQUAAAAAAAAAAABAVVVVVVVVBQAAAABVVVVVFQAAAAAAAAAAAFBVVVVVVQUAAAAAAABVVVVVAAAAAAAAAAAAVFVVVVUVAAAAAAAAAEBVVVUFAAAAAAAAAABVVVVVVQEAAAAAAAAAAFRVVRUAAAAAAAAAQFVVVVUFAAAAAAAAAAAAQFVVVQAAAAAAAABQVVVVVQEAAAAAAAAAAAAAVFVVAQAAAAAAAFRVVVUVAAAAAAAAAAAAAABAVVUFAAAAAAAAVVVVVQEAAAAAAAAAAAAAAABVVRUAAAAAAEBVVVVVAAAAAAAAAAAAAAAAAFBVVQAFAAAAUFVVVRUAAAAAAAAAAAAAAAAAAFRVVQUAAABQVVVVAQAAAAAAAAAAAAAAAAAAUFVVAQAAAFRVVVUAAAAAAAAAAAAAAAAAAFRVVVUAAAAAVVVVFQAAAAAAAAAAAAAAAFBVVVVVFQAAAABVVVUFAAAAAAAAAAAAVVVVVVVVVVUFAAAAQFVVVQEAAAAAAABAVVVVVVVVVVVVVRUAAABQVVVVAQAAAAAAAEBVVVVVVVVVVVVVVQAAAFBVVVUAAAAAAAAAQFVVVVVVVVVVVVVVAQAAVFVVFQAAAAAAAABAVVVVVVVVVVVVVVUBAABUVVUFAAAAAAAAAEBVVVVVVVVVVVVRVQUAAFVVVQUAAAAAAAAAQFVVVVVVVVVVVVBVBQAAVVVVAQAAAAAAAABAVVVVVVVVVVUVQFUVAABVVVUAAAAAAAAAAEBVVVVVVVVVVQVAVRUAQFVVVQAAAAAAAAAAQFVVVVVVVVVVAQBVVQBAVVUVAAAAAAAAAABAVVVVVVVVVVUAAFVVAEBVVRUAAAAAAAAAAEBVVVVVVVVVFQAAVFUBUFVVBQAAAAAAAAAAQFVVVVVVVVUFAABUVQFQVVUFAAAAAAAAAABAVVVVVVVVVQEAAFBVAVBVVQUAAAAAAAAAAEBVVVVVVVVVAQAAUFUFUFVVAQAAAAAAAAAAAABQVVVVVVUBAABQVQVQVVUBAAAAAAAAAAAAAFBVVVVVVQAAAEBVBVRVVQEAAAAAAAAAAAAAVFVVVVVVAAAAQFUVVFVVAAAAAAAAAAAAAABUVVVVVVUAAABAVRVUVVUAAAAAAAAAAAAAAFRVVVVVVQAAAABVFVRVVQAAAAAAAAAAAAAAVFVVVVUVAAAAAFUVVFVVAAAAAAAAAAAAAABVVVVVVRUAAAAAVRVUVVUAAAAAAAAAAAAAAFVVVVVVFQAAAABUVVVVFQAAAAAAAAAAAAAAVVVVVVUlAAAAAFRVVVUVAAAAAAAAAAAAAABVVVVVVQUAAAAAVFVVVRUAAAAAAAAAAAAAQFVVVVVVBQAAAABUVVVVFQAAAAAAAAAAAABAVVVVVVUFAAAAAFRVVVUVAAAAAAAAAAAAAEBVVVVVVQUAAAAAUBVVVRUAAAAAAAAAAAAAUFVVVVWVBQAAAABQFVVVFQAAAAAAAAAAAABQVVVVVVUFAAAAAFAVVVUVAAAAAAAAAAAAAFBVVVVVVQkAAAAAUBVVVVUAAAAAAAAAAAAAVFVVVVVVCgAAAABQFVVVVQAAAAAAAAAAAABUVVVVVZUCAAAAAFAVVVVVAAAAAAAAAAAAAFRVVVVVpQIAAAAAUBVVVVUAAAAAAAAAAAAAVFVVVVWpAgAAAABQFVRVVQAAAAAAAAAAAABVVVVVVZoCAAAAAFAUVFVVAAAAAAAAAAAAAFVVVVWVpgIAAAAAABRUVVUAAAAAAAAAAAAAVVVVVaWmAgAAAAAAFFRVVQAAAFVVVQEAAEBVVVVVqaUCAAAAAAAFVFVVAQAAVVVVBQAAQFVVVVWpqQAAAAAAAAVUVVUBAABVVVUFAABAVVVVVaqpAAAAAAAABVBVVQEAAFVVVQUAAFBVVVWVaqoAAAAAAAAFUFVVBQAAVVVVBQAAUFVVVaVqqgAAAAAAAAVQVVUBAABUVVUVAABQVVVVqVqqAAAAAAAABVBVVQEAAFRVVRUAAFRVVVWqmqoAAAAAAAAFQFVVAQAAVFVVVQAAVFVVlaqWKgAAAAAAQAVAVVUFAABUVVVVAFRVVaVaqqYqAAAAAABABUBVVQUAAFBVVVVVVVWqqmqqpSoAAAAAAEAFAFVVFQAAUFVVVVWpqqqqalWlKgAAAAAAQAEAVVUVAABQVVVVqaqqqqpqVZWVAgAAAABQAQBUVVUAAEBVVVVVqapWVWqpVqkqAAAAAFABAFRVVQAAQFVVVVVVqqpaValaqqoCAAAAUAAAVFVVAQAAVVVVVVWlqqpaqlqpqqoAAABUAABQVVUFAABVVVVVVVWpqmqpWlWpqgoAABQAAEBVVQUAAFRVVVVVVVWqWqmWqlapqgAAFQAAQFVVFQAAUFVVVVVVVVWlVZWqqqqqCgAFAAAAVVVVAABQVVVVVVVVVapVpaqqqqqqQAUAAABVVVUBAEBVVVVVVVWVqqWWqqqqKgBQAQAAAFRVVQUAAFVVVVVVVZWqpZqqqgoAAFABAAAAUFVVFQAAUFVVVVVVlWqpWqoCAAAAVAAAAABQVVVVAABAVVVVVVWVaqoqAAAAAAAVAAAAAEBVVVUFAABVVVVVVaVaqgoAAAAAQBUAAAAAAFVVVRUAAFBVVVVVpZqqAgAAAABQBQAAAAAAVVVVVQAAAFVVVVWllqoAAAAAAFQBAAAAAABUVVVVBQAAAFZVVKWmKgAAAAAAVQAAAAAAAFBVVVVVAAAAAABUpaYKAAAAAEAVAAAAAAAAQFVVVVUFAAAAAFSpqQIAAAAAUBUAAAAAAAAAVVVVVVUAAAAAWKmqAAAAAABUBQAAAAAAAABUVVVVVVVVAABYqaoAAAAAQFUAAAAAAAAAAFBVVVVVVVUFAFipKgAAAABQFQAAAAAAAAAAQFVVVVVVVRUAVKoKAAAAAFUFAAAAAAAAAAAAVFVVVVVVVQBUqgIAAABAVQEAAAAAAAAAAABQVVVVVVVVAFCqAAAAAFRVAAAAAAAAAAAAAEBVVVVVVVUBUCoAAABAVQUAAAAAAAAAAAAAAFRVVVVVVQGQCgAAAFRVAQAAAAAAAAAAAAAAQFVVVVVVBZACAABAVRUAAAAAAAAAAAAAAAAAVVVVVVUFkAIAAFRVAQAAAAAAAAAAAAAAAABAVVVVVQGgAABQVRUAAAAAAAAAAAAAAAAAAABUVVVVACAAAFVVAAAAAAAAAAAAAAAAAAAAAABVVVUAAABAVQEAAAAAAAAAAAAAAAAAAAAAAABUAQAAAFQCAAAAAAAAAAAA' };
+  function logo() {
+    var bin = atob(LOGO.d), cells = [], c;
+    for (var i = 0; i < LOGO.w * LOGO.h; i++) { c = (bin.charCodeAt(i >> 2) >> ((i & 3) * 2)) & 3; if (!c) continue;
+      var dx = (i % LOGO.w) - LOGO.w / 2, dy = Math.floor(i / LOGO.w) - LOGO.h / 2, inner = Math.hypot(dx, dy) < LOGO.w * .34;
+      for (var rep = 0; rep < (c === 2 ? 3 : inner ? 3 : 1); rep++) cells.push(i * 4 + c); }
+    var a = new Float32Array(N * 3), r = rand(31), S = 4.6 / LOGO.w;
+    for (var k = 0; k < N; k++) {
+      var e = cells[Math.floor(r() * cells.length)], cls = e & 3, i2 = e >> 2, px = i2 % LOGO.w, py = Math.floor(i2 / LOGO.w);
+      a[k * 3] = (px + r() - LOGO.w / 2) * S;
+      a[k * 3 + 1] = -(py + r() - LOGO.h / 2) * S;
+      a[k * 3 + 2] = (cls === 2 ? .5 : 0) + (r() - .5) * .22;      /* shuriken öne çıkar */
+    }
+    return a;
+  }
+  function shield() {
+    /* kalkan: çift çizgili dış hat, içinde asma kilit (halka + gövde + anahtar deliği), seyrek yüzey */
+    var a = new Float32Array(N * 3), r = rand(41);
+    var half = [[0, 2.35], [1.0, 2.1], [1.85, 1.85], [1.9, .6], [1.55, -.6], [.9, -1.6], [0, -2.5]];
+    var poly = half.concat(half.slice(1, -1).reverse().map(function (q) { return [-q[0], q[1]]; }));
+    poly = poly.slice(0, half.length).concat(half.slice(0, -1).reverse().map(function (q) { return [-q[0], q[1]]; }));
+    var edges = [], tot = 0, m = poly.length;
+    for (var i = 0; i < m; i++) { var p0 = poly[i], p1 = poly[(i + 1) % m], l = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]); edges.push([p0, p1, l]); tot += l; }
+    function onEdge(sc) {
+      var d = r() * tot, e = 0; while (e < edges.length - 1 && d > edges[e][2]) { d -= edges[e][2]; e++; }
+      var t = d / edges[e][2], q0 = edges[e][0], q1 = edges[e][1];
+      return [(q0[0] + (q1[0] - q0[0]) * t) * sc, (q0[1] + (q1[1] - q0[1]) * t) * sc];
+    }
+    function inside(x, y) { var ins = false; for (var i = 0, j = m - 1; i < m; j = i++) { var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins; } return ins; }
+    for (var k = 0; k < N; k++) {
+      var x, y, z, u = r();
+      if (u < .34) { var q = onEdge(1); x = q[0]; y = q[1]; z = (r() < .5 ? -1 : 1) * .2; }
+      else if (u < .5) { var q2 = onEdge(.84); x = q2[0]; y = q2[1]; z = (r() - .5) * .1; }
+      else if (u < .66) { var t = r() * Math.PI * 2; x = Math.cos(t) * .5; y = .45 + Math.sin(t) * .5; z = (r() - .5) * .16 + .05; }       /* kilit halkası */
+      else if (u < .8) { x = (r() - .5) * 1.3; y = -.85 + r() * .8; z = .12 + (r() - .5) * .1; }                                       /* kilit gövdesi */
+      else { do { x = (r() * 2 - 1) * 1.9; y = -2.4 + r() * 4.7; } while (!inside(x * .9, y * .9)); z = (r() - .5) * .3; }             /* yüzey */
+      a[k * 3] = x; a[k * 3 + 1] = y; a[k * 3 + 2] = z;
+    }
+    return a;
+  }
+  var SHAPES = { base: logo(), cyber: shield(), noir: fingerprint(), jelly: jelly(), drop: drop(), warm: pot() };
   var ORDER = ['base', 'cyber', 'noir', 'jelly', 'drop', 'warm'];
 
   /* ---------- nokta bulutu ---------- */
@@ -156,7 +198,7 @@
     current = name; target = SHAPES[name]; setColor(name); lastSwitch = performance.now();
   }
   /* ---------- fare ---------- */
-  var mx = 0, my = 0, tx = 0, ty = 0;
+  var mx = 0, my = 0, tx = 0, ty = 0, amp = .3;
   window.addEventListener('pointermove', function (e) { tx = e.clientX / window.innerWidth - .5; ty = e.clientY / window.innerHeight - .5; }, { passive: true });
 
   function resize() {
@@ -182,7 +224,8 @@
     }
     geo.attributes.position.needsUpdate = true;
     mat.color.lerp(targetColor, .06); ringMat.color.lerp(targetColor, .06);
-    group.rotation.y = Math.sin(t * .32) * .85 + mx * 1.1;
+    amp += ((current === 'base' ? .3 : .85) - amp) * .05;      /* logo yüzünü hep gösterir */
+    group.rotation.y = Math.sin(t * .32) * amp + mx * (current === 'base' ? .6 : 1.1);
     group.rotation.x = -.15 + my * .6;
     ring.rotation.z = t * .25;
     gl.render(scene, camera);
