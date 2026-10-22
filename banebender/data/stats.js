@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2667,
+ "total": 2697,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -53,13 +53,13 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 239,
+   "dl": 241,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
   "gilded-gambit": {
    "name": "Gilded Gambit",
-   "dl": 28,
+   "dl": 30,
    "created": "2026-10-11T12:41Z",
    "updated": "2026-10-11T12:41Z"
   },
@@ -71,13 +71,13 @@ window.BB_STATS={
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 155,
+   "dl": 158,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 301,
+   "dl": 312,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,19 +95,19 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 143,
+   "dl": 144,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 236,
+   "dl": 242,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 129,
+   "dl": 132,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-15T15:37Z"
   },
@@ -119,7 +119,7 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 136,
+   "dl": 137,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -137,7 +137,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-22T19:07Z",
+ "updated": "2026-10-22T23:56Z",
  "source": "profile",
  "datesAt": "2026-10-22T14:27Z"
 };
