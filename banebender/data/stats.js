@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2644,
+ "total": 2667,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 88,
+   "dl": 90,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 163,
+   "dl": 164,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 236,
+   "dl": 239,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,19 +65,19 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 349,
+   "dl": 351,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 154,
+   "dl": 155,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 293,
+   "dl": 301,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -101,7 +101,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 233,
+   "dl": 236,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -113,7 +113,7 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 85,
+   "dl": 86,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -131,13 +131,13 @@ window.BB_STATS={
   },
   "veinminer-all-types": {
    "name": "Veinminer All Types",
-   "dl": 105,
+   "dl": 107,
    "created": "2026-09-15T08:51Z",
    "updated": "2026-09-15T08:51Z"
   }
  },
  "unlisted": [],
- "updated": "2026-10-22T14:27Z",
+ "updated": "2026-10-22T19:07Z",
  "source": "profile",
  "datesAt": "2026-10-22T14:27Z"
 };
