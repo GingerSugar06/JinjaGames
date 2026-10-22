@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2634,
+ "total": 2644,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 87,
+   "dl": 88,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 235,
+   "dl": 236,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,7 +65,7 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 348,
+   "dl": 349,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
@@ -77,7 +77,7 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 289,
+   "dl": 293,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -89,7 +89,7 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 111,
+   "dl": 112,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -101,7 +101,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 231,
+   "dl": 233,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -137,7 +137,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-22T08:29Z",
+ "updated": "2026-10-22T14:27Z",
  "source": "profile",
- "datesAt": "2026-10-21T14:26Z"
+ "datesAt": "2026-10-22T14:27Z"
 };
