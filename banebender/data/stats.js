@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2618,
+ "total": 2634,
  "projects": 22,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 86,
+   "dl": 87,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 162,
+   "dl": 163,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 19,
+   "dl": 20,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-12T09:46Z"
   },
@@ -47,7 +47,7 @@ window.BB_STATS={
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
-   "dl": 25,
+   "dl": 26,
    "created": "2026-10-09T08:03Z",
    "updated": "2026-10-09T08:03Z"
   },
@@ -71,19 +71,19 @@ window.BB_STATS={
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 153,
+   "dl": 154,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 282,
+   "dl": 289,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 37,
+   "dl": 38,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -95,13 +95,13 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 142,
+   "dl": 143,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 230,
+   "dl": 231,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -113,7 +113,7 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 84,
+   "dl": 85,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -137,7 +137,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-21T23:57Z",
+ "updated": "2026-10-22T08:29Z",
  "source": "profile",
  "datesAt": "2026-10-21T14:26Z"
 };
