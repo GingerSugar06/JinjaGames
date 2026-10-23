@@ -1,7 +1,7 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2737,
- "projects": 22,
+ "total": 2766,
+ "projects": 23,
  "mods": {
   "all-irons": {
    "name": "All irons",
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 99,
+   "dl": 101,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "every-last-bite": {
    "name": "Every Last Bite",
-   "dl": 4,
+   "dl": 5,
    "created": "2026-10-21T09:15Z",
    "updated": "2026-10-21T09:15Z"
   },
@@ -65,19 +65,25 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 353,
+   "dl": 357,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-03T21:49Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 160,
+   "dl": 164,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-12T12:44Z"
   },
+  "lodepulse": {
+   "name": "Lodepulse",
+   "dl": 5,
+   "created": "2026-10-23T08:51Z",
+   "updated": "2026-10-23T08:51Z"
+  },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 323,
+   "dl": 329,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -89,19 +95,19 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 112,
+   "dl": 113,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 146,
+   "dl": 147,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-03T21:49Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 245,
+   "dl": 247,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -113,7 +119,7 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 88,
+   "dl": 92,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
@@ -136,8 +142,10 @@ window.BB_STATS={
    "updated": "2026-09-15T08:51Z"
   }
  },
- "unlisted": [],
- "updated": "2026-10-23T08:25Z",
+ "unlisted": [
+  "lodepulse"
+ ],
+ "updated": "2026-10-23T14:10Z",
  "source": "profile",
- "datesAt": "2026-10-22T14:27Z"
+ "datesAt": "2026-10-23T14:10Z"
 };

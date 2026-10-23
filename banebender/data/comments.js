@@ -61,6 +61,15 @@ window.BB_COMMENTS={
    "p": false
   }
  ],
+ "every-last-bite": [
+  {
+   "id": 8587623,
+   "n": "JinjaGames",
+   "t": "Eating meals bite by bite and watching the food disappear from the plate is such a lovely detail. Seeing Turkish dishes alongside so many other cuisines makes it even better. This mod really makes me want to build a proper kitchen in Minecraft. Great work!",
+   "d": "2026-10-23",
+   "p": false
+  }
+ ],
  "flesh-tanner": [
   {
    "id": 8519677,
