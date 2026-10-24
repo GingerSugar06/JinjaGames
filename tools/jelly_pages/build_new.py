@@ -90,11 +90,11 @@ GAMES['jellylogic'] = dict(
     lead=('Every board is a real sudoku with exactly one solution, growing from tiny 4x4 to full 9x9, and every level adds its own twist. No guessing, no rush, just the quiet joy of working it out.',
           'Her tahta tek çözümlü gerçek bir sudoku; minik 4x4\'ten tam 9x9\'a büyür ve her bölüm kendi sürprizini ekler. Tahmin yok, acele yok; yalnızca çözmenin sessiz keyfi.'),
     twist_h=('Six rules, <span class="hl">one at a time.</span>', 'Altı kural, <span class="hl">tek tek gelir.</span>'),
-    lab=[('sudoku', 'logic_cell_given', 1, 'sudoku'), ('compare', 'logic_cmp_right', 11, 'compare'), ('parity', 'logic_tok_empty', 31, 'parity'),
-         ('diag', 'logic_cell_selected', 61, 'diag'), ('cage', 'logic_cell_hint', 101, 'cage'), ('jigsaw', 'logic_cell_same', 151, 'jigsaw')],
+    lab=[('sudoku', 'logic_cell_given', 1, 'sudoku'), ('compare', 'tw_logic_compare', 11, 'compare'), ('parity', 'tw_logic_parity', 31, 'parity'),
+         ('diag', 'tw_logic_diag', 61, 'diag'), ('cage', 'tw_logic_cage', 101, 'cage'), ('jigsaw', 'tw_logic_jigsaw', 151, 'jigsaw')],
     calm=['logic_owl_think', 'logic_owl_idle', 'logic_owl_wink'],
     win_img='logic_owl_win', win=('Solved!', 'Çözüldü!', 'Every number found its place.', 'Her sayı yerini buldu.'),
-    shots_alt=['Home screen', 'World map', 'A binary puzzle', 'A tower puzzle', 'Level complete'],
+    shots_alt=['Home screen', 'World map', 'A sudoku level', 'A bigger sudoku level', 'Level complete'],
     gal=('From the game', 'Oyundan'),
     cta=('Almost on Google Play.', 'Neredeyse Google Play\'de.',
          'Jelly Logic is in release preparation for Google Play. Want to know the day it lands, or have a rule you would love to see? Write to us.',
@@ -110,19 +110,20 @@ GAMES['jellyloops'] = dict(
     dark=dict(bg='#1F0F19', soft='#2A1421', surface='#341A29', ink='#FFEFF6', ink2='#E9C7D9', ink3='#BE98AE', line='#4A2438', line2='#5F2F49',
               accent='#FF8FBF', accent2='#FFAAD0', argb='255,143,191', on='#3A0E24', pop='#FFD27A', prgb='255,210,122', bgrgb='31,15,25',
               sky1='#3A1730', sky2='#43183A', sky3='#35172B'),
-    title='Jelly Loops: Thread Puzzle | Cozy Line and Bridge Puzzles for Android | JinjaGames',
-    desc='Jelly Loops is a calm line-puzzle game for Android starring a chubby jelly thread spool. Draw one glossy loop or build bridges between islands. 500 handcrafted levels. Free, in six languages.',
+    title='Jelly Loops: Thread Puzzle | Cozy Loop Puzzles for Android | JinjaGames',
+    desc='Jelly Loops is a calm line-puzzle game for Android starring a chubby jelly thread spool. Draw one glossy thread loop that fits every number. 500 handcrafted levels. Free, in six languages.',
     og_title='Jelly Loops: İp Bulmacası | JinjaGames',
-    og_desc='İpi çek, halkayı kapat, köprüleri kur. Tek çözümlü sakin çizgi bulmacaları, 500 bölüm. Android için ücretsiz.',
-    ld_desc='A calm line-puzzle adventure: draw a single glossy loop that fits every number, or build bridges that link every island. 500 handcrafted levels in 50 worlds, every puzzle with exactly one solution.',
+    og_desc='İpi çek, halkayı kapat. İncilerle, düğümlerle, deliklerle tek çözümlü sakin halka bulmacaları, 500 bölüm. Android için ücretsiz.',
+    ld_desc='A calm loop puzzle: draw a single glossy thread loop that fits every number, with pearls, knots, holes and stitches along the way. 500 handcrafted levels in 50 worlds, every puzzle with exactly one solution.',
     claim=('Pull the thread. Close the loop.', 'İpi çek. Halkayı kapat.'),
-    lead=('Drag your finger between the dots to draw a single glossy loop, or join the islands with stitched bridges. The numbers tell how many threads touch each square. Every puzzle has exactly one solution.',
-          'Noktalar arasında parmağını sürükleyip tek bir parlak halka çiz ya da adaları dikişli köprülerle birleştir. Sayılar her karenin kaç ipe değdiğini söyler. Her bulmacanın tek bir çözümü var.'),
-    twist_h=('Four twists, <span class="hl">one at a time.</span>', 'Dört sürpriz, <span class="hl">tek tek gelir.</span>'),
-    lab=[('pearl', 'loops_pearl_white', 21, 'pearl'), ('bridge', 'loops_island_ok', 61, 'bridge'), ('x', 'loops_edge_x', 101, None), ('double', 'loops_bridge_2', 141, 'double')],
+    lead=('Draw a single glossy loop of thread between the dots. The numbers tell how many threads touch each square, and the loop must close without crossing itself. Every puzzle has exactly one solution.',
+          'Noktalar arasında tek bir parlak ip halkası çiz. Sayılar her karenin kaç ipe değdiğini söyler; halka kendini kesmeden kapanmalı. Her bulmacanın tek bir çözümü var.'),
+    twist_h=('Six twists, <span class="hl">one at a time.</span>', 'Altı sürpriz, <span class="hl">tek tek gelir.</span>'),
+    lab=[('pearl', 'tw_loops_pearl', 21, None), ('wall', 'tw_loops_wall', 61, None), ('stitch', 'tw_loops_stitch', 101, None),
+         ('knot', 'tw_loops_knot', 141, None), ('hole', 'tw_loops_hole', 181, None), ('parity', 'tw_loops_parity', 221, None)],
     calm=['loops_hero_idle', 'loops_hero_happy', 'loops_hero_win'],
     win_img='loops_hero_win', win=('Loop closed!', 'Halka kapandı!', 'Every number is happy.', 'Her sayı yerini buldu.'),
-    shots_alt=['Home screen', 'World map', 'A loop puzzle', 'A bridge puzzle', 'Level complete'],
+    shots_alt=['Home screen', 'World map', 'A loop puzzle', 'Level complete'],
     gal=('From the game', 'Oyundan'),
     cta=('Almost on Google Play.', 'Neredeyse Google Play\'de.',
          'Jelly Loops is in release preparation for Google Play. Want to know the day it lands, or have an idea for a new twist? Write to us.',
@@ -177,7 +178,7 @@ GAMES['jellyseek'] = dict(
     lead=('Little jelly surprises hide under the tiles of every board. Open a tile and its number tells you how many surprises lurk right next to it. Use the clues to find every sweet without waking a single sour jelly.',
           'Her tahtada karoların altında minik jöle sürprizler saklanır. Bir karoyu aç; sayısı yanında kaç sürpriz olduğunu söyler. İpuçlarıyla her şekeri bul, tek bir ekşi jöleyi bile uyandırma.'),
     twist_h=('Four twists, <span class="hl">one at a time.</span>', 'Dört sürpriz, <span class="hl">tek tek gelir.</span>'),
-    lab=[('lantern', 'tw_seek_lantern', 21, None), ('camp', 'tw_seek_camp', 61, None), ('spyglass', 'seek_hero_search', 101, None), ('scale', 'seek_num_bg', 141, None)],
+    lab=[('lantern', 'tw_seek_lantern', 21, None), ('camp', 'tw_seek_camp', 61, None), ('spyglass', 'tw_seek_spyglass', 101, None), ('scale', 'tw_seek_scale', 141, None)],
     calm=['seek_sweet_0', 'seek_sweet_1', 'seek_sweet_3'],
     win_img='seek_hero_win', win=('All sweets found!', 'Tüm şekerler bulundu!', 'Not a single sour jelly woke up.', 'Tek bir ekşi jöle bile uyanmadı.'),
     shots_alt=['Home screen', 'World map', 'A level in progress', 'A harder board', 'Level complete'],
@@ -287,7 +288,7 @@ def build_game(slug, g):
             </div>
           </div>''' % (art_html, B.esc(nm['en']), B.esc(nm['tr']), B.esc(ds['en']), B.esc(ds['tr']), first))
     gallery = '\n'.join('      <button type="button" data-full="img/shot-%d.webp" aria-label="%s"><img src="img/shot-%d.webp" alt="%s" width="540" height="960" loading="lazy"></button>'
-                        % (i, g['shots_alt'][i - 1], i, g['shots_alt'][i - 1]) for i in range(1, 6))
+                        % (i, g['shots_alt'][i - 1], i, g['shots_alt'][i - 1]) for i in range(1, len(g['shots_alt']) + 1))
     play = PLAY_URL[slug]
     if play:
         play_btn = ('<a class="btn p" href="%s" target="_blank" rel="noopener"><span class="en i">Get it on Google Play</span>'

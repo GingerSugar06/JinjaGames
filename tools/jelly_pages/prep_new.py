@@ -14,10 +14,10 @@ COMMON = ['ui_star_full', 'ui_star_empty', 'ui_gem', 'ui_boss_badge', 'ic_limit_
 GAMES = {
     'jellyjars': dict(app='jelly_jars', prefix=['jars_', 'tw_jars_'], logo='logo_jars', hero='jars_mascot_idle',
                       shots=['01_home', '02_map', '03_play_start', '04_play_select', '05_result']),
-    'jellylogic': dict(app='jelly_logic', prefix=['logic_'], logo='logo_logic', hero='logic_owl_idle',
+    'jellylogic': dict(app='jelly_logic', prefix=['logic_', 'tw_logic_'], logo='logo_logic', hero='logic_owl_idle',
                        shots=['01_home', '02_map', '03_play_binary', '04_play_tower', '05_result']),
-    'jelly' + 'loops': dict(app='jelly_loops', prefix=['loops_'], logo='logo_loops', hero='loops_hero_idle',
-                            shots=['01_R_home', '02_R_map', '03_R_play_line', '04_R_play_bridge', '05_R_result']),
+    'jelly' + 'loops': dict(app='jelly_loops', prefix=['loops_', 'tw_loops_'], logo='logo_loops', hero='loops_hero_idle',
+                            shots=['01_R_home', '02_R_map', '03_R_play_line', '05_R_result']),
     'jellypark': dict(app='jelly_park', prefix=['park_'], logo='logo_park', hero='home_hero_park',
                       shots=['01_home', '02_play', '03_map', '04_cones', '05_result']),
     'jellyseek': dict(app='jelly_seek', prefix=['seek_', 'tw_seek_'], logo='logo_seek', hero='seek_hero_idle', shots=['1', '2', '3', '4', '5']),

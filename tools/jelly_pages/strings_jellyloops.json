@@ -1,4 +1,44 @@
 {
+ "twist.wall": {
+  "tr": "Yasak kenar",
+  "en": "Blocked edges"
+ },
+ "twist.wall.desc": {
+  "tr": "Engelli kenardan ip geçmez; oraya ip çekmeye çalışırsan tahta sallanır.",
+  "en": "No thread can cross an edge with a barrier; if you try, the board shakes."
+ },
+ "twist.stitch": {
+  "tr": "Hazır dikiş",
+  "en": "Ready stitches"
+ },
+ "twist.stitch.desc": {
+  "tr": "Altın dikişli ip baştan çizilidir ve silinemez. Halkanın bir parçasıdır.",
+  "en": "Gold-stitched thread is already drawn and cannot be erased. It is part of the loop."
+ },
+ "twist.knot": {
+  "tr": "Düğüm noktası",
+  "en": "Knots"
+ },
+ "twist.knot.desc": {
+  "tr": "Altın halkalı noktadan ip mutlaka geçer.",
+  "en": "The thread must pass through a dot with a golden ring."
+ },
+ "twist.hole": {
+  "tr": "Delik",
+  "en": "Holes"
+ },
+ "twist.hole.desc": {
+  "tr": "İp, koyu delik olan noktaya uğramaz.",
+  "en": "The thread never touches a dot that is a dark hole."
+ },
+ "twist.parity": {
+  "tr": "Tek / çift hücre",
+  "en": "Odd / even cells"
+ },
+ "twist.parity.desc": {
+  "tr": "İki boncuklu hücrenin çevresinde çift, tek boncuklunun çevresinde tek sayıda ip olur.",
+  "en": "A cell with two beads has an even number of threads around it, one bead means odd."
+ },
  "world.1": {
   "tr": "İplik Atölyesi",
   "en": "Thread Workshop"
@@ -206,30 +246,6 @@
  "twist.pearl.desc": {
   "tr": "Beyaz inciden ip düz geçer, siyah incide köşe döner. İnciler halkanın üstündedir.",
   "en": "The thread goes straight through a white pearl and turns at a black one. Every pearl is on the loop."
- },
- "twist.bridge": {
-  "tr": "Köprü bulmacası",
-  "en": "Bridge puzzle"
- },
- "twist.bridge.desc": {
-  "tr": "Adalardaki sayı kadar köprü kur. Köprüler kesişmez ve tüm adalar birbirine bağlanır.",
-  "en": "Build as many bridges as the number on each island. Bridges never cross and all islands get linked."
- },
- "twist.x": {
-  "tr": "Kapalı kenar",
-  "en": "Blocked edges"
- },
- "twist.x.desc": {
-  "tr": "X işaretli kenardan ip geçmez. Kenara dokunarak kendi X işaretini de koyabilirsin.",
-  "en": "No thread can use an edge marked with X. Tap an edge to place your own X too."
- },
- "twist.double": {
-  "tr": "İkili köprü",
-  "en": "Double bridges"
- },
- "twist.double.desc": {
-  "tr": "Aynı iki ada arasına iki köprü kurulabilir. Köprüye iki kez dokun ya da iki kez sürükle.",
-  "en": "Two islands can be joined by two bridges. Tap or drag a bridge twice."
  },
  "twist.fence": {
   "tr": "Çit",
