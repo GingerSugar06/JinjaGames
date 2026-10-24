@@ -1,17 +1,17 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2850,
+ "total": 2905,
  "projects": 23,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 135,
+   "dl": 138,
    "created": "2026-09-16T08:34Z",
-   "updated": "2026-10-03T21:46Z"
+   "updated": "2026-10-24T10:11Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 109,
+   "dl": 114,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -29,9 +29,9 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 22,
+   "dl": 25,
    "created": "2026-10-12T09:46Z",
-   "updated": "2026-10-12T09:46Z"
+   "updated": "2026-10-24T10:11Z"
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
@@ -41,9 +41,9 @@ window.BB_STATS={
   },
   "every-last-bite": {
    "name": "Every Last Bite",
-   "dl": 6,
+   "dl": 11,
    "created": "2026-10-21T09:15Z",
-   "updated": "2026-10-21T09:15Z"
+   "updated": "2026-10-24T10:09Z"
   },
   "flesh-tanner": {
    "name": "Flesh Tanner",
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 244,
+   "dl": 247,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,15 +65,15 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 361,
+   "dl": 367,
    "created": "2026-09-18T05:55Z",
-   "updated": "2026-10-03T21:49Z"
+   "updated": "2026-10-24T10:10Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 171,
+   "dl": 179,
    "created": "2026-10-12T12:44Z",
-   "updated": "2026-10-12T12:44Z"
+   "updated": "2026-10-24T10:08Z"
   },
   "lodepulse": {
    "name": "Lodepulse",
@@ -83,7 +83,7 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 350,
+   "dl": 357,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,27 +95,27 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 114,
+   "dl": 115,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 149,
+   "dl": 153,
    "created": "2026-09-18T06:42Z",
-   "updated": "2026-10-03T21:49Z"
+   "updated": "2026-10-24T10:10Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 259,
+   "dl": 262,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 136,
+   "dl": 139,
    "created": "2026-10-05T11:03Z",
-   "updated": "2026-10-15T15:37Z"
+   "updated": "2026-10-24T10:11Z"
   },
   "towers": {
    "name": "Towers",
@@ -125,13 +125,13 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 140,
+   "dl": 141,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
   "variantide": {
    "name": "Variantide",
-   "dl": 24,
+   "dl": 26,
    "created": "2026-10-11T12:32Z",
    "updated": "2026-10-11T12:32Z"
   },
@@ -142,10 +142,8 @@ window.BB_STATS={
    "updated": "2026-09-15T08:51Z"
   }
  },
- "unlisted": [
-  "lodepulse"
- ],
- "updated": "2026-10-24T08:01Z",
+ "unlisted": [],
+ "updated": "2026-10-24T13:13Z",
  "source": "profile",
- "datesAt": "2026-10-23T14:10Z"
+ "datesAt": "2026-10-24T13:13Z"
 };
