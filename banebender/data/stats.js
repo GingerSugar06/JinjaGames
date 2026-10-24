@@ -1,17 +1,17 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 2905,
+ "total": 2965,
  "projects": 23,
  "mods": {
   "all-irons": {
    "name": "All irons",
-   "dl": 138,
+   "dl": 139,
    "created": "2026-09-16T08:34Z",
    "updated": "2026-10-24T10:11Z"
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 114,
+   "dl": 119,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 25,
+   "dl": 27,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-24T10:11Z"
   },
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "every-last-bite": {
    "name": "Every Last Bite",
-   "dl": 11,
+   "dl": 14,
    "created": "2026-10-21T09:15Z",
    "updated": "2026-10-24T10:09Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 247,
+   "dl": 248,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,13 +65,13 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 367,
+   "dl": 376,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-24T10:10Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 179,
+   "dl": 198,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-24T10:08Z"
   },
@@ -83,13 +83,13 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 357,
+   "dl": 365,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 43,
+   "dl": 45,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -101,19 +101,19 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 153,
+   "dl": 154,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-24T10:10Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 262,
+   "dl": 266,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 139,
+   "dl": 144,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-24T10:11Z"
   },
@@ -143,7 +143,7 @@ window.BB_STATS={
   }
  },
  "unlisted": [],
- "updated": "2026-10-24T13:13Z",
+ "updated": "2026-10-24T18:01Z",
  "source": "profile",
  "datesAt": "2026-10-24T13:13Z"
 };
