@@ -16,6 +16,12 @@ kendi dünyasının yüzeyini kullanır. Ortak olan yapı, farklı olan ten:
 | DayPot | Sakin mutfak | Fraunces | Nunito | Nunito | Orman yeşili |
 | Jelly Trails | Pastel jöle | Fraunces | Nunito | Nunito | Mor `#7A4FD6` |
 | Jelly Pipes | Pastel su camı | Fraunces | Nunito | Nunito | Mavi `#1C7FB8` |
+| Jelly Jars | Bal rengi raf | Fraunces | Nunito | Nunito | Kehribar `#B8470A` |
+| Jelly Logic | Kitaplık, lavanta | Fraunces | Nunito | Nunito | İndigo `#5A47C9` |
+| Jelly Loops | Boncuk ve ip | Fraunces | Nunito | Nunito | Gül `#C2306F` |
+| Jelly Park | Şeker yolu | Fraunces | Nunito | Nunito | Kırmızı `#D1342F` |
+| Jelly Seek | Çimen, şeker | Fraunces | Nunito | Nunito | Yeşil `#1A7F4F` |
+| Jelly Slide | Buz, kar | Fraunces | Nunito | Nunito | Kobalt `#3560D8` |
 
 Locard'ın açık teması sararmış dosya kâğıdı, koyu teması gece bürosudur;
 ikisi de aynı ölçüleri kullanır. DayPot yuvarlak köşe ve geniş satır aralığı
@@ -84,9 +90,22 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
   `build.py`. Sayfaları elle değil bu betiklerle değiştir. Oyunlar `games/` listesinde 04/05, ana sayfada 04/05
   paneli olarak yer alır. Google Play bağlantısı yayına çıkınca `build.py` içindeki `PLAY_URL` sözlüğüne yazılıp
   çalıştırılır (şimdilik "Yakında" rozeti).
-- Ana sayfa hero'su sayfalıdır: JinjaGames → Cyber Academy → Locard → Jelly Trails → Jelly Pipes → DayPot → başa.
+- `jellyjars/`, `jellylogic/`, `jellyloops/`, `jellypark/`, `jellyseek/`, `jellyslide/` — altı yeni Jelly oyununun sayfaları
+  (`https://jinjagames.com/<ad>/`), her biri kendi oynanabilir demosuyla: Jars'ta dök ve ayır, Logic'te 4x4/6x6 sudoku (karşılaştırma,
+  tek-çift, çapraz), Loops'ta halka çiz + köprü kur, Park'ta arabaları çıkar (koni, otobüs, numaralı), Seek'te tahminsiz arama (fener,
+  dürbün), Slide'da buzda kayan penguen (kaya, kar yığını, balık, ışınlanma). Demo kuralları oyunların kodundan (`puzzle_core`) alındı;
+  bulmacalar `gen_new_puzzles.py` ile çözücüyle doğrulanarak üretilir (Logic/Loops tek çözümlü, Seek tahminsiz, diğerleri çözülebilir).
+  **Tek kaynak `tools/jelly_pages/`:** `game.html` ortak iskelet, `g_<ad>.txt` oyuna özgü CSS + hero sahnesi + demo (`@@@ BÖLÜM` ile ayrılmış),
+  `build_new.py` oyun metinleri/renkleri/mekanik listesi ve derleme. Sırayla: `extract_new.py` (oyun metinleri), `prep_new.py` (çizimler ve
+  mağaza görselleri; Slide'ın mağaza ekran görüntüsü olmadığı için galerisi oyunun dünya arka planlarıdır), `gen_new_puzzles.py` (bir kez),
+  `build_new.py [ad]`. Uygulamalar gizlilik ve silme adreslerini `https://jinjagames.com/<ad>/privacy/` ve `/delete/` olarak açar;
+  ikisi `tools/make_jelly_legal.py` ile üretilir (Firebase hesap/yedek, AdMob + UMP, yaş kapısı, Analytics/Crashlytics, Google Play satın alma,
+  uygulama içinden hesap silme). Oyunlara yeni bir veri işleyen hizmet eklenirse o betikteki metin güncellenip yeniden çalıştırılmalı.
+  Play bağlantısı `build_new.py` içindeki `PLAY_URL`'ye yazılır. Ana sayfa ve `games/` değişiklikleri `tools/patch_home_jelly.py` ve
+  `tools/patch_games_jelly.py` ile (bir kez) yapıldı; sonrası elle düzenlenir.
+- Ana sayfa hero'su sayfalıdır: JinjaGames → Cyber Academy → Locard → Jelly Trails → Pipes → Jars → Logic → Loops → Park → Seek → Slide → DayPot → başa.
   Yeni oyun eklerken `index.html` içindeki `.slide` listesine bir sayfa, `assets/home3d.js` içine bir parçacık biçimi
-  ekle (`data-shape` adı eşleşmeli). `home3d.js` değişince `index.html`'deki `?v=` sürümünü artır.
+  ekle (`data-shape` adı eşleşmeli; Jelly oyunlarının biçimleri kavanoz, sudoku tablosu, ip halkası, araba, büyüteç, kar tanesi). `home3d.js` değişince `index.html`'deki `?v=` sürümünü artır.
 - BaneBender yorumları: `tools/update_stats.py` sayılarla birlikte her modun CurseForge yorumlarını
   (`https://www.curseforge.com/api/v1/mods/<id>/comments`, anahtar gerekmez) `banebender/data/comments.js`'e yazar;
   GitHub Actions bunu 6 saatte bir çalıştırıp commit'ler. Mod sayfasında "CurseForge yorumları" bölümü olarak görünür.
@@ -299,4 +318,6 @@ DNS yayılması 10 dk – 24 saat sürebilir.
 - [ ] DayPot: Play yayını açılınca "Yakında Google Play'de" durumu mağaza rozetiyle
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
 - [ ] DayPot: gizlilik politikasındaki tarih, yayın gününde güncellensin.
+- [ ] Jelly Jars / Logic / Loops / Park / Seek / Slide: Play yayını açılınca `tools/jelly_pages/build_new.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki kartlar elle güncellensin. Slide için mağaza ekran görüntüsü alınınca `prep_new.py` içindeki `shots` listesi ekran görüntülerine çevrilebilir.
+- [ ] **Jelly Trails ve Jelly Pipes gizlilik sayfaları eski:** `make_jelly_privacy.py` "hesap yok, analiz yok" diyor; iki oyunun kodu da artık Firebase (hesap, Analytics, Crashlytics), UMP ve yaş kapısı taşıyor ve `jellytrails/delete/`, `jellypipes/delete/` adreslerine bakıyor. Yayından önce `make_jelly_legal.py` metnine taşınmalı; sayfalardaki "Hesap yok" cümleleri ve "EN · TR" dil rozeti de gözden geçirilmeli (uygulamalar 6 dilde).
 - [ ] Jelly Trails / Jelly Pipes: Play yayını açılınca `tools/jelly_pages/build.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki "Google Play yakında" etiketi güncellensin. Mağaza ekran görüntüleri değişirse betik görselleri `Puzzles/store`'dan yeniden üretir.

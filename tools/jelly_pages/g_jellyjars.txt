@@ -1,0 +1,173 @@
+@@@ CSS
+/* JELLY JARS: raf, bal rengi, kavanozlar */
+.hero-shelf{position:absolute;left:0;right:0;bottom:52px;height:64px;z-index:1;pointer-events:none;opacity:.55}
+.hero-shelf img{position:absolute;bottom:0;width:min(46%,520px);height:auto}
+.hero-shelf img:nth-child(1){left:-4%}.hero-shelf img:nth-child(2){right:-4%;transform:scaleX(-1)}
+.glass{background:linear-gradient(180deg,var(--surface),var(--bg-soft))}
+.pourfx{position:absolute;pointer-events:none;z-index:5;width:46px;animation:dripfall var(--t,3.4s) ease-in infinite var(--dl,0s)}
+@keyframes dripfall{0%{transform:translateY(-30px) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(300px) scale(1);opacity:0}}
+.jb-board{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:4% 3%;align-items:end;padding:6px 2px 4px;border-radius:24px;background:linear-gradient(180deg,transparent 0,transparent 100%);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.jar{position:relative;aspect-ratio:2/3;cursor:pointer;transition:transform .3s var(--ease);-webkit-tap-highlight-color:transparent;border-radius:18px}
+.jar::after{content:"";position:absolute;left:8%;right:8%;bottom:-6px;height:12px;border-radius:50%;background:rgba(0,0,0,.12);filter:blur(5px);z-index:-1}
+.jar>img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.jar .jf{z-index:4}
+.jar .lys{position:absolute;inset:0;z-index:2;pointer-events:none}
+.jar .ly{position:absolute;left:11%;width:78%;bottom:calc(9% + var(--k)*15.2%);height:auto;transition:bottom .35s var(--ease),transform .35s var(--ease)}
+.jar .ly.new{animation:layin .45s var(--ease)}
+@keyframes layin{from{transform:translateY(-70%) scale(.9,1.1);opacity:0}to{transform:none;opacity:1}}
+.jar .ly.qm{opacity:.95;filter:saturate(.65) brightness(1.05)}
+.jar.sel{transform:translateY(-12%) scale(1.03)}
+.jar.sel .jf{filter:drop-shadow(0 0 10px rgba(var(--accent-rgb),.75))}
+.jar.pour-l{animation:pourl .5s var(--ease)}
+.jar.pour-r{animation:pourr .5s var(--ease)}
+@keyframes pourl{40%{transform:translateY(-18%) rotate(-32deg)}100%{transform:none}}
+@keyframes pourr{40%{transform:translateY(-18%) rotate(32deg)}100%{transform:none}}
+.jar.no{animation:shake .4s}
+.jar.full::before{content:"";position:absolute;inset:-6%;border-radius:22px;background:radial-gradient(circle,rgba(255,225,120,.55),transparent 66%);z-index:0}
+.jar .lock{position:absolute;z-index:5;left:50%;top:22%;width:46%;transform:translateX(-50%);filter:drop-shadow(0 5px 5px rgba(0,0,0,.25))}
+.jar .lockdot{position:absolute;z-index:6;left:50%;top:41%;width:20%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+.jar .done{position:absolute;z-index:6;right:-6%;top:-5%;width:34%;animation:hop .5s var(--ease)}
+@keyframes hop{30%{transform:translateY(-14%) scale(1.1)}60%{transform:scale(1.08,.9)}100%{transform:none}}
+.jb-mascot{position:absolute;right:-10px;top:-44px;width:92px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+@media(max-width:680px){.jb-mascot{width:70px;top:-34px}}
+
+@@@ HERO_DECO
+  <div class="hero-shelf" aria-hidden="true"><img src="img/s/jars_shelf.webp" alt=""><img src="img/s/jars_shelf.webp" alt=""></div>
+
+@@@ HERO_STAGE
+        <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
+        <button class="fj" style="--x:-4%;--y:2%;--s:92px;--t:5.2s" data-d="14" aria-label="Jelly"><img src="img/s/jars_layer_0.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:82%;--y:-1%;--s:88px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Jelly"><img src="img/s/jars_layer_5.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:-8%;--y:58%;--s:96px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Jelly"><img src="img/s/jars_layer_3.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:88%;--y:50%;--s:100px;--t:5s;--dl:-.5s" data-d="26" aria-label="Jelly"><img src="img/s/jars_layer_7.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:12%;--y:92%;--s:84px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Jelly"><img src="img/s/jars_layer_1.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:70%;--y:94%;--s:86px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Jelly"><img src="img/s/jars_layer_4.webp" alt="" width="192" height="96"></button>
+        <button class="fj" style="--x:44%;--y:-8%;--s:70px;--t:4.1s;--dl:-2.4s" data-d="10" aria-label="Jelly"><img src="img/s/jars_layer_2.webp" alt="" width="192" height="96"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i>
+
+@@@ TRY
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Pour and sort.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Dök ve ayır.</span></h2>
+          <p class="lead2 en">Tap a jar to pick it up, then tap another jar to pour. Jelly only pours onto the same colour or into an empty jar, and only if there is room. Make every jar a single colour.</p>
+          <p class="lead2 tr">Bir kavanoza dokunup kaldır, sonra dökmek için başka bir kavanoza dokun. Jöle yalnız aynı renge ya da boş kavanoza, yer varsa dökülür. Her kavanozu tek renk yap.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Pours</span><span class="tr i">Döküm</span> <b id="m-moves">0</b></span><span><span class="en i">Par</span><span class="tr i">Hedef</span> <b id="m-par">0</b></span><span><span class="en i">Sorted</span><span class="tr i">Tamam</span> <b id="m-done">0/0</b></span></div>
+          <div class="actions">
+            <button class="btn g" id="b-undo" type="button"><span class="en i">Undo</span><span class="tr i">Geri al</span></button>
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+          <p class="hint-line" id="hint-line" aria-live="polite"></p>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <img class="jb-mascot" id="jb-mascot" src="img/s/jars_mascot_idle.webp" alt="" width="192" height="192">
+            <div class="jb-board" id="board" role="application" aria-label="Jelly Jars puzzle"></div>
+@@WIN@@
+          </div>
+        </div>
+
+@@@ JS
+/* ============ Jelly Jars: oynanabilir bulmaca ============
+   Kurallar oyunun kendi kodundan (jars.dart): üstteki aynı renkli katmanlar aynı renge ya da boş kavanoza dökülür,
+   yer yoksa dökülmez; kilitli kavanoza yalnız kilidin rengi dökülür; gizli katmanlar '?' görünür, üstleri
+   boşalınca açılır. Her kavanoz tek renk (ya da boş) olunca bölüm biter. */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$,JX=window.JX;
+  var P=window.JX_PUZZLES; if(!P||!P.length) return;
+  var CAP=4, board=$('#board'), mascot=$('#jb-mascot');
+  var cur=0, st, locks, hidden, sel=-1, hist=[], moves=0, par=0, solved=P.map(function(){return false;}), busy=false, won=false;
+  var NAMES=[['Classic','Klasik'],['Hidden layers','Gizli katman'],['Locked jar','Kilitli kavanoz']];
+
+  function copy(s){ return s.map(function(j){return j.slice();}); }
+  function top(j){ return j[j.length-1]; }
+  function runLen(j){ var c=top(j), n=0; while(n<j.length && j[j.length-1-n]===c) n++; return n; }
+  function canPour(s,a,b){
+    if(a===b||!s[a].length) return 0; var c=top(s[a]);
+    if(locks[b]!==null && locks[b]!==c) return 0;
+    if(s[b].length && top(s[b])!==c) return 0;
+    var room=CAP-s[b].length; if(room<=0) return 0;
+    return Math.min(runLen(s[a]),room);
+  }
+  function isDone(s){ return s.every(function(j){ return !j.length || (j.length===CAP && j.every(function(x){return x===j[0];})); }); }
+  function key(s){ return s.map(function(j){return j.join('');}).join('|'); }
+  function solve(s0){
+    var seen={}, q=[{s:s0,f:null}], h=0; seen[key(s0)]=1;
+    while(h<q.length && q.length<60000){
+      var e=q[h++]; if(isDone(e.s)) return e.f;
+      for(var a=0;a<e.s.length;a++) for(var b=0;b<e.s.length;b++){
+        var k=canPour(e.s,a,b); if(!k) continue;
+        if(!e.s[b].length && runLen(e.s[a])===e.s[a].length && locks[b]===null) continue;
+        var n=copy(e.s), c=top(n[a]); for(var i=0;i<k;i++){ n[a].pop(); n[b].push(c); }
+        var kk=key(n); if(seen[kk]) continue; seen[kk]=1; q.push({s:n,f:e.f||[a,b]});
+      }
+    }
+    return null;
+  }
+
+  function render(newJar){
+    board.innerHTML=''; board.style.setProperty('--cols',st.length===5?5:st.length>6?4:3);
+    st.forEach(function(j,i){
+      var d=document.createElement('div'); d.className='jar'+(i===sel?' sel':'')+((j.length===CAP&&j.every(function(x){return x===j[0];}))?' full':''); d.setAttribute('data-i',i);
+      var h='<img class="jb" src="img/s/jars_jar_back.webp" alt=""><div class="lys">';
+      j.forEach(function(c,k){
+        var isTop=k===j.length-1, q=hidden&&!isTop;
+        h+='<img class="ly'+(q?' qm':'')+((newJar===i&&k===j.length-1)?' new':'')+'" style="--k:'+k+'" src="img/s/'+(q?'jars_layer_hidden':'jars_layer_'+c)+'.webp" alt="">';
+      });
+      h+='</div><img class="jf" src="img/s/jars_jar_front.webp" alt="">';
+      if(locks[i]!==null){ h+='<img class="lock" src="img/s/jars_lock.webp" alt=""><span class="lockdot" style="--c:'+COL[locks[i]]+'"></span>'; }
+      if(j.length===CAP&&j.every(function(x){return x===j[0];})) h+='<img class="done" src="img/s/jars_done.webp" alt="">';
+      d.innerHTML=h; board.appendChild(d);
+      d.addEventListener('click',function(){ tap(i); });
+    });
+    $('#m-moves').textContent=moves; $('#m-par').textContent=par;
+    var dn=st.filter(function(j){return j.length===CAP&&j.every(function(x){return x===j[0];});}).length, tot=st.filter(function(j){return j.length;}).length;
+    $('#m-done').textContent=dn+'/'+Math.max(tot,dn);
+  }
+  var COL=['#FF5C7A','#FFA13D','#FFD84A','#7ED957','#3FD9A4','#37C8E8','#4C86F0','#9A62E8','#F25FB4','#8B5A3C'];
+
+  function load(i){
+    cur=i; var p=P[i]; st=copy(p.jars); locks=p.locks.slice(); hidden=p.hidden; sel=-1; hist=[]; moves=0; par=p.par; won=false; busy=false;
+    $('#win').classList.remove('on'); mascot.src='img/s/jars_mascot_idle.webp'; JX.hint('',''); renderPicker(); render();
+  }
+  function renderPicker(){
+    var labels=P.map(function(p,i){ return (i+1)+' · <span class="en i">'+NAMES[i][0]+'</span><span class="tr i">'+NAMES[i][1]+'</span>'; });
+    JX.picker($('#picker'),labels,cur,solved,load);
+  }
+  function tap(i){
+    if(busy||won) return;
+    if(sel<0){ if(!st[i].length) return; sel=i; render(); return; }
+    if(sel===i){ sel=-1; render(); return; }
+    var k=canPour(st,sel,i), el=board.children[sel];
+    if(!k){ var bad=board.children[i]; sel=-1; render(); var b2=board.children[i]; b2.classList.add('no'); JX.hint('That jar cannot take it: the colours differ, it is locked for another colour, or it is full.','Bu kavanoz alamaz: renkler farklı, başka renge kilitli ya da dolu.'); return; }
+    pour(sel,i,k);
+  }
+  function pour(a,b,k){
+    busy=true; hist.push({s:copy(st),m:moves}); JX.hint('','');
+    var el=board.children[a]; el.classList.add(b>a?'pour-r':'pour-l'); mascot.src='img/s/jars_mascot_pour.webp';
+    setTimeout(function(){
+      var c=top(st[a]); for(var n=0;n<k;n++){ st[a].pop(); st[b].push(c); }
+      moves++; sel=-1; render(b); busy=false;
+      setTimeout(function(){ if(!won) mascot.src='img/s/jars_mascot_idle.webp'; },500);
+      if(isDone(st)) win();
+    },300);
+  }
+  function win(){
+    won=true; solved[cur]=true; renderPicker(); mascot.src='img/s/jars_mascot_win.webp'; JX.win(['fx_star','fx_heart','jars_done','jars_fx_drip']);
+  }
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-undo').addEventListener('click',function(){ if(busy||!hist.length) return; var h=hist.pop(); st=h.s; moves=h.m; sel=-1; won=false; $('#win').classList.remove('on'); render(); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-hint').addEventListener('click',function(){
+    if(busy||won) return; var mv=solve(st);
+    if(!mv){ JX.hint('No clear way forward from here. Try Undo or Start over.','Buradan net bir yol görünmüyor. Geri al ya da baştan başla.'); return; }
+    sel=-1; render(); var e1=board.children[mv[0]], e2=board.children[mv[1]];
+    e1.classList.add('sel'); setTimeout(function(){ e2.style.transform='translateY(-8%)'; },250);
+    setTimeout(function(){ e2.style.transform=''; tap2(mv[0],mv[1]); },750);
+  });
+  function tap2(a,b){ sel=a; tap(b); }
+  load(0);
+})();

@@ -184,11 +184,12 @@ paint();document.getElementById('year').textContent=new Date().getFullYear();}})
 </html>
 '''
 
-for a in APPS:
-    out = os.path.join(ROOT, a['slug'], 'privacy')
-    os.makedirs(out, exist_ok=True)
-    icon = Image.open(os.path.join(PUZZLES, a['store'], 'app_icon.png')).convert('RGBA')
-    icon.thumbnail((128, 128)); icon.save(os.path.join(out, 'icon.png'), optimize=True)
-    html = PAGE.format(en=EN.format(**a), tr=TR.format(**a), upd_en=UPDATED[0], upd_tr=UPDATED[1], **a)
-    open(os.path.join(out, 'index.html'), 'w', encoding='utf8', newline='\n').write(html)
-    print('ok', a['slug'])
+if __name__ == '__main__':
+    for a in APPS:
+        out = os.path.join(ROOT, a['slug'], 'privacy')
+        os.makedirs(out, exist_ok=True)
+        icon = Image.open(os.path.join(PUZZLES, a['store'], 'app_icon.png')).convert('RGBA')
+        icon.thumbnail((128, 128)); icon.save(os.path.join(out, 'icon.png'), optimize=True)
+        html = PAGE.format(en=EN.format(**a), tr=TR.format(**a), upd_en=UPDATED[0], upd_tr=UPDATED[1], **a)
+        open(os.path.join(out, 'index.html'), 'w', encoding='utf8', newline='\n').write(html)
+        print('ok', a['slug'])

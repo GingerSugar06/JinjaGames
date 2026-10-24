@@ -245,5 +245,6 @@ def build(slug, g):
     print('ok', slug, round(len(html) / 1024), 'KB')
 
 
-for slug, g in GAMES.items():
-    build(slug, g)
+if __name__ == '__main__':
+    for slug, g in GAMES.items():
+        build(slug, g)

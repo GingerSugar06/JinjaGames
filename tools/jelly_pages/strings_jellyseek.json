@@ -1,0 +1,378 @@
+{
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "twist.snow": {
+  "tr": "Kar yığınları",
+  "en": "Snow piles"
+ },
+ "twist.snow.desc": {
+  "tr": "Kar yığınına girince patenci durur.",
+  "en": "The skater stops when it enters a snow pile."
+ },
+ "world.1": {
+  "tr": "Şeker Bahçesi",
+  "en": "Candy Garden"
+ },
+ "world.2": {
+  "tr": "Gizli Patika",
+  "en": "Secret Path"
+ },
+ "world.3": {
+  "tr": "Kurabiye Tarlası",
+  "en": "Cookie Field"
+ },
+ "world.4": {
+  "tr": "Hazine Plajı",
+  "en": "Treasure Beach"
+ },
+ "world.5": {
+  "tr": "Bal Mağarası",
+  "en": "Honey Cave"
+ },
+ "world.6": {
+  "tr": "Marshmallow Ormanı",
+  "en": "Marshmallow Wood"
+ },
+ "world.7": {
+  "tr": "Çikolata Nehri",
+  "en": "Chocolate Stream"
+ },
+ "world.8": {
+  "tr": "Dondurma Vadisi",
+  "en": "Ice-Cream Valley"
+ },
+ "world.9": {
+  "tr": "Sis Bataklığı",
+  "en": "Mist Marsh"
+ },
+ "world.10": {
+  "tr": "Büyük Şeker Mağarası",
+  "en": "Grand Candy Cavern"
+ },
+ "world.11": {
+  "tr": "Bisküvi Çölü",
+  "en": "Biscuit Desert"
+ },
+ "world.12": {
+  "tr": "Gökkuşağı Dağı",
+  "en": "Rainbow Mountain"
+ },
+ "world.13": {
+  "tr": "Fener Vadisi",
+  "en": "Lantern Valley"
+ },
+ "world.14": {
+  "tr": "Kamp Alanı",
+  "en": "Campground"
+ },
+ "world.15": {
+  "tr": "Mercan Adası",
+  "en": "Coral Isle"
+ },
+ "world.16": {
+  "tr": "Pamuk Şeker Bulutları",
+  "en": "Cotton Candy Clouds"
+ },
+ "world.17": {
+  "tr": "Sakız Ormanı",
+  "en": "Gum Forest"
+ },
+ "world.18": {
+  "tr": "Kek Tepesi",
+  "en": "Cake Hill"
+ },
+ "world.19": {
+  "tr": "Pastel Kumullar",
+  "en": "Pastel Dunes"
+ },
+ "world.20": {
+  "tr": "Hazine Kalesi",
+  "en": "Treasure Castle"
+ },
+ "world.21": {
+  "tr": "Mücevher Mağarası",
+  "en": "Gem Grotto"
+ },
+ "world.22": {
+  "tr": "Karamel Çayırı",
+  "en": "Caramel Meadow"
+ },
+ "world.23": {
+  "tr": "Lolipop Tarlası",
+  "en": "Lollipop Field"
+ },
+ "world.24": {
+  "tr": "Şeker Kamışı Ormanı",
+  "en": "Candy Cane Forest"
+ },
+ "world.25": {
+  "tr": "Şerbet Gölü",
+  "en": "Sherbet Lake"
+ },
+ "world.26": {
+  "tr": "Kuruyemiş Dağı",
+  "en": "Nutty Mountain"
+ },
+ "world.27": {
+  "tr": "Fındık Kampı",
+  "en": "Hazelnut Camp"
+ },
+ "world.28": {
+  "tr": "Peri Bahçesi",
+  "en": "Fairy Garden"
+ },
+ "world.29": {
+  "tr": "Mantar Köyü",
+  "en": "Mushroom Village"
+ },
+ "world.30": {
+  "tr": "Işıltılı Gece",
+  "en": "Glimmer Night"
+ },
+ "world.31": {
+  "tr": "Yıldız Tozu Çölü",
+  "en": "Stardust Desert"
+ },
+ "world.32": {
+  "tr": "Balon Tepesi",
+  "en": "Balloon Hill"
+ },
+ "world.33": {
+  "tr": "Sihirli Orman",
+  "en": "Magic Wood"
+ },
+ "world.34": {
+  "tr": "Tatlı Bataklık",
+  "en": "Sweet Swamp"
+ },
+ "world.35": {
+  "tr": "Kristal Vadi",
+  "en": "Crystal Valley"
+ },
+ "world.36": {
+  "tr": "Jöle Gölü",
+  "en": "Jelly Lake"
+ },
+ "world.37": {
+  "tr": "Çiçek Çayırı",
+  "en": "Flower Meadow"
+ },
+ "world.38": {
+  "tr": "Rüzgâr Tarlası",
+  "en": "Windy Field"
+ },
+ "world.39": {
+  "tr": "Gökyüzü Adası",
+  "en": "Sky Island"
+ },
+ "world.40": {
+  "tr": "Hazine Haritası Odası",
+  "en": "Treasure Map Room"
+ },
+ "world.41": {
+  "tr": "Gece Pikniği",
+  "en": "Night Picnic"
+ },
+ "world.42": {
+  "tr": "Şeker Çiftliği",
+  "en": "Candy Farm"
+ },
+ "world.43": {
+  "tr": "Meyve Mağarası",
+  "en": "Fruit Cavern"
+ },
+ "world.44": {
+  "tr": "Pasta Dağı",
+  "en": "Pie Mountain"
+ },
+ "world.45": {
+  "tr": "Tatlı Kasaba",
+  "en": "Sweet Town"
+ },
+ "world.46": {
+  "tr": "Bulut Bahçesi",
+  "en": "Cloud Garden"
+ },
+ "world.47": {
+  "tr": "Peri Kampı",
+  "en": "Fairy Camp"
+ },
+ "world.48": {
+  "tr": "Ay Işığı Çayırı",
+  "en": "Moonlit Meadow"
+ },
+ "world.49": {
+  "tr": "Gün Doğumu Tepesi",
+  "en": "Sunrise Hill"
+ },
+ "world.50": {
+  "tr": "Büyük Sürpriz Festivali",
+  "en": "Grand Surprise Festival"
+ },
+ "twist.spyglass": {
+  "tr": "Dürbün",
+  "en": "Spyglass"
+ },
+ "twist.spyglass.desc": {
+  "tr": "Dürbün hep güvenlidir. Açınca sayısı, iki kare uzaklığa kadar olan bölgedeki sürprizleri söyler.",
+  "en": "A spyglass is always safe. Its number counts the surprises up to two tiles away in every direction."
+ },
+ "twist.scale": {
+  "tr": "Terazi",
+  "en": "Scale"
+ },
+ "twist.scale.desc": {
+  "tr": "Kenardaki sayı, o satırda ya da sütunda toplam kaç sürpriz olduğunu söyler.",
+  "en": "A number on the edge tells you how many surprises hide in that whole row or column."
+ },
+ "twist.lantern": {
+  "tr": "Fener",
+  "en": "Lantern"
+ },
+ "twist.lantern.desc": {
+  "tr": "Fener hep güvenlidir. Açınca sayısı komşuları değil, bütün satırdaki sürprizleri söyler.",
+  "en": "A lantern is always safe. Its number counts the surprises in its whole row, not just its neighbours."
+ },
+ "twist.camp": {
+  "tr": "Kamp yeri",
+  "en": "Campsite"
+ },
+ "twist.camp.desc": {
+  "tr": "Ağaçlar baştan açık. Her ağacın dört yanındaki karolardan tam biri çadırdır (sürpriz).",
+  "en": "Trees start open. Exactly one of the four tiles beside each tree is a tent (a surprise)."
+ }
+}

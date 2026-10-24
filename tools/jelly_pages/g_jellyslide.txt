@@ -1,0 +1,172 @@
+@@@ CSS
+/* JELLY SLIDE: buz, kar taneleri, kayan penguenler */
+.hero-ice{position:absolute;left:0;right:0;bottom:0;height:130px;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,255,255,.55));opacity:.8}
+html[data-theme="dark"] .hero-ice{background:linear-gradient(180deg,transparent,rgba(var(--accent-rgb),.14))}
+.snow{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.snow i{position:absolute;top:-30px;left:var(--x);width:var(--s);aspect-ratio:1;border-radius:50%;background:#fff;opacity:.85;animation:snowfall var(--t) linear var(--dl) infinite;filter:blur(.4px)}
+@keyframes snowfall{to{transform:translate(var(--dr),calc(100vh + 60px))}}
+.hero-slider{position:absolute;left:0;right:0;bottom:44px;height:84px;z-index:2;pointer-events:none;overflow:hidden}
+.hero-slider img{position:absolute;bottom:0;height:78px;width:auto;left:-100px;animation:slideacross var(--t,9s) cubic-bezier(.6,.05,.3,1) var(--dl,0s) infinite}
+@keyframes slideacross{0%{transform:translateX(-100px)}60%,100%{transform:translateX(calc(100vw + 120px))}}
+.sl-board{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none;background:var(--bg-soft);cursor:grab}
+.sl-t{position:absolute;width:calc(100%/var(--n));height:calc(100%/var(--n));background:center/100% 100% no-repeat}
+.sl-o{position:absolute;width:calc(100%/var(--n));height:calc(100%/var(--n));display:grid;place-items:center;pointer-events:none}
+.sl-o img{width:92%;height:92%;object-fit:contain}
+.sl-o.rock img{width:100%;height:100%;filter:drop-shadow(0 6px 5px rgba(20,30,80,.35))}
+.sl-o.fish img{width:74%;height:74%;animation:fishbob 2.4s ease-in-out infinite}
+@keyframes fishbob{50%{transform:translateY(-8%) rotate(4deg)}}
+.sl-o.gone{opacity:0;transform:scale(1.6);transition:.4s}
+.sl-pen{position:absolute;width:calc(100%/var(--n));height:calc(100%/var(--n));display:grid;place-items:center;pointer-events:none;transition:left var(--dur,.3s) cubic-bezier(.4,.05,.6,1),top var(--dur,.3s) cubic-bezier(.4,.05,.6,1);z-index:4}
+.sl-pen img{width:96%;height:96%;object-fit:contain;filter:drop-shadow(0 6px 5px rgba(20,30,80,.3))}
+.sl-pen.dive img{animation:dive .6s ease-in forwards}
+@keyframes dive{to{transform:scale(.1) rotate(200deg);opacity:0}}
+.sl-pen.bonk img{animation:shake .35s}
+.sl-pad{display:grid;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(2,64px);gap:6px;justify-content:center;margin-top:16px}
+.sl-pad button{border:0;padding:0;background:url(img/s/slide_arrow.webp) center/contain no-repeat;transition:transform .12s,filter .2s}
+.sl-pad button:active{transform:scale(.9)}
+.sl-pad .u{grid-column:2;grid-row:1}.sl-pad .l{grid-column:1;grid-row:2;transform:rotate(-90deg)}.sl-pad .d{grid-column:2;grid-row:2;transform:rotate(180deg)}.sl-pad .r{grid-column:3;grid-row:2;transform:rotate(90deg)}
+.sl-pad .l:active{transform:rotate(-90deg) scale(.9)}.sl-pad .d:active{transform:rotate(180deg) scale(.9)}.sl-pad .r:active{transform:rotate(90deg) scale(.9)}
+.sl-pad button.hl2{filter:drop-shadow(0 0 10px rgba(var(--pop-rgb),1)) brightness(1.15)}
+.sl-tip{text-align:center;color:var(--ink-3);font-weight:700;font-size:14px;margin-top:8px}
+
+@@@ HERO_DECO
+  <div class="snow" aria-hidden="true">
+    <i style="--x:6%;--s:7px;--t:11s;--dl:-2s;--dr:30px"></i><i style="--x:16%;--s:5px;--t:14s;--dl:-8s;--dr:-20px"></i><i style="--x:27%;--s:9px;--t:12s;--dl:-5s;--dr:24px"></i>
+    <i style="--x:38%;--s:5px;--t:15s;--dl:-1s;--dr:-30px"></i><i style="--x:49%;--s:8px;--t:10s;--dl:-7s;--dr:20px"></i><i style="--x:58%;--s:6px;--t:13s;--dl:-3s;--dr:-24px"></i>
+    <i style="--x:68%;--s:9px;--t:12s;--dl:-9s;--dr:26px"></i><i style="--x:77%;--s:5px;--t:16s;--dl:-4s;--dr:-18px"></i><i style="--x:86%;--s:7px;--t:11s;--dl:-6s;--dr:22px"></i><i style="--x:94%;--s:6px;--t:14s;--dl:-10s;--dr:-26px"></i>
+  </div>
+  <div class="hero-ice" aria-hidden="true"></div>
+  <div class="hero-slider" aria-hidden="true"><img src="img/s/slide_penguin_right.webp" alt="" style="--t:9s"><img src="img/s/slide_twin_h.webp" alt="" style="--t:11s;--dl:-5s"></div>
+
+@@@ HERO_STAGE
+        <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
+        <button class="fj" style="--x:-6%;--y:4%;--s:84px;--t:5.2s" data-d="14" aria-label="Fish"><img src="img/s/slide_fish_0.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:86%;--y:0%;--s:78px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Fish"><img src="img/s/slide_fish_1.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:-9%;--y:58%;--s:88px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Seal"><img src="img/s/slide_seal_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:90%;--y:50%;--s:92px;--t:5s;--dl:-.5s" data-d="26" aria-label="Penguin"><img src="img/s/slide_twin_idle.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:12%;--y:92%;--s:70px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Key"><img src="img/s/slide_key.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:72%;--y:93%;--s:78px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Bumper"><img src="img/s/slide_bumper_idle.webp" alt="" width="192" height="192"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i>
+
+@@@ TRY
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Slide to the exit.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Çıkışa kay.</span></h2>
+          <p class="lead2 en">Swipe on the ice, or use the arrows or your keyboard. The penguin keeps sliding until a rock or the edge stops it, so plan every move. Reach the exit hole in as few moves as you can.</p>
+          <p class="lead2 tr">Buzun üstünde kaydır; oklar ya da klavye de olur. Penguen bir kaya ya da kenar durdurana kadar kayar, o yüzden her hamleyi planla. Çıkış deliğine en az hamleyle ulaş.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Moves</span><span class="tr i">Hamle</span> <b id="m-moves">0</b></span><span><span class="en i">Best</span><span class="tr i">En iyi</span> <b id="m-par">0</b></span><span id="m-fish-w" style="display:none"><span class="en i">Fish</span><span class="tr i">Balık</span> <b id="m-fish">0/0</b></span></div>
+          <div class="actions">
+            <button class="btn g" id="b-undo" type="button"><span class="en i">Undo</span><span class="tr i">Geri al</span></button>
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+          <p class="hint-line" id="hint-line" aria-live="polite"></p>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <div class="sl-board" id="board" role="application" aria-label="Jelly Slide puzzle" tabindex="0"></div>
+            <div class="sl-pad" id="pad"><button class="u" type="button" aria-label="Up" data-d="u"></button><button class="l" type="button" aria-label="Left" data-d="l"></button><button class="d" type="button" aria-label="Down" data-d="d"></button><button class="r" type="button" aria-label="Right" data-d="r"></button></div>
+@@WIN@@
+          </div>
+        </div>
+
+@@@ JS
+/* ============ Jelly Slide: oynanabilir buz bulmacası ============
+   Kurallar oyunun kendi kodundan (slide.dart): penguen bir yöne kayar, kaya ya da kenar durdurana kadar; kar yığınına girince durur;
+   balıklar üzerinden geçilirken toplanır ve hepsi toplanmadan çıkış açılmaz; ışınlanma deliğine girince eşinden AYNI yönde devam eder;
+   çıkış deliğine (balıklar tamamsa) girince bölüm biter. En az hamle bulmacadaki "en iyi" sayıdır. */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$,JX=window.JX;
+  var P=window.JX_PUZZLES; if(!P||!P.length) return;
+  var board=$('#board'), D={u:[-1,0],d:[1,0],l:[0,-1],r:[0,1]};
+  var cur=0, pz, n, pos, fishLeft, moves, hist, busy, won, penEl, fishEls, solved=P.map(function(){return false;}), exitEl;
+  var NAMES=[['Rocks','Kayalar'],['Snow piles','Kar yığınları'],['Fish','Balıklar'],['Warp holes','Işınlanma']];
+  var key=function(q){ return q[0]+','+q[1]; };
+
+  function setOf(a){ var m={}; a.forEach(function(q){ m[key(q)]=1; }); return m; }
+  function load(i){
+    cur=i; pz=P[i]; n=pz.n; pos=pz.start.slice(); moves=0; hist=[]; busy=false; won=false; fishLeft=pz.fish.map(function(){return true;});
+    pz._rock=setOf(pz.rocks); pz._snow=setOf(pz.snow); pz._warp={}; pz.warps.forEach(function(w){ pz._warp[key(w[0])]=w[1]; pz._warp[key(w[1])]=w[0]; });
+    $('#win').classList.remove('on'); JX.hint('','');
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    board.innerHTML=''; board.style.setProperty('--n',n);
+    for(var r=0;r<n;r++) for(var c=0;c<n;c++){ var t=document.createElement('i'); t.className='sl-t'; t.style.cssText='left:'+(c/n*100)+'%;top:'+(r/n*100)+'%;background-image:url(img/s/slide_ice_'+((r+c)%2?'b':'a')+'.webp)'; board.appendChild(t); }
+    function obj(q,cls,src){ var d=document.createElement('div'); d.className='sl-o '+cls; d.style.cssText='left:'+(q[1]/n*100)+'%;top:'+(q[0]/n*100)+'%'; d.innerHTML='<img src="img/s/'+src+'.webp" alt="">'; board.appendChild(d); return d; }
+    pz.snow.forEach(function(q){ obj(q,'snow','slide_snow'); });
+    pz.rocks.forEach(function(q,k){ obj(q,'rock','slide_rock_'+(k%3)); });
+    pz.warps.forEach(function(w,k){ obj(w[0],'warp','slide_warp_'+(k%3)); obj(w[1],'warp','slide_warp_'+(k%3)); });
+    exitEl=obj(pz.exit,'exit',pz.fish.length?'slide_exit_closed':'slide_exit_open');
+    fishEls=pz.fish.map(function(q,k){ return obj(q,'fish','slide_fish_'+(k%2)); });
+    penEl=document.createElement('div'); penEl.className='sl-pen'; penEl.innerHTML='<img src="img/s/slide_penguin_idle.webp" alt="">'; place(pos,0); board.appendChild(penEl);
+    $('#m-fish-w').style.display=pz.fish.length?'':'none'; stats();
+  }
+  function place(q,dur){ penEl.style.setProperty('--dur',dur+'s'); penEl.style.left=(q[1]/n*100)+'%'; penEl.style.top=(q[0]/n*100)+'%'; }
+  function stats(){ $('#m-moves').textContent=moves; $('#m-par').textContent=pz.par; $('#m-fish').textContent=(pz.fish.length-fishLeft.filter(Boolean).length)+'/'+pz.fish.length; }
+  /* bir hamlenin sonucu: oyun kuralıyla aynı */
+  function run(from,d,fl){
+    var r=from[0], c=from[1], steps=0, got=[], dv=D[d], done=false, path=[];
+    fl=fl.slice();
+    while(true){
+      var nr=r+dv[0], nc=c+dv[1];
+      if(nr<0||nr>=n||nc<0||nc>=n||pz._rock[nr+','+nc]) break;
+      r=nr; c=nc; steps++; path.push([r,c]); if(steps>4*n) break;
+      pz.fish.forEach(function(f,k){ if(fl[k]&&f[0]===r&&f[1]===c){ fl[k]=false; got.push(k); } });
+      var w=pz._warp[r+','+c]; if(w){ r=w[0]; c=w[1]; path.push([r,c]); }
+      if(r===pz.exit[0]&&c===pz.exit[1]&&fl.every(function(x){return !x;})){ done=true; break; }
+      if(pz._snow[r+','+c]) break;
+      if(steps>4*n) break;
+    }
+    return {to:[r,c],steps:steps,got:got,done:done,fl:fl,path:path};
+  }
+  function go(d,silent){
+    if(busy||won) return; var res=run(pos,d,fishLeft);
+    if(!res.steps){ penEl.classList.remove('bonk'); void penEl.offsetWidth; penEl.classList.add('bonk'); return; }
+    busy=true; hist.push({pos:pos.slice(),fl:fishLeft.slice(),moves:moves}); moves++;
+    var img=penEl.querySelector('img'); img.src='img/s/slide_penguin_'+({u:'up',d:'down',l:'left',r:'right'})[d]+'.webp';
+    var dur=Math.min(.9,.16+res.steps*.09); place(res.to,dur);
+    setTimeout(function(){
+      pos=res.to; fishLeft=res.fl; res.got.forEach(function(k){ fishEls[k].classList.add('gone'); });
+      if(pz.fish.length && fishLeft.every(function(x){return !x;})) exitEl.querySelector('img').src='img/s/slide_exit_open.webp';
+      stats();
+      if(res.done){ won=true; solved[cur]=true; penEl.classList.add('dive'); setTimeout(function(){ JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load); JX.win(['fx_star','fx_heart','fx_flake','fx_glint']); },450); }
+      else img.src='img/s/slide_penguin_idle.webp';
+      busy=false;
+    },dur*1000+30);
+  }
+  /* kaydırma: işaretçi, ok tuşları, ekran okları */
+  var sx=0, sy=0, down=false;
+  board.addEventListener('pointerdown',function(e){ down=true; sx=e.clientX; sy=e.clientY; try{ board.setPointerCapture(e.pointerId); }catch(x){} e.preventDefault(); });
+  board.addEventListener('pointerup',function(e){
+    if(!down) return; down=false; var dx=e.clientX-sx, dy=e.clientY-sy; if(Math.max(Math.abs(dx),Math.abs(dy))<18) return;
+    go(Math.abs(dx)>Math.abs(dy)?(dx>0?'r':'l'):(dy>0?'d':'u'));
+  });
+  $$('#pad button').forEach(function(b){ b.addEventListener('click',function(){ go(b.getAttribute('data-d')); }); });
+  document.addEventListener('keydown',function(e){
+    var m={ArrowUp:'u',ArrowDown:'d',ArrowLeft:'l',ArrowRight:'r'}[e.key]; if(!m) return;
+    var rc=board.getBoundingClientRect(); if(rc.bottom<0||rc.top>innerHeight) return;
+    if(e.target.closest&&e.target.closest('input,textarea,select')) return; e.preventDefault(); go(m);
+  });
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-undo').addEventListener('click',function(){
+    if(busy||!hist.length) return; var h=hist.pop(); pos=h.pos; fishLeft=h.fl; moves=h.moves; won=false; penEl.classList.remove('dive'); $('#win').classList.remove('on');
+    fishEls.forEach(function(el,k){ el.classList.toggle('gone',!fishLeft[k]); }); exitEl.querySelector('img').src='img/s/slide_exit_'+(fishLeft.some(Boolean)?'closed':'open')+'.webp'; place(pos,.2); stats();
+  });
+  /* ipucu: şu andan çıkışa en kısa yol (BFS) */
+  function best(){
+    var start=[pos[0],pos[1],fishLeft.map(function(x){return x?1:0;}).join('')], seen={}, q=[{s:start,f:null}], h=0; seen[start.join('|')]=1;
+    while(h<q.length&&q.length<20000){ var e=q[h++];
+      for(var d in D){ var fl=e.s[2].split('').map(function(x){return x==='1';}); var r=run([e.s[0],e.s[1]],d,fl); if(!r.steps) continue;
+        if(r.done) return e.f||d; var k=[r.to[0],r.to[1],r.fl.map(function(x){return x?1:0;}).join('')], ks=k.join('|'); if(seen[ks]) continue; seen[ks]=1; q.push({s:k,f:e.f||d}); } }
+    return null;
+  }
+  $('#b-hint').addEventListener('click',function(){
+    if(busy||won) return; var d=best(); if(!d){ JX.hint('No way out from here. Try Undo or Start over.','Buradan çıkış yok. Geri al ya da baştan başla.'); return; }
+    var b=$('#pad [data-d="'+d+'"]'); b.classList.add('hl2'); setTimeout(function(){ b.classList.remove('hl2'); },2200);
+    JX.hint('Try sliding that way.','Şu yöne kaymayı dene.');
+  });
+  load(0);
+})();

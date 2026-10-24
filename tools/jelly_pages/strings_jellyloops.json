@@ -1,0 +1,378 @@
+{
+ "world.1": {
+  "tr": "İplik Atölyesi",
+  "en": "Thread Workshop"
+ },
+ "world.2": {
+  "tr": "Boncuk Kutusu",
+  "en": "Bead Box"
+ },
+ "world.3": {
+  "tr": "Kolye Vitrini",
+  "en": "Necklace Display"
+ },
+ "world.4": {
+  "tr": "Kuyumcu",
+  "en": "Jeweler's Shop"
+ },
+ "world.5": {
+  "tr": "Dantel Odası",
+  "en": "Lace Room"
+ },
+ "world.6": {
+  "tr": "Düğme Çekmecesi",
+  "en": "Button Drawer"
+ },
+ "world.7": {
+  "tr": "Nakış Çerçevesi",
+  "en": "Embroidery Hoop"
+ },
+ "world.8": {
+  "tr": "Örgü Salonu",
+  "en": "Knitting Parlor"
+ },
+ "world.9": {
+  "tr": "İnci Koyu",
+  "en": "Pearl Cove"
+ },
+ "world.10": {
+  "tr": "Büyük Atölye",
+  "en": "Grand Atelier"
+ },
+ "world.11": {
+  "tr": "Kumaş Pazarı",
+  "en": "Fabric Market"
+ },
+ "world.12": {
+  "tr": "İğne Yastığı",
+  "en": "Pincushion Meadow"
+ },
+ "world.13": {
+  "tr": "Kurdele Bahçesi",
+  "en": "Ribbon Garden"
+ },
+ "world.14": {
+  "tr": "Yün Tepesi",
+  "en": "Wool Hill"
+ },
+ "world.15": {
+  "tr": "Altın İplik Sarayı",
+  "en": "Golden Thread Palace"
+ },
+ "world.16": {
+  "tr": "Boncuk Plajı",
+  "en": "Bead Beach"
+ },
+ "world.17": {
+  "tr": "Charm Dükkânı",
+  "en": "Charm Shop"
+ },
+ "world.18": {
+  "tr": "Taç Odası",
+  "en": "Tiara Room"
+ },
+ "world.19": {
+  "tr": "Küpe Bahçesi",
+  "en": "Earring Garden"
+ },
+ "world.20": {
+  "tr": "Yüzük Kutusu",
+  "en": "Ring Box"
+ },
+ "world.21": {
+  "tr": "Brodeli Orman",
+  "en": "Embroidered Forest"
+ },
+ "world.22": {
+  "tr": "Patchwork Tarlası",
+  "en": "Patchwork Field"
+ },
+ "world.23": {
+  "tr": "Kadife Salonu",
+  "en": "Velvet Lounge"
+ },
+ "world.24": {
+  "tr": "Cam Boncuk Atölyesi",
+  "en": "Glass Bead Studio"
+ },
+ "world.25": {
+  "tr": "İnci Kolye Sokağı",
+  "en": "Pearl Necklace Lane"
+ },
+ "world.26": {
+  "tr": "Papyon Salonu",
+  "en": "Bow Tie Parlor"
+ },
+ "world.27": {
+  "tr": "Fiyonk Çayırı",
+  "en": "Ribbon Bow Meadow"
+ },
+ "world.28": {
+  "tr": "Kristal Avize Salonu",
+  "en": "Chandelier Hall"
+ },
+ "world.29": {
+  "tr": "Işıltılı Bileklik",
+  "en": "Bangle Bazaar"
+ },
+ "world.30": {
+  "tr": "Tarçın İpliği",
+  "en": "Cinnamon Yarn"
+ },
+ "world.31": {
+  "tr": "Deniz Kabuğu Koleksiyonu",
+  "en": "Seashell Collection"
+ },
+ "world.32": {
+  "tr": "Mercan Kolye",
+  "en": "Coral Necklace"
+ },
+ "world.33": {
+  "tr": "Gökkuşağı İpliği",
+  "en": "Rainbow Thread"
+ },
+ "world.34": {
+  "tr": "Yıldız Boncuğu",
+  "en": "Star Beads"
+ },
+ "world.35": {
+  "tr": "Kalp Kolyesi",
+  "en": "Heart Locket"
+ },
+ "world.36": {
+  "tr": "Çiçek Çelengi",
+  "en": "Flower Garland"
+ },
+ "world.37": {
+  "tr": "Kozalak Ormanı",
+  "en": "Pinecone Wood"
+ },
+ "world.38": {
+  "tr": "Kar Taneli Dantel",
+  "en": "Snowflake Lace"
+ },
+ "world.39": {
+  "tr": "Altın Kemer",
+  "en": "Gold Belt Hall"
+ },
+ "world.40": {
+  "tr": "Işıltılı Perde",
+  "en": "Sparkle Curtain"
+ },
+ "world.41": {
+  "tr": "Kalem Etek Sokağı",
+  "en": "Tailor's Lane"
+ },
+ "world.42": {
+  "tr": "Ay Taşı Kolyesi",
+  "en": "Moonstone Necklace"
+ },
+ "world.43": {
+  "tr": "Sedef Odası",
+  "en": "Mother-of-Pearl Room"
+ },
+ "world.44": {
+  "tr": "Dantel Köprüsü",
+  "en": "Lace Bridge"
+ },
+ "world.45": {
+  "tr": "Ahşap Boncuk Atölyesi",
+  "en": "Wooden Bead Workshop"
+ },
+ "world.46": {
+  "tr": "Tül Bahçesi",
+  "en": "Tulle Garden"
+ },
+ "world.47": {
+  "tr": "Gece Kolyesi",
+  "en": "Night Necklace"
+ },
+ "world.48": {
+  "tr": "Altın Düğüm",
+  "en": "Golden Knot"
+ },
+ "world.49": {
+  "tr": "Büyük Kolye Festivali",
+  "en": "Grand Necklace Festival"
+ },
+ "world.50": {
+  "tr": "Jöle Halka Şöleni",
+  "en": "Jelly Loop Jubilee"
+ },
+ "twist.pearl": {
+  "tr": "İnci",
+  "en": "Pearls"
+ },
+ "twist.pearl.desc": {
+  "tr": "Beyaz inciden ip düz geçer, siyah incide köşe döner. İnciler halkanın üstündedir.",
+  "en": "The thread goes straight through a white pearl and turns at a black one. Every pearl is on the loop."
+ },
+ "twist.bridge": {
+  "tr": "Köprü bulmacası",
+  "en": "Bridge puzzle"
+ },
+ "twist.bridge.desc": {
+  "tr": "Adalardaki sayı kadar köprü kur. Köprüler kesişmez ve tüm adalar birbirine bağlanır.",
+  "en": "Build as many bridges as the number on each island. Bridges never cross and all islands get linked."
+ },
+ "twist.x": {
+  "tr": "Kapalı kenar",
+  "en": "Blocked edges"
+ },
+ "twist.x.desc": {
+  "tr": "X işaretli kenardan ip geçmez. Kenara dokunarak kendi X işaretini de koyabilirsin.",
+  "en": "No thread can use an edge marked with X. Tap an edge to place your own X too."
+ },
+ "twist.double": {
+  "tr": "İkili köprü",
+  "en": "Double bridges"
+ },
+ "twist.double.desc": {
+  "tr": "Aynı iki ada arasına iki köprü kurulabilir. Köprüye iki kez dokun ya da iki kez sürükle.",
+  "en": "Two islands can be joined by two bridges. Tap or drag a bridge twice."
+ },
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "twist.snow": {
+  "tr": "Kar yığınları",
+  "en": "Snow piles"
+ },
+ "twist.snow.desc": {
+  "tr": "Kar yığınına girince patenci durur.",
+  "en": "The skater stops when it enters a snow pile."
+ }
+}

@@ -1,0 +1,442 @@
+{
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "twist.snow": {
+  "tr": "Kar yığınları",
+  "en": "Snow piles"
+ },
+ "twist.snow.desc": {
+  "tr": "Kar yığınına girince patenci durur.",
+  "en": "The skater stops when it enters a snow pile."
+ },
+ "world.1": {
+  "tr": "Şeker Köşesi",
+  "en": "Candy Corner"
+ },
+ "world.2": {
+  "tr": "Donut Caddesi",
+  "en": "Donut Drive"
+ },
+ "world.3": {
+  "tr": "Kekçi Meydanı",
+  "en": "Cupcake Court"
+ },
+ "world.4": {
+  "tr": "Sakız Garajı",
+  "en": "Gummy Garage"
+ },
+ "world.5": {
+  "tr": "Lolipop Sokağı",
+  "en": "Lollipop Lane"
+ },
+ "world.6": {
+  "tr": "Dondurma Meydanı",
+  "en": "Ice-Cream Plaza"
+ },
+ "world.7": {
+  "tr": "Krep Otoparkı",
+  "en": "Pancake Parking"
+ },
+ "world.8": {
+  "tr": "Gofret Deposu",
+  "en": "Waffle Warehouse"
+ },
+ "world.9": {
+  "tr": "Marshmallow AVM",
+  "en": "Marshmallow Mall"
+ },
+ "world.10": {
+  "tr": "Çikolata Limanı",
+  "en": "Chocolate Harbor"
+ },
+ "world.11": {
+  "tr": "Jelibon Havalimanı",
+  "en": "Jellybean Airfield"
+ },
+ "world.12": {
+  "tr": "Makaron Pazarı",
+  "en": "Macaron Market"
+ },
+ "world.13": {
+  "tr": "Gazoz Durağı",
+  "en": "Soda Station"
+ },
+ "world.14": {
+  "tr": "Patlamış Mısır Sineması",
+  "en": "Popcorn Cinema"
+ },
+ "world.15": {
+  "tr": "Bal Otoyolu",
+  "en": "Honey Highway"
+ },
+ "world.16": {
+  "tr": "Konfeti Meydanı",
+  "en": "Sprinkle Square"
+ },
+ "world.17": {
+  "tr": "Şeker Panayırı",
+  "en": "Fairground Fudge"
+ },
+ "world.18": {
+  "tr": "Sorbe Sahili",
+  "en": "Sorbet Seaside"
+ },
+ "world.19": {
+  "tr": "Pamuk Bulut Çatısı",
+  "en": "Cotton Cloud Rooftop"
+ },
+ "world.20": {
+  "tr": "Kurabiye Kampüsü",
+  "en": "Cookie Campus"
+ },
+ "world.21": {
+  "tr": "Bastonlu Kavşak",
+  "en": "Candy Cane Crossing"
+ },
+ "world.22": {
+  "tr": "Puding Parkı",
+  "en": "Pudding Park"
+ },
+ "world.23": {
+  "tr": "Nane Çarşısı",
+  "en": "Mint Bazaar"
+ },
+ "world.24": {
+  "tr": "Karamel Tüneli",
+  "en": "Toffee Tunnel"
+ },
+ "world.25": {
+  "tr": "Gumdrop Bahçe Merkezi",
+  "en": "Gumdrop Garden Center"
+ },
+ "world.26": {
+  "tr": "Çilek Stadyumu",
+  "en": "Strawberry Stadium"
+ },
+ "world.27": {
+  "tr": "Limonata Kıyısı",
+  "en": "Lemonade Lakeside"
+ },
+ "world.28": {
+  "tr": "Pretzel Meydanı",
+  "en": "Pretzel Plaza"
+ },
+ "world.29": {
+  "tr": "Gökkuşağı Göbeği",
+  "en": "Rainbow Roundabout"
+ },
+ "world.30": {
+  "tr": "Kruvasan Metrosu",
+  "en": "Croissant Metro"
+ },
+ "world.31": {
+  "tr": "Akide Tren İstasyonu",
+  "en": "Taffy Station"
+ },
+ "world.32": {
+  "tr": "Karamel Kanyonu",
+  "en": "Caramel Canyon"
+ },
+ "world.33": {
+  "tr": "Jelibon Kavşağı",
+  "en": "Jellybean Junction"
+ },
+ "world.34": {
+  "tr": "Krema Festivali",
+  "en": "Frosting Festival"
+ },
+ "world.35": {
+  "tr": "Şeker Okulu",
+  "en": "Sugar School"
+ },
+ "world.36": {
+  "tr": "Şeker Şato Avlusu",
+  "en": "Candy Castle Courtyard"
+ },
+ "world.37": {
+  "tr": "Yıldızlı Açık Hava Sineması",
+  "en": "Starlight Drive-in"
+ },
+ "world.38": {
+  "tr": "Naneli İskele",
+  "en": "Peppermint Pier"
+ },
+ "world.39": {
+  "tr": "Şurup Pınarları",
+  "en": "Syrup Springs"
+ },
+ "world.40": {
+  "tr": "Bisküvi Köprüsü",
+  "en": "Biscuit Bridge"
+ },
+ "world.41": {
+  "tr": "Kakao Koyu",
+  "en": "Cocoa Cove"
+ },
+ "world.42": {
+  "tr": "Beze Dağı",
+  "en": "Meringue Mountain"
+ },
+ "world.43": {
+  "tr": "Petek Tepeleri",
+  "en": "Honeycomb Heights"
+ },
+ "world.44": {
+  "tr": "Köpüklü Çeşme Meydanı",
+  "en": "Fizzy Fountain Plaza"
+ },
+ "world.45": {
+  "tr": "Sundae Silueti",
+  "en": "Sundae Skyline"
+ },
+ "world.46": {
+  "tr": "Fener Gece Pazarı",
+  "en": "Lantern Night Market"
+ },
+ "world.47": {
+  "tr": "Böğürtlen Sahil Yolu",
+  "en": "Berry Boardwalk"
+ },
+ "world.48": {
+  "tr": "Balon Meydanı",
+  "en": "Balloon Airfield"
+ },
+ "world.49": {
+  "tr": "Tatlı Şenlik Meydanı",
+  "en": "Sweet Jamboree Square"
+ },
+ "world.50": {
+  "tr": "Jöle Şöleni",
+  "en": "Jelly Jubilee"
+ },
+ "twist.cones": {
+  "tr": "Koniler",
+  "en": "Cones"
+ },
+ "twist.cones.desc": {
+  "tr": "Koniler hareket etmez. Arabalar konilerin içinden geçemez.",
+  "en": "Cones never move. Cars cannot drive through them."
+ },
+ "twist.bus": {
+  "tr": "Otobüs",
+  "en": "Bus"
+ },
+ "twist.bus.desc": {
+  "tr": "Otobüsler 3 hücre uzunluğunda; çıkmak için daha uzun bir yol ister.",
+  "en": "Buses are three squares long and need a longer clear road."
+ },
+ "twist.number": {
+  "tr": "Numaralı arabalar",
+  "en": "Numbered cars"
+ },
+ "twist.number.desc": {
+  "tr": "Numaralı arabalar sırayla çıkar: önce 1, sonra 2, sonra 3…",
+  "en": "Numbered cars leave in order: 1 first, then 2, then 3…"
+ },
+ "twist.arrow": {
+  "tr": "Yol oku",
+  "en": "Road arrow"
+ },
+ "twist.arrow.desc": {
+  "tr": "Okun üstünden geçen araba okun gösterdiği yöne döner.",
+  "en": "A car that drives over an arrow turns the way it points."
+ },
+ "twist.gate": {
+  "tr": "Renkli bariyer",
+  "en": "Colour barrier"
+ },
+ "twist.gate.desc": {
+  "tr": "Renkli bariyerden yalnız aynı renkteki araba geçebilir.",
+  "en": "Only a car of the same colour can pass a colour barrier."
+ },
+ "twist.sleep": {
+  "tr": "Uyuyan araba",
+  "en": "Sleepy car"
+ },
+ "twist.sleep.desc": {
+  "tr": "Uyuyan araba, yanındaki bir araba çıkınca uyanır. Uyurken çıkamaz.",
+  "en": "A sleepy car wakes when a neighbour drives out. It cannot go while asleep."
+ },
+ "twist.bridge": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridge.desc": {
+  "tr": "Köprüden geçen araba, köprü üstündeki arabaya takılmaz.",
+  "en": "Cars driving over a bridge are not blocked by a car parked on it."
+ },
+ "twist.frozen": {
+  "tr": "Donmuş araba",
+  "en": "Frozen car"
+ },
+ "twist.frozen.desc": {
+  "tr": "Buzlu araba, iki araba çıkınca erir. Önce başkalarını çıkar.",
+  "en": "A frozen car melts once two cars have left. Free the others first."
+ },
+ "twist.traffic": {
+  "tr": "Geçen trafik",
+  "en": "Passing traffic"
+ },
+ "twist.traffic.desc": {
+  "tr": "Şeritte bir kamyon her dokunuşta bir adım ilerler. Zamanlamana dikkat et.",
+  "en": "A truck crosses the lane one step per tap. Mind your timing."
+ },
+ "twist.honk": {
+  "tr": "Korna",
+  "en": "Horn"
+ },
+ "twist.honk.desc": {
+  "tr": "Korna basan araba çıkarken komşu arabaları bir kare iter.",
+  "en": "A horn car nudges neighbouring cars one square as it leaves."
+ },
+ "twist.tow": {
+  "tr": "Çekici",
+  "en": "Tow truck"
+ },
+ "twist.tow.desc": {
+  "tr": "Çekici çıkarken arkasındaki arabayı da çıkarır.",
+  "en": "A tow truck takes the car right behind it along when it leaves."
+ },
+ "twist.round": {
+  "tr": "Dönel kavşak",
+  "en": "Roundabout"
+ },
+ "twist.round.desc": {
+  "tr": "Kavşağa dokununca komşu arabaların yönü ters döner.",
+  "en": "Tap a roundabout to flip the direction of the cars around it."
+ }
+}

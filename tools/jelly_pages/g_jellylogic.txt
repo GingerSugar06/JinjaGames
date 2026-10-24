@@ -1,0 +1,178 @@
+@@@ CSS
+/* JELLY LOGIC: kitaplık, kalem, sudoku tahtası */
+.hero-books{position:absolute;inset:auto 0 0 0;height:150px;z-index:1;pointer-events:none;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(var(--accent-rgb),.10) 46px 52px)}
+.fj{display:grid;place-items:center}
+.fj b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:calc(var(--s,84px)*.46);color:#4a2f9a;pointer-events:none;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.lg-wrap{position:relative}
+.lg-board{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:3px;aspect-ratio:1;user-select:none;-webkit-user-select:none;touch-action:manipulation;padding:2px}
+.lc{position:relative;aspect-ratio:1;border:0;padding:0;background:url(img/s/logic_cell_normal.webp) center/100% 100% no-repeat;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5.6vw,34px);color:#3f55d6;line-height:1;display:grid;place-items:center;transition:transform .15s var(--ease)}
+.lc.gv{background-image:url(img/s/logic_cell_given.webp);color:#4a2f9a}
+.lc.dg{background-image:url(img/s/logic_cell_selected.webp)}
+.lc.gv.dg{background-image:url(img/s/logic_cell_given.webp);box-shadow:inset 0 0 0 3px rgba(80,160,255,.55);border-radius:22%}
+.lc.sm{background-image:url(img/s/logic_cell_same.webp)}
+.lc.hn{background-image:url(img/s/logic_cell_hint.webp)}
+.lc.er{background-image:url(img/s/logic_cell_error.webp);color:#c0314f}
+.lc.sel{transform:scale(1.07);z-index:3;filter:drop-shadow(0 0 7px rgba(var(--accent-rgb),.7))}
+.lc.sel{background-image:url(img/s/logic_cell_selected.webp)}
+.lc .nt{position:absolute;inset:9%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);font-size:clamp(8px,1.7vw,11px);font-family:var(--f-body);font-weight:800;color:#6a5aa8;pointer-events:none}
+.lc .nt i{font-style:normal;display:grid;place-items:center}
+.lc .pr{position:absolute;right:7%;top:7%;width:30%;aspect-ratio:1;border:2.5px solid rgba(90,71,201,.55);pointer-events:none}
+.lc .pr.e{border-radius:50%}.lc .pr.o{border-radius:3px}
+.lg-line{position:absolute;background:var(--accent);border-radius:4px;pointer-events:none;z-index:2;opacity:.85}
+.lg-cmp{position:absolute;width:11%;z-index:4;pointer-events:none;transform:translate(-50%,-50%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+.lg-pad{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr)) ;gap:8px;margin-top:16px}
+.lg-pad button{position:relative;aspect-ratio:1;border:0;padding:0;background:url(img/s/logic_key_normal.webp) center/100% 100% no-repeat;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,30px);color:#fff;text-shadow:0 2px 0 rgba(60,30,130,.45);transition:transform .12s}
+.lg-pad button:active{background-image:url(img/s/logic_key_pressed.webp);transform:scale(.94)}
+.lg-pad button.dn{opacity:.35}
+.lg-tools{display:flex;gap:10px;margin-top:12px}
+.lg-tools button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);font-weight:800;color:var(--ink-2);font-size:14.5px}
+.lg-tools button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.lg-tools img{width:28px;height:28px}
+.lg-owl{position:absolute;right:-8px;top:-52px;width:96px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+.lab-art .mg{display:grid;grid-template-columns:repeat(var(--c),1fr);gap:3px;width:min(100%,230px);margin:0 auto}
+.lab-art .mg span{position:relative;display:block}
+.lab-art .mg span img{width:100%;filter:none;cursor:default}
+.lab-art .mg b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:26px;color:#4a2f9a}
+.lab-art .mg i{position:absolute;left:8%;top:2%;font-style:normal;font-size:13px;font-weight:800;color:#4a2f9a}
+.lab-art .cagebox{outline:3px dashed rgba(90,71,201,.7);outline-offset:-1px;width:min(100%,190px)}
+.lab-art .cmp b,.lab-art .par b{font-family:var(--f-display);font-size:30px;color:#4a2f9a}
+.lab-art .cmp{position:relative}.lab-art .cmp img{width:30%}.lab-art .cmp img.cmpi{width:22%}
+.lab-art .cmp>b{position:static}
+.lab-art .par .sq,.lab-art .par .ci{width:96px;height:96px;display:grid;place-items:center;border:5px solid var(--accent);background:var(--bg-soft)}
+.lab-art .par .sq{border-radius:14px}.lab-art .par .ci{border-radius:50%}
+@media(max-width:680px){.lg-owl{width:72px;top:-38px}}
+
+@@@ HERO_DECO
+  <div class="hero-books" aria-hidden="true"></div>
+
+@@@ HERO_STAGE
+        <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
+        <button class="fj" style="--x:-6%;--y:4%;--s:90px;--t:5.2s" data-d="14" aria-label="Number"><img src="img/s/logic_cell_given.webp" alt="" width="192" height="192"><b>3</b></button>
+        <button class="fj" style="--x:84%;--y:0%;--s:84px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Number"><img src="img/s/logic_cell_hint.webp" alt="" width="192" height="192"><b>1</b></button>
+        <button class="fj" style="--x:-9%;--y:60%;--s:86px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Number"><img src="img/s/logic_cell_same.webp" alt="" width="192" height="192"><b>4</b></button>
+        <button class="fj" style="--x:90%;--y:50%;--s:92px;--t:5s;--dl:-.5s" data-d="26" aria-label="Number"><img src="img/s/logic_cell_selected.webp" alt="" width="192" height="192"><b>2</b></button>
+        <button class="fj" style="--x:14%;--y:92%;--s:72px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Pencil"><img src="img/s/logic_ic_note.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:72%;--y:93%;--s:78px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Check"><img src="img/s/logic_fx_ok.webp" alt="" width="192" height="192"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i>
+
+@@@ TRY
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Fill the grid.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Tabloyu doldur.</span></h2>
+          <p class="lead2 en">Tap a cell, then tap a number. Every row, column and thick-lined box holds each number once. Mistakes turn red right away. Each twist below is a real level type from the game.</p>
+          <p class="lead2 tr">Bir hücreye, sonra bir sayıya dokun. Her satır, sütun ve kalın çizgili kutu her sayıyı bir kez içerir. Hatalar hemen kırmızıya döner. Aşağıdaki her sürpriz oyundaki gerçek bir bölüm türü.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Filled</span><span class="tr i">Dolu</span> <b id="m-fill">0/0</b></span><span><span class="en i">Mistakes</span><span class="tr i">Hata</span> <b id="m-err">0</b></span></div>
+          <div class="actions">
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+          <p class="hint-line" id="hint-line" aria-live="polite"></p>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <img class="lg-owl" id="lg-owl" src="img/s/logic_owl_idle.webp" alt="" width="192" height="192">
+            <div class="lg-wrap"><div class="lg-board" id="board" role="application" aria-label="Jelly Logic puzzle"></div></div>
+            <div class="lg-pad" id="pad"></div>
+            <div class="lg-tools"><button type="button" id="b-note"><img src="img/s/logic_ic_note.webp" alt=""><span class="en i">Notes</span><span class="tr i">Not</span></button><button type="button" id="b-erase"><img src="img/s/logic_ic_erase.webp" alt=""><span class="en i">Erase</span><span class="tr i">Sil</span></button></div>
+@@WIN@@
+          </div>
+        </div>
+
+@@@ JS
+/* ============ Jelly Logic: oynanabilir sudoku ============
+   Kurallar oyunun kendi kodundan (logic.dart): satır, sütun ve kutu başına her sayı bir kez; karşılaştırma okları KÜÇÜK sayıyı
+   gösterir; kare hücre TEK, daire hücre ÇİFT sayı taşır; çapraz sudokuda iki çapraz da her sayıyı bir kez içerir.
+   Yanlış sayı hemen kırmızı olur (çözümle karşılaştırılır). Bulmacalar tek çözümlü. */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$,JX=window.JX;
+  var P=window.JX_PUZZLES; if(!P||!P.length) return;
+  var board=$('#board'), pad=$('#pad'), owl=$('#lg-owl');
+  var cur=0, pz, n, val, notes, sel=-1, err=0, noteMode=false, won=false, solved=P.map(function(){return false;}), hinted=-1;
+  var NAMES=[['4×4 Sudoku','4×4 Sudoku'],['Bigger or smaller','Büyük ya da küçük'],['Odd & even','Tek ve çift'],['Diagonal','Çapraz'],['6×6 Sudoku','6×6 Sudoku']];
+
+  function load(i){
+    cur=i; pz=P[i]; n=pz.n; val=pz.givens.slice(); notes=val.map(function(){return {};}); sel=-1; err=0; won=false; hinted=-1;
+    $('#win').classList.remove('on'); owl.src='img/s/logic_owl_idle.webp'; noteMode=false; $('#b-note').classList.remove('on'); JX.hint('','');
+    var lab=P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; });
+    JX.picker($('#picker'),lab,cur,solved,load);
+    build(); render();
+  }
+  function build(){
+    board.style.setProperty('--n',n); board.innerHTML='';
+    for(var i=0;i<n*n;i++){
+      var b=document.createElement('button'); b.type='button'; b.className='lc'; b.setAttribute('data-i',i); b.setAttribute('aria-label','cell '+(i+1));
+      (function(i){ b.addEventListener('click',function(){ pick(i); }); })(i); board.appendChild(b);
+    }
+    /* kutu çizgileri */
+    for(var c=pz.bc;c<n;c+=pz.bc){ var v=document.createElement('i'); v.className='lg-line'; v.style.cssText='top:2px;bottom:2px;width:4px;left:calc('+(c/n*100)+'% - 2px)'; board.appendChild(v); }
+    for(var r=pz.br;r<n;r+=pz.br){ var h=document.createElement('i'); h.className='lg-line'; h.style.cssText='left:2px;right:2px;height:4px;top:calc('+(r/n*100)+'% - 2px)'; board.appendChild(h); }
+    /* karşılaştırma okları: ok KÜÇÜK olanı gösterir (a < b) */
+    pz.cmp.forEach(function(p){
+      var a=p[0], b=p[1], ra=Math.floor(a/n), ca=a%n, rb=Math.floor(b/n), cb=b%n, im=document.createElement('img');
+      var dir=rb===ra ? (cb>ca?'left':'right') : (rb>ra?'up':'down');
+      im.src='img/s/logic_cmp_'+dir+'.webp'; im.className='lg-cmp'; im.alt='';
+      im.style.left=((ca+cb+1)/2/n*100)+'%'; im.style.top=((ra+rb+1)/2/n*100)+'%'; board.appendChild(im);
+    });
+    pad.style.setProperty('--n',n); pad.innerHTML='';
+    for(var k=1;k<=n;k++){ var bt=document.createElement('button'); bt.type='button'; bt.textContent=k; (function(k){ bt.addEventListener('click',function(){ enter(k); }); })(k); pad.appendChild(bt); }
+  }
+  function onDiag(i){ var r=Math.floor(i/n), c=i%n; return pz.diag && (r===c || r+c===n-1); }
+  function peers(i){
+    var r=Math.floor(i/n), c=i%n, set={}; for(var k=0;k<n;k++){ set[r*n+k]=1; set[k*n+c]=1; }
+    var R=Math.floor(r/pz.br)*pz.br, C=Math.floor(c/pz.bc)*pz.bc; for(var a=0;a<pz.br;a++) for(var b=0;b<pz.bc;b++) set[(R+a)*n+C+b]=1;
+    delete set[i]; return set;
+  }
+  function render(){
+    var cells=$$('.lc',board), filled=0, selv=sel>=0?val[sel]:0, counts={};
+    cells.forEach(function(el,i){
+      var v=val[i], given=pz.givens[i]>0, bad=v&&v!==pz.solution[i];
+      el.className='lc'+(given?' gv':'')+(onDiag(i)?' dg':'')+(v&&selv&&v===selv&&i!==sel?' sm':'')+(bad?' er':'')+(i===hinted?' hn':'')+(i===sel?' sel':'');
+      var h='';
+      if(v){ h+=v; counts[v]=(counts[v]||0)+1; if(!bad) filled++; }
+      else { var nt=notes[i], keys=Object.keys(nt); if(keys.length){ h+='<span class="nt">'; for(var k=1;k<=Math.max(n,4);k++){ h+='<i>'+(nt[k]?k:'')+'</i>'; } h+='</span>'; } }
+      var pr=pz.parity[i]; if(pr) h+='<span class="pr '+pr+'"></span>';
+      el.innerHTML=h;
+    });
+    $$('button',pad).forEach(function(b,k){ b.classList.toggle('dn',(counts[k+1]||0)>=n); });
+    $('#m-fill').textContent=filled+'/'+(n*n); $('#m-err').textContent=err;
+    if(!won && filled===n*n) finish();
+  }
+  function pick(i){ if(won) return; sel=sel===i?-1:i; hinted=-1; render(); }
+  function enter(k){
+    if(won||sel<0){ if(!won) JX.hint('Tap a cell first.','Önce bir hücreye dokun.'); return; }
+    if(pz.givens[sel]) return;
+    if(noteMode){ if(val[sel]) return; if(notes[sel][k]) delete notes[sel][k]; else notes[sel][k]=1; render(); return; }
+    var wasBad=val[sel]&&val[sel]!==pz.solution[sel];
+    val[sel]=(val[sel]===k)?0:k; notes[sel]={};
+    if(val[sel] && val[sel]!==pz.solution[sel]){ err++; owl.src='img/s/logic_owl_sad.webp'; shake(); setTimeout(function(){ if(!won) owl.src='img/s/logic_owl_idle.webp'; },900); }
+    else if(val[sel]){ owl.src='img/s/logic_owl_wink.webp'; setTimeout(function(){ if(!won) owl.src='img/s/logic_owl_idle.webp'; },700); }
+    render();
+  }
+  function shake(){ var el=$$('.lc',board)[sel]; if(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); } }
+  function finish(){
+    won=true; solved[cur]=true; sel=-1; owl.src='img/s/logic_owl_win.webp'; render();
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    JX.win(['fx_star','fx_heart','logic_fx_ok','logic_fx_note']);
+  }
+  $('#b-note').addEventListener('click',function(){ noteMode=!noteMode; this.classList.toggle('on',noteMode); });
+  $('#b-erase').addEventListener('click',function(){ if(won||sel<0||pz.givens[sel]) return; val[sel]=0; notes[sel]={}; render(); });
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-hint').addEventListener('click',function(){
+    if(won) return;
+    var pick1=-1; for(var i=0;i<n*n;i++){ if(val[i] && val[i]!==pz.solution[i]){ pick1=i; break; } }
+    if(pick1<0){ var best=-1, bc=99; for(var j=0;j<n*n;j++){ if(!val[j]){ var pe=peers(j), used={}; Object.keys(pe).forEach(function(q){ if(val[q]) used[val[q]]=1; }); var c=n-Object.keys(used).length; if(c<bc){ bc=c; best=j; } } } pick1=best; }
+    if(pick1<0) return;
+    val[pick1]=pz.solution[pick1]; notes[pick1]={}; hinted=pick1; sel=pick1;
+    JX.hint('The hint fills one cell. Look at its row, column and box to see why it fits.','İpucu bir hücreyi doldurur. Neden uyduğunu görmek için satırına, sütununa ve kutusuna bak.'); render();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.target.closest&&e.target.closest('input,textarea')) return;
+    var k=parseInt(e.key,10); var r=board.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+    if(k>=1&&k<=n) enter(k);
+  });
+  load(0);
+})();

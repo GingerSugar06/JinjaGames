@@ -597,5 +597,36 @@ window.BB_MODS = [
       en: 'The Cookbook explains every recipe step by step, from the field to the plate. JEI, EMI, Jade and AppleSkin are supported, but none of them are required. No other mods needed. Forge 1.20.1, singleplayer and servers.',
       tr: 'Tarif Kitabı her tarifi tarladan tabağa adım adım anlatır. JEI, EMI, Jade ve AppleSkin desteklenir ama hiçbiri gerekli değil. Başka mod gerekmez. Forge 1.20.1; tek oyunculu ve sunucularda çalışır.' } }
   ]
+},
+/* ------------------------------------------------------------------ */
+{
+  slug: 'lodepulse', cats: ['tech', 'utility'], dl: 10, released: '2026-10-22',
+  tag: { en: 'A handheld ore scanner with a holographic HUD and a compass that keeps pointing at the ore.', tr: 'Holografik arayüzlü, cevheri gösteren pusulası hiç şaşmayan bir el cevher tarayıcısı.' },
+  lede: {
+    en: 'Lodepulse adds a premium handheld ore scanner to Minecraft. Right-click to send out a scan and a holographic HUD shows which ores are nearby, how far away they are, which direction to walk, how strong the signal is and how rare the ore is. The compass keeps pointing at the ore as you move, and the game tells you when you break it.',
+    tr: 'Lodepulse, Minecraft’a gösterişli bir el cevher tarayıcısı ekliyor. Sağ tıkla, tarama gönder; holografik arayüz yakındaki cevherleri, ne kadar uzakta olduklarını, hangi yöne yürüyeceğini, sinyalin gücünü ve cevherin ne kadar nadir olduğunu gösterir. Pusula sen ilerledikçe cevhere dönük kalır ve cevheri kırınca oyun sana haber verir.'
+  },
+  sections: [
+    { h: { en: 'Three scan modes', tr: 'Üç tarama kipi' }, list: [
+      { en: 'Pulse scans every ore around you.', tr: 'Pulse, çevrendeki tüm cevherleri tarar.' },
+      { en: 'Precision focuses on one ore you choose and gives tighter readings.', tr: 'Precision, seçtiğin tek bir cevhere odaklanır ve daha hassas okuma verir.' },
+      { en: 'Deep reaches 32 blocks and is unlocked with a module.', tr: 'Deep, 32 blok öteye ulaşır ve bir modülle açılır.' }
+    ] },
+    { h: { en: 'Which ores', tr: 'Hangi cevherler' }, p: {
+      en: 'Coal, iron, copper, gold, redstone, lapis, diamond, emerald, nether gold, quartz and ancient debris. Ores from other mods can be added through config tags.',
+      tr: 'Kömür, demir, bakır, altın, kızıltaş, lapis, elmas, zümrüt, nether altını, kuvars ve ancient debris. Başka modların cevherleri config etiketleriyle eklenebilir.' } },
+    { h: { en: 'An animated device', tr: 'Canlı bir cihaz' }, p: {
+      en: 'A custom 3D model with a rotating scanner ring, a pulsing core and an extending antenna. It reacts when you equip it, scan, find ore, find rare ore, find nothing or run low on power.',
+      tr: 'Dönen bir tarayıcı halkası, atan bir çekirdek ve uzayan bir antenle özel bir 3D model. Kuşandığında, tarama yaptığında, cevher bulduğunda, nadir cevher bulduğunda, hiçbir şey bulamadığında ya da gücü azaldığında tepki verir.' } },
+    { h: { en: 'Energy and upgrades', tr: 'Enerji ve geliştirmeler' }, list: [
+      { en: 'The Lodepulse runs on a battery. Recharge it with Energy Cells, redstone dust or redstone blocks.', tr: 'Lodepulse bir bataryayla çalışır. Enerji Hücreleri, kızıltaş tozu ya da kızıltaş blokla şarj et.' },
+      { en: 'Three modules upgrade it: Extended Range, Efficient Scanner and Advanced Battery.', tr: 'Üç modül onu geliştirir: Extended Range, Efficient Scanner ve Advanced Battery.' }
+    ] },
+    { h: { en: 'Fair play and technical details', tr: 'Adil oyun ve teknik ayrıntılar' }, list: [
+      { en: 'It gives direction and approximate distance only. It never shows coordinates or highlights ore through walls, and it never loads chunks.', tr: 'Yalnızca yön ve yaklaşık mesafe verir. Koordinat göstermez, cevheri duvarların ardından parlatmaz ve chunk yüklemez.' },
+      { en: 'No extra libraries, only Forge 1.20.1. It runs on the server, so it works in multiplayer, and the scan is spread over several ticks to keep the game smooth.', tr: 'Ek kütüphane gerekmez, yalnızca Forge 1.20.1. Sunucuda çalışır, yani çok oyunculuda da işler; tarama oyun akıcı kalsın diye birkaç tike yayılır.' },
+      { en: 'Controls: right-click to scan, sneak + right-click or R to change mode, V to change the target ore. Keys are rebindable. English and Turkish included.', tr: 'Kontroller: tarama için sağ tık, kip değiştirmek için çömel + sağ tık ya da R, hedef cevheri değiştirmek için V. Tuşlar değiştirilebilir. İngilizce ve Türkçe dahil.' }
+    ] }
+  ]
 }
 ];

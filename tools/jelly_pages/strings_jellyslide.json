@@ -1,0 +1,434 @@
+{
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "world.1": {
+  "tr": "Don Çayırı",
+  "en": "Frosty Meadow"
+ },
+ "world.2": {
+  "tr": "Kardan Köy",
+  "en": "Snowy Village"
+ },
+ "world.3": {
+  "tr": "Buz Gölü",
+  "en": "Frozen Lake"
+ },
+ "world.4": {
+  "tr": "Kristal Mağara",
+  "en": "Crystal Cave"
+ },
+ "world.5": {
+  "tr": "Aurora Tepesi",
+  "en": "Aurora Hill"
+ },
+ "world.6": {
+  "tr": "İgloo Kasabası",
+  "en": "Igloo Town"
+ },
+ "world.7": {
+  "tr": "Naneli Buz Dağı",
+  "en": "Peppermint Peak"
+ },
+ "world.8": {
+  "tr": "Balina Koyu",
+  "en": "Whale Bay"
+ },
+ "world.9": {
+  "tr": "Kutup Gecesi",
+  "en": "Polar Night"
+ },
+ "world.10": {
+  "tr": "Buzul Geçidi",
+  "en": "Glacier Pass"
+ },
+ "world.11": {
+  "tr": "Çilekli Kar Tarlası",
+  "en": "Strawberry Snowfield"
+ },
+ "world.12": {
+  "tr": "Kar Küresi",
+  "en": "Snow Globe"
+ },
+ "world.13": {
+  "tr": "Penguen Kolonisi",
+  "en": "Penguin Colony"
+ },
+ "world.14": {
+  "tr": "Dondurma Yaylası",
+  "en": "Ice-Cream Highlands"
+ },
+ "world.15": {
+  "tr": "Sıcak Kakao Gölü",
+  "en": "Cocoa Lake"
+ },
+ "world.16": {
+  "tr": "Zencefil Ormanı",
+  "en": "Gingerbread Forest"
+ },
+ "world.17": {
+  "tr": "Buz Şelalesi",
+  "en": "Frozen Falls"
+ },
+ "world.18": {
+  "tr": "Kar Meleği Vadisi",
+  "en": "Snow Angel Valley"
+ },
+ "world.19": {
+  "tr": "Fener Festivali",
+  "en": "Lantern Festival"
+ },
+ "world.20": {
+  "tr": "Buz Pateni Pisti",
+  "en": "Skating Rink"
+ },
+ "world.21": {
+  "tr": "Kristal Kanyon",
+  "en": "Crystal Canyon"
+ },
+ "world.22": {
+  "tr": "Yıldız Tozu Karı",
+  "en": "Stardust Snow"
+ },
+ "world.23": {
+  "tr": "Mavi Buz Mağarası",
+  "en": "Blue Ice Grotto"
+ },
+ "world.24": {
+  "tr": "Nane Çayırı",
+  "en": "Mint Snowfield"
+ },
+ "world.25": {
+  "tr": "Kar Topu Vadisi",
+  "en": "Snowball Valley"
+ },
+ "world.26": {
+  "tr": "Buz Kalesi",
+  "en": "Ice Castle"
+ },
+ "world.27": {
+  "tr": "Sisli Fiyort",
+  "en": "Misty Fjord"
+ },
+ "world.28": {
+  "tr": "Kış Çiçeği Bahçesi",
+  "en": "Winter Bloom Garden"
+ },
+ "world.29": {
+  "tr": "Bulutlu Kar Ovası",
+  "en": "Cloud Snowplain"
+ },
+ "world.30": {
+  "tr": "Kar Fenerleri",
+  "en": "Snow Lamps"
+ },
+ "world.31": {
+  "tr": "Şeker Buzul",
+  "en": "Candy Glacier"
+ },
+ "world.32": {
+  "tr": "Buz Gülü Tarlası",
+  "en": "Ice Rose Field"
+ },
+ "world.33": {
+  "tr": "Karlı Çan Kulesi",
+  "en": "Bell Tower Snow"
+ },
+ "world.34": {
+  "tr": "Dev Kar Tanesi",
+  "en": "Giant Snowflake"
+ },
+ "world.35": {
+  "tr": "Kutup Pazarı",
+  "en": "Polar Market"
+ },
+ "world.36": {
+  "tr": "Buz Heykelleri",
+  "en": "Ice Sculptures"
+ },
+ "world.37": {
+  "tr": "Karlı Gökkuşağı",
+  "en": "Snowbow"
+ },
+ "world.38": {
+  "tr": "Sıcak Kaynak",
+  "en": "Hot Springs"
+ },
+ "world.39": {
+  "tr": "Buz Gökdelen Şehri",
+  "en": "Ice Skyline"
+ },
+ "world.40": {
+  "tr": "Kış Balonları",
+  "en": "Winter Balloons"
+ },
+ "world.41": {
+  "tr": "Puslu Pırıltı",
+  "en": "Glimmer Haze"
+ },
+ "world.42": {
+  "tr": "Buzlu Şeker Ormanı",
+  "en": "Rock Candy Forest"
+ },
+ "world.43": {
+  "tr": "Yunus Koyu",
+  "en": "Dolphin Cove"
+ },
+ "world.44": {
+  "tr": "Kar Fırtınası Sonrası",
+  "en": "After the Storm"
+ },
+ "world.45": {
+  "tr": "Gece Yarısı Buzu",
+  "en": "Midnight Ice"
+ },
+ "world.46": {
+  "tr": "Pamuk Kar Dağı",
+  "en": "Cotton Snow Mountain"
+ },
+ "world.47": {
+  "tr": "Altın Buz",
+  "en": "Golden Ice"
+ },
+ "world.48": {
+  "tr": "Yıldız Fıskiyesi",
+  "en": "Star Fountain"
+ },
+ "world.49": {
+  "tr": "Kış Rüyası",
+  "en": "Winter Dream"
+ },
+ "world.50": {
+  "tr": "Büyük Buz Şöleni",
+  "en": "Grand Frost Festival"
+ },
+ "twist.snow": {
+  "tr": "Kar yığını",
+  "en": "Snow pile"
+ },
+ "twist.snow.desc": {
+  "tr": "Penguen kar yığınına girince hemen durur.",
+  "en": "The penguin stops the moment it slides into a snow pile."
+ },
+ "twist.fish": {
+  "tr": "Balık",
+  "en": "Fish"
+ },
+ "twist.fish.desc": {
+  "tr": "Tüm balıkları topla: hepsi toplanmadan çıkış açılmaz. Üstünden kayman yeter.",
+  "en": "Collect every fish: the exit stays shut until you do. Just slide over them."
+ },
+ "twist.crack": {
+  "tr": "Çatlak buz",
+  "en": "Cracked ice"
+ },
+ "twist.crack.desc": {
+  "tr": "Üstünden bir kez kayabilirsin; sonra kırılıp su çukuru olur ve yol kapanır.",
+  "en": "You can cross it once; then it breaks into a hole and blocks the way."
+ },
+ "twist.warp": {
+  "tr": "Işınlanma deliği",
+  "en": "Warp hole"
+ },
+ "twist.warp.desc": {
+  "tr": "Bir deliğe giren penguen eşinden, aynı yönde kaymaya devam eder.",
+  "en": "Slide into one hole and pop out of its twin, still sliding the same way."
+ },
+ "twist.bumper": {
+  "tr": "Zıplatıcı",
+  "en": "Bumper"
+ },
+ "twist.bumper.desc": {
+  "tr": "Zıplatıcıya çarpan penguen ters yöne fırlar.",
+  "en": "Hit a bumper and you bounce back the other way."
+ },
+ "twist.arrow": {
+  "tr": "Ok karosu",
+  "en": "Arrow tile"
+ },
+ "twist.arrow.desc": {
+  "tr": "Ok karosuna giren penguenin yönü okun gösterdiği yöne döner.",
+  "en": "Slide onto an arrow tile and your direction turns to where it points."
+ },
+ "twist.twin": {
+  "tr": "İkiz penguen",
+  "en": "Twin penguin"
+ },
+ "twist.twin.desc": {
+  "tr": "İki penguen aynı anda kayar. İkisi de kendi çıkışına varmalı.",
+  "en": "Two penguins slide together. Both must reach their own exit."
+ },
+ "twist.key": {
+  "tr": "Anahtar ve kapı",
+  "en": "Key and gate"
+ },
+ "twist.key.desc": {
+  "tr": "Anahtarı topla, kapı açılsın. Anahtarsız kapıdan geçilmez.",
+  "en": "Grab the key to open the gate. No key, no way through."
+ },
+ "twist.seal": {
+  "tr": "Fok",
+  "en": "Seal"
+ },
+ "twist.seal.desc": {
+  "tr": "Fok her hamlede bir adım ilerler. Yoluna çıktığı yerde seni durdurur.",
+  "en": "The seal steps along its path after every move and blocks your slide."
+ },
+ "twist.button": {
+  "tr": "Renkli düğme",
+  "en": "Colour button"
+ },
+ "twist.button.desc": {
+  "tr": "Düğmenin üstünden geçince aynı renkli buz duvarlar açılır ya da kapanır.",
+  "en": "Slide over a button to raise or lower the ice walls of the same colour."
+ },
+ "twist.gate": {
+  "tr": "Dönen kapı",
+  "en": "Spinning gate"
+ },
+ "twist.gate.desc": {
+  "tr": "Kapı her hamlede 90° döner: bir hamle yatay, sonra dikey geçişi engeller.",
+  "en": "The gate turns 90° every move, blocking one direction at a time."
+ },
+ "twist.ball": {
+  "tr": "Kar topu",
+  "en": "Snowball"
+ },
+ "twist.ball.desc": {
+  "tr": "Kar topuna çarpınca topu bir kare iter ve durursun. Sıkışırsa top yerinde kalır.",
+  "en": "Bump a snowball to push it one square and stop. If it is stuck, it stays put."
+ }
+}

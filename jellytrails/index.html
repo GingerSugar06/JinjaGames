@@ -141,7 +141,7 @@ section.blk{padding:104px 0;position:relative}
 /* MEKANİK LABORATUVARI */
 .lab-detail{position:relative}
 .lab-pane{display:none}
-.lab-pane.on{display:block;animation:labin .5s var(--ease)}
+.lab-pane.on{display:grid;grid-template-columns:minmax(200px,.8fr) minmax(0,1.2fr);gap:40px;align-items:center;animation:labin .5s var(--ease)}
 @keyframes labin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .lab-pane h3{font-size:clamp(28px,3.6vw,40px);margin-bottom:12px}
 .lab-pane p{color:var(--ink-2);font-size:18px;max-width:520px}
@@ -201,6 +201,7 @@ footer a:hover{color:var(--accent)}
 
 @media(max-width:960px){
   .privacy{grid-template-columns:1fr}
+  .lab-pane.on{grid-template-columns:1fr;gap:22px}
 }
 @media(max-width:680px){
   :root{--navh:64px;--r:22px}
@@ -307,7 +308,7 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
 .pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
 .lab-tab{padding:8px 18px 8px 10px;background:var(--surface);border-color:var(--line)}
 .lab-tab img{width:34px;height:34px}
-.lab-card{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:40px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:36px;padding:44px 48px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.lab-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:36px;padding:44px 48px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
 .lab-card::before{content:"";position:absolute;width:380px;height:380px;left:-110px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(var(--pop-rgb),.2),transparent 66%)}
 .lab-card>*{position:relative}
 .lab-tip{margin-top:18px;font-size:14px;font-weight:800;color:var(--ink-3)}
@@ -333,7 +334,7 @@ html[data-theme="dark"] .win{background:rgba(24,18,36,.74)}
   .stage{max-width:440px;margin:0 auto;width:100%}
   .stickers{grid-template-columns:1fr}
   .sticker:nth-child(n){transform:none}
-  .lab-card{grid-template-columns:1fr;padding:32px 24px;gap:22px}
+  .lab-card{padding:32px 24px}
 }
 @media(max-width:680px){
   .hero{padding:calc(var(--navh) + 24px) 0 90px}

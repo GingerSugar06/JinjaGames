@@ -1,0 +1,370 @@
+{
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "world.1": {
+  "tr": "Reçel Rafı",
+  "en": "Jam Shelf"
+ },
+ "world.2": {
+  "tr": "Bal Mutfağı",
+  "en": "Honey Kitchen"
+ },
+ "world.3": {
+  "tr": "Şekerleme Dükkânı",
+  "en": "Candy Shop"
+ },
+ "world.4": {
+  "tr": "Kiler",
+  "en": "Pantry"
+ },
+ "world.5": {
+  "tr": "Çay Saati",
+  "en": "Tea Time"
+ },
+ "world.6": {
+  "tr": "Meyve Bahçesi",
+  "en": "Orchard"
+ },
+ "world.7": {
+  "tr": "Pasta Tezgâhı",
+  "en": "Bakery Counter"
+ },
+ "world.8": {
+  "tr": "Dondurma Dükkânı",
+  "en": "Ice-Cream Parlor"
+ },
+ "world.9": {
+  "tr": "Cam Eşya Pazarı",
+  "en": "Glassware Market"
+ },
+ "world.10": {
+  "tr": "Büyük Mutfak",
+  "en": "Grand Kitchen"
+ },
+ "world.11": {
+  "tr": "Limon Bahçesi",
+  "en": "Lemon Grove"
+ },
+ "world.12": {
+  "tr": "Yaban Mersini Tarlası",
+  "en": "Blueberry Field"
+ },
+ "world.13": {
+  "tr": "Nane Bahçesi",
+  "en": "Mint Garden"
+ },
+ "world.14": {
+  "tr": "Çilek Serası",
+  "en": "Strawberry Greenhouse"
+ },
+ "world.15": {
+  "tr": "Şurup Fabrikası",
+  "en": "Syrup Factory"
+ },
+ "world.16": {
+  "tr": "Kek Atölyesi",
+  "en": "Cake Workshop"
+ },
+ "world.17": {
+  "tr": "Kakao Odası",
+  "en": "Cocoa Room"
+ },
+ "world.18": {
+  "tr": "Marmelat Tepesi",
+  "en": "Marmalade Hill"
+ },
+ "world.19": {
+  "tr": "Kavanoz Müzesi",
+  "en": "Jar Museum"
+ },
+ "world.20": {
+  "tr": "Kraliyet Kileri",
+  "en": "Royal Pantry"
+ },
+ "world.21": {
+  "tr": "Üzüm Bağı",
+  "en": "Vineyard"
+ },
+ "world.22": {
+  "tr": "Vişne Kileri",
+  "en": "Cherry Cellar"
+ },
+ "world.23": {
+  "tr": "Elma Kasabası",
+  "en": "Cider Town"
+ },
+ "world.24": {
+  "tr": "Portakal Bahçesi",
+  "en": "Orange Grove"
+ },
+ "world.25": {
+  "tr": "Tarçın Köşesi",
+  "en": "Cinnamon Nook"
+ },
+ "world.26": {
+  "tr": "Gül Şerbeti Salonu",
+  "en": "Rose Sherbet Hall"
+ },
+ "world.27": {
+  "tr": "Fındık Ormanı",
+  "en": "Hazelnut Wood"
+ },
+ "world.28": {
+  "tr": "Lavanta Kileri",
+  "en": "Lavender Pantry"
+ },
+ "world.29": {
+  "tr": "Şeftali Bahçesi",
+  "en": "Peach Orchard"
+ },
+ "world.30": {
+  "tr": "Kuru Meyve Pazarı",
+  "en": "Dried-Fruit Bazaar"
+ },
+ "world.31": {
+  "tr": "Hindistan Cevizi Adası",
+  "en": "Coconut Island"
+ },
+ "world.32": {
+  "tr": "Nar Bahçesi",
+  "en": "Pomegranate Garden"
+ },
+ "world.33": {
+  "tr": "Mango Terası",
+  "en": "Mango Terrace"
+ },
+ "world.34": {
+  "tr": "Kivi Vadisi",
+  "en": "Kiwi Valley"
+ },
+ "world.35": {
+  "tr": "Ahududu Tepesi",
+  "en": "Raspberry Hill"
+ },
+ "world.36": {
+  "tr": "Karamel Mutfağı",
+  "en": "Caramel Kitchen"
+ },
+ "world.37": {
+  "tr": "Yoğurt Çiftliği",
+  "en": "Yogurt Farm"
+ },
+ "world.38": {
+  "tr": "Zencefil Evi",
+  "en": "Ginger House"
+ },
+ "world.39": {
+  "tr": "Pekmez Değirmeni",
+  "en": "Molasses Mill"
+ },
+ "world.40": {
+  "tr": "Tatlı Fırın",
+  "en": "Sweet Oven"
+ },
+ "world.41": {
+  "tr": "Böğürtlen Çalılığı",
+  "en": "Blackberry Thicket"
+ },
+ "world.42": {
+  "tr": "Kayısı Bahçesi",
+  "en": "Apricot Orchard"
+ },
+ "world.43": {
+  "tr": "Vanilya Serası",
+  "en": "Vanilla Conservatory"
+ },
+ "world.44": {
+  "tr": "Turşu Sokağı",
+  "en": "Pickle Lane"
+ },
+ "world.45": {
+  "tr": "Bal Peteği Salonu",
+  "en": "Honeycomb Hall"
+ },
+ "world.46": {
+  "tr": "Muz Plajı",
+  "en": "Banana Beach"
+ },
+ "world.47": {
+  "tr": "İncir Avlusu",
+  "en": "Fig Courtyard"
+ },
+ "world.48": {
+  "tr": "Karpuz Tarlası",
+  "en": "Watermelon Patch"
+ },
+ "world.49": {
+  "tr": "Şeker Fabrikası",
+  "en": "Sugar Factory"
+ },
+ "world.50": {
+  "tr": "Büyük Kavanoz Festivali",
+  "en": "Grand Jar Festival"
+ },
+ "twist.hidden": {
+  "tr": "Gizli katman",
+  "en": "Hidden layer"
+ },
+ "twist.hidden.desc": {
+  "tr": "Üstteki dışındaki katmanlar '?' görünür. Üstlerini dökünce renkleri ortaya çıkar.",
+  "en": "Layers under the top one show a '?'. Pour the ones above and the colours are revealed."
+ },
+ "twist.cap": {
+  "tr": "Kapaklı kavanoz",
+  "en": "Lidded jar"
+ },
+ "twist.cap.desc": {
+  "tr": "Kapaklı kavanoz, bir kavanoz tek renkle dolana dek kapalı kalır.",
+  "en": "A lidded jar stays shut until some jar is filled with a single colour."
+ },
+ "twist.lock": {
+  "tr": "Kilitli kavanoz",
+  "en": "Locked jar"
+ },
+ "twist.lock.desc": {
+  "tr": "Kilitli kavanoza yalnız kilit noktasındaki renk dökülebilir.",
+  "en": "Only the colour shown on the lock can be poured into a locked jar."
+ },
+ "twist.mix": {
+  "tr": "Karışık kavanoz",
+  "en": "Mixed jar"
+ },
+ "twist.mix.desc": {
+  "tr": "Karışık kavanozdan dökerken üstteki iki katman birlikte akar.",
+  "en": "Pouring from a mixed jar moves its top two layers together."
+ }
+}

@@ -1,0 +1,394 @@
+{
+ "twist.fence": {
+  "tr": "Çit",
+  "en": "Fence"
+ },
+ "twist.fence.desc": {
+  "tr": "İki kare arasındaki çitten yol geçemez. Yolu çitin etrafından dolandır; yine de bütün kareler dolmalı.",
+  "en": "A trail cannot cross a fence between two squares. Go around it; every square must still be filled."
+ },
+ "twist.turncap": {
+  "tr": "Dönüş sınırı",
+  "en": "Turn limit"
+ },
+ "twist.turncap.desc": {
+  "tr": "Dirsek rozetli jöle: yolu en çok rozetteki sayı kadar dönebilir. Altında \"şimdiki/sınır\" görünür. Sınırı aşan dönüş yapılamaz, düz ve akıcı çiz.",
+  "en": "A jelly with an elbow badge: its trail can turn at most that many times. The badge shows \"now/limit\". Plan a straighter path."
+ },
+ "twist.counter": {
+  "tr": "Sayaç jöle",
+  "en": "Counter jelly"
+ },
+ "twist.counter.desc": {
+  "tr": "Üstünde sayı yazan jöle, yolunun tam o kadar kareden oluşmasını ister. Altında \"şimdiki/hedef\" görünür.",
+  "en": "A jelly with a number wants its trail to be exactly that many squares long."
+ },
+ "twist.gates": {
+  "tr": "Renk kapısı",
+  "en": "Colour gate"
+ },
+ "twist.gates.desc": {
+  "tr": "Boyalı jöle havuzundan yalnız aynı renkli yol geçebilir.",
+  "en": "Only a trail of the same colour can cross a painted jelly puddle."
+ },
+ "twist.doors": {
+  "tr": "Anahtarlı kapı",
+  "en": "Key door"
+ },
+ "twist.doors.desc": {
+  "tr": "Kapı kilitli. Anahtar rozetli jölenin rengini bağla, kapı açılsın.",
+  "en": "The door is locked. Connect the colour with the key badge to open it."
+ },
+ "twist.bridges": {
+  "tr": "Köprü",
+  "en": "Bridge"
+ },
+ "twist.bridges.desc": {
+  "tr": "Köprü karosundan iki yol da geçer: biri yatay (üstten), biri dikey (alttan). Birbirini kesmez.",
+  "en": "Two trails cross a bridge without cutting each other: one across, one down."
+ },
+ "twist.wander": {
+  "tr": "Gezen engel",
+  "en": "Wandering rock"
+ },
+ "twist.wander.desc": {
+  "tr": "Bu taş her renk bağlandığında yer değiştirir. Üstüne inen yol silinir; sırayı iyi seç.",
+  "en": "This rock moves whenever a colour connects. A trail it lands on is erased: choose your order."
+ },
+ "twist.hub": {
+  "tr": "Çok renkli jöle",
+  "en": "Multicolour jelly"
+ },
+ "twist.hub.desc": {
+  "tr": "Üç ya da dört rengin ortak ucu olan jöle: hepsi ona ulaşmalı.",
+  "en": "A jelly that is the shared end of three or four colours: all must reach it."
+ },
+ "twist.new": {
+  "tr": "Yeni öğe!",
+  "en": "New!"
+ },
+ "twist.got_it": {
+  "tr": "Anladım",
+  "en": "Got it"
+ },
+ "twist.stones": {
+  "tr": "Taş bloklar",
+  "en": "Stone blocks"
+ },
+ "twist.stones.desc": {
+  "tr": "Taşların içinden yol geçmez. Geri kalan tüm kareleri doldur.",
+  "en": "Paths cannot cross stones. Fill every other square."
+ },
+ "twist.dual": {
+  "tr": "İki renkli jöle",
+  "en": "Two-color jelly"
+ },
+ "twist.dual.desc": {
+  "tr": "Bu jöleye iki renk de bağlanmalı. İki yol da buraya ulaşsın.",
+  "en": "Both colors must reach this jelly. Connect both paths to it."
+ },
+ "twist.straight": {
+  "tr": "Düz jöle",
+  "en": "Straight jelly"
+ },
+ "twist.straight.desc": {
+  "tr": "Yol bu kareden DÜZ geçmeli: sağdan sola ya da yukarıdan aşağıya.",
+  "en": "The path must go STRAIGHT through this square."
+ },
+ "twist.turn": {
+  "tr": "Köşe jölesi",
+  "en": "Corner jelly"
+ },
+ "twist.turn.desc": {
+  "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
+  "en": "The path must TURN on this square. It cannot go straight."
+ },
+ "twist.portal": {
+  "tr": "Portal",
+  "en": "Portal"
+ },
+ "twist.portal.desc": {
+  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
+  "en": "Two portals of the same color are linked. Hop from one to the other."
+ },
+ "twist.locked": {
+  "tr": "Kilitli borular",
+  "en": "Locked pipes"
+ },
+ "twist.locked.desc": {
+  "tr": "Kilitli borular döndürülemez. Çevresini ona göre ayarla.",
+  "en": "Locked pipes cannot be rotated. Plan around them."
+ },
+ "twist.pinned": {
+  "tr": "Çivili düğümler",
+  "en": "Pinned dots"
+ },
+ "twist.pinned.desc": {
+  "tr": "Çivili düğümler yerinden oynamaz. Diğerlerini ona göre yerleştir.",
+  "en": "Pinned dots will not move. Arrange the others around them."
+ },
+ "twist.fixed": {
+  "tr": "Sabit aynalar",
+  "en": "Fixed mirrors"
+ },
+ "twist.fixed.desc": {
+  "tr": "Sabit aynalar yerinde durur. Işığı onlarla birlikte yönlendir.",
+  "en": "Fixed mirrors stay put. Steer the light together with them."
+ },
+ "twist.snow": {
+  "tr": "Kar yığınları",
+  "en": "Snow piles"
+ },
+ "twist.snow.desc": {
+  "tr": "Kar yığınına girince patenci durur.",
+  "en": "The skater stops when it enters a snow pile."
+ },
+ "world.1": {
+  "tr": "Okuma Odası",
+  "en": "Reading Room"
+ },
+ "world.2": {
+  "tr": "Çay Bahçesi",
+  "en": "Tea Garden"
+ },
+ "world.3": {
+  "tr": "Satranç Salonu",
+  "en": "Chess Parlor"
+ },
+ "world.4": {
+  "tr": "Gözlükçü Dükkânı",
+  "en": "Spectacle Shop"
+ },
+ "world.5": {
+  "tr": "Kütüphane Merdiveni",
+  "en": "Library Stairs"
+ },
+ "world.6": {
+  "tr": "Saat Kulesi",
+  "en": "Clock Tower"
+ },
+ "world.7": {
+  "tr": "Ay Işığı Odası",
+  "en": "Moonlight Study"
+ },
+ "world.8": {
+  "tr": "Gökyüzü Balkonu",
+  "en": "Sky Balcony"
+ },
+ "world.9": {
+  "tr": "Harita Odası",
+  "en": "Map Room"
+ },
+ "world.10": {
+  "tr": "Büyük Kütüphane",
+  "en": "Grand Library"
+ },
+ "world.11": {
+  "tr": "Mektup Odası",
+  "en": "Letter Room"
+ },
+ "world.12": {
+  "tr": "Yağmur Penceresi",
+  "en": "Rain Window"
+ },
+ "world.13": {
+  "tr": "Pastane",
+  "en": "Patisserie"
+ },
+ "world.14": {
+  "tr": "Pusula Bahçesi",
+  "en": "Compass Garden"
+ },
+ "world.15": {
+  "tr": "Gizli Geçit",
+  "en": "Secret Passage"
+ },
+ "world.16": {
+  "tr": "Kristal Küre Odası",
+  "en": "Crystal Ball Room"
+ },
+ "world.17": {
+  "tr": "Kitap Kurdu Kasabası",
+  "en": "Bookworm Town"
+ },
+ "world.18": {
+  "tr": "Çalışma Terası",
+  "en": "Study Terrace"
+ },
+ "world.19": {
+  "tr": "Gece Okuma",
+  "en": "Night Reading"
+ },
+ "world.20": {
+  "tr": "Bilgelik Tepesi",
+  "en": "Wisdom Hill"
+ },
+ "world.21": {
+  "tr": "Mürekkep Atölyesi",
+  "en": "Ink Workshop"
+ },
+ "world.22": {
+  "tr": "Tebeşir Sınıfı",
+  "en": "Chalk Classroom"
+ },
+ "world.23": {
+  "tr": "Müzik Kutusu Odası",
+  "en": "Music Box Room"
+ },
+ "world.24": {
+  "tr": "Teleskop Kulesi",
+  "en": "Telescope Tower"
+ },
+ "world.25": {
+  "tr": "Antika Dükkânı",
+  "en": "Antique Shop"
+ },
+ "world.26": {
+  "tr": "Balon Gözlem Noktası",
+  "en": "Balloon Lookout"
+ },
+ "world.27": {
+  "tr": "Mozaik Salonu",
+  "en": "Mosaic Hall"
+ },
+ "world.28": {
+  "tr": "Origami Atölyesi",
+  "en": "Origami Studio"
+ },
+ "world.29": {
+  "tr": "Cam Köşk",
+  "en": "Glasshouse"
+ },
+ "world.30": {
+  "tr": "Yıldız Haritası Odası",
+  "en": "Star Chart Room"
+ },
+ "world.31": {
+  "tr": "Kum Saati Vadisi",
+  "en": "Hourglass Valley"
+ },
+ "world.32": {
+  "tr": "Zarif Köprü",
+  "en": "Elegant Bridge"
+ },
+ "world.33": {
+  "tr": "Çini Odası",
+  "en": "Tile Room"
+ },
+ "world.34": {
+  "tr": "Mum Işığı Odası",
+  "en": "Candlelight Study"
+ },
+ "world.35": {
+  "tr": "Fener Kulesi Odası",
+  "en": "Lighthouse Study"
+ },
+ "world.36": {
+  "tr": "Nota Odası",
+  "en": "Sheet Music Room"
+ },
+ "world.37": {
+  "tr": "Çiçekli Çalışma",
+  "en": "Flower Study"
+ },
+ "world.38": {
+  "tr": "Eski Postane",
+  "en": "Old Post Office"
+ },
+ "world.39": {
+  "tr": "Rüzgâr Çanları Terası",
+  "en": "Wind Chime Terrace"
+ },
+ "world.40": {
+  "tr": "Satranç Bahçesi",
+  "en": "Chess Garden"
+ },
+ "world.41": {
+  "tr": "Mercan Kütüphanesi",
+  "en": "Coral Library"
+ },
+ "world.42": {
+  "tr": "Kar Kitaplığı",
+  "en": "Snow Library"
+ },
+ "world.43": {
+  "tr": "Çay Evi",
+  "en": "Tea House"
+ },
+ "world.44": {
+  "tr": "Şömine Başı",
+  "en": "Fireside"
+ },
+ "world.45": {
+  "tr": "Altın Kitap Salonu",
+  "en": "Golden Book Hall"
+ },
+ "world.46": {
+  "tr": "Gökkuşağı Çalışma Odası",
+  "en": "Rainbow Study"
+ },
+ "world.47": {
+  "tr": "Yaprak Odası",
+  "en": "Leaf Study"
+ },
+ "world.48": {
+  "tr": "Bilmece Kapısı",
+  "en": "Riddle Gate"
+ },
+ "world.49": {
+  "tr": "Usta Odası",
+  "en": "Master's Study"
+ },
+ "world.50": {
+  "tr": "Büyük Mantık Salonu",
+  "en": "Grand Logic Hall"
+ },
+ "twist.sudoku": {
+  "tr": "Sudoku",
+  "en": "Sudoku"
+ },
+ "twist.sudoku.desc": {
+  "tr": "Her satır, sütun ve kalın çizgili kutuda her sayı yalnız bir kez olur.",
+  "en": "Each number appears once in every row, column and thick-lined box."
+ },
+ "twist.compare": {
+  "tr": "Büyük-Küçük",
+  "en": "Bigger or Smaller"
+ },
+ "twist.compare.desc": {
+  "tr": "İki hücre arasındaki ok, küçük sayıyı gösterir. Sudoku kuralları aynen geçerli.",
+  "en": "The arrow between two cells points to the smaller number. Normal sudoku rules still apply."
+ },
+ "twist.parity": {
+  "tr": "Tek-Çift",
+  "en": "Odd & Even"
+ },
+ "twist.parity.desc": {
+  "tr": "Kare işaretli hücre TEK, daire işaretli hücre ÇİFT sayı olur.",
+  "en": "A square cell holds an ODD number, a circle cell holds an EVEN number."
+ },
+ "twist.diag": {
+  "tr": "Çapraz Sudoku",
+  "en": "Diagonal Sudoku"
+ },
+ "twist.diag.desc": {
+  "tr": "Mavi renkli iki köşegenin her birinde de her sayı yalnız bir kez olur.",
+  "en": "Each of the two blue diagonals also holds every number exactly once."
+ },
+ "twist.cage": {
+  "tr": "Toplam Kafesi",
+  "en": "Sum Cages"
+ },
+ "twist.cage.desc": {
+  "tr": "Kesik çizgili kafesteki sayıların toplamı köşedeki sayıya eşit olur; kafeste sayı tekrar etmez.",
+  "en": "Numbers in a dashed cage add up to the small number in its corner; no repeats inside a cage."
+ },
+ "twist.jigsaw": {
+  "tr": "Şekilli Bölgeler",
+  "en": "Jigsaw Regions"
+ },
+ "twist.jigsaw.desc": {
+  "tr": "Kutular artık düzensiz, renkli bölgeler. Her bölgede de her sayı yalnız bir kez olur.",
+  "en": "The boxes are now irregular coloured regions. Every region also holds each number once."
+ }
+}

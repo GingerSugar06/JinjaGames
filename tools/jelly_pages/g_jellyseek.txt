@@ -1,0 +1,153 @@
+@@@ CSS
+/* JELLY SEEK: çimen, şeker karoları */
+.hero-grass{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:1;pointer-events:none;background:radial-gradient(60% 100% at 20% 100%,rgba(var(--accent-rgb),.22),transparent 70%),radial-gradient(50% 90% at 80% 100%,rgba(var(--pop-rgb),.16),transparent 70%)}
+.sk-wrap{position:relative}
+.sk-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:4px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.sk{position:relative;aspect-ratio:1;border:0;padding:0;background:url(img/s/seek_tile_covered_a.webp) center/100% 100% no-repeat;transition:transform .15s var(--ease),filter .2s;-webkit-tap-highlight-color:transparent}
+.sk.b{background-image:url(img/s/seek_tile_covered_b.webp)}
+.sk:not(.op):hover{transform:scale(1.05)}
+.sk.op{background-image:url(img/s/seek_tile_open_a.webp);cursor:default;animation:tileopen .35s var(--ease)}
+.sk.op.b{background-image:url(img/s/seek_tile_open_b.webp)}
+@keyframes tileopen{from{transform:scale(.8)}to{transform:none}}
+.sk .nb{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,32px);color:#3a2d6e;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none}
+.sk .nb.n1{color:#2563d6}.sk .nb.n2{color:#1f8f4f}.sk .nb.n3{color:#d6401f}.sk .nb.n4{color:#7a2fc0}.sk .nb.n5{color:#a0521f}.sk .nb.n6{color:#127f8a}
+.sk .fg{position:absolute;inset:6%;width:88%;height:88%;pointer-events:none;object-fit:contain}
+.sk .sp{position:absolute;inset:8%;width:84%;height:84%;pointer-events:none;object-fit:contain;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
+.sk.lt .nb,.sk.sy .nb{font-size:clamp(17px,4.2vw,26px);transform:translateY(22%);color:#8A4B00}
+.sk.hint{animation:pulse .7s ease-in-out 4}
+@keyframes pulse{50%{transform:scale(1.14);filter:drop-shadow(0 0 10px rgba(var(--pop-rgb),1)) brightness(1.1)}}
+.sk.pop{background-image:url(img/s/seek_tile_open_a.webp)}
+.sk-hero{position:absolute;right:-8px;top:-54px;width:96px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+.sk-flagbtn img{width:26px;height:26px}
+@media(max-width:680px){.sk-hero{width:72px;top:-38px}}
+
+@@@ HERO_DECO
+  <div class="hero-grass" aria-hidden="true"></div>
+
+@@@ HERO_STAGE
+        <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
+        <button class="fj" style="--x:-6%;--y:4%;--s:80px;--t:5.2s" data-d="14" aria-label="Sweet"><img src="img/s/seek_sweet_0.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:86%;--y:0%;--s:76px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Sweet"><img src="img/s/seek_sweet_1.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:-9%;--y:58%;--s:84px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Sweet"><img src="img/s/seek_sweet_3.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:90%;--y:50%;--s:90px;--t:5s;--dl:-.5s" data-d="26" aria-label="Lantern"><img src="img/s/seek_lantern.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:12%;--y:92%;--s:76px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Flag"><img src="img/s/seek_flag.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:72%;--y:93%;--s:84px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Tree"><img src="img/s/seek_tree.webp" alt="" width="192" height="192"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i>
+
+@@@ TRY
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Find the safe tiles.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Güvenli karoları bul.</span></h2>
+          <p class="lead2 en">Tap a tile to open it. A number counts the surprises on the tiles touching it. Open every safe tile without waking a sour jelly. Every board here can be solved by logic alone, so no guessing.</p>
+          <p class="lead2 tr">Bir karoya dokunup aç. Sayı, ona değen karolardaki sürprizleri sayar. Ekşi bir jöleyi uyandırmadan tüm güvenli karoları aç. Buradaki her tahta yalnızca mantıkla çözülür, tahmin gerekmez.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Safe tiles left</span><span class="tr i">Kalan güvenli karo</span> <b id="m-left">0</b></span><span><span class="en i">Flags</span><span class="tr i">Bayrak</span> <b id="m-flag">0</b></span></div>
+          <div class="actions">
+            <button class="btn g sk-flagbtn" id="b-flag" type="button"><img src="img/s/seek_flag.webp" alt=""><span class="en i">Flag mode</span><span class="tr i">Bayrak modu</span></button>
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+          <p class="hint-line" id="hint-line" aria-live="polite"></p>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <img class="sk-hero" id="sk-hero" src="img/s/seek_hero_idle.webp" alt="" width="192" height="192">
+            <div class="sk-wrap"><div class="sk-board" id="board" role="application" aria-label="Jelly Seek puzzle"></div></div>
+@@WIN@@
+          </div>
+        </div>
+
+@@@ JS
+/* ============ Jelly Seek: oynanabilir bulmaca ============
+   Kurallar oyunun kendi kodundan (seek.dart): açılan karonun sayısı ona değen sekiz komşudaki sürprizleri sayar, sayısı 0 olan
+   karo komşularını da açar; fener (hep güvenli) bütün SATIRI, dürbün (hep güvenli) iki kare uzaklıktaki 5x5 bölgeyi sayar.
+   Bulmacalar tahminsiz: oyunun çözücüsüne benzer çıkarımla (sayım ve küme farkı) tamamen çözülebilir. */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$,JX=window.JX;
+  var P=window.JX_PUZZLES; if(!P||!P.length) return;
+  var board=$('#board'), hero=$('#sk-hero');
+  var cur=0, pz, R, C, mines, kinds, opened, flags, tiles, over, won, flagMode=false, solved=P.map(function(){return false;});
+  var NAMES=[['Starter 5×5','Başlangıç 5×5'],['Classic 6×6','Klasik 6×6'],['Lanterns','Fenerler'],['Spyglass','Dürbün']];
+
+  function nb(i){ var r=Math.floor(i/C), c=i%C, o=[]; for(var a=-1;a<=1;a++) for(var b=-1;b<=1;b++){ if((a||b)&&r+a>=0&&r+a<R&&c+b>=0&&c+b<C) o.push((r+a)*C+c+b); } return o; }
+  function region(i,k){
+    var r=Math.floor(i/C), c=i%C, o=[];
+    if(k==='l'){ for(var cc=0;cc<C;cc++) if(cc!==c) o.push(r*C+cc); return o; }
+    if(k==='s'){ for(var a=-2;a<=2;a++) for(var b=-2;b<=2;b++){ if((a||b)&&r+a>=0&&r+a<R&&c+b>=0&&c+b<C) o.push((r+a)*C+c+b); } return o; }
+    return nb(i);
+  }
+  function countAt(i){ return region(i,kinds[i]||'n').filter(function(j){ return mines[j]; }).length; }
+
+  function load(i){
+    cur=i; pz=P[i]; R=pz.rows; C=pz.cols; mines={}; pz.mines.forEach(function(m){ mines[m]=1; }); kinds={}; Object.keys(pz.kinds).forEach(function(k){ kinds[k]=pz.kinds[k]; });
+    opened={}; flags={}; over=false; won=false; $('#win').classList.remove('on'); hero.src='img/s/seek_hero_idle.webp'; JX.hint('','');
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    board.style.setProperty('--cols',C); board.innerHTML=''; tiles=[];
+    for(var k=0;k<R*C;k++){ var t=document.createElement('button'); t.type='button'; t.className='sk'+(((Math.floor(k/C)+k%C)%2)?' b':''); t.setAttribute('aria-label','tile '+(k+1));
+      (function(k){ t.addEventListener('click',function(){ press(k); }); t.addEventListener('contextmenu',function(e){ e.preventDefault(); toggleFlag(k); });
+        var lp=null; t.addEventListener('pointerdown',function(e){ if(e.pointerType==='touch'){ lp=setTimeout(function(){ lp=null; t.__lp=1; toggleFlag(k); },480); } });
+        ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ t.addEventListener(ev,function(){ if(lp){ clearTimeout(lp); lp=null; } }); });
+        t.addEventListener('click',function(e){ if(t.__lp){ t.__lp=0; e.stopImmediatePropagation(); } },true); })(k);
+      board.appendChild(t); tiles.push(t); }
+    Object.keys(kinds).forEach(function(k){ reveal(+k); });
+    openCell(pz.start); render();
+  }
+  function openCell(i){
+    var st=[i];
+    while(st.length){ var x=st.pop(); if(opened[x]||mines[x]) continue; opened[x]=1; delete flags[x];
+      if(!kinds[x] && countAt(x)===0){ nb(x).forEach(function(y){ if(!opened[y]) st.push(y); }); } }
+  }
+  function reveal(i){ opened[i]=1; }
+  function render(){
+    var left=0;
+    tiles.forEach(function(t,i){
+      var o=opened[i], k=kinds[i], h='';
+      t.className='sk'+(((Math.floor(i/C)+i%C)%2)?' b':'')+(o?' op':'')+(k==='l'?' lt':'')+(k==='s'?' sy':'');
+      if(o){ var cnt=countAt(i);
+        if(k==='l') h='<img class="sp" src="img/s/seek_lantern.webp" alt=""><span class="nb">'+cnt+'</span>';
+        else if(k==='s') h='<img class="sp" src="img/s/seek_hero_search.webp" alt=""><span class="nb">'+cnt+'</span>';
+        else h=cnt?'<span class="nb n'+cnt+'">'+cnt+'</span>':'';
+      } else { if(!mines[i]) left++; if(flags[i]) h='<img class="fg" src="img/s/seek_flag.webp" alt="">'; }
+      if(over && mines[i]) { h='<img class="sp" src="img/s/seek_surprise.webp" alt="">'; t.classList.add('op'); }
+      t.innerHTML=h;
+    });
+    $('#m-left').textContent=left; $('#m-flag').textContent=Object.keys(flags).length+'/'+pz.mines.length;
+    if(!over && !won && left===0) win();
+  }
+  function press(i){
+    if(over||won||opened[i]) return;
+    if(flagMode){ toggleFlag(i); return; }
+    if(flags[i]){ return; }
+    if(mines[i]){ over=true; hero.src='img/s/seek_hero_scared.webp'; render(); JX.hint('A sour jelly woke up! That tile was a surprise. Start over and use the numbers.','Ekşi bir jöle uyandı! O karo bir sürprizdi. Baştan başla ve sayılara güven.'); setTimeout(function(){ if(over) load(cur); },2600); return; }
+    openCell(i); hero.src='img/s/seek_hero_happy.webp'; setTimeout(function(){ if(!over&&!won) hero.src='img/s/seek_hero_idle.webp'; },600); render();
+  }
+  function toggleFlag(i){ if(over||won||opened[i]) return; if(flags[i]) delete flags[i]; else flags[i]=1; render(); }
+  function win(){
+    won=true; solved[cur]=true; hero.src='img/s/seek_hero_win.webp';
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    JX.win(['fx_star','fx_heart','seek_sweet_0','seek_sweet_1','seek_sweet_3']);
+  }
+  /* ipucu: sayımlardan kesin güvenli bir karo bul (oyundaki ipucu gibi, mantıkla emin olunan bir karoyu gösterir) */
+  function safeTile(){
+    var N=R*C, mk={}, sf={}, prog=true, guard=0;
+    while(prog && guard++<40){
+      prog=false; var cons=[];
+      Object.keys(opened).forEach(function(x){ x=+x; var reg=region(x,kinds[x]||'n'), cnt=countAt(x), unk=reg.filter(function(y){ return !opened[y]&&!mk[y]; }), rem=cnt-reg.filter(function(y){ return mk[y]; }).length; if(unk.length) cons.push([unk,rem]); });
+      cons.forEach(function(c){ if(c[1]===0) c[0].forEach(function(y){ if(!sf[y]){ sf[y]=1; prog=true; } }); else if(c[1]===c[0].length) c[0].forEach(function(y){ if(!mk[y]){ mk[y]=1; prog=true; } }); });
+      cons.forEach(function(a){ cons.forEach(function(b){ if(a===b) return; var sub=a[0].every(function(y){ return b[0].indexOf(y)>-1; }); if(sub&&a[0].length<b[0].length){ var d=b[0].filter(function(y){ return a[0].indexOf(y)<0; }), dr=b[1]-a[1]; if(dr===0) d.forEach(function(y){ if(!sf[y]){ sf[y]=1; prog=true; } }); else if(dr===d.length) d.forEach(function(y){ if(!mk[y]){ mk[y]=1; prog=true; } }); } }); });
+    }
+    for(var k in sf){ if(!opened[k]) return +k; } return -1;
+  }
+  $('#b-flag').addEventListener('click',function(){ flagMode=!flagMode; this.classList.toggle('on',flagMode); });
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-hint').addEventListener('click',function(){
+    if(over||won) return; var s=safeTile();
+    if(s<0){ JX.hint('Nothing is certain from the numbers alone right now. Look at the numbers again.','Şu an yalnız sayılardan kesin bir şey çıkmıyor. Sayılara yeniden bak.'); return; }
+    tiles[s].classList.add('hint'); setTimeout(function(){ tiles[s].classList.remove('hint'); },3000);
+    JX.hint('The glowing tile is certainly safe. Why? Read the numbers around it.','Parlayan karo kesinlikle güvenli. Neden? Çevresindeki sayıları oku.');
+  });
+  load(0);
+})();

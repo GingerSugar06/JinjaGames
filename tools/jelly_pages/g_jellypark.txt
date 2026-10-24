@@ -1,0 +1,145 @@
+@@@ CSS
+/* JELLY PARK: şeker yolu, arabalar, otopark */
+.hero-road{position:absolute;left:0;right:0;bottom:30px;height:70px;z-index:1;pointer-events:none;background:linear-gradient(180deg,#9A93B5,#8B84A8);box-shadow:inset 0 5px 0 #fff3,inset 0 -5px 0 #0002}
+.hero-road::before{content:"";position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;background:repeating-linear-gradient(90deg,#FFE9A0 0 46px,transparent 46px 92px);animation:roadmove 3s linear infinite}
+@keyframes roadmove{to{background-position:-92px 0}}
+html[data-theme="dark"] .hero-road{background:linear-gradient(180deg,#4A4560,#3E3A52)}
+.hero-cars{position:absolute;left:0;right:0;bottom:48px;height:92px;z-index:2;pointer-events:none;overflow:hidden}
+.hero-cars img{position:absolute;bottom:0;height:78px;width:auto;transform:rotate(90deg);animation:drive var(--t,18s) linear var(--dl,0s) infinite;left:-120px}
+@keyframes drive{from{transform:translateX(-120px) rotate(90deg)}to{transform:translateX(calc(100vw + 160px)) rotate(90deg)}}
+.pk-board{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;background:var(--bg-soft);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.pk-tile{position:absolute;width:calc(100%/var(--n));height:calc(100%/var(--n));background:center/100% 100% no-repeat}
+.pk-cone{position:absolute;width:calc(100%/var(--n));height:calc(100%/var(--n));display:grid;place-items:center;pointer-events:none}
+.pk-cone img{width:78%;filter:drop-shadow(0 6px 5px rgba(0,0,0,.25))}
+.pk-car{position:absolute;display:grid;place-items:center;border:0;padding:0;background:none;cursor:pointer;transition:transform .55s cubic-bezier(.5,0,.8,.4),opacity .3s .3s;-webkit-tap-highlight-color:transparent}
+.pk-car img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 5px rgba(0,0,0,.28));pointer-events:none}
+.pk-car .num{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%) rotate(var(--unrot,0deg));display:grid;place-items:center;pointer-events:none}
+.pk-car .num img{width:100%;height:auto;filter:none}
+.pk-car .num b{position:absolute;font-family:var(--f-display);font-size:clamp(13px,3vw,20px);color:#7A4A00}
+.pk-car.bonk{animation:bonk .45s}
+@keyframes bonk{20%{margin-left:-5px}40%{margin-left:5px}60%{margin-left:-3px}80%{margin-left:2px}}
+.pk-car.go{pointer-events:none}
+.pk-car.glow img{filter:drop-shadow(0 0 10px #fff) drop-shadow(0 0 16px rgba(var(--pop-rgb),.95))}
+.pk-honk{position:absolute;width:calc(100%/var(--n)*.9);z-index:6;pointer-events:none;animation:honk .6s ease-out forwards}
+@keyframes honk{from{opacity:1;transform:scale(.5)}to{opacity:0;transform:scale(1.5)}}
+.pk-exit{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);border-radius:22px;z-index:5}
+@media(max-width:680px){.hero-cars img{height:60px}}
+
+@@@ HERO_DECO
+  <div class="hero-road" aria-hidden="true"></div>
+  <div class="hero-cars" aria-hidden="true">
+    <img src="img/s/park_car2_red.webp" alt="" style="--t:15s">
+    <img src="img/s/park_car2_yellow.webp" alt="" style="--t:19s;--dl:-6s">
+    <img src="img/s/park_car2_mint.webp" alt="" style="--t:23s;--dl:-13s">
+    <img src="img/s/park_car2_pink.webp" alt="" style="--t:17s;--dl:-10s">
+  </div>
+
+@@@ HERO_STAGE
+        <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640" style="width:96%"></div>
+        <button class="fj" style="--x:-6%;--y:2%;--s:60px;--t:5.2s" data-d="14" aria-label="Car"><img src="img/s/park_car2_blue.webp" alt="" width="192" height="384"></button>
+        <button class="fj" style="--x:86%;--y:-2%;--s:62px;--t:4.6s;--dl:-1s" data-d="22" aria-label="Car"><img src="img/s/park_car2_orange.webp" alt="" width="192" height="384"></button>
+        <button class="fj" style="--x:-9%;--y:56%;--s:70px;--t:5.8s;--dl:-2s" data-d="18" aria-label="Cone"><img src="img/s/park_cone_0.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:90%;--y:50%;--s:74px;--t:5s;--dl:-.5s" data-d="26" aria-label="Honk"><img src="img/s/park_honk.webp" alt="" width="192" height="192"></button>
+        <button class="fj" style="--x:12%;--y:90%;--s:60px;--t:4.4s;--dl:-3s" data-d="12" aria-label="Car"><img src="img/s/park_car2_lilac.webp" alt="" width="192" height="384"></button>
+        <button class="fj" style="--x:68%;--y:90%;--s:70px;--t:5.4s;--dl:-1.6s" data-d="20" aria-label="Stop"><img src="img/s/park_stop.webp" alt="" width="192" height="192"></button>
+        <i class="spark" style="--x:8%;--y:30%;--s:22px;--t:3.2s"></i><i class="spark" style="--x:92%;--y:24%;--s:16px;--t:2.7s;--dl:-1s"></i><i class="spark" style="--x:20%;--y:78%;--s:14px;--t:3.6s;--dl:-2s"></i><i class="spark" style="--x:80%;--y:80%;--s:20px;--t:3s;--dl:-.6s"></i>
+
+@@@ TRY
+        <div class="rv">
+          <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
+          <h2 class="en">Your turn. <span class="hl">Clear the lot.</span></h2>
+          <h2 class="tr">Sıra sende. <span class="hl">Otoparkı boşalt.</span></h2>
+          <p class="lead2 en">Tap a car. If the road in front of it is clear, it honks and drives off the board. If something is in the way, it just bonks. Get every car out in as few taps as you can.</p>
+          <p class="lead2 tr">Bir arabaya dokun. Önündeki yol açıksa korna çalıp tahtadan çıkar; bir şey varsa yalnızca "bonk" der. Her arabayı en az dokunuşla dışarı çıkar.</p>
+          <div class="picker" id="picker"></div>
+          <div class="meter"><span><span class="en i">Cars left</span><span class="tr i">Kalan araba</span> <b id="m-left">0</b></span><span><span class="en i">Taps</span><span class="tr i">Dokunuş</span> <b id="m-taps">0</b></span><span><span class="en i">Best</span><span class="tr i">En iyi</span> <b id="m-par">0</b></span></div>
+          <div class="actions">
+            <button class="btn g" id="b-reset" type="button"><span class="en i">Start over</span><span class="tr i">Baştan başla</span></button>
+            <button class="btn g" id="b-hint" type="button"><span class="en i">Show a hint</span><span class="tr i">İpucu göster</span></button>
+          </div>
+          <p class="hint-line" id="hint-line" aria-live="polite"></p>
+        </div>
+        <div class="rv">
+          <div class="board-card" id="bcard">
+            <div class="pk-board" id="board" role="application" aria-label="Jelly Park puzzle"></div>
+@@WIN@@
+          </div>
+        </div>
+
+@@@ JS
+/* ============ Jelly Park: oynanabilir otopark ============
+   Kurallar oyunun kendi kodundan (park.dart): bir arabaya dokununca baktığı yönde yol AÇIKSA korna çalıp tahtadan çıkar,
+   değilse "bonk"; koniler sabit engeldir, otobüs 3 hücre uzunluğundadır, numaralı arabalar yalnız sırayla çıkar.
+   En az dokunuş = araba sayısı. */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$,JX=window.JX;
+  var P=window.JX_PUZZLES; if(!P||!P.length) return;
+  var board=$('#board'), COLORS=['red','blue','mint','orange','pink','teal','yellow','lilac'];
+  var DIRS={u:[-1,0],d:[1,0],l:[0,-1],r:[0,1]}, ROT={u:0,r:90,d:180,l:270};
+  var cur=0, pz, n, alive, taps, nextNum, solved=P.map(function(){return false;}), els, won=false, busy=0;
+  var NAMES=[['Easy lot','Kolay otopark'],['Cones','Koniler'],['Bus','Otobüs'],['Numbered','Numaralı']];
+
+  function load(i){
+    cur=i; pz=P[i]; n=pz.n; alive=pz.cars.map(function(){return true;}); taps=0; nextNum=1; won=false; busy=0;
+    $('#win').classList.remove('on'); JX.hint('','');
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    board.innerHTML=''; board.style.setProperty('--n',n);
+    for(var r=0;r<n;r++) for(var c=0;c<n;c++){ var t=document.createElement('i'); t.className='pk-tile'; t.style.cssText='left:'+(c/n*100)+'%;top:'+(r/n*100)+'%;background-image:url(img/s/park_tile_'+((r+c)%2?'b':'a')+'.webp)'; board.appendChild(t); }
+    pz.cones.forEach(function(q,k){ var d=document.createElement('div'); d.className='pk-cone'; d.style.cssText='left:'+(q[1]/n*100)+'%;top:'+(q[0]/n*100)+'%'; d.innerHTML='<img src="img/s/park_cone_'+(k%2)+'.webp" alt="">'; board.appendChild(d); });
+    els=pz.cars.map(function(car,idx){
+      var len=car.len, cx=0, cy=0; car.cells.forEach(function(q){ cy+=q[0]+.5; cx+=q[1]+.5; }); cx/=len; cy/=len;
+      var b=document.createElement('button'); b.type='button'; b.className='pk-car'; b.setAttribute('aria-label','car '+(idx+1));
+      b.style.cssText='width:'+(100/n)+'%;height:'+(100/n*len)+'%;left:'+((cx-.5)/n*100)+'%;top:'+((cy-len/2)/n*100)+'%;transform:rotate('+ROT[car.dir]+'deg);--unrot:'+(-ROT[car.dir])+'deg';
+      b.innerHTML='<img src="img/s/park_car'+len+'_'+COLORS[car.color%8]+'.webp" alt="">'+(car.num?'<span class="num"><img src="img/s/park_num_badge.webp" alt=""><b>'+car.num+'</b></span>':'');
+      b.addEventListener('click',function(){ tap(idx); }); board.appendChild(b); return b;
+    });
+    var ex=document.createElement('div'); ex.className='pk-exit'; board.appendChild(ex);
+    stats();
+  }
+  function stats(){ var left=alive.filter(Boolean).length; $('#m-left').textContent=left; $('#m-taps').textContent=taps; $('#m-par').textContent=pz.cars.length; }
+  function occ(skip){
+    var m={}; pz.cars.forEach(function(car,i){ if(alive[i]&&i!==skip) car.cells.forEach(function(q){ m[q[0]+','+q[1]]=i; }); });
+    pz.cones.forEach(function(q){ m[q[0]+','+q[1]]=-1; }); return m;
+  }
+  function pathFree(i){
+    var car=pz.cars[i], d=DIRS[car.dir], m=occ(i), r=car.cells[0][0]+d[0], c=car.cells[0][1]+d[1], steps=0;
+    while(r>=0&&r<n&&c>=0&&c<n){ if(m[r+','+c]!==undefined) return -1; r+=d[0]; c+=d[1]; steps++; }
+    return steps;
+  }
+  function tap(i){
+    if(won||!alive[i]||els[i].classList.contains('go')) return; taps++;
+    var car=pz.cars[i];
+    if(car.num && car.num!==nextNum){ bonk(i); JX.hint('Numbered cars leave in order: car '+nextNum+' goes first.','Numaralı arabalar sırayla çıkar: önce '+nextNum+' numaralı araba.'); stats(); return; }
+    var steps=pathFree(i);
+    if(steps<0){ bonk(i); JX.hint('Bonk! Something is in the way. Try another car.','Bonk! Önünde bir şey var. Başka bir arabayı dene.'); stats(); return; }
+    JX.hint('','');
+    alive[i]=false; if(car.num) nextNum++;
+    var d=DIRS[car.dir], dist=steps+car.len+1, b=els[i]; b.classList.add('go'); b.classList.remove('glow');
+    honk(car);
+    b.style.transform='translate('+(d[1]*dist*100)+'%,'+(d[0]*dist*100)+'%) rotate('+ROT[car.dir]+'deg)';
+    /* dönüş kesin: translate önce, rotate sonra; yüzde eksenler kutuya göre, bu yüzden dönüş sonrası yönü elle çözüyoruz */
+    var cellPx=board.getBoundingClientRect().width/n; b.style.transform='translate('+(d[1]*dist*cellPx)+'px,'+(d[0]*dist*cellPx)+'px) rotate('+ROT[car.dir]+'deg)';
+    b.style.opacity=0; setTimeout(function(){ b.style.display='none'; },900);
+    stats(); if(!alive.some(Boolean)) setTimeout(win,650);
+  }
+  function bonk(i){ var b=els[i]; b.classList.remove('bonk'); void b.offsetWidth; b.classList.add('bonk'); }
+  function honk(car){
+    var h=document.createElement('img'); h.src='img/s/park_honk_flash.webp'; h.className='pk-honk'; h.alt='';
+    h.style.left=((car.cells[0][1]-.1)/n*100)+'%'; h.style.top=((car.cells[0][0]-.1)/n*100)+'%'; board.appendChild(h); setTimeout(function(){ h.remove(); },650);
+  }
+  function win(){
+    won=true; solved[cur]=true;
+    JX.picker($('#picker'),P.map(function(p,k){ return '<span class="en i">'+NAMES[k][0]+'</span><span class="tr i">'+NAMES[k][1]+'</span>'; }),cur,solved,load);
+    JX.win(['fx_star','fx_heart','park_honk_flash','park_num_badge']);
+  }
+  $('#b-reset').addEventListener('click',function(){ load(cur); });
+  $('#b-next').addEventListener('click',function(){ load((cur+1)%P.length); });
+  $('#b-hint').addEventListener('click',function(){
+    if(won) return;
+    for(var i=0;i<pz.cars.length;i++){ if(!alive[i]) continue; var car=pz.cars[i]; if(car.num&&car.num!==nextNum) continue; if(pathFree(i)>=0){
+      els.forEach(function(e){ e.classList.remove('glow'); }); els[i].classList.add('glow'); setTimeout(function(){ els[i].classList.remove('glow'); },2200);
+      JX.hint('This car has a clear road. Tap it!','Bu arabanın yolu açık. Dokun!'); return; } }
+  });
+  load(0);
+})();

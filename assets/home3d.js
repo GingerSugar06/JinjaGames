@@ -1,5 +1,5 @@
 /* Ana sayfa hero'su: üç dünyanın biçimleri arasında dönüşen 3B parçacık bulutu.
-   Boşta: küre. Cyber Academy: tel kafes küp ve ağ. Locard: parmak izi.
+   Boşta: küre. Jelly oyunları: kavanoz, sudoku tablosu, ip halkası, araba, büyüteç, kar tanesi. Cyber Academy: tel kafes küp ve ağ. Locard: parmak izi.
    DayPot: tencere ve buhar. Hero sayfaları değişince bulut o sayfanın biçimine döner; fare bulutu döndürür.
    three.js klasik betik (assets/vendor/three.min.js); dosyadan açınca da çalışır. */
 (function () {
@@ -151,8 +151,97 @@
     }
     return a;
   }
-  var SHAPES = { base: logo(), cyber: shield(), noir: fingerprint(), jelly: jelly(), drop: drop(), warm: pot() };
-  var ORDER = ['base', 'cyber', 'noir', 'jelly', 'drop', 'warm'];
+  /* ---- altı yeni Jelly oyununun biçimleri ---- */
+  function box(r, cx, cy, cz, sx, sy, sz) {
+    /* kutu yüzeyinde rastgele nokta (yüz alanıyla orantılı) */
+    var ax = sy * sz, ay = sx * sz, az = sx * sy, u = r() * (ax + ay + az) * 2, s = r() < .5 ? -1 : 1, a = r() - .5, b = r() - .5;
+    if (u < ax * 2) return [cx + s * sx / 2, cy + a * sy, cz + b * sz];
+    if (u < (ax + ay) * 2) return [cx + a * sx, cy + s * sy / 2, cz + b * sz];
+    return [cx + a * sx, cy + b * sy, cz + s * sz / 2];
+  }
+  function jars() {
+    /* kavanoz: hafif göbekli cam gövde, içinde üç jöle katmanı, boyun ve mantar kapak */
+    var a = new Float32Array(N * 3), r = rand(41);
+    for (var i = 0; i < N; i++) {
+      var x, y, z, u = r(), t = r() * Math.PI * 2;
+      if (u < .46) { var h = r(); var rad = h > .84 ? 1.12 : 1.62 - .26 * Math.pow(2 * h - 1, 2); y = -2 + h * 3.1; x = Math.cos(t) * rad; z = Math.sin(t) * rad; }
+      else if (u < .8) { var k = Math.floor(r() * 3), rr = 1.5 * Math.sqrt(r()); y = -1.55 + k * .78 + (r() - .5) * .08; x = Math.cos(t) * rr; z = Math.sin(t) * rr; }
+      else if (u < .86) { var rb = 1.5 * Math.sqrt(r()); y = -2; x = Math.cos(t) * rb; z = Math.sin(t) * rb; }
+      else { var rl = 1.18 * Math.sqrt(r()); y = 1.18 + r() * .5; x = Math.cos(t) * rl; z = Math.sin(t) * rl; }
+      a[i * 3] = x; a[i * 3 + 1] = y; a[i * 3 + 2] = z;
+    }
+    return a;
+  }
+  function logicGrid() {
+    /* sudoku tablosu: 4x4 ızgara, kalın kutu çizgileri ve birkaç dolu hücre */
+    var a = new Float32Array(N * 3), r = rand(43), S = 4.4, c = [[0, 0], [2, 0], [1, 1], [3, 1], [0, 2], [2, 3], [3, 3]];
+    for (var i = 0; i < N; i++) {
+      var x, y, z = (r() - .5) * .14, u = r();
+      if (u < .82) {
+        var k = Math.floor(r() * 5), thick = k % 2 === 0, along = (r() - .5) * S, off = -S / 2 + k * S / 4;
+        if (!thick && r() < .45) { k = Math.floor(r() * 3) * 2; off = -S / 2 + k * S / 4; }
+        if (r() < .5) { x = along; y = off; } else { x = off; y = along; }
+      } else { var q = c[Math.floor(r() * c.length)]; x = -S / 2 + (q[0] + .5) * S / 4 + (r() - .5) * .5; y = S / 2 - (q[1] + .5) * S / 4 + (r() - .5) * .5; z = (r() - .5) * .3; }
+      a[i * 3] = x; a[i * 3 + 1] = y; a[i * 3 + 2] = z;
+    }
+    return a;
+  }
+  function loops() {
+    /* ip halkası: dolanan tek bir kapalı eğri ve üstünde boncuklar */
+    var a = new Float32Array(N * 3), r = rand(47), beads = [];
+    var P = function (t) { return [(Math.sin(t) + 2 * Math.sin(2 * t)) * .78, (Math.cos(t) - 2 * Math.cos(2 * t)) * .78, -Math.sin(3 * t) * .9]; };
+    for (var b = 0; b < 8; b++) beads.push(b / 8 * Math.PI * 2 + .3);
+    for (var i = 0; i < N; i++) {
+      var tt, rad, o;
+      if (i < N * .84) { tt = r() * Math.PI * 2; rad = .1; }
+      else { tt = beads[i % beads.length]; rad = .3; }
+      o = P(tt); var ph = r() * Math.PI * 2, rr = rad * Math.sqrt(r());
+      a[i * 3] = o[0] + Math.cos(ph) * rr; a[i * 3 + 1] = o[1] + Math.sin(ph) * rr; a[i * 3 + 2] = o[2] + (r() - .5) * rad * 1.6;
+    }
+    return a;
+  }
+  function car() {
+    /* yandan bakan şirin araba: gövde, kabin, dört tekerlek ve farlar */
+    var a = new Float32Array(N * 3), r = rand(53);
+    for (var i = 0; i < N; i++) {
+      var u = r(), p;
+      if (u < .42) p = box(r, 0, -.75, 0, 4.8, 1.1, 1.9);
+      else if (u < .66) p = box(r, -.15, .2, 0, 2.5, .95, 1.7);
+      else if (u < .94) { var w = Math.floor(r() * 4), t = r() * Math.PI * 2, rad = .48 * (r() < .5 ? 1 : Math.sqrt(r())); p = [(w % 2 ? 1 : -1) * 1.5 + Math.cos(t) * rad, -1.3 + Math.sin(t) * rad, (w < 2 ? 1 : -1) * .98]; }
+      else { var side = r() < .5 ? 1 : -1; p = [2.42, -.55 + (r() - .5) * .2, side * .6 + (r() - .5) * .3]; }
+      a[i * 3] = p[0] * .92; a[i * 3 + 1] = p[1] * .92 + .3; a[i * 3 + 2] = p[2] * .92;
+    }
+    return a;
+  }
+  function seek() {
+    /* büyüteç: halka, uzun sap ve camın içinde parıltılı noktalar */
+    var a = new Float32Array(N * 3), r = rand(59), cx = -.5, cy = .55, R = 1.55;
+    for (var i = 0; i < N; i++) {
+      var x, y, z, u = r(), t = r() * Math.PI * 2;
+      if (u < .52) { var ph = r() * Math.PI * 2; x = cx + (R + .14 * Math.cos(ph)) * Math.cos(t); y = cy + (R + .14 * Math.cos(ph)) * Math.sin(t); z = .14 * Math.sin(ph); }
+      else if (u < .78) { var s = r(), d = Math.SQRT1_2; x = cx + R * d + s * 2.3 * d + Math.cos(t) * .17 * d; y = cy - R * d - s * 2.3 * d + Math.cos(t) * .17 * d; z = Math.sin(t) * .17; }
+      else if (u < .92) { var rr = (R - .2) * Math.sqrt(r()); x = cx + Math.cos(t) * rr; y = cy + Math.sin(t) * rr; z = (r() - .5) * .05; }
+      else { var q = r(), arm = Math.floor(r() * 4) * Math.PI / 2; x = cx - .55 + Math.cos(arm) * q * .5; y = cy + .6 + Math.sin(arm) * q * .5; z = .3; }
+      a[i * 3] = x + .35; a[i * 3 + 1] = y - .1; a[i * 3 + 2] = z;
+    }
+    return a;
+  }
+  function flake() {
+    /* kar tanesi: altı kol, her kolda iki çift dal ve ortada altıgen */
+    var a = new Float32Array(N * 3), r = rand(61);
+    for (var i = 0; i < N; i++) {
+      var k = Math.floor(r() * 6), ang = k * Math.PI / 3, u = r(), x, y, s = r(), L = 2.5;
+      var dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx;
+      if (u < .45) { x = dx * s * L; y = dy * s * L; }
+      else if (u < .8) { var d0 = u < .62 ? .95 : 1.7, bl = u < .62 ? .8 : .55, sg = r() < .5 ? 1 : -1; x = dx * d0 + (dx * .5 + nx * sg * .87) * s * bl; y = dy * d0 + (dy * .5 + ny * sg * .87) * s * bl; }
+      else if (u < .9) { var ph = (k + r()) * Math.PI / 3; x = Math.cos(ph) * .55; y = Math.sin(ph) * .55; }
+      else { x = dx * L + (r() - .5) * .3; y = dy * L + (r() - .5) * .3; }
+      a[i * 3] = x + (r() - .5) * .07; a[i * 3 + 1] = y + (r() - .5) * .07; a[i * 3 + 2] = (r() - .5) * .18;
+    }
+    return a;
+  }
+  var SHAPES = { base: logo(), cyber: shield(), noir: fingerprint(), jelly: jelly(), drop: drop(), warm: pot(), jars: jars(), logic: logicGrid(), loops: loops(), park: car(), seek: seek(), slide: flake() };
+  var ORDER = ['base', 'cyber', 'noir', 'jelly', 'drop', 'jars', 'logic', 'loops', 'park', 'seek', 'slide', 'warm'];
 
   /* ---------- nokta bulutu ---------- */
   var pos = new Float32Array(SHAPES.base), jitter = new Float32Array(N);
@@ -180,7 +269,7 @@
   function readColors() {
     var cs = getComputedStyle(document.documentElement);
     var v = function (n, f) { return (cs.getPropertyValue(n) || f).trim() || f; };
-    COLORS = { base: v('--brand', '#C42B2B'), cyber: v('--w-cyber', '#0E7A8A'), noir: v('--w-noir', '#B03B32'), jelly: v('--w-trails', '#7A4FD6'), drop: v('--w-pipes', '#1C7FB8'), warm: v('--w-warm', '#2F6B48') };
+    COLORS = { base: v('--brand', '#C42B2B'), cyber: v('--w-cyber', '#0E7A8A'), noir: v('--w-noir', '#B03B32'), jelly: v('--w-trails', '#7A4FD6'), drop: v('--w-pipes', '#1C7FB8'), warm: v('--w-warm', '#2F6B48'), jars: v('--w-jars', '#B8470A'), logic: v('--w-logic', '#5A47C9'), loops: v('--w-loops', '#C2306F'), park: v('--w-park', '#D1342F'), seek: v('--w-seek', '#1A7F4F'), slide: v('--w-slide', '#3560D8') };
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
     ringMat.blending = mat.blending; mat.needsUpdate = true; ringMat.needsUpdate = true;

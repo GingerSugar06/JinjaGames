@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+@@HEAD@@
+<style>
+@@THEME@@
+@@BASE_CSS@@
+
+/* ================= ORTAK: yeni Jelly oyunları ================= */
+.hero{position:relative;padding:calc(var(--navh) + 40px) 0 110px;overflow:hidden;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,var(--bg) 100%)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(2px);pointer-events:none}
+html[data-theme="dark"] .hero::before,html[data-theme="dark"] .hero::after{background:rgba(var(--accent-rgb),.10)}
+.hero::before{width:420px;height:130px;left:-80px;top:150px;box-shadow:120px -50px 0 -10px rgba(255,255,255,.55),230px 20px 0 -30px rgba(255,255,255,.5)}
+.hero::after{width:360px;height:110px;right:-60px;bottom:140px;box-shadow:-140px -40px 0 -8px rgba(255,255,255,.5)}
+html[data-theme="dark"] .hero::before{box-shadow:120px -50px 0 -10px rgba(var(--accent-rgb),.09),230px 20px 0 -30px rgba(var(--accent-rgb),.08)}
+html[data-theme="dark"] .hero::after{box-shadow:-140px -40px 0 -8px rgba(var(--accent-rgb),.08)}
+.hero .wrap{position:relative;z-index:2}
+.crumb{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:800;color:var(--ink-2);margin-bottom:22px;flex-wrap:wrap}
+.crumb a:hover{color:var(--accent)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:40px;align-items:center}
+.logo{width:min(100%,540px);margin:0 0 8px -10px;filter:drop-shadow(0 18px 24px rgba(var(--pop-rgb),.28));animation:logoin 1.1s var(--ease) both}
+@keyframes logoin{from{opacity:0;transform:translateY(24px) scale(.9) rotate(-3deg)}to{opacity:1;transform:none}}
+.claim{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,3vw,32px);line-height:1.25;color:var(--accent);margin-top:4px}
+.lead{max-width:540px;margin-top:16px;color:var(--ink-2);font-size:18px}
+.cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
+.badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.badges span{font-size:13.5px;font-weight:800;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid var(--line-2);padding:5px 14px;border-radius:999px}
+html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
+.stage{position:relative;display:grid;place-items:center;padding:34px 0 24px;min-height:360px}
+.fj{position:absolute;width:var(--s,84px);left:var(--x);top:var(--y);z-index:3;animation:bob var(--t,5s) ease-in-out var(--dl,0s) infinite;transform:translate(var(--px,0),var(--py,0));-webkit-tap-highlight-color:transparent;cursor:pointer}
+.fj img{width:100%;filter:drop-shadow(0 12px 12px rgba(var(--accent-rgb),.25));transition:transform .2s}
+.fj:active img{transform:scale(.9,1.12)}
+.fj.sq img{animation:squish .6s var(--ease)}
+@keyframes bob{0%,100%{margin-top:0}50%{margin-top:-14px}}
+@keyframes squish{0%{transform:scale(1)}25%{transform:scale(1.28,.72)}50%{transform:scale(.82,1.2)}75%{transform:scale(1.1,.92)}100%{transform:scale(1)}}
+.heart{position:absolute;width:26px;pointer-events:none;z-index:6;animation:heart 1.1s ease-out forwards}
+@keyframes heart{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),-90px) scale(1.2) rotate(var(--rot))}}
+.spark{position:absolute;width:var(--s,18px);aspect-ratio:1;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:twinkle var(--t,3s) ease-in-out var(--dl,0s) infinite;left:var(--x);top:var(--y);z-index:4;filter:drop-shadow(0 0 6px rgba(255,255,255,.9))}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(90deg)}}
+.glass{position:relative;width:min(100%,400px);background:var(--surface);border-radius:38px;padding:22px;box-shadow:var(--shadow-2);border:1px solid var(--line);transform:rotate(2deg);animation:floaty 7s ease-in-out infinite;display:grid;place-items:center;aspect-ratio:1}
+@keyframes floaty{50%{transform:rotate(.8deg) translateY(-8px)}}
+.glass::before{content:"";position:absolute;inset:-30px;z-index:-1;border-radius:64px;background:radial-gradient(circle at 25% 20%,rgba(var(--pop-rgb),.32),transparent 60%),radial-gradient(circle at 80% 85%,rgba(var(--accent-rgb),.3),transparent 62%)}
+.glass .mascot{width:88%;filter:drop-shadow(0 22px 22px rgba(var(--accent-rgb),.3));cursor:pointer;transition:transform .3s var(--ease)}
+.glass .mascot.sq{animation:squish .6s var(--ease)}
+
+/* OYNA */
+.try{display:grid;grid-template-columns:minmax(0,.9fr) minmax(300px,1.1fr);gap:56px;align-items:center}
+.try h2{font-size:clamp(34px,5vw,58px);margin:12px 0 14px}
+.try p.lead2{color:var(--ink-2);font-size:18px;max-width:470px}
+.picker{display:flex;gap:10px;margin:26px 0 18px;flex-wrap:wrap}
+.pk{height:46px;min-width:46px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);font-weight:800;color:var(--ink-2);transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.pk:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.pk.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pk.done::after{content:"\2605";color:#FFC93C}
+.pk.on.done::after{color:#FFE27A}
+.meter{display:flex;gap:18px;flex-wrap:wrap;font-weight:800;color:var(--ink-2);font-size:15.5px;margin-bottom:18px}
+.meter span b{color:var(--accent);font-family:var(--f-display);font-size:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions .btn{padding:12px 22px;font-size:15px}
+.btn.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.hint-line{margin-top:14px;min-height:26px;font-weight:700;color:var(--ink-3);font-size:15px}
+.board-card{position:relative;background:var(--surface);border-radius:36px;padding:22px;box-shadow:var(--shadow-2);border:1px solid var(--line);max-width:520px;margin:0 auto;width:100%}
+.board-card::before{content:"";position:absolute;inset:-26px;z-index:-1;border-radius:60px;background:radial-gradient(circle at 30% 20%,rgba(var(--pop-rgb),.22),transparent 60%),radial-gradient(circle at 80% 90%,rgba(var(--accent-rgb),.22),transparent 60%)}
+.win{position:absolute;inset:0;z-index:8;display:none;place-items:center;text-align:center;background:rgba(255,255,255,.76);backdrop-filter:blur(3px);border-radius:36px}
+html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
+.win.on{display:grid;animation:labin .4s ease}
+.win img.wm{width:120px;margin:0 auto -6px;filter:drop-shadow(0 12px 14px rgba(var(--accent-rgb),.3))}
+.win h3{font-size:34px;margin:6px 0 4px}
+.win p{color:var(--ink-2);margin-bottom:16px}
+.stars{display:flex;gap:6px;justify-content:center}
+.stars img{width:56px;opacity:0;transform:scale(.3) rotate(-30deg)}
+.win.on .stars img{animation:starin .6s var(--ease) forwards}
+.win.on .stars img:nth-child(2){animation-delay:.18s}.win.on .stars img:nth-child(3){animation-delay:.36s}
+@keyframes starin{60%{transform:scale(1.25) rotate(8deg);opacity:1}100%{opacity:1;transform:none}}
+.conf{position:absolute;width:30px;z-index:9;pointer-events:none;animation:conf 1.4s ease-out forwards}
+@keyframes conf{from{opacity:1;transform:translate(0,0) scale(.4)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--rot))}}
+.shake{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+
+/* SURPRIZLER */
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.lab-tab{padding:8px 18px 8px 10px;background:var(--surface);border-color:var(--line)}
+.lab-tab img{width:34px;height:34px}
+.lab-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:36px;padding:44px 48px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.lab-card::before{content:"";position:absolute;width:380px;height:380px;left:-110px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(var(--pop-rgb),.2),transparent 66%)}
+.lab-card>*{position:relative}
+.lab-tip{margin-top:18px;font-size:14px;font-weight:800;color:var(--ink-3)}
+.lab-art .art-row{display:flex;align-items:center;justify-content:center;gap:10px;height:190px}
+.lab-art .art-row img{width:44%;max-height:170px}
+
+/* SAKIN BASLA */
+.stickers{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.sticker{background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:34px 30px 30px;position:relative;box-shadow:var(--shadow-1);transition:transform .35s var(--ease)}
+.sticker:nth-child(1){transform:rotate(-1.6deg)}.sticker:nth-child(2){transform:rotate(1.2deg) translateY(10px)}.sticker:nth-child(3){transform:rotate(-.8deg)}
+.sticker:hover{transform:rotate(0) translateY(-8px)}
+.sticker .row{display:flex;gap:8px;align-items:center;min-height:76px;margin-bottom:16px}
+.sticker .row img{height:70px;width:auto;max-width:30%;object-fit:contain}
+.sticker h4{font-size:22px;margin-bottom:8px}
+.sticker p{color:var(--ink-2);font-size:16px}
+.starbtn{display:flex;gap:2px}
+.starbtn button{width:58px;height:58px;padding:0}
+.starbtn img{width:100%;transition:transform .25s var(--ease),filter .25s}
+.starbtn button:not(.on) img{filter:grayscale(1) opacity(.45)}
+.starbtn button:hover img{transform:scale(1.15) rotate(-8deg)}
+.gwrap{overflow:hidden}
+
+/* KAPI KARDESLER */
+.family{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:26px}
+.family a{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px 10px 14px;font-family:var(--f-display);font-weight:700;font-size:16px;transition:transform .3s var(--ease),box-shadow .3s}
+.family a:hover{transform:translateY(-5px);box-shadow:var(--shadow-1)}
+.family img{width:72px;height:72px;border-radius:18px}
+.family small{display:block;font-family:var(--f-body);font-weight:700;font-size:12.5px;color:var(--ink-3)}
+.fam-h{margin-top:46px;font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+@@GAME_CSS@@
+
+@media(max-width:960px){
+  .hero-in,.try{grid-template-columns:1fr}
+  .stage{max-width:440px;margin:0 auto;width:100%}
+  .stickers{grid-template-columns:1fr}
+  .sticker:nth-child(n){transform:none}
+  .lab-card{padding:32px 24px}
+}
+@media(max-width:680px){
+  .hero{padding:calc(var(--navh) + 24px) 0 90px}
+  .cta{flex-direction:column;align-items:stretch}
+  .board-card{padding:14px;border-radius:28px}
+  .win{border-radius:28px}
+  .stage{min-height:320px}
+}
+</style>
+<script src="../assets/clean-scroll.js?v=20261012d" defer></script>
+<script src="../assets/local-links.js?v=20261012d"></script>
+</head>
+<body>
+@@NAV@@
+
+<header class="hero">
+@@HERO_DECO@@
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="../"><span class="en i">Home</span><span class="tr i">Ana Sayfa</span></a><span aria-hidden="true">/</span><a href="../games/"><span class="en i">Games</span><span class="tr i">Oyunlar</span></a><span aria-hidden="true">/</span><span>@@name@@</span></nav>
+    <div class="hero-in">
+      <div>
+        <h1 class="logo"><img src="img/logo.webp" alt="@@name@@" width="720" height="360"></h1>
+        <p class="claim en">@@claim_en@@</p>
+        <p class="claim tr">@@claim_tr@@</p>
+        <p class="lead en">@@lead_en@@</p>
+        <p class="lead tr">@@lead_tr@@</p>
+        <div class="cta">
+          @@PLAY_BTN@@
+          <a class="btn g" href="#try"><span class="en i">Try a puzzle now</span><span class="tr i">Hemen bir bulmaca dene</span></a>
+        </div>
+        <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span class="en i">6 languages</span><span class="tr i">6 dil</span></div>
+      </div>
+      <div class="stage" id="stage">
+@@HERO_STAGE@@
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- OYNA -->
+  <section id="try" class="blk">
+    <div class="wrap">
+      <div class="try">
+@@TRY@@
+      </div>
+    </div>
+  </section>
+
+  <!-- SURPRIZLER -->
+  <section class="blk">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">The twists</span><span class="tr i">Sürprizler</span></span>
+        <h2 class="en">@@twist_h_en@@</h2>
+        <h2 class="tr">@@twist_h_tr@@</h2>
+        <p class="en">Every new twist arrives alone, in a gentle level with a little tutorial. Tap one to see what it does and when you will meet it.</p>
+        <p class="tr">Her yeni sürpriz, küçük bir anlatımla ve kolay bir bölümde tek başına gelir. Birine dokun, ne yaptığını ve ne zaman karşına çıkacağını gör.</p>
+      </div>
+      <div id="lab" class="rv">
+        <div class="pills" role="tablist">
+@@LAB_TABS@@
+        </div>
+        <div class="lab-card lab-detail">
+@@LAB_PANES@@
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAKIN BASLA -->
+  <section class="blk" style="padding-top:20px">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">Take your time</span><span class="tr i">Acele yok</span></span>
+        <h2 class="en">Calm first. <span class="hl">Spicy when you ask for it.</span></h2>
+        <h2 class="tr">Önce sakin. <span class="hl">Acılı, sen isteyince.</span></h2>
+      </div>
+      <div class="stickers">
+        <div class="sticker rv">
+          <div class="row">@@CALM_ROW@@</div>
+          <h4><span class="en i">20 levels, zero pressure</span><span class="tr i">20 bölüm, sıfır baskı</span></h4>
+          <p class="en">The first 20 levels have no time or move limits at all. Learn at your own pace, nobody is watching.</p>
+          <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. Kendi hızında öğren, kimse bakmıyor.</p>
+        </div>
+        <div class="sticker rv">
+          <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/ui_boss_badge.webp" alt=""></div>
+          <h4><span class="en i">Boss levels</span><span class="tr i">Patron bölümleri</span></h4>
+          <p class="en">Boss levels bring a clock and a move limit together, for the moments you want a real challenge.</p>
+          <p class="tr">Patron bölümleri süre ve hamle sınırını bir arada getirir; gerçek bir meydan okuma istediğin anlar için.</p>
+        </div>
+        <div class="sticker rv">
+          <div class="row starbtn" id="stars"><button type="button" class="on" aria-label="1"><img src="img/s/ui_star_full.webp" alt=""></button><button type="button" class="on" aria-label="2"><img src="img/s/ui_star_full.webp" alt=""></button><button type="button" aria-label="3"><img src="img/s/ui_star_full.webp" alt=""></button></div>
+          <h4><span class="en i">Up to three stars</span><span class="tr i">En fazla üç yıldız</span></h4>
+          <p class="en">Replay any level for a better score. Stars and daily gifts turn into gems for the shop. Stuck? A hint is one tap away.</p>
+          <p class="tr">Daha iyi skor için her bölümü tekrar oyna. Yıldızlar ve günlük hediyeler mağaza için elmasa dönüşür. Takıldın mı? İpucu bir dokunuş uzakta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section class="blk gwrap" style="padding-top:30px">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="eyebrow"><span class="en i">@@gal_eyebrow_en@@</span><span class="tr i">@@gal_eyebrow_tr@@</span></span>
+        <h2 class="en">Soft, glossy and <span class="hl">a little bit squishy.</span></h2>
+        <h2 class="tr">Yumuşak, parlak ve <span class="hl">biraz da jöle gibi.</span></h2>
+      </div>
+    </div>
+    <div class="wrap"><div class="gal rv">
+@@GALLERY@@
+    </div></div>
+  </section>
+
+  <!-- GIZLILIK -->
+  <section class="blk" style="padding-top:30px">
+    <div class="wrap">
+@@PRIVACY@@
+      <div class="fam-h rv"><span class="en i">More from the Jelly family</span><span class="tr i">Jelly ailesinden daha fazlası</span></div>
+      <div class="family rv">
+@@FAMILY@@
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="blk" style="padding-top:10px">
+    <div class="wrap">
+@@CTA@@
+    </div>
+  </section>
+</main>
+
+@@FOOT@@
+<div class="lb" id="lb" role="dialog" aria-modal="true"><button class="lb-x" type="button" aria-label="Close">&times;</button><button class="lb-n l" type="button" aria-label="Previous">&lsaquo;</button><img alt=""><button class="lb-n r" type="button" aria-label="Next">&rsaquo;</button></div>
+
+<script>
+window.JX_PUZZLES=@@PUZZLES@@;
+</script>
+<script>
+@@BASE_JS@@
+</script>
+<script>
+/* ============ ortak: hero jöleleri, yıldızlar, konfeti ============ */
+(function(){
+  'use strict';
+  var JG=window.JG,$=JG.$,$$=JG.$$;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage=$('#stage');
+  if(stage){
+    var hearts='img/s/fx_heart.webp';
+    $$('.fj,.mascot',stage).forEach(function(j){
+      j.addEventListener('click',function(){
+        j.classList.remove('sq'); void j.offsetWidth; j.classList.add('sq');
+        var r=j.getBoundingClientRect(), s=stage.getBoundingClientRect();
+        for(var k=0;k<3;k++){
+          var h=document.createElement('img'); h.src=hearts; h.className='heart'; h.alt='';
+          h.style.left=(r.left-s.left+r.width/2-13+(k-1)*16)+'px'; h.style.top=(r.top-s.top)+'px';
+          h.style.setProperty('--dx',((k-1)*34)+'px'); h.style.setProperty('--rot',((k-1)*24)+'deg');
+          stage.appendChild(h); setTimeout(function(x){return function(){x.remove();};}(h),1200);
+        }
+      });
+    });
+    if(!reduce && window.matchMedia('(pointer: fine)').matches){
+      $('.hero').addEventListener('pointermove',function(e){
+        var r=stage.getBoundingClientRect(), nx=(e.clientX-(r.left+r.width/2))/r.width, ny=(e.clientY-(r.top+r.height/2))/r.height;
+        $$('.fj',stage).forEach(function(j){ var dd=+j.getAttribute('data-d')||12; j.style.setProperty('--px',(-nx*dd).toFixed(1)+'px'); j.style.setProperty('--py',(-ny*dd).toFixed(1)+'px'); });
+      });
+    }
+  }
+  $$('#stars button').forEach(function(b,i,all){ b.addEventListener('click',function(){ all.forEach(function(x,k){ x.classList.toggle('on',k<=i); }); }); });
+  /* demo yardımcıları */
+  var JX=window.JX={};
+  JX.burst=function(card,imgs){
+    for(var i=0;i<22;i++){
+      var im=document.createElement('img'); im.src='img/s/'+imgs[i%imgs.length]+'.webp'; im.className='conf'; im.alt='';
+      var a=Math.random()*Math.PI*2, dist=120+Math.random()*190;
+      im.style.left='50%'; im.style.top='46%'; im.style.setProperty('--dx',Math.cos(a)*dist+'px'); im.style.setProperty('--dy',(Math.sin(a)*dist-40)+'px'); im.style.setProperty('--rot',(Math.random()*360-180)+'deg');
+      card.appendChild(im); setTimeout(function(x){return function(){x.remove();};}(im),1500);
+    }
+  };
+  JX.picker=function(el,labels,cur,solved,onPick){
+    el.innerHTML='';
+    labels.forEach(function(lb,i){ var b=document.createElement('button'); b.type='button'; b.className='pk'+(i===cur?' on':'')+(solved[i]?' done':'');
+      b.innerHTML=lb; b.addEventListener('click',function(){ onPick(i); }); el.appendChild(b); });
+  };
+  JX.win=function(burstImgs){
+    var w=$('#win'); setTimeout(function(){ w.classList.add('on'); JX.burst($('#bcard'),burstImgs); },450);
+  };
+  JX.sleep=function(ms){ return new Promise(function(r){ setTimeout(r,ms); }); };
+  JX.reduce=reduce;
+  JX.hint=function(en,tr){ var h=$('#hint-line'); if(h) h.innerHTML='<span class="en i">'+en+'</span><span class="tr i">'+tr+'</span>'; };
+  JX.rng=function(seed){ var s=seed; return function(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }; };
+})();
+</script>
+<script>
+@@GAME_JS@@
+</script>
+</body>
+</html>
