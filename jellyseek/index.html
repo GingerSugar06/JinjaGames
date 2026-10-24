@@ -156,7 +156,16 @@ section.blk{padding:104px 0;position:relative}
 @keyframes labpop{30%{transform:scale(1.14) rotate(-8deg)}60%{transform:scale(.94) rotate(5deg)}100%{transform:none}}
 
 /* GALERİ */
-.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 30px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal-nav{display:flex;align-items:center;gap:18px;margin-top:2px}
+.gal-track{flex:1;height:8px;border-radius:8px;background:var(--line);overflow:hidden;position:relative}
+.gal-track i{position:absolute;left:0;top:0;bottom:0;width:30%;border-radius:8px;background:var(--accent);transition:left .15s linear,width .15s}
+.gal-nav button{width:56px;height:56px;border-radius:50%;flex:none;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;box-shadow:0 10px 22px rgba(var(--accent-rgb),.32),inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.14);transition:transform .25s var(--ease),opacity .2s,filter .2s}
+.gal-nav button:hover{transform:translateY(-3px) scale(1.05)}
+.gal-nav button:active{transform:scale(.9,1.08)}
+.gal-nav button:disabled{opacity:.3;transform:none;cursor:default;filter:saturate(.5)}
+.gal-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .gal button{flex:0 0 min(270px,66vw);scroll-snap-align:center;border-radius:34px;overflow:hidden;border:7px solid var(--surface);box-shadow:var(--shadow-1);background:var(--surface);transition:transform .4s var(--ease),box-shadow .4s}
 .gal button:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:var(--shadow-2)}
 .gal img{width:100%;aspect-ratio:9/16;object-fit:cover}
@@ -326,15 +335,16 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
 
 /* JELLY SEEK: çimen, şeker karoları */
 .hero-grass{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:1;pointer-events:none;background:radial-gradient(60% 100% at 20% 100%,rgba(var(--accent-rgb),.22),transparent 70%),radial-gradient(50% 90% at 80% 100%,rgba(var(--pop-rgb),.16),transparent 70%)}
-.sk-wrap{position:relative}
-.sk-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:4px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.sk-wrap{position:relative;padding:14%;background:url(img/s/seek_board_frame.webp) center/100% 100% no-repeat}
+.sk-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:3px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 .sk{position:relative;aspect-ratio:1;border:0;padding:0;background:url(img/s/seek_tile_covered_a.webp) center/100% 100% no-repeat;transition:transform .15s var(--ease),filter .2s;-webkit-tap-highlight-color:transparent}
 .sk.b{background-image:url(img/s/seek_tile_covered_b.webp)}
 .sk:not(.op):hover{transform:scale(1.05)}
 .sk.op{background-image:url(img/s/seek_tile_open_a.webp);cursor:default;animation:tileopen .35s var(--ease)}
 .sk.op.b{background-image:url(img/s/seek_tile_open_b.webp)}
 @keyframes tileopen{from{transform:scale(.8)}to{transform:none}}
-.sk .nb{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,32px);color:#3a2d6e;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none}
+.sk .nb::before{content:"";position:absolute;width:58%;aspect-ratio:1;background:url(img/s/seek_num_bg.webp) center/contain no-repeat;z-index:-1}
+.sk .nb{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,32px);color:#3a2d6e;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none}
 .sk .nb.n1{color:#2563d6}.sk .nb.n2{color:#1f8f4f}.sk .nb.n3{color:#d6401f}.sk .nb.n4{color:#7a2fc0}.sk .nb.n5{color:#a0521f}.sk .nb.n6{color:#127f8a}
 .sk .fg{position:absolute;inset:6%;width:88%;height:88%;pointer-events:none;object-fit:contain}
 .sk .sp{position:absolute;inset:8%;width:84%;height:84%;pointer-events:none;object-fit:contain;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
@@ -342,9 +352,9 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
 .sk.hint{animation:pulse .7s ease-in-out 4}
 @keyframes pulse{50%{transform:scale(1.14);filter:drop-shadow(0 0 10px rgba(var(--pop-rgb),1)) brightness(1.1)}}
 .sk.pop{background-image:url(img/s/seek_tile_open_a.webp)}
-.sk-hero{position:absolute;right:-8px;top:-54px;width:96px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+.sk-hero{position:absolute;right:6px;top:-62px;width:92px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
 .sk-flagbtn img{width:26px;height:26px}
-@media(max-width:680px){.sk-hero{width:72px;top:-38px}}
+@media(max-width:680px){.sk-hero{width:68px;top:-46px}}
 
 @media(max-width:960px){
   .hero-in,.try{grid-template-columns:1fr}
@@ -404,7 +414,6 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
           <span class="btn soon"><span class="dotlive" aria-hidden="true"></span><span class="en i">Coming soon to Google Play</span><span class="tr i">Yakında Google Play'de</span></span>
           <a class="btn g" href="#try"><span class="en i">Try a puzzle now</span><span class="tr i">Hemen bir bulmaca dene</span></a>
         </div>
-        <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span class="en i">6 languages</span><span class="tr i">6 dil</span></div>
       </div>
       <div class="stage" id="stage">
         <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
@@ -695,6 +704,18 @@ window.JX_PUZZLES=[{"rows":5,"cols":5,"mines":[4,7,17,18],"kinds":{},"start":10}
     $$('.lab-art img',lab).forEach(function(im){ im.addEventListener('click',function(){ im.classList.remove('pop'); void im.offsetWidth; im.classList.add('pop'); }); });
     pick(0);
   }
+
+  /* ---------- Galeri okları ---------- */
+  $$('.gal').forEach(function(g){
+    var nav=d.createElement('div'); nav.className='gal-nav';
+    nav.innerHTML='<button type="button" data-d="-1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><div class="gal-track"><i></i></div><button type="button" data-d="1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>';
+    g.parentNode.insertBefore(nav,g.nextSibling);
+    var bt=$$('button',nav), th=$('i',nav);
+    function upd(){ var max=g.scrollWidth-g.clientWidth; var r=max>0?g.scrollLeft/max:0; var w=max>0?Math.max(14,g.clientWidth/g.scrollWidth*100):100;
+      th.style.width=w+'%'; th.style.left=((100-w)*r)+'%'; bt[0].disabled=g.scrollLeft<4; bt[1].disabled=g.scrollLeft>=max-4; }
+    bt.forEach(function(b){ b.addEventListener('click',function(){ g.scrollBy({left:(+b.getAttribute('data-d'))*g.clientWidth*.7,behavior:'smooth'}); }); });
+    g.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd(); setTimeout(upd,400);
+  });
 
   /* ---------- Işık kutusu ---------- */
   var lb=$('#lb');

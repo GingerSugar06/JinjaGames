@@ -40,6 +40,59 @@ def find(d, name):
     return None
 
 
+def slide_scene(art, bgname, n, out):
+    """Slide'ın mağaza ekran görüntüsü yok: oyunun kendi çizimlerinden (dünya arka planı, buz karoları, kayalar, penguenler...) 9:16 sahne."""
+    W, H = 1080, 1920
+    bg = Image.open(find(art, bgname)).convert('RGB')
+    s = max(W / bg.width, H / bg.height)
+    bg = bg.resize((round(bg.width * s), round(bg.height * s)), Image.LANCZOS)
+    bg = bg.crop(((bg.width - W) // 2, 0, (bg.width - W) // 2 + W, H))
+    im = bg.convert('RGBA')
+
+    def spr(name, size):
+        a = Image.open(find(art, name)).convert('RGBA')
+        return a.resize((size, size), Image.LANCZOS)
+    N = 5 if n != 4 else 6
+    T = 164 if N == 5 else 138
+    bx, by = (W - N * T) // 2, 640
+    # tahta zemini
+    pad = 26
+    from PIL import ImageDraw, ImageFilter
+    panel = Image.new('RGBA', (N * T + pad * 2, N * T + pad * 2), (0, 0, 0, 0))
+    d = ImageDraw.Draw(panel)
+    d.rounded_rectangle([0, 0, panel.width - 1, panel.height - 1], radius=64, fill=(235, 245, 255, 190), outline=(255, 255, 255, 230), width=6)
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0))
+    sh.paste(Image.new('RGBA', panel.size, (40, 70, 140, 90)), (bx - pad, by - pad + 18))
+    im = Image.alpha_composite(im, sh.filter(ImageFilter.GaussianBlur(22)))
+    im.alpha_composite(panel, (bx - pad, by - pad))
+    for r in range(N):
+        for c in range(N):
+            im.alpha_composite(spr('slide_ice_a' if (r + c) % 2 == 0 else 'slide_ice_b', T), (bx + c * T, by + r * T))
+    layouts = {
+        1: dict(rocks=[(0, 1), (1, 3), (2, 0), (3, 4), (4, 2)], exit=(0, 4), pen=(4, 0), extra=[]),
+        2: dict(rocks=[(1, 1), (3, 3)], exit=(0, 0), pen=(4, 4), extra=[('slide_snow', (1, 3)), ('slide_snow', (3, 1)), ('slide_fish_0', (2, 2)), ('slide_fish_1', (0, 3))]),
+        3: dict(rocks=[(0, 2), (2, 1), (3, 3), (4, 0)], exit=(0, 0), pen=(4, 4), extra=[('slide_warp_0', (1, 4)), ('slide_warp_0', (3, 0))]),
+        4: dict(rocks=[(1, 2), (3, 4), (5, 1), (4, 0)], exit=(0, 5), pen=(5, 5), extra=[('slide_seal_idle', (2, 3)), ('slide_arrow', (4, 2)), ('slide_bumper_idle', (1, 5))]),
+        5: dict(rocks=[(1, 2), (3, 1), (2, 4)], exit=(0, 0), pen=(4, 4), extra=[('slide_key', (4, 1)), ('slide_gate_closed', (1, 0)), ('slide_btn_1', (3, 3)), ('slide_twin_idle', (0, 4))]),
+    }
+    L = layouts[n]
+    k = 0
+    for (r, c) in L['rocks']:
+        im.alpha_composite(spr('slide_rock_%d' % (k % 3), T), (bx + c * T, by + r * T))
+        k += 1
+    er, ec = L['exit']
+    im.alpha_composite(spr('slide_exit_open', T), (bx + ec * T, by + er * T))
+    for name, (r, c) in L['extra']:
+        im.alpha_composite(spr(name, T), (bx + c * T, by + r * T))
+    pr, pc = L['pen']
+    im.alpha_composite(spr('slide_penguin_idle', T + 10), (bx + pc * T - 5, by + pr * T - 10))
+    # üstte mutlu penguen ve üç yıldız
+    im.alpha_composite(spr('slide_penguin_happy', 330), ((W - 330) // 2, 170))
+    for i in range(3):
+        im.alpha_composite(spr('ui_star_full', 130), (W // 2 - 195 + i * 130, 490))
+    im.convert('RGB').resize((540, 960), Image.LANCZOS).save(os.path.join(out, 'shot-%d.webp' % n), 'WEBP', quality=84, method=6)
+
+
 for slug, g in GAMES.items():
     art = os.path.join(PUZ, 'apps', g['app'], 'assets', 'art')
     store = os.path.join(PUZ, 'store', g['app'])
@@ -57,7 +110,7 @@ for slug, g in GAMES.items():
         if any(stem.startswith(p) for p in g['prefix']) or stem in COMMON:
             names.append(stem)
     for name in names:
-        im = shrink(Image.open(find(art, name)).convert('RGBA'), 256 if name.startswith('tw_') else 192)
+        im = shrink(Image.open(find(art, name)).convert('RGBA'), 512 if name.endswith('_board_frame') else 256 if name.startswith('tw_') else 192)
         im.save(os.path.join(out, 's', name + '.webp'), 'WEBP', quality=88, method=6)
     icon = Image.open(os.path.join(store, 'app_icon_512.png')).convert('RGBA')
     icon.save(os.path.join(out, 'icon.png'), optimize=True)
@@ -69,7 +122,8 @@ for slug, g in GAMES.items():
     fg.resize((1024, 500), Image.LANCZOS).save(os.path.join(out, 'banner.webp'), 'WEBP', quality=84, method=6)
     for i, name in enumerate(g['shots'], 1):
         if slug == 'jellyslide':
-            src = Image.open(find(art, name)).convert('RGB')
+            slide_scene(art, name, i, out)
+            continue
         else:
             src = Image.open(os.path.join(store, 'screenshots', 'phone', name + '.png')).convert('RGB')
         sw, sh = src.size

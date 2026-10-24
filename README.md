@@ -102,7 +102,7 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
   ikisi `tools/make_jelly_legal.py` ile üretilir (Trails ve Pipes dahil 8 oyun için; Firebase hesap/yedek, AdMob + UMP, yaş kapısı, Analytics/Crashlytics, Google Play satın alma,
   uygulama içinden hesap silme). Oyunlara yeni bir veri işleyen hizmet eklenirse o betikteki metin güncellenip yeniden çalıştırılmalı.
   Play bağlantısı `build_new.py` içindeki `PLAY_URL`'ye yazılır. Ana sayfa ve `games/` değişiklikleri `tools/patch_home_jelly.py` ve
-  `tools/patch_games_jelly.py` ile (bir kez) yapıldı; sonrası elle düzenlenir.
+  `tools/patch_games_jelly.py` ile, ikinci tur düzen (Mobil = Jelly oyunları + Uygulamalar, 3B kart halkası `assets/games3d.js`, DayPot en sonda) `tools/patch_home_v2.py` ve `tools/patch_games_v2.py` ile (bir kez) yapıldı; sonrası elle düzenlenir.
 - Ana sayfa hero'su sayfalıdır: JinjaGames → Cyber Academy → Locard → Jelly Trails → Pipes → Jars → Logic → Loops → Park → Seek → Slide → DayPot → başa.
   Yeni oyun eklerken `index.html` içindeki `.slide` listesine bir sayfa, `assets/home3d.js` içine bir parçacık biçimi
   ekle (`data-shape` adı eşleşmeli; Jelly oyunlarının biçimleri kavanoz, sudoku tablosu, ip halkası, araba, büyüteç, kar tanesi). `home3d.js` değişince `index.html`'deki `?v=` sürümünü artır.

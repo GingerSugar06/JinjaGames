@@ -86,7 +86,16 @@ section.blk{padding:104px 0;position:relative}
 @keyframes labpop{30%{transform:scale(1.14) rotate(-8deg)}60%{transform:scale(.94) rotate(5deg)}100%{transform:none}}
 
 /* GALERİ */
-.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 30px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal-nav{display:flex;align-items:center;gap:18px;margin-top:2px}
+.gal-track{flex:1;height:8px;border-radius:8px;background:var(--line);overflow:hidden;position:relative}
+.gal-track i{position:absolute;left:0;top:0;bottom:0;width:30%;border-radius:8px;background:var(--accent);transition:left .15s linear,width .15s}
+.gal-nav button{width:56px;height:56px;border-radius:50%;flex:none;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;box-shadow:0 10px 22px rgba(var(--accent-rgb),.32),inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.14);transition:transform .25s var(--ease),opacity .2s,filter .2s}
+.gal-nav button:hover{transform:translateY(-3px) scale(1.05)}
+.gal-nav button:active{transform:scale(.9,1.08)}
+.gal-nav button:disabled{opacity:.3;transform:none;cursor:default;filter:saturate(.5)}
+.gal-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .gal button{flex:0 0 min(270px,66vw);scroll-snap-align:center;border-radius:34px;overflow:hidden;border:7px solid var(--surface);box-shadow:var(--shadow-1);background:var(--surface);transition:transform .4s var(--ease),box-shadow .4s}
 .gal button:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:var(--shadow-2)}
 .gal img{width:100%;aspect-ratio:9/16;object-fit:cover}

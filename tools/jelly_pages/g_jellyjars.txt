@@ -6,7 +6,7 @@
 .glass{background:linear-gradient(180deg,var(--surface),var(--bg-soft))}
 .pourfx{position:absolute;pointer-events:none;z-index:5;width:46px;animation:dripfall var(--t,3.4s) ease-in infinite var(--dl,0s)}
 @keyframes dripfall{0%{transform:translateY(-30px) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(300px) scale(1);opacity:0}}
-.jb-board{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:4% 3%;align-items:end;padding:6px 2px 4px;border-radius:24px;background:linear-gradient(180deg,transparent 0,transparent 100%);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.jb-board{position:relative;display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:4% 3%;align-items:end;padding:6px 2px 4px;border-radius:24px;background:linear-gradient(180deg,transparent 0,transparent 100%);user-select:none;-webkit-user-select:none;touch-action:manipulation}
 .jar{position:relative;aspect-ratio:2/3;cursor:pointer;transition:transform .3s var(--ease);-webkit-tap-highlight-color:transparent;border-radius:18px}
 .jar::after{content:"";position:absolute;left:8%;right:8%;bottom:-6px;height:12px;border-radius:50%;background:rgba(0,0,0,.12);filter:blur(5px);z-index:-1}
 .jar>img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -24,11 +24,16 @@
 @keyframes pourr{40%{transform:translateY(-18%) rotate(32deg)}100%{transform:none}}
 .jar.no{animation:shake .4s}
 .jar.full::before{content:"";position:absolute;inset:-6%;border-radius:22px;background:radial-gradient(circle,rgba(255,225,120,.55),transparent 66%);z-index:0}
-.jar .lock{position:absolute;z-index:5;left:50%;top:22%;width:46%;transform:translateX(-50%);filter:drop-shadow(0 5px 5px rgba(0,0,0,.25))}
+.jar .lock{position:absolute;z-index:5;left:50%;top:22%;bottom:auto;height:auto;width:46%;transform:translateX(-50%);filter:drop-shadow(0 5px 5px rgba(0,0,0,.25))}
 .jar .lockdot{position:absolute;z-index:6;left:50%;top:41%;width:20%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)}
-.jar .done{position:absolute;z-index:6;right:-6%;top:-5%;width:34%;animation:hop .5s var(--ease)}
+.jar .done{position:absolute;z-index:6;left:auto;bottom:auto;height:auto;right:-8%;top:-4%;width:36%;animation:hop .5s var(--ease)}
 @keyframes hop{30%{transform:translateY(-14%) scale(1.1)}60%{transform:scale(1.08,.9)}100%{transform:none}}
 .jb-mascot{position:absolute;right:-10px;top:-44px;width:92px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+.jb-stream{position:absolute;z-index:8;width:12px;margin-left:-6px;border-radius:8px;transform-origin:top;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.75),var(--c) 28%,var(--c) 72%,rgba(0,0,0,.18));box-shadow:0 0 10px var(--c);animation:streamflow .62s ease-out forwards}
+@keyframes streamflow{0%{transform:scaleY(0);opacity:1}35%{transform:scaleY(1);opacity:1}80%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.jb-splash{position:absolute;z-index:9;width:20%;margin-left:-10%;pointer-events:none;animation:splash .55s ease-out forwards}
+@keyframes splash{0%{transform:scale(.2);opacity:0}40%{transform:scale(1);opacity:1}100%{transform:scale(1.15) translateY(-10%);opacity:0}}
+.jar.tilt{z-index:12;transition:transform .36s cubic-bezier(.3,.7,.3,1)}
 @media(max-width:680px){.jb-mascot{width:70px;top:-34px}}
 
 @@@ HERO_DECO
@@ -147,13 +152,24 @@
   }
   function pour(a,b,k){
     busy=true; hist.push({s:copy(st),m:moves}); JX.hint('','');
-    var el=board.children[a]; el.classList.add(b>a?'pour-r':'pour-l'); mascot.src='img/s/jars_mascot_pour.webp';
+    var A=board.children[a], B=board.children[b], ar=A.getBoundingClientRect(), br=B.getBoundingClientRect(), bd=board.getBoundingClientRect();
+    var color=COL[top(st[a])], side=(br.left+br.width/2)>=(ar.left+ar.width/2)?1:-1;
+    /* kaynak kavanoz hedefin üstüne gelir ve yatar */
+    var dx=(br.left+br.width/2-side*br.width*.46)-(ar.left+ar.width/2), dy=(br.top-ar.height*.34)-ar.top;
+    A.classList.add('tilt'); A.style.transform='translate('+dx+'px,'+dy+'px) rotate('+(side*62)+'deg)'; mascot.src='img/s/jars_mascot_pour.webp';
+    setTimeout(function(){
+      var s=document.createElement('i'); s.className='jb-stream'; s.style.setProperty('--c',color);
+      s.style.left=(br.left+br.width/2-bd.left)+'px'; s.style.top=(br.top-bd.top+br.height*.05)+'px'; s.style.height=(br.height*.5)+'px'; board.appendChild(s);
+      var sp=document.createElement('img'); sp.src='img/s/jars_fx_splash.webp'; sp.className='jb-splash'; sp.alt='';
+      sp.style.left=(br.left+br.width/2-bd.left)+'px'; sp.style.top=(br.top-bd.top+br.height*.42)+'px'; setTimeout(function(){ board.appendChild(sp); },240);
+      setTimeout(function(){ s.remove(); sp.remove(); },900);
+    },300);
     setTimeout(function(){
       var c=top(st[a]); for(var n=0;n<k;n++){ st[a].pop(); st[b].push(c); }
       moves++; sel=-1; render(b); busy=false;
       setTimeout(function(){ if(!won) mascot.src='img/s/jars_mascot_idle.webp'; },500);
       if(isDone(st)) win();
-    },300);
+    },820);
   }
   function win(){
     won=true; solved[cur]=true; renderPicker(); mascot.src='img/s/jars_mascot_win.webp'; JX.win(['fx_star','fx_heart','jars_done','jars_fx_drip']);

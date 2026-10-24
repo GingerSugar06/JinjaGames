@@ -1,15 +1,16 @@
 @@@ CSS
 /* JELLY SEEK: çimen, şeker karoları */
 .hero-grass{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:1;pointer-events:none;background:radial-gradient(60% 100% at 20% 100%,rgba(var(--accent-rgb),.22),transparent 70%),radial-gradient(50% 90% at 80% 100%,rgba(var(--pop-rgb),.16),transparent 70%)}
-.sk-wrap{position:relative}
-.sk-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:4px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.sk-wrap{position:relative;padding:14%;background:url(img/s/seek_board_frame.webp) center/100% 100% no-repeat}
+.sk-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:3px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 .sk{position:relative;aspect-ratio:1;border:0;padding:0;background:url(img/s/seek_tile_covered_a.webp) center/100% 100% no-repeat;transition:transform .15s var(--ease),filter .2s;-webkit-tap-highlight-color:transparent}
 .sk.b{background-image:url(img/s/seek_tile_covered_b.webp)}
 .sk:not(.op):hover{transform:scale(1.05)}
 .sk.op{background-image:url(img/s/seek_tile_open_a.webp);cursor:default;animation:tileopen .35s var(--ease)}
 .sk.op.b{background-image:url(img/s/seek_tile_open_b.webp)}
 @keyframes tileopen{from{transform:scale(.8)}to{transform:none}}
-.sk .nb{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,32px);color:#3a2d6e;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none}
+.sk .nb::before{content:"";position:absolute;width:58%;aspect-ratio:1;background:url(img/s/seek_num_bg.webp) center/contain no-repeat;z-index:-1}
+.sk .nb{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:clamp(20px,5vw,32px);color:#3a2d6e;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none}
 .sk .nb.n1{color:#2563d6}.sk .nb.n2{color:#1f8f4f}.sk .nb.n3{color:#d6401f}.sk .nb.n4{color:#7a2fc0}.sk .nb.n5{color:#a0521f}.sk .nb.n6{color:#127f8a}
 .sk .fg{position:absolute;inset:6%;width:88%;height:88%;pointer-events:none;object-fit:contain}
 .sk .sp{position:absolute;inset:8%;width:84%;height:84%;pointer-events:none;object-fit:contain;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
@@ -17,9 +18,9 @@
 .sk.hint{animation:pulse .7s ease-in-out 4}
 @keyframes pulse{50%{transform:scale(1.14);filter:drop-shadow(0 0 10px rgba(var(--pop-rgb),1)) brightness(1.1)}}
 .sk.pop{background-image:url(img/s/seek_tile_open_a.webp)}
-.sk-hero{position:absolute;right:-8px;top:-54px;width:96px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
+.sk-hero{position:absolute;right:6px;top:-62px;width:92px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 8px rgba(var(--accent-rgb),.3))}
 .sk-flagbtn img{width:26px;height:26px}
-@media(max-width:680px){.sk-hero{width:72px;top:-38px}}
+@media(max-width:680px){.sk-hero{width:68px;top:-46px}}
 
 @@@ HERO_DECO
   <div class="hero-grass" aria-hidden="true"></div>

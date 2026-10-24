@@ -156,7 +156,16 @@ section.blk{padding:104px 0;position:relative}
 @keyframes labpop{30%{transform:scale(1.14) rotate(-8deg)}60%{transform:scale(.94) rotate(5deg)}100%{transform:none}}
 
 /* GALERİ */
-.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 30px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.gal{display:flex;gap:22px;overflow-x:auto;padding:14px 6px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal-nav{display:flex;align-items:center;gap:18px;margin-top:2px}
+.gal-track{flex:1;height:8px;border-radius:8px;background:var(--line);overflow:hidden;position:relative}
+.gal-track i{position:absolute;left:0;top:0;bottom:0;width:30%;border-radius:8px;background:var(--accent);transition:left .15s linear,width .15s}
+.gal-nav button{width:56px;height:56px;border-radius:50%;flex:none;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;box-shadow:0 10px 22px rgba(var(--accent-rgb),.32),inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.14);transition:transform .25s var(--ease),opacity .2s,filter .2s}
+.gal-nav button:hover{transform:translateY(-3px) scale(1.05)}
+.gal-nav button:active{transform:scale(.9,1.08)}
+.gal-nav button:disabled{opacity:.3;transform:none;cursor:default;filter:saturate(.5)}
+.gal-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .gal button{flex:0 0 min(270px,66vw);scroll-snap-align:center;border-radius:34px;overflow:hidden;border:7px solid var(--surface);box-shadow:var(--shadow-1);background:var(--surface);transition:transform .4s var(--ease),box-shadow .4s}
 .gal button:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:var(--shadow-2)}
 .gal img{width:100%;aspect-ratio:9/16;object-fit:cover}
@@ -425,7 +434,6 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
           <span class="btn soon"><span class="dotlive" aria-hidden="true"></span><span class="en i">Coming soon to Google Play</span><span class="tr i">Yakında Google Play'de</span></span>
           <a class="btn g" href="#try"><span class="en i">Try a puzzle now</span><span class="tr i">Hemen bir bulmaca dene</span></a>
         </div>
-        <div class="badges"><span>Android</span><span class="en i">Free to play</span><span class="tr i">Ücretsiz</span><span class="en i">6 languages</span><span class="tr i">6 dil</span></div>
       </div>
       <div class="stage" id="stage">
         <div class="glass"><img class="mascot" id="mascot" src="img/hero.webp" alt="" width="640" height="640"></div>
@@ -737,6 +745,18 @@ window.JX_PUZZLES=[{"key":"sudoku","n":4,"br":2,"bc":2,"diag":false,"givens":[1,
     $$('.lab-art img',lab).forEach(function(im){ im.addEventListener('click',function(){ im.classList.remove('pop'); void im.offsetWidth; im.classList.add('pop'); }); });
     pick(0);
   }
+
+  /* ---------- Galeri okları ---------- */
+  $$('.gal').forEach(function(g){
+    var nav=d.createElement('div'); nav.className='gal-nav';
+    nav.innerHTML='<button type="button" data-d="-1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><div class="gal-track"><i></i></div><button type="button" data-d="1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>';
+    g.parentNode.insertBefore(nav,g.nextSibling);
+    var bt=$$('button',nav), th=$('i',nav);
+    function upd(){ var max=g.scrollWidth-g.clientWidth; var r=max>0?g.scrollLeft/max:0; var w=max>0?Math.max(14,g.clientWidth/g.scrollWidth*100):100;
+      th.style.width=w+'%'; th.style.left=((100-w)*r)+'%'; bt[0].disabled=g.scrollLeft<4; bt[1].disabled=g.scrollLeft>=max-4; }
+    bt.forEach(function(b){ b.addEventListener('click',function(){ g.scrollBy({left:(+b.getAttribute('data-d'))*g.clientWidth*.7,behavior:'smooth'}); }); });
+    g.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd(); setTimeout(upd,400);
+  });
 
   /* ---------- Işık kutusu ---------- */
   var lb=$('#lb');

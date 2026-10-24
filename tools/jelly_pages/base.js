@@ -56,6 +56,18 @@
     pick(0);
   }
 
+  /* ---------- Galeri okları ---------- */
+  $$('.gal').forEach(function(g){
+    var nav=d.createElement('div'); nav.className='gal-nav';
+    nav.innerHTML='<button type="button" data-d="-1" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><div class="gal-track"><i></i></div><button type="button" data-d="1" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button>';
+    g.parentNode.insertBefore(nav,g.nextSibling);
+    var bt=$$('button',nav), th=$('i',nav);
+    function upd(){ var max=g.scrollWidth-g.clientWidth; var r=max>0?g.scrollLeft/max:0; var w=max>0?Math.max(14,g.clientWidth/g.scrollWidth*100):100;
+      th.style.width=w+'%'; th.style.left=((100-w)*r)+'%'; bt[0].disabled=g.scrollLeft<4; bt[1].disabled=g.scrollLeft>=max-4; }
+    bt.forEach(function(b){ b.addEventListener('click',function(){ g.scrollBy({left:(+b.getAttribute('data-d'))*g.clientWidth*.7,behavior:'smooth'}); }); });
+    g.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd(); setTimeout(upd,400);
+  });
+
   /* ---------- Işık kutusu ---------- */
   var lb=$('#lb');
   if(lb){
