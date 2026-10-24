@@ -99,7 +99,7 @@ Her sayfa kendi CSS ve JS'ini içinde taşır; harici bağımlılık yoktur.
   `build_new.py` oyun metinleri/renkleri/mekanik listesi ve derleme. Sırayla: `extract_new.py` (oyun metinleri), `prep_new.py` (çizimler ve
   mağaza görselleri; Slide'ın mağaza ekran görüntüsü olmadığı için galerisi oyunun dünya arka planlarıdır), `gen_new_puzzles.py` (bir kez),
   `build_new.py [ad]`. Uygulamalar gizlilik ve silme adreslerini `https://jinjagames.com/<ad>/privacy/` ve `/delete/` olarak açar;
-  ikisi `tools/make_jelly_legal.py` ile üretilir (Firebase hesap/yedek, AdMob + UMP, yaş kapısı, Analytics/Crashlytics, Google Play satın alma,
+  ikisi `tools/make_jelly_legal.py` ile üretilir (Trails ve Pipes dahil 8 oyun için; Firebase hesap/yedek, AdMob + UMP, yaş kapısı, Analytics/Crashlytics, Google Play satın alma,
   uygulama içinden hesap silme). Oyunlara yeni bir veri işleyen hizmet eklenirse o betikteki metin güncellenip yeniden çalıştırılmalı.
   Play bağlantısı `build_new.py` içindeki `PLAY_URL`'ye yazılır. Ana sayfa ve `games/` değişiklikleri `tools/patch_home_jelly.py` ve
   `tools/patch_games_jelly.py` ile (bir kez) yapıldı; sonrası elle düzenlenir.
@@ -319,5 +319,5 @@ DNS yayılması 10 dk – 24 saat sürebilir.
       değiştirilecek; mağaza ekran görüntüleri alınınca sayfaya galeri eklenebilir.
 - [ ] DayPot: gizlilik politikasındaki tarih, yayın gününde güncellensin.
 - [ ] Jelly Jars / Logic / Loops / Park / Seek / Slide: Play yayını açılınca `tools/jelly_pages/build_new.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki kartlar elle güncellensin. Slide için mağaza ekran görüntüsü alınınca `prep_new.py` içindeki `shots` listesi ekran görüntülerine çevrilebilir.
-- [ ] **Jelly Trails ve Jelly Pipes gizlilik sayfaları eski:** `make_jelly_privacy.py` "hesap yok, analiz yok" diyor; iki oyunun kodu da artık Firebase (hesap, Analytics, Crashlytics), UMP ve yaş kapısı taşıyor ve `jellytrails/delete/`, `jellypipes/delete/` adreslerine bakıyor. Yayından önce `make_jelly_legal.py` metnine taşınmalı; sayfalardaki "Hesap yok" cümleleri ve "EN · TR" dil rozeti de gözden geçirilmeli (uygulamalar 6 dilde).
+- [x] Jelly Trails / Pipes gizlilik ve silme sayfaları `make_jelly_legal.py` ile 8 oyun için aynı metinde üretiliyor (`make_jelly_privacy.py` yalnız şablon kaynağı).
 - [ ] Jelly Trails / Jelly Pipes: Play yayını açılınca `tools/jelly_pages/build.py` içindeki `PLAY_URL` doldurulup betik çalıştırılsın; `games/` kartlarındaki "Yayın hazırlığında" durumu ve ana sayfadaki "Google Play yakında" etiketi güncellensin. Mağaza ekran görüntüleri değişirse betik görselleri `Puzzles/store`'dan yeniden üretir.

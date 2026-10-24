@@ -348,31 +348,7 @@ def build_game(slug, g):
 
 
 CK = B.CK
-PRIVACY = '''      <div class="head rv">
-        <span class="eyebrow"><span class="en i">Your data</span><span class="tr i">Verilerin</span></span>
-        <h2 class="en">Play without an account. <span class="hl">Sign in only if you want to.</span></h2>
-        <h2 class="tr">Hesapsız oyna. <span class="hl">Yalnızca istersen giriş yap.</span></h2>
-        <p class="en">@@name@@ keeps your progress on your own device. An account is optional and only used to back up your progress. Ads come from Google AdMob and purchases go through Google Play.</p>
-        <p class="tr">@@name@@ ilerlemeni kendi cihazında tutar. Hesap isteğe bağlıdır ve yalnızca ilerlemeni yedeklemek için kullanılır. Reklamlar Google AdMob'dan gelir, satın almalar Google Play üzerinden yapılır.</p>
-      </div>
-      <div class="privacy">
-        <div class="pbox rv">
-          <ul>
-            <li>@@CK@@<span><span class="en i">No signup is needed to play. Levels, stars, gems and settings live on your device. An optional account (email or Google) backs them up so you can continue on another phone.</span><span class="tr i">Oynamak için kayıt gerekmez. Bölümler, yıldızlar, elmaslar ve ayarlar cihazında durur. İsteğe bağlı hesap (e-posta ya da Google) bunları yedekler, başka telefonda devam edebilirsin.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Ads come from Google AdMob. In the EEA and UK you get Google's consent form and can decline personalised ads. Pick "I'm under 13" and personalised ads are switched off.</span><span class="tr i">Reklamlar Google AdMob'dan gelir. AEA ve Birleşik Krallık'ta Google'ın onay formu çıkar ve kişiselleştirilmiş reklamları reddedebilirsin. "13 yaşından küçüğüm" dersen kişiselleştirilmiş reklamlar kapanır.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Anonymous game events and crash reports help us find bugs (Firebase). They are switched off for players who say they are under 13.</span><span class="tr i">Anonim oyun olayları ve çökme raporları hataları bulmamıza yardım eder (Firebase). 13 yaşından küçük olduğunu söyleyen oyuncular için kapalıdır.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Gem packs and the monthly pass are bought through Google Play. Your card details never reach us.</span><span class="tr i">Elmas paketleri ve aylık geçiş Google Play üzerinden alınır. Kart bilgilerin bize hiç ulaşmaz.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Delete your account any time in Settings, or follow the data deletion page. We do not sell your data, and the game never touches your contacts, photos, camera or microphone.</span><span class="tr i">Hesabını istediğin an Ayarlar'dan ya da veri silme sayfasından silebilirsin. Verilerini satmayız; oyun rehberine, fotoğraflarına, kamerana ya da mikrofonuna dokunmaz.</span></span></li>
-          </ul>
-        </div>
-        <div class="pside rv">
-          <h4><span class="en i">Read the full policy</span><span class="tr i">Politikanın tamamı</span></h4>
-          <p class="en">The privacy policy spells out exactly what is stored, what leaves the device and who handles it, in English and Turkish.</p>
-          <p class="tr">Gizlilik politikası neyin saklandığını, cihazdan neyin çıktığını ve kimin işlediğini tek tek yazar; İngilizce ve Türkçe.</p>
-          <a href="privacy/"><span class="en i">Privacy policy</span><span class="tr i">Gizlilik politikası</span> <span class="arw">&rarr;</span></a>
-          <a href="delete/" style="margin-top:10px"><span class="en i">Delete my data</span><span class="tr i">Verilerimi sil</span> <span class="arw">&rarr;</span></a>
-        </div>
-      </div>'''.replace('@@CK@@', CK)
+PRIVACY = B.PRIVACY
 
 if __name__ == '__main__':
     import sys

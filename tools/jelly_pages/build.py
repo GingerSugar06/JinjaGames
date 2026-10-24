@@ -20,7 +20,7 @@ GAMES = {
     'jellytrails': {
         'name': 'Jelly Trails', 'bg': '#FBF7FF', 'd_bg': '#15101E', 'tpl': 'trails.html',
         'title': 'Jelly Trails: Color Flow | Cute Jelly Puzzle Game for Android | JinjaGames',
-        'desc': 'Jelly Trails is a cozy color-connect puzzle for Android. Drag to link matching jellies, fill every square, play 500 handcrafted levels across 50 sweet worlds. Free, in English and Turkish.',
+        'desc': 'Jelly Trails is a cozy color-connect puzzle for Android. Drag to link matching jellies, fill every square, play 500 handcrafted levels across 50 sweet worlds. Free, in six languages.',
         'og_title': 'Jelly Trails: Renk Yolu | JinjaGames',
         'og_desc': 'Şirin jöleleri aynı renkle bağla, tüm kareleri doldur. 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A cozy color-connect puzzle: drag a finger between two matching jellies, link every pair and fill every square. 500 handcrafted levels in 50 worlds.',
@@ -36,7 +36,7 @@ GAMES = {
     'jellypipes': {
         'name': 'Jelly Pipes', 'bg': '#F2FAFF', 'd_bg': '#0C161C', 'tpl': 'pipes.html',
         'title': 'Jelly Pipes: Water Puzzle | Flowing Pipe Puzzle Game for Android | JinjaGames',
-        'desc': 'Jelly Pipes is a calming water puzzle for Android. Rotate sparkling glass pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 worlds. Free, in English and Turkish.',
+        'desc': 'Jelly Pipes is a calming water puzzle for Android. Rotate sparkling glass pipes so real flowing water reaches every flower. 500 handcrafted levels across 50 worlds. Free, in six languages.',
         'og_title': 'Jelly Pipes: Su Bulmacası | JinjaGames',
         'og_desc': 'Cam boruları çevir, su her çiçeğe ulaşsın. Gerçek akan su, 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A calming water puzzle: rotate sparkling glass pipes so water travels from the tap to every flower. 500 handcrafted levels in 50 worlds.',
@@ -137,19 +137,19 @@ FOOT = '''<footer>
 CK = '<svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg>'
 PRIVACY = '''      <div class="head rv">
         <span class="eyebrow"><span class="en i">Your data</span><span class="tr i">Verilerin</span></span>
-        <h2 class="en">No account. <span class="hl">No personal data from us.</span></h2>
-        <h2 class="tr">Hesap yok. <span class="hl">Bizden kişisel veri yok.</span></h2>
-        <p class="en">@@name@@ keeps your progress on your own device. The only outside services are Google AdMob for the optional ads and Google Play for purchases.</p>
-        <p class="tr">@@name@@ ilerlemeni kendi cihazında tutar. Dışarıdaki tek hizmetler isteğe bağlı reklamlar için Google AdMob ve satın almalar için Google Play.</p>
+        <h2 class="en">Play without an account. <span class="hl">Sign in only if you want to.</span></h2>
+        <h2 class="tr">Hesapsız oyna. <span class="hl">Yalnızca istersen giriş yap.</span></h2>
+        <p class="en">@@name@@ keeps your progress on your own device. An account is optional and only used to back up your progress. Ads come from Google AdMob and purchases go through Google Play.</p>
+        <p class="tr">@@name@@ ilerlemeni kendi cihazında tutar. Hesap isteğe bağlıdır ve yalnızca ilerlemeni yedeklemek için kullanılır. Reklamlar Google AdMob'dan gelir, satın almalar Google Play üzerinden yapılır.</p>
       </div>
       <div class="privacy">
         <div class="pbox rv">
           <ul>
-            <li>@@CK@@<span><span class="en i">No signup, no email, no phone number. The game never asks who you are.</span><span class="tr i">Kayıt yok, mail adresi yok, telefon numarası yok. Oyun kim olduğunu hiç sormaz.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Levels, stars, gems and settings stay in the game's private storage on your device. Uninstall and they are gone.</span><span class="tr i">Bölümler, yıldızlar, elmaslar ve ayarlar cihazındaki oyunun özel alanında durur. Oyunu silince onlar da gider.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Ads come from Google AdMob and are limited to content rated for teens. You can reset your advertising ID in your device settings.</span><span class="tr i">Reklamlar Google AdMob'dan gelir ve gençler için uygun içerikle sınırlıdır. Reklam kimliğini cihaz ayarlarından sıfırlayabilirsin.</span></span></li>
-            <li>@@CK@@<span><span class="en i">Gem packs are bought through Google Play. Your payment details never reach us.</span><span class="tr i">Elmas paketleri Google Play üzerinden alınır. Ödeme bilgilerin bize hiç ulaşmaz.</span></span></li>
-            <li>@@CK@@<span><span class="en i">No analytics and no crash reports are sent anywhere. The game does not touch your contacts, photos, camera, microphone or precise location.</span><span class="tr i">Hiçbir yere analiz ya da çökme raporu gönderilmez. Oyun rehberine, fotoğraflarına, kamerana, mikrofonuna ya da kesin konumuna dokunmaz.</span></span></li>
+            <li>@@CK@@<span><span class="en i">No signup is needed to play. Levels, stars, gems and settings live on your device. An optional account (email or Google) backs them up so you can continue on another phone.</span><span class="tr i">Oynamak için kayıt gerekmez. Bölümler, yıldızlar, elmaslar ve ayarlar cihazında durur. İsteğe bağlı hesap (e-posta ya da Google) bunları yedekler, başka telefonda devam edebilirsin.</span></span></li>
+            <li>@@CK@@<span><span class="en i">Ads come from Google AdMob. In the EEA and UK you get Google's consent form and can decline personalised ads. Pick "I'm under 13" and personalised ads are switched off.</span><span class="tr i">Reklamlar Google AdMob'dan gelir. AEA ve Birleşik Krallık'ta Google'ın onay formu çıkar ve kişiselleştirilmiş reklamları reddedebilirsin. "13 yaşından küçüğüm" dersen kişiselleştirilmiş reklamlar kapanır.</span></span></li>
+            <li>@@CK@@<span><span class="en i">Anonymous game events and crash reports help us find bugs (Firebase). They are switched off for players who say they are under 13.</span><span class="tr i">Anonim oyun olayları ve çökme raporları hataları bulmamıza yardım eder (Firebase). 13 yaşından küçük olduğunu söyleyen oyuncular için kapalıdır.</span></span></li>
+            <li>@@CK@@<span><span class="en i">Gem packs and the monthly pass are bought through Google Play. Your card details never reach us.</span><span class="tr i">Elmas paketleri ve aylık geçiş Google Play üzerinden alınır. Kart bilgilerin bize hiç ulaşmaz.</span></span></li>
+            <li>@@CK@@<span><span class="en i">Delete your account any time in Settings, or follow the data deletion page. We do not sell your data, and the game never touches your contacts, photos, camera or microphone.</span><span class="tr i">Hesabını istediğin an Ayarlar'dan ya da veri silme sayfasından silebilirsin. Verilerini satmayız; oyun rehberine, fotoğraflarına, kamerana ya da mikrofonuna dokunmaz.</span></span></li>
           </ul>
         </div>
         <div class="pside rv">
@@ -157,6 +157,7 @@ PRIVACY = '''      <div class="head rv">
           <p class="en">The privacy policy spells out exactly what is stored, what leaves the device and who handles it, in English and Turkish.</p>
           <p class="tr">Gizlilik politikası neyin saklandığını, cihazdan neyin çıktığını ve kimin işlediğini tek tek yazar; İngilizce ve Türkçe.</p>
           <a href="privacy/"><span class="en i">Privacy policy</span><span class="tr i">Gizlilik politikası</span> <span class="arw">&rarr;</span></a>
+          <a href="delete/" style="margin-top:10px"><span class="en i">Delete my data</span><span class="tr i">Verilerimi sil</span> <span class="arw">&rarr;</span></a>
         </div>
       </div>'''.replace('@@CK@@', CK)
 
@@ -217,7 +218,7 @@ def build(slug, g):
     bubbles = ''.join('<i style="--x:%d%%;--s:%dpx;--t:%.1fs;--dl:-%.1fs;--dr:%dpx"></i>' % (rr.randint(2, 96), rr.randint(14, 54), rr.uniform(9, 18), rr.uniform(0, 14), rr.randint(-60, 60)) for _ in range(18))
     ld = ('{"@context":"https://schema.org","@graph":[{"@type":"MobileApplication","name":"%(name)s","url":"https://jinjagames.com/%(slug)s/",'
           '"image":"https://jinjagames.com/%(slug)s/img/og.jpg","description":"%(ld_desc)s","applicationCategory":"GameApplication",'
-          '"genre":"Puzzle","operatingSystem":"Android","inLanguage":["en","tr"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},'
+          '"genre":"Puzzle","operatingSystem":"Android","inLanguage":["en","tr","de","es","pt","fr"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},'
           '"author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"}},'
           '{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},'
           '{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"},'

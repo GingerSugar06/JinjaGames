@@ -1,4 +1,4 @@
-"""6 yeni Jelly oyununun gizlilik ve veri silme sayfalarını üretir:
+"""8 Jelly oyununun gizlilik ve veri silme sayfalarını üretir:
    <slug>/privacy/index.html  ->  https://jinjagames.com/<slug>/privacy/
    <slug>/delete/index.html   ->  https://jinjagames.com/<slug>/delete/
 Oyunlar bu adreslere bakar (lib/services/legal.dart: https://jinjagames.com/<oyun>/privacy/ ve /delete/).
@@ -174,12 +174,22 @@ def delete_page(tpl):
     return t
 
 
-def main():
-    page_del = delete_page(PAGE)
+def apps():
     for slug, g in BN.GAMES.items():
-        a = dict(slug=slug, name=g['name'], pkg=g['pkg'], store=g['app'], accent=g['light']['accent'], accent_d=g['dark']['accent'], bg=g['light']['bg'],
-                 bg_d=g['dark']['bg'], mail=MAIL, name_q=g['name'].replace(' ', '%20'))
-        for kind, en, tr, page in (('privacy', EN, TR, PAGE), ('delete', DEL_EN, DEL_TR, page_del)):
+        yield dict(slug=slug, name=g['name'], pkg=g['pkg'], store=g['app'], accent=g['light']['accent'], accent_d=g['dark']['accent'], bg=g['light']['bg'], bg_d=g['dark']['bg'])
+    for m in M.APPS:  # Trails ve Pipes: renkler make_jelly_privacy.py'den
+        yield dict(slug=m['slug'], name=m['name'], pkg=m['pkg'], store=m['store'], accent=m['accent'], accent_d=m['accent_d'], bg=m['bg'], bg_d=m['bg_d'])
+
+
+def main():
+    page_priv = PAGE.replace('{name} privacy policy. No accounts and no personal data collected by JinjaGames; ads by Google AdMob and purchases by Google Play.',
+                             '{name} privacy policy: optional account, ads by Google AdMob, analytics by Firebase, purchases by Google Play.')
+    assert page_priv != PAGE
+    page_del = delete_page(PAGE)
+    for a in apps():
+        a.update(mail=MAIL, name_q=a['name'].replace(' ', '%20'))
+        slug = a['slug']
+        for kind, en, tr, page in (('privacy', EN, TR, page_priv), ('delete', DEL_EN, DEL_TR, page_del)):
             out = os.path.join(ROOT, slug, kind)
             os.makedirs(out, exist_ok=True)
             icon = Image.open(os.path.join(PUZZLES, a['store'], 'app_icon.png')).convert('RGBA')

@@ -185,6 +185,7 @@ paint();document.getElementById('year').textContent=new Date().getFullYear();}})
 '''
 
 if __name__ == '__main__':
+    raise SystemExit('Eski metin (hesap yok). Gizlilik ve silme sayfaları artık tools/make_jelly_legal.py ile üretilir.')
     for a in APPS:
         out = os.path.join(ROOT, a['slug'], 'privacy')
         os.makedirs(out, exist_ok=True)
