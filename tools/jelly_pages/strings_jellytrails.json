@@ -303,13 +303,13 @@
   "tr": "Yol bu karede DÖNMELİ. Düz geçemez.",
   "en": "The path must TURN on this square. It cannot go straight."
  },
- "twist.portal": {
-  "tr": "Portal",
-  "en": "Portal"
+ "twist.rooms": {
+  "tr": "Jöle havuzu",
+  "en": "Jelly pool"
  },
- "twist.portal.desc": {
-  "tr": "Aynı renkli iki portal birbirine bağlı. Yolu birinden diğerine geçir.",
-  "en": "Two portals of the same color are linked. Hop from one to the other."
+ "twist.rooms.desc": {
+  "tr": "Çerçevedeki kareler AYNI renkli yolun parçası olmalı. Hangi renk olduğunu sen bulursun; havuz tek renk olunca o renkte parlar.",
+  "en": "The framed squares must all belong to the SAME colored trail. You work out which color; the pool glows in that color when it is right."
  },
  "twist.locked": {
   "tr": "Kilitli borular",

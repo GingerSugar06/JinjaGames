@@ -12,17 +12,17 @@ PUZ = r'C:\Users\user\Desktop\Puzzles'
 GAMES = {
     'jellytrails': {
         'app': 'jelly_trails', 'store': 'jelly_trails', 'logo': 'logo_trails.png',
-        'shots': ['01_R_home', '02_R_map2', '03_R_play24', '04_R_play30', '05_R_res30'],
+        'shots': ['01_home', '02_map', '04_play', '03_new_item', '05_result'],
         'sprites': ['flow_node_%d_idle' % i for i in range(8)] + ['flow_node_%d_done' % i for i in range(8)] + [
             'flow_fence', 'flow_turncap_badge', 'flow_gate_0', 'flow_gate_1', 'flow_gate_2', 'flow_door_closed', 'flow_door_open',
             'flow_key_badge', 'flow_bridge', 'flow_wanderer_idle', 'flow_wanderer_hop', 'flow_multi_triple_idle', 'flow_multi_quad_idle',
-            'flow_triple_idle', 'flow_quad_idle', 'flow_stone', 'flow_straight', 'flow_turn', 'flow_portal_0', 'flow_portal_1', 'flow_portal_2',
+            'flow_triple_idle', 'flow_quad_idle', 'flow_stone', 'flow_straight', 'flow_turn', 'flow_tile_straight', 'flow_tile_turn', 'ui_chip', 'flow_portal_0', 'flow_portal_1', 'flow_portal_2',
             'ui_star_full', 'ui_star_empty', 'ui_gem', 'item_hint', 'ui_boss_badge', 'fx_star', 'fx_heart', 'gift_closed', 'gift_open',
             'ui_icon_hint', 'ic_timer', 'ic_limit_moves', 'ic_limit_time'],
     },
     'jellypipes': {
         'app': 'jelly_pipes', 'store': 'jelly_pipes', 'logo': 'logo_pipes.png',
-        'shots': ['01_Q_home', '02_Q_map3', '03_Q_play21', '04_Q_play30', '05_Q_res30'],
+        'shots': ['01_home', '02_map', '03_play_frozen', '04_bloom', '05_result'],
         'sprites': ['pipe_source', 'pipe_source_1', 'pipe_source_2', 'pipe_flower_bud', 'pipe_flower_open', 'pipe_flower_bud_c0',
                     'pipe_flower_open_c0', 'pipe_flower_bud_c1', 'pipe_flower_open_c1', 'pipe_flower_bud_c2', 'pipe_flower_open_c2',
                     'pipe_flower_bud_dual', 'pipe_flower_open_dual', 'pipe_lock', 'pipe_frozen_cross', 'pipe_frozen_elbow', 'pipe_ice',

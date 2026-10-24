@@ -75,6 +75,18 @@ html[data-theme="dark"] .badges span{background:rgba(255,255,255,.06)}
 .lab-art .art-dual img{position:absolute;width:62%;max-height:none;filter:drop-shadow(0 18px 20px rgba(var(--accent-rgb),.22))}
 .lab-art .art-dual img:first-child{clip-path:inset(0 50% 0 0);left:calc(50% - 31%)}
 .lab-art .art-dual img:last-child{clip-path:inset(0 0 0 50%);left:calc(50% - 31%)}
+/* Jöle havuzu: oyundaki gibi lavanta çerçeveli, içi yumuşak dolgulu kareler; hepsi aynı renkli yolsa havuz o renkle parlar */
+.lab-art .art-room{position:relative;display:block;width:190px;height:190px}
+.lab-art .art-room svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.rm-o rect{fill:none;stroke:#6F63B8;stroke-width:9}
+.rm-i rect{fill:none;stroke:#9C8CF2;stroke-width:5}
+.rm-f rect{fill:#E8E3FC;stroke:none}
+html[data-theme="dark"] .rm-f rect{fill:#2D2750}
+.rm-t{fill:none;stroke:#FF8A8A;stroke-width:15;stroke-linecap:round;stroke-linejoin:round}
+.rm-b{fill:#fff;stroke:#9C8CF2;stroke-width:3.5}
+.lab-art .art-room img{position:absolute;width:30%}
+.lab-art .art-room .rm-j1{left:15%;top:15%}
+.lab-art .art-room .rm-j2{left:55%;top:55%}
 .lab-art .art-counter img{width:62%}
 .lab-art .art-counter b{position:absolute;right:calc(50% - 45px);top:6px;width:42px;height:42px;border-radius:50%;background:var(--surface);color:var(--accent);display:grid;place-items:center;font-family:var(--f-display);font-size:22px;box-shadow:var(--shadow-1);border:2px solid var(--accent)}
 

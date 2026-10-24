@@ -24,9 +24,9 @@ GAMES = {
         'og_title': 'Jelly Trails: Renk Yolu | JinjaGames',
         'og_desc': 'Şirin jöleleri aynı renkle bağla, tüm kareleri doldur. 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A cozy color-connect puzzle: drag a finger between two matching jellies, link every pair and fill every square. 500 handcrafted levels in 50 worlds.',
-        'shots_alt': ['Home screen', 'World map', 'A level in progress', 'A harder board', 'Level complete'],
-        'lab': [('twist.stones', 'flow_stone', 21, None), ('twist.dual', 'flow_node_0_idle', 61, 'dual'), ('twist.straight', 'flow_straight', 101, None),
-                ('twist.turn', 'flow_turn', 141, None), ('twist.portal', 'flow_portal_0', 181, 'portal'), ('twist.gates', 'flow_gate_0', 221, None),
+        'shots_alt': ['Home screen', 'World map', 'A level in progress', 'A new twist arrives', 'Level complete'],
+        'lab': [('twist.stones', 'flow_stone', 21, None), ('twist.dual', 'flow_node_0_idle', 61, 'dual'), ('twist.straight', 'flow_tile_straight', 101, None),
+                ('twist.turn', 'flow_tile_turn', 141, None), ('twist.rooms', 'flow_portal_0', 181, 'room'), ('twist.gates', 'flow_gate_0', 221, None),
                 ('twist.hub', 'flow_quad_idle', 261, None), ('twist.doors', 'flow_door_closed', 301, 'door'), ('twist.bridges', 'flow_bridge', 341, None),
                 ('twist.counter', 'flow_node_1_idle', 421, 'counter'), ('twist.turncap', 'flow_turncap_badge', 461, None)],
         'cta_h': ('Almost on Google Play.', 'Neredeyse Google Play\'de.'),
@@ -40,7 +40,7 @@ GAMES = {
         'og_title': 'Jelly Pipes: Su Bulmacası | JinjaGames',
         'og_desc': 'Cam boruları çevir, su her çiçeğe ulaşsın. Gerçek akan su, 500 bölüm, 50 dünya. Android için ücretsiz bulmaca.',
         'ld_desc': 'A calming water puzzle: rotate sparkling glass pipes so water travels from the tap to every flower. 500 handcrafted levels in 50 worlds.',
-        'shots_alt': ['Home screen', 'World map', 'A level in progress', 'A harder board', 'Level complete'],
+        'shots_alt': ['Home screen', 'World map', 'A level with frozen pipes', 'A flower blooms', 'Level complete'],
         'lab': [('twist.locked', 'pipe_lock', 21, None), ('twist.rocks', 'flow_stone', 61, None), ('twist.frozen', 'pipe_frozen_cross', 101, None),
                 ('twist.valve', 'pipe_valve', 141, None), ('twist.twin', 'pipe_source_1', 181, None), ('twist.link', 'pipe_link_badge', 221, None),
                 ('twist.dual', 'pipe_flower_open_dual', 261, None), ('twist.worn', 'pipe_worn_3', 301, None), ('twist.pump', 'pipe_pump_active', 341, None),
@@ -186,7 +186,7 @@ def build(slug, g):
     tabs, panes = [], []
     ART = {
         'dual': '<span class="art-dual"><img src="img/s/flow_node_0_idle.webp" alt=""><img src="img/s/flow_node_4_idle.webp" alt=""></span>',
-        'portal': '<span class="art-pair"><img src="img/s/flow_portal_0.webp" alt=""><img src="img/s/flow_portal_0.webp" alt=""></span>',
+        'room': '<span class="art-room"><svg viewBox="0 0 200 200" aria-hidden="true"><g class="rm-o"><rect x="22" y="22" width="76" height="76" rx="16"/><rect x="102" y="22" width="76" height="76" rx="16"/><rect x="102" y="102" width="76" height="76" rx="16"/></g><g class="rm-i"><rect x="22" y="22" width="76" height="76" rx="16"/><rect x="102" y="22" width="76" height="76" rx="16"/><rect x="102" y="102" width="76" height="76" rx="16"/></g><g class="rm-f"><rect x="21" y="21" width="78" height="78" rx="16"/><rect x="101" y="21" width="78" height="78" rx="16"/><rect x="101" y="101" width="78" height="78" rx="16"/><rect x="92" y="40" width="16" height="40"/><rect x="120" y="92" width="40" height="16"/></g><path class="rm-t" d="M60 60H140V140"/><circle class="rm-b" cx="34" cy="34" r="11"/></svg><img class="rm-j1" src="img/s/flow_node_0_done.webp" alt=""><img class="rm-j2" src="img/s/flow_node_0_idle.webp" alt=""></span>',
         'door': '<span class="art-pair"><img src="img/s/flow_door_closed.webp" alt=""><img src="img/s/flow_key_badge.webp" alt=""></span>',
         'counter': '<span class="art-counter"><img src="img/s/flow_node_1_idle.webp" alt=""><b>7</b></span>',
     }
