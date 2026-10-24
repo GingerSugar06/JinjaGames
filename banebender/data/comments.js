@@ -143,6 +143,15 @@ window.BB_COMMENTS={
    "p": false
   }
  ],
+ "lodepulse": [
+  {
+   "id": 8587629,
+   "n": "JinjaGames",
+   "t": "The handheld scanner and holographic display look really cool! I love the idea of an ore compass that keeps pointing as you move. Such a creative way to make mining more engaging. Great work!",
+   "d": "2026-10-23",
+   "p": false
+  }
+ ],
  "ore-elemental-golems": [
   {
    "id": 8534712,
