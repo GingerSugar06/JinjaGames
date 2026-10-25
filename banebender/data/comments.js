@@ -170,6 +170,13 @@ window.BB_COMMENTS={
  ],
  "pale-contagion": [
   {
+   "id": 8597876,
+   "n": "TikiTikiTikiTrace",
+   "t": "can you make it work with Tissue's zombie resourepack?",
+   "d": "2026-10-25",
+   "p": false
+  },
+  {
    "id": 8532411,
    "n": "JinjaGames",
    "t": "Really well-made infection mod! I love how it makes zombie encounters much more intense and meaningful without feeling unfair. The armor based protection, infection timer, multi-step cure system, and optional airborne transmission are all very well thought out. It’s especially perfect for zombie apocalypse modpacks. I also appreciate how configurable everything is and that multiple mod loaders are supported. Great work I’m excited to see how the mod develops!",
