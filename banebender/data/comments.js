@@ -120,6 +120,13 @@ window.BB_COMMENTS={
  ],
  "hard-mobs-and-bosses": [
   {
+   "id": 8594996,
+   "n": "ivebeenstabbed",
+   "t": "really like how the models improved heavily",
+   "d": "2026-10-24",
+   "p": false
+  },
+  {
    "id": 8431428,
    "n": "JinjaGames",
    "t": "Huge respect for keeping it dependency-free without needing GeckoLib,just drop it in and play. The mob mechanics look so refreshing and the Doom set rewards are totally worth grinding for. Amazing work!",
