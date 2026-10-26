@@ -38,6 +38,13 @@ window.BB_COMMENTS={
  ],
  "death-hand": [
   {
+   "id": 8602291,
+   "n": "PonyTravieso",
+   "t": "The mod is really epic! Just one thing: could you make it compatible with Curios? Right now, when you die, any items you have equipped in Curios slots end up dropping on the ground.",
+   "d": "2026-10-26",
+   "p": false
+  },
+  {
    "id": 8534697,
    "n": "JinjaGames",
    "t": "Such a unique and atmospheric idea! Turning item recovery into a ghostly handshake ritual is much more memorable than a normal gravestone. The animations, sounds, and reliable item restoration are all great touches. Awesome work!",
