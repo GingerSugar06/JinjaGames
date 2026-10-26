@@ -136,6 +136,13 @@ window.BB_COMMENTS={
  ],
  "hearthly": [
   {
+   "id": 8600743,
+   "n": "iobiarg",
+   "t": "I would be great if you add some images to the gallery to see your textures and make people more interested in the mod.",
+   "d": "2026-10-25",
+   "p": false
+  },
+  {
    "id": 8534848,
    "n": "softoryce",
    "t": "Can you contact me via Discord? Discord softoryce_",
