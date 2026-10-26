@@ -60,8 +60,8 @@
           <span class="eyebrow"><span class="en i">Play it right here</span><span class="tr i">Tam burada oyna</span></span>
           <h2 class="en">Your turn. <span class="hl">Fill the grid.</span></h2>
           <h2 class="tr">Sıra sende. <span class="hl">Tabloyu doldur.</span></h2>
-          <p class="lead2 en">Tap a cell, then tap a number. Every row, column and thick-lined box holds each number once. Mistakes turn red right away. Each twist below is a real level type from the game.</p>
-          <p class="lead2 tr">Bir hücreye, sonra bir sayıya dokun. Her satır, sütun ve kalın çizgili kutu her sayıyı bir kez içerir. Hatalar hemen kırmızıya döner. Aşağıdaki her sürpriz oyundaki gerçek bir bölüm türü.</p>
+          <p class="lead2 en">Tap a cell, then tap a number. Every row, column and thick-lined box holds each number once. Mistakes turn red right away. Each rule below is a real rule of the game, added on top of sudoku.</p>
+          <p class="lead2 tr">Bir hücreye, sonra bir sayıya dokun. Her satır, sütun ve kalın çizgili kutu her sayıyı bir kez içerir. Hatalar hemen kırmızıya döner. Aşağıdaki her kural oyundaki gerçek bir kuraldır ve sudokunun üstüne eklenir.</p>
           <div class="picker" id="picker"></div>
           <div class="meter"><span><span class="en i">Filled</span><span class="tr i">Dolu</span> <b id="m-fill">0/0</b></span><span><span class="en i">Mistakes</span><span class="tr i">Hata</span> <b id="m-err">0</b></span></div>
           <div class="actions">

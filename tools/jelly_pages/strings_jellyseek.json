@@ -367,12 +367,68 @@
   "tr": "Fener hep güvenlidir. Açınca sayısı komşuları değil, bütün satırdaki sürprizleri söyler.",
   "en": "A lantern is always safe. Its number counts the surprises in its whole row, not just its neighbours."
  },
- "twist.camp": {
-  "tr": "Kamp yeri",
-  "en": "Campsite"
+ "twist.parity": {
+  "tr": "Tek ve çift",
+  "en": "Odd and even"
  },
- "twist.camp.desc": {
-  "tr": "Ağaçlar baştan açık. Her ağacın dört yanındaki karolardan tam biri çadırdır (sürpriz).",
-  "en": "Trees start open. Exactly one of the four tiles beside each tree is a tent (a surprise)."
+ "twist.parity.desc": {
+  "tr": "Güvenli karo. Noktalar, çevresindeki sürprizlerin tek (bir nokta) mi çift (iki nokta) mi olduğunu söyler.",
+  "en": "A safe tile. Its dots say whether the surprises around it are odd (one dot) or even (two dots)."
+ },
+ "twist.diag": {
+  "tr": "Çaprazlar",
+  "en": "Diagonals"
+ },
+ "twist.diag.desc": {
+  "tr": "Güvenli karo. Sayısı, içinden geçen iki çapraz hattaki sürprizleri sayar.",
+  "en": "A safe tile. Its number counts the surprises on both diagonal lines through it."
+ },
+ "twist.seal": {
+  "tr": "Mühür",
+  "en": "Seal"
+ },
+ "twist.seal.desc": {
+  "tr": "Kapalı ama kesin güvenli olan, mühürle işaretli karo.",
+  "en": "A closed tile that is still certainly safe, marked with a seal."
+ },
+ "twist.zone": {
+  "tr": "Bölge",
+  "en": "Zone"
+ },
+ "twist.zone.desc": {
+  "tr": "Renkli dikdörtgenin köşesindeki sayı, içindeki sürpriz toplamını söyler.",
+  "en": "A coloured rectangle shows in one corner how many surprises hide inside it."
+ },
+ "twist.range": {
+  "tr": "Aralık",
+  "en": "Range"
+ },
+ "twist.range.desc": {
+  "tr": "İki olası sayı gösteren güvenli karo, örneğin 2 ya da 3. Gerçek sayı bu ikisinden biridir.",
+  "en": "A safe tile showing two possible counts, like 2 or 3. The real count is one of the two."
+ },
+ "twist.knight": {
+  "tr": "At",
+  "en": "Knight"
+ },
+ "twist.knight.desc": {
+  "tr": "Güvenli karo. Satranç atının bu karodan ulaşabileceği kareleri sayar.",
+  "en": "A safe tile. It counts the tiles a chess knight could reach from it."
+ },
+ "twist.ring": {
+  "tr": "Halka",
+  "en": "Ring"
+ },
+ "twist.ring.desc": {
+  "tr": "Güvenli karo. Tam iki adım uzaktaki halkadaki kareleri sayar.",
+  "en": "A safe tile. It counts the ring of tiles exactly two steps away."
+ },
+ "twist.twin": {
+  "tr": "İkizler",
+  "en": "Twins"
+ },
+ "twist.twin.desc": {
+  "tr": "İple bağlı iki güvenli karo. Ortak sayı, ikisinin çevresindeki sürprizleri sayar.",
+  "en": "Two safe tiles joined by a thread. The shared number counts surprises around both of them."
  }
 }

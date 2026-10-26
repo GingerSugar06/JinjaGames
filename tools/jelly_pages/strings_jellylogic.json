@@ -390,5 +390,61 @@
  "twist.jigsaw.desc": {
   "tr": "Kutular artık düzensiz, renkli bölgeler. Her bölgede de her sayı yalnız bir kez olur.",
   "en": "The boxes are now irregular coloured regions. Every region also holds each number once."
+ },
+ "twist.next": {
+  "tr": "Sıralı komşu",
+  "en": "Consecutive pair"
+ },
+ "twist.next.desc": {
+  "tr": "İki hücre arasındaki beyaz nokta, sayıların tam olarak bir farklı olduğunu gösterir.",
+  "en": "A white dot between two cells means their numbers differ by exactly one."
+ },
+ "twist.thermo": {
+  "tr": "Termometre",
+  "en": "Thermometer"
+ },
+ "twist.thermo.desc": {
+  "tr": "Termometrede sayılar balondan uca doğru kesin olarak artar.",
+  "en": "Numbers on a thermometer rise steadily from the bulb toward the tip."
+ },
+ "twist.nocons": {
+  "tr": "Ardışık yok",
+  "en": "No consecutive"
+ },
+ "twist.nocons.desc": {
+  "tr": "Yan yana ya da alt alta duran hücreler ardışık sayı olamaz.",
+  "en": "Cells side by side or stacked on top of each other cannot hold consecutive numbers."
+ },
+ "twist.window": {
+  "tr": "Pencereler",
+  "en": "Windows"
+ },
+ "twist.window.desc": {
+  "tr": "Dört ek 3x3 pencerenin her biri de her sayıyı bir kez içerir.",
+  "en": "Four extra 3x3 windows must each also hold every number exactly once."
+ },
+ "twist.knight": {
+  "tr": "Satranç atı",
+  "en": "Knight moves"
+ },
+ "twist.knight.desc": {
+  "tr": "Satranç atı hamlesiyle ulaşılan hücreler aynı sayıyı taşıyamaz.",
+  "en": "Cells that are one knight move apart cannot hold the same number."
+ },
+ "twist.king": {
+  "tr": "Kral",
+  "en": "King moves"
+ },
+ "twist.king.desc": {
+  "tr": "Bir hücrenin çevresindeki sekiz hücre, çaprazlar dahil, aynı sayıyı taşıyamaz.",
+  "en": "The eight cells around a cell, diagonals included, cannot hold the same number."
+ },
+ "twist.sandwich": {
+  "tr": "Sandviç",
+  "en": "Sandwich"
+ },
+ "twist.sandwich.desc": {
+  "tr": "Kenardaki sayı, o satır ya da sütunda 1 ile en büyük sayı arasında kalan hücrelerin toplamıdır.",
+  "en": "The number on the edge is the sum of the cells between the 1 and the largest number in that row or column."
  }
 }

@@ -9,15 +9,15 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Jelly Seek: Hidden Sweets | Cozy Logic Puzzle for Android | JinjaGames</title>
-<meta name="description" content="Jelly Seek is a cosy logic puzzle for Android. Open tiles, follow the numbers and find every hidden sweet without waking a sour jelly. No guessing. 500 handcrafted levels. Free, in six languages." />
+<title>Jelly Seek: Minesweeper Deduction | Cozy Hidden Sweets Puzzle for Android | JinjaGames</title>
+<meta name="description" content="Jelly Seek is a cosy minesweeper deduction puzzle for Android. Open tiles, follow the numbers and find every hidden sweet without waking a sour jelly. No guessing. 500 handcrafted levels. Free, in six languages." />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href="https://jinjagames.com/jellyseek/" />
 <meta name="theme-color" content="#F4FFF6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0E1D14" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/png" href="img/icon.png" />
 <link rel="apple-touch-icon" href="img/icon.png" />
-<meta property="og:title" content="Jelly Seek: Gizli Şekerler | JinjaGames" />
+<meta property="og:title" content="Jelly Seek: Mayın Tarlası | JinjaGames" />
 <meta property="og:description" content="Karoları aç, sayıları izle, her gizli şekeri bul. Tahmin yok, yalnızca mantık. 500 bölüm. Android için ücretsiz." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://jinjagames.com/jellyseek/" />
@@ -27,7 +27,7 @@ if ((location.protocol === 'https:' || location.protocol === 'http:') && locatio
 <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/nunito-latin-400.woff2" crossorigin />
 <link rel="stylesheet" href="../assets/fonts.css?v=20261012d" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"MobileApplication","name":"Jelly Seek","url":"https://jinjagames.com/jellyseek/","image":"https://jinjagames.com/jellyseek/img/og.jpg","description":"A cosy logic puzzle with a sweet twist: little jelly surprises hide under the tiles. Open a tile, read its number and work out which tiles are safe. Every level can be solved by logic alone. 500 handcrafted levels in 50 worlds.","applicationCategory":"GameApplication","genre":"Puzzle","operatingSystem":"Android","inLanguage":["en","tr","de","es","pt","fr"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"},{"@type":"ListItem","position":3,"name":"Jelly Seek","item":"https://jinjagames.com/jellyseek/"}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"MobileApplication","name":"Jelly Seek","url":"https://jinjagames.com/jellyseek/","image":"https://jinjagames.com/jellyseek/img/og.jpg","description":"A cosy minesweeper deduction puzzle with a sweet twist: little jelly surprises hide under the tiles. Open a tile, read its number and work out which tiles are safe. Every level can be solved by logic alone. 500 handcrafted levels in 50 worlds.","applicationCategory":"GameApplication","genre":"Puzzle","operatingSystem":"Android","inLanguage":["en","tr","de","es","pt","fr"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"JinjaGames"},"publisher":{"@type":"Organization","name":"JinjaGames","url":"https://jinjagames.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JinjaGames","item":"https://jinjagames.com/"},{"@type":"ListItem","position":2,"name":"Games","item":"https://jinjagames.com/games/"},{"@type":"ListItem","position":3,"name":"Jelly Seek","item":"https://jinjagames.com/jellyseek/"}]}]}
 </script>
 <script>
 /* Tema + dil, ana siteyle AYNI anahtarlardan okunur → sayfalar arası tutarlı. */
@@ -408,8 +408,8 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
         <h1 class="logo"><img src="img/logo.webp" alt="Jelly Seek" width="720" height="360"></h1>
         <p class="claim en">Seek, deduce and smile!</p>
         <p class="claim tr">Ara, çıkarım yap, gülümse!</p>
-        <p class="lead en">Little jelly surprises hide under the tiles of every board. Open a tile and its number tells you how many surprises lurk right next to it. Use the clues to find every sweet without waking a single sour jelly.</p>
-        <p class="lead tr">Her tahtada karoların altında minik jöle sürprizler saklanır. Bir karoyu aç; sayısı yanında kaç sürpriz olduğunu söyler. İpuçlarıyla her şekeri bul, tek bir ekşi jöleyi bile uyandırma.</p>
+        <p class="lead en">This is a minesweeper deduction puzzle. Little jelly surprises hide under the tiles of every board. Open a tile and its number tells you how many surprises lurk right next to it. Use the clues to find every sweet without waking a single sour jelly.</p>
+        <p class="lead tr">Bu bir mayın tarlası çıkarım bulmacası. Her tahtada karoların altında minik jöle sürprizler saklanır. Bir karoyu aç; sayısı yanında kaç sürpriz olduğunu söyler. İpuçlarıyla her şekeri bul, tek bir ekşi jöleyi bile uyandırma.</p>
         <div class="cta">
           <span class="btn soon"><span class="dotlive" aria-hidden="true"></span><span class="en i">Coming soon to Google Play</span><span class="tr i">Yakında Google Play'de</span></span>
           <a class="btn g" href="#try"><span class="en i">Try a puzzle now</span><span class="tr i">Hemen bir bulmaca dene</span></a>
@@ -472,17 +472,24 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
     <div class="wrap">
       <div class="head rv">
         <span class="eyebrow"><span class="en i">The twists</span><span class="tr i">Sürprizler</span></span>
-        <h2 class="en">Four twists, <span class="hl">one at a time.</span></h2>
-        <h2 class="tr">Dört sürpriz, <span class="hl">tek tek gelir.</span></h2>
+        <h2 class="en">New twists, <span class="hl">one at a time.</span></h2>
+        <h2 class="tr">Yeni sürprizler, <span class="hl">tek tek gelir.</span></h2>
         <p class="en">Every new twist arrives alone, in a gentle level with a little tutorial. Tap one to see what it does and when you will meet it.</p>
         <p class="tr">Her yeni sürpriz, küçük bir anlatımla ve kolay bir bölümde tek başına gelir. Birine dokun, ne yaptığını ve ne zaman karşına çıkacağını gör.</p>
       </div>
       <div id="lab" class="rv">
         <div class="pills" role="tablist">
           <button class="lab-tab" type="button" role="tab"><img src="img/s/tw_seek_lantern.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Lantern</span><span class="tr i">Fener</span></span></button>
-          <button class="lab-tab" type="button" role="tab"><img src="img/s/tw_seek_camp.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Campsite</span><span class="tr i">Kamp yeri</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/tw_seek_spyglass.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Spyglass</span><span class="tr i">Dürbün</span></span></button>
           <button class="lab-tab" type="button" role="tab"><img src="img/s/tw_seek_scale.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Scale</span><span class="tr i">Terazi</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_num_bg.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Odd and even</span><span class="tr i">Tek ve çift</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_hex_open.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Diagonals</span><span class="tr i">Çaprazlar</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_surprise.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Seal</span><span class="tr i">Mühür</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_board_frame.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Zone</span><span class="tr i">Bölge</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_flag.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Range</span><span class="tr i">Aralık</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_pop.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Knight</span><span class="tr i">At</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_spyglass_zone.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Ring</span><span class="tr i">Halka</span></span></button>
+          <button class="lab-tab" type="button" role="tab"><img src="img/s/seek_tree.webp" alt="" width="192" height="192" loading="lazy"><span><span class="en i">Twins</span><span class="tr i">İkizler</span></span></button>
         </div>
         <div class="lab-card lab-detail">
           <div class="lab-pane" role="tabpanel">
@@ -492,15 +499,6 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
               <p class="en">A lantern is always safe. Its number counts the surprises in its whole row, not just its neighbours.</p>
               <p class="tr">Fener hep güvenlidir. Açınca sayısı komşuları değil, bütün satırdaki sürprizleri söyler.</p>
               <p class="lab-tip"><span class="en i">First shows up at level 21</span><span class="tr i">İlk 21. bölümde karşına çıkar</span></p>
-            </div>
-          </div>
-          <div class="lab-pane" role="tabpanel">
-            <div class="lab-art"><img src="img/s/tw_seek_camp.webp" alt="" width="256" height="256" loading="lazy"></div>
-            <div>
-              <h3><span class="en i">Campsite</span><span class="tr i">Kamp yeri</span></h3>
-              <p class="en">Trees start open. Exactly one of the four tiles beside each tree is a tent (a surprise).</p>
-              <p class="tr">Ağaçlar baştan açık. Her ağacın dört yanındaki karolardan tam biri çadırdır (sürpriz).</p>
-              <p class="lab-tip"><span class="en i">First shows up at level 61</span><span class="tr i">İlk 61. bölümde karşına çıkar</span></p>
             </div>
           </div>
           <div class="lab-pane" role="tabpanel">
@@ -521,6 +519,78 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
               <p class="lab-tip"><span class="en i">First shows up at level 141</span><span class="tr i">İlk 141. bölümde karşına çıkar</span></p>
             </div>
           </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_num_bg.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Odd and even</span><span class="tr i">Tek ve çift</span></h3>
+              <p class="en">A safe tile. Its dots say whether the surprises around it are odd (one dot) or even (two dots).</p>
+              <p class="tr">Güvenli karo. Noktalar, çevresindeki sürprizlerin tek (bir nokta) mi çift (iki nokta) mi olduğunu söyler.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 181</span><span class="tr i">İlk 181. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_hex_open.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Diagonals</span><span class="tr i">Çaprazlar</span></h3>
+              <p class="en">A safe tile. Its number counts the surprises on both diagonal lines through it.</p>
+              <p class="tr">Güvenli karo. Sayısı, içinden geçen iki çapraz hattaki sürprizleri sayar.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 221</span><span class="tr i">İlk 221. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_surprise.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Seal</span><span class="tr i">Mühür</span></h3>
+              <p class="en">A closed tile that is still certainly safe, marked with a seal.</p>
+              <p class="tr">Kapalı ama kesin güvenli olan, mühürle işaretli karo.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 261</span><span class="tr i">İlk 261. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_board_frame.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Zone</span><span class="tr i">Bölge</span></h3>
+              <p class="en">A coloured rectangle shows in one corner how many surprises hide inside it.</p>
+              <p class="tr">Renkli dikdörtgenin köşesindeki sayı, içindeki sürpriz toplamını söyler.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 301</span><span class="tr i">İlk 301. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_flag.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Range</span><span class="tr i">Aralık</span></h3>
+              <p class="en">A safe tile showing two possible counts, like 2 or 3. The real count is one of the two.</p>
+              <p class="tr">İki olası sayı gösteren güvenli karo, örneğin 2 ya da 3. Gerçek sayı bu ikisinden biridir.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 341</span><span class="tr i">İlk 341. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_pop.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Knight</span><span class="tr i">At</span></h3>
+              <p class="en">A safe tile. It counts the tiles a chess knight could reach from it.</p>
+              <p class="tr">Güvenli karo. Satranç atının bu karodan ulaşabileceği kareleri sayar.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 381</span><span class="tr i">İlk 381. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_spyglass_zone.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Ring</span><span class="tr i">Halka</span></h3>
+              <p class="en">A safe tile. It counts the ring of tiles exactly two steps away.</p>
+              <p class="tr">Güvenli karo. Tam iki adım uzaktaki halkadaki kareleri sayar.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 421</span><span class="tr i">İlk 421. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
+          <div class="lab-pane" role="tabpanel">
+            <div class="lab-art"><img src="img/s/seek_tree.webp" alt="" width="256" height="256" loading="lazy"></div>
+            <div>
+              <h3><span class="en i">Twins</span><span class="tr i">İkizler</span></h3>
+              <p class="en">Two safe tiles joined by a thread. The shared number counts surprises around both of them.</p>
+              <p class="tr">İple bağlı iki güvenli karo. Ortak sayı, ikisinin çevresindeki sürprizleri sayar.</p>
+              <p class="lab-tip"><span class="en i">First shows up at level 461</span><span class="tr i">İlk 461. bölümde karşına çıkar</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -538,8 +608,8 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
         <div class="sticker rv">
           <div class="row"><img src="img/s/seek_sweet_0.webp" alt=""><img src="img/s/seek_sweet_1.webp" alt=""><img src="img/s/seek_sweet_3.webp" alt=""></div>
           <h4><span class="en i">20 levels, zero pressure</span><span class="tr i">20 bölüm, sıfır baskı</span></h4>
-          <p class="en">The first 20 levels have no time or move limits at all. Learn at your own pace, nobody is watching.</p>
-          <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. Kendi hızında öğren, kimse bakmıyor.</p>
+          <p class="en">The first 20 levels have no time or move limits at all. From level 21, a new twist arrives about every 40 levels. Learn at your own pace, nobody is watching.</p>
+          <p class="tr">İlk 20 bölümde süre ya da hamle sınırı hiç yok. 21. bölümden itibaren yaklaşık 40 bölümde bir yeni sürpriz gelir. Kendi hızında öğren, kimse bakmıyor.</p>
         </div>
         <div class="sticker rv">
           <div class="row"><img src="img/s/ic_limit_time.webp" alt=""><img src="img/s/ic_limit_moves.webp" alt=""><img src="img/s/ui_boss_badge.webp" alt=""></div>
@@ -605,13 +675,13 @@ html[data-theme="dark"] .win{background:rgba(20,16,24,.78)}
       </div>
       <div class="fam-h rv"><span class="en i">More from the Jelly family</span><span class="tr i">Jelly ailesinden daha fazlası</span></div>
       <div class="family rv">
-        <a href="../jellytrails/"><img src="../jellytrails/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Trails<small><span class="en i">Color connect</span><span class="tr i">Renk bağlama</span></small></span></a>
+        <a href="../jellytrails/"><img src="../jellytrails/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Trails<small><span class="en i">Flow puzzle</span><span class="tr i">Flow bulmacası (renk yolu)</span></small></span></a>
         <a href="../jellypipes/"><img src="../jellypipes/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Pipes<small><span class="en i">Water pipes</span><span class="tr i">Su boruları</span></small></span></a>
-        <a href="../jellyjars/"><img src="../jellyjars/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Jars<small><span class="en i">Sort puzzle</span><span class="tr i">Ayırma bulmacası</span></small></span></a>
-        <a href="../jellylogic/"><img src="../jellylogic/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Logic<small><span class="en i">Sudoku</span><span class="tr i">Sudoku</span></small></span></a>
-        <a href="../jellyloops/"><img src="../jellyloops/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Loops<small><span class="en i">Thread puzzle</span><span class="tr i">İp bulmacası</span></small></span></a>
-        <a href="../jellypark/"><img src="../jellypark/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Park<small><span class="en i">Car jam</span><span class="tr i">Araba trafiği</span></small></span></a>
-        <a href="../jellyslide/"><img src="../jellyslide/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Slide<small><span class="en i">Ice puzzle</span><span class="tr i">Buz bulmacası</span></small></span></a>
+        <a href="../jellyjars/"><img src="../jellyjars/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Jars<small><span class="en i">Jelly sort</span><span class="tr i">Jöle sıralama bulmacası</span></small></span></a>
+        <a href="../jellylogic/"><img src="../jellylogic/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Logic<small><span class="en i">Pure sudoku</span><span class="tr i">Saf sudoku</span></small></span></a>
+        <a href="../jellyloops/"><img src="../jellyloops/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Loops<small><span class="en i">Slitherlink</span><span class="tr i">Slitherlink (ip halkası)</span></small></span></a>
+        <a href="../jellypark/"><img src="../jellypark/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Park<small><span class="en i">Parking jam</span><span class="tr i">Otopark çıkmazı</span></small></span></a>
+        <a href="../jellyslide/"><img src="../jellyslide/img/icon.png" alt="" width="72" height="72" loading="lazy"><span>Jelly Slide<small><span class="en i">Ice sliding</span><span class="tr i">Buzda kaydırma</span></small></span></a>
       </div>
     </div>
   </section>

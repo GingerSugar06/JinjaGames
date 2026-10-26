@@ -39,7 +39,7 @@
           <h2 class="en">Your turn. <span class="hl">Close the loop.</span></h2>
           <h2 class="tr">Sıra sende. <span class="hl">Halkayı kapat.</span></h2>
           <p class="lead2 en">Tap a line between two dots to lay a thread; tap it again to lift it. Each number says how many threads touch its square, and everything must close into ONE loop.</p>
-          <p class="lead2 tr">İki nokta arasındaki çizgiye dokun, ip döşensin; tekrar dokun, ip kalksın. Her sayı karesine kaç ip değdiğini söyler ve her şey TEK bir halkada kapanmalı. Köprü bulmacalarında adaların arasına dokunup köprü kur.</p>
+          <p class="lead2 tr">İki nokta arasındaki çizgiye dokun, ip döşensin; tekrar dokun, ip kalksın. Her sayı karesine kaç ip değdiğini söyler ve her şey TEK bir halkada kapanmalı.</p>
           <div class="picker" id="picker"></div>
           <div class="meter"><span id="m-a-l"></span><b id="m-a">0</b><span id="m-b-l"></span><b id="m-b">0</b></div>
           <div class="actions">

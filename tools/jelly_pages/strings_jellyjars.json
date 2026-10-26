@@ -366,5 +366,69 @@
  "twist.mix.desc": {
   "tr": "Karışık kavanozdan dökerken üstteki iki katman birlikte akar.",
   "en": "Pouring from a mixed jar moves its top two layers together."
+ },
+ "twist.neck": {
+  "tr": "İnce ağızlı kavanoz",
+  "en": "Narrow neck jar"
+ },
+ "twist.neck.desc": {
+  "tr": "Bu kavanozdan her seferinde yalnız tek katman dökülür, üstte üç aynı renk olsa bile.",
+  "en": "Only one layer can be poured out of this jar each time, even if the top three layers share a colour."
+ },
+ "twist.mini": {
+  "tr": "Mini kavanoz",
+  "en": "Mini jar"
+ },
+ "twist.mini.desc": {
+  "tr": "Yarım kapasite, iki katman. Hiçbir rengi tamamlayamaz; bölüm bittiğinde boş olmalı.",
+  "en": "Half capacity, two layers. It can never complete a colour, so it must be empty when the level ends."
+ },
+ "twist.tap": {
+  "tr": "Musluk kavanozu",
+  "en": "Tap jar"
+ },
+ "twist.tap.desc": {
+  "tr": "Yalnız boşaltılır, içine hiçbir şey dökülemez. Boşalınca kullanım dışı kalır.",
+  "en": "It only pours out and never takes anything in. Once it is empty, it stops working."
+ },
+ "twist.well": {
+  "tr": "Kuyu kavanozu",
+  "en": "Well jar"
+ },
+ "twist.well.desc": {
+  "tr": "Yalnız doldurulur, içinden bir şey alınamaz. Tek renkle dolmalı.",
+  "en": "It only fills up and nothing can be taken out of it. It must end up with a single colour."
+ },
+ "twist.solo": {
+  "tr": "Yalnız kavanoz",
+  "en": "Solo jar"
+ },
+ "twist.solo.desc": {
+  "tr": "Ancak tamamen boşken doldurulabilir; içinde bir şey varken üstüne eklenmez.",
+  "en": "It can be filled only while it is completely empty. Nothing can be added on top of its contents."
+ },
+ "twist.meter": {
+  "tr": "Sayaçlı kavanoz",
+  "en": "Counter jar"
+ },
+ "twist.meter.desc": {
+  "tr": "Rozetteki sayı kadar dökmeye katılabilir; sayı sıfır olunca kapanır.",
+  "en": "It can take part in as many pours as its counter shows. At zero it shuts for good."
+ },
+ "twist.ice": {
+  "tr": "Buzlu kavanoz",
+  "en": "Frozen jar"
+ },
+ "twist.ice.desc": {
+  "tr": "Donmuştur: tahtadaki toplam dökme, rozetteki sayıya ulaşınca buz erir. O zamana dek içine ya da dışına dökülemez.",
+  "en": "It is frozen: nothing can be poured in or out until the total pours on the board reach the number on its badge."
+ },
+ "twist.order": {
+  "tr": "Renk sırası",
+  "en": "Colour order"
+ },
+ "twist.order.desc": {
+  "tr": "Üst şeritteki renkler soldan sağa sırayla tamamlanır; önceki renkler bitmeden bir renk kavanozu dolduramaz.",
+  "en": "Colours finish from left to right on the top strip. A colour cannot fill a jar until the ones before it are done."
  }
 }

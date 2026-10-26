@@ -390,5 +390,61 @@
  "twist.snow.desc": {
   "tr": "Kar yığınına girince patenci durur.",
   "en": "The skater stops when it enters a snow pile."
+ },
+ "twist.shape": {
+  "tr": "Köşe ve düz",
+  "en": "Corners and straights"
+ },
+ "twist.shape.desc": {
+  "tr": "2 yazan hücrenin iki ipi ya köşe yapar ya da düz gider.",
+  "en": "A cell showing 2 has its two threads either forming a corner or running straight."
+ },
+ "twist.inside": {
+  "tr": "İç ve dış",
+  "en": "Inside and outside"
+ },
+ "twist.inside.desc": {
+  "tr": "Dolu daire halkanın içinde, boş daire dışında kalır.",
+  "en": "A filled circle sits inside the loop, an empty circle sits outside it."
+ },
+ "twist.diag": {
+  "tr": "Çapraz toplam",
+  "en": "Diagonal sums"
+ },
+ "twist.diag.desc": {
+  "tr": "Köşedeki sayı, iki çapraz komşu hücrenin ip toplamını gösterir.",
+  "en": "A corner number counts the threads touching the two diagonal neighbour cells."
+ },
+ "twist.region": {
+  "tr": "Üç hücreli bölge",
+  "en": "Region of three cells"
+ },
+ "twist.region.desc": {
+  "tr": "Sayı, üç hücrelik bir bölgeye değen ip toplamını söyler.",
+  "en": "A number counts the threads touching a region of three cells."
+ },
+ "twist.twin": {
+  "tr": "Eşit ikili",
+  "en": "Equal pair"
+ },
+ "twist.twin.desc": {
+  "tr": "= işaretli iki hücre aynı sayıda ip taşır.",
+  "en": "Two cells marked with an equals sign hold the same number of threads."
+ },
+ "twist.sym": {
+  "tr": "Yarım dönüş",
+  "en": "Half turn"
+ },
+ "twist.sym.desc": {
+  "tr": "Halka, merkez etrafında yarım tur simetriktir.",
+  "en": "The loop is symmetric under a half turn around the centre."
+ },
+ "twist.rowcount": {
+  "tr": "Satır sayacı",
+  "en": "Row count"
+ },
+ "twist.rowcount.desc": {
+  "tr": "Kenardaki sayı, o satır ya da sütundaki ip sayısıdır.",
+  "en": "A number on the edge counts the threads along that row or column."
  }
 }
