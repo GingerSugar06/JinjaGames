@@ -1,0 +1,75 @@
+/* İkon animasyonları. İkonlar css/app.css'te çizgi olarak boyanır; `.a` yarı saydam dolgu, `.m` hareketli parça.
+   Hareket yalnızca üzerine gelince / etkin sekmede / etkinleştirildiğinde oynar; prefers-reduced-motion hepsini kapatır. */
+svg.ico { overflow: visible; }
+svg.ico .a { fill: currentColor; fill-opacity: .2; stroke: none; }
+svg.ico * { transform-box: fill-box; transform-origin: center; }
+svg.ico .m { transition: transform .35s var(--ease, ease); }
+
+/* ---- tetikleyiciler: bağlantı, düğme, kart üzerine gelince; ya da .play sınıfı */
+:is(a, button, .tile, .btn, [role=button]):is(:hover, :focus-visible) svg.ico .spin,
+svg.ico.play .spin { animation: ic-spin 1.4s linear infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .spin2 { animation: ic-spin2 2.2s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .fl { animation: ic-flick .9s steps(2, end) infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .hand { animation: ic-hand 1.2s ease-in-out infinite; transform-origin: 0% 69%; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .ball { animation: ic-dribble .9s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .star { animation: ic-pulse .8s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .mate { animation: ic-bob .7s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .lens { animation: ic-wiggle .7s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .rays { animation: ic-spin 6s linear infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .tw { animation: ic-pulse 1s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .back { transform: translateX(-3px); }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .up { animation: ic-up .7s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .dn { animation: ic-dn .7s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .ln path { stroke-dasharray: 12; animation: ic-draw 1.1s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .r { animation: ic-slide-r .8s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .l { animation: ic-slide-l .8s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .shine { animation: ic-flash 1s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .snd { animation: ic-ping .8s ease-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .shot { animation: ic-shoot .8s ease-in infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .kick { animation: ic-kick .7s ease-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .spot { animation: ic-spot .8s ease-in infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .route { stroke-dasharray: 14; animation: ic-draw 1.2s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .rowhl { animation: ic-row 1.4s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .dot { animation: ic-pulse .8s ease-in-out infinite; }
+:is(a, button, .tile, .btn):is(:hover, :focus-visible) svg.ico .flame { animation: ic-flame .5s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+
+/* ---- etkin sekme: kendi hâlinde sürekli, hafif */
+.nav a[aria-current="page"] svg.ico .spin, .dock a[aria-current="page"] svg.ico .spin { animation: ic-spin 6s linear infinite; }
+.nav a[aria-current="page"] svg.ico .fl { animation: ic-flick 2.2s steps(2, end) infinite; }
+.nav a[aria-current="page"] svg.ico .tw, .nav a[aria-current="page"] svg.ico .star, .dock a[aria-current="page"] svg.ico :is(.tw, .star) { animation: ic-pulse 2.2s ease-in-out infinite; }
+.nav a[aria-current="page"] svg.ico .ball { animation: ic-dribble 1.6s ease-in-out infinite; }
+
+/* ---- olay ikonları (haberler): bir kez oynar */
+.ev-ic svg.ico.once .m, .ev-ic svg.ico .card { animation: ic-pop .5s var(--ease, ease) both; }
+.ev-ic svg.ico .spin { animation: ic-spin 1.2s cubic-bezier(.2, .7, .2, 1) 1; }
+.ev-ic svg.ico .shot { animation: ic-shoot-once .6s ease-out both; }
+.ev-ic svg.ico .spot { animation: ic-pop .5s var(--ease, ease) both; }
+
+/* ---- canlı rozet */
+.live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 0 rgba(255, 90, 74, .7); animation: ic-ring 1.6s ease-out infinite; }
+
+@keyframes ic-spin { to { transform: rotate(360deg); } }
+@keyframes ic-spin2 { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
+@keyframes ic-flick { 50% { opacity: .35; } }
+@keyframes ic-hand { to { transform: rotate(-360deg); } }
+@keyframes ic-dribble { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(5px, -4px); } 50% { transform: translate(9px, 0); } 75% { transform: translate(5px, -3px); } }
+@keyframes ic-pulse { 50% { transform: scale(1.25); opacity: .8; } }
+@keyframes ic-bob { 50% { transform: translateY(-2.5px); } }
+@keyframes ic-wiggle { 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+@keyframes ic-up { 50% { transform: translateY(-3px); } }
+@keyframes ic-dn { 50% { transform: translateY(3px); } }
+@keyframes ic-draw { from { stroke-dashoffset: 14; } 60%, to { stroke-dashoffset: 0; } }
+@keyframes ic-slide-r { 50% { transform: translateX(3px); } }
+@keyframes ic-slide-l { 50% { transform: translateX(-3px); } }
+@keyframes ic-flash { 0%, 60%, 100% { opacity: 0; } 30% { opacity: 1; } }
+@keyframes ic-ping { 0% { transform: scale(.7); opacity: 1; } 100% { transform: scale(1.35); opacity: 0; } }
+@keyframes ic-shoot { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-9px) scale(.55); opacity: .2; } }
+@keyframes ic-shoot-once { 0% { transform: translateY(6px) scale(.6); opacity: 0; } 60% { transform: translateY(-3px) scale(1.1); opacity: 1; } 100% { transform: translateY(0) scale(1); } }
+@keyframes ic-kick { 0% { transform: translate(-4px, 4px) scale(.7); } 100% { transform: translate(2px, -3px) scale(1); } }
+@keyframes ic-spot { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-6px) scale(.6); opacity: .3; } }
+@keyframes ic-row { 0%, 100% { transform: translateY(-3px); opacity: .2; } 50% { transform: translateY(3px); opacity: .7; } }
+@keyframes ic-flame { to { transform: scaleY(1.08) rotate(-3deg); } }
+@keyframes ic-pop { 0% { transform: scale(.2) rotate(-25deg); opacity: 0; } 70% { transform: scale(1.15) rotate(4deg); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes ic-ring { 70% { box-shadow: 0 0 0 9px rgba(255, 90, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 90, 74, 0); } }
+
+@media (prefers-reduced-motion: reduce) { svg.ico *, .live-dot { animation: none !important; transition: none !important; } }

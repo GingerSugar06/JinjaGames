@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /football/
 Allow: /
 
 Sitemap: https://jinjagames.com/sitemap.xml

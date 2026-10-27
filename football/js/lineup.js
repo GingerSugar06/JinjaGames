@@ -1,0 +1,85 @@
+// Yeniden kullanılabilir ilk 11 düzenleyici: saha + kadro listesi. Kulüpler ve milli takımlar için aynı bileşen.
+import { h, svg, mount, norm, debounce, fmtMoney } from './util.js';
+import { FORMATIONS, ROLE_LINE, autoXI, fit, isOut } from './matchsim.js';
+import { POS_LABEL, avatar } from './ui.js';
+
+export const lastName = n => { const p = String(n || '').trim().split(/\s+/); return p.length > 1 ? p.slice(-1)[0] : p[0] || '—'; };
+
+export function pitchLines() {
+  const s = svg('svg', { class: 'lines', viewBox: '0 0 68 100', preserveAspectRatio: 'none' });
+  const r = (x, y, w, hh) => svg('rect', { x, y, width: w, height: hh });
+  s.append(r(2, 2, 64, 96), svg('line', { x1: 2, y1: 50, x2: 66, y2: 50 }), svg('circle', { cx: 34, cy: 50, r: 8.7 }),
+    r(14, 2, 40, 15.7), r(24, 2, 20, 5.2), r(14, 82.3, 40, 15.7), r(24, 92.8, 20, 5.2), svg('circle', { cx: 34, cy: 50, r: .6 }));
+  return s;
+}
+
+/**
+ * @param {object} o { squad:[{id,name,line,pos,value,age}], formation, xi:[id|null], onChange(xi,formation) }
+ */
+export function lineupEditor(o) {
+  let selected = null, filter = 'ALL', q = '';
+  const root = h('div', { class: 'grid', style: 'gap:12px' });
+  const byId = new Map(o.squad.map(p => [p.id, p]));
+
+  const setXI = (xi, formation = o.formation) => { o.xi = xi; o.formation = formation; o.onChange?.(xi, formation); draw(); };
+
+  const place = pid => {
+    const xi = [...o.xi], slots = FORMATIONS[o.formation];
+    const cur = xi.indexOf(pid);
+    let target = selected;
+    if (target == null) {
+      // seçili slot yoksa: boş slotlardan en uygun olanı
+      let best = -1, bf = -1;
+      slots.forEach((s, i) => { if (xi[i] == null) { const f = fit(byId.get(pid), s.role); if (f > bf) { bf = f; best = i; } } });
+      target = best;
+      if (target < 0) return;
+    }
+    if (cur >= 0) { xi[cur] = xi[target]; }       // takas
+    xi[target] = pid;
+    selected = null;
+    setXI(xi);
+  };
+
+  function draw() {
+    const slots = FORMATIONS[o.formation];
+    const used = new Set(o.xi.filter(Boolean));
+    const pitch = h('div', { class: 'pitch-wrap' }, pitchLines(),
+      ...slots.map((s, i) => {
+        const p = byId.get(o.xi[i]);
+        const f = p ? fit(p, s.role) : 1;
+        const btn = h('button', { class: `slot ${p ? p.line : 'empty'} ${selected === i ? 'sel' : ''} ${f < .8 || p?.inj ? 'out' : ''}`, style: `left:${s.x}%;top:${s.y}%`, title: p ? `${p.name} · ${fmtMoney(p.value)}${f < .8 ? ' · mevki dışı' : ''}${p.inj ? ' · SAKAT: ' + p.inj.t : ''}` : `${s.role} seç`,
+          onclick: () => { selected = selected === i ? null : i; draw(); }, 'aria-label': `${s.role} ${p ? p.name : 'boş'}` },
+          h('span', { class: 'disc' }, p ? (p.img || p.esp ? avatar(p) : s.role) : '+'), h('span', { class: 'nm' }, p ? lastName(p.name) : s.role), p ? h('span', { class: 'vl' }, `${s.role} · ${fmtMoney(p.value)}`) : null);
+        return btn;
+      }));
+
+    const formSel = h('select', { 'aria-label': 'Diziliş', onchange: e => { const f = e.target.value; setXI(autoXI(o.squad, f), f); } },
+      Object.keys(FORMATIONS).map(f => h('option', { value: f, selected: f === o.formation }, f)));
+    const bar = h('div', { class: 'row center', style: 'justify-content:space-between' },
+      h('div', { class: 'row center' }, formSel, h('button', { class: 'btn sm', onclick: () => { selected = null; setXI(autoXI(o.squad, o.formation)); } }, 'En iyi 11'),
+        o.addPlayer ? h('button', { class: 'btn sm', onclick: async () => { const np = await o.addPlayer(); if (np) { o.squad.push(np); byId.set(np.id, np); draw(); } } }, '+ Oyuncu ekle (hayali transfer)') : null,
+        selected != null && o.xi[selected] ? h('button', { class: 'btn sm', onclick: () => { const xi = [...o.xi]; xi[selected] = null; selected = null; setXI(xi); } }, 'Çıkar') : null),
+      h('span', { class: 'dim', style: 'font-size:12px' }, selected != null ? `${slots[selected].role} için oyuncu seç` : 'Bir slota tıkla, sonra oyuncu seç'));
+
+    const list = h('div', { class: 'pl-list' });
+    const drawList = () => {
+      const qq = norm(q).trim();
+      const rows = o.squad.filter(p => (filter === 'ALL' || p.line === filter) && (!qq || norm(p.name).includes(qq)));
+      const sel = selected != null ? slots[selected].role : null;
+      if (sel) rows.sort((a, b) => fit(b, sel) * Math.log(b.value + 1) - fit(a, sel) * Math.log(a.value + 1));
+      list.replaceChildren(...rows.map(p => h('button', { class: `pl ${used.has(p.id) ? 'used' : ''}`, onclick: () => place(p.id), title: used.has(p.id) ? 'İlk 11’de — tıkla: yer değiştir' : '' },
+        h('span', { class: `p ${p.line}` }, p.pos || POS_LABEL[p.line]),
+        h('span', { class: 'who' }, avatar(p, 'sm'), h('span', null, p.name, h('span', { class: 'dim' }, p.age ? `  ${p.age}` : ''), sel && fit(p, sel) < .8 ? h('span', { class: 'chip', style: 'margin-left:6px' }, 'mevki dışı') : null, p.inj ? h('span', { class: `chip ${isOut(p) ? 'rel' : 'mk'}`, style: 'margin-left:6px', title: p.inj.t }, isOut(p) ? 'Sakat' : 'Şüpheli') : null, p.added ? h('span', { class: 'chip promo', style: 'margin-left:6px' }, 'Yeni transfer') : null, p.st && p.st.ap ? h('span', { class: 'dim', style: 'margin-left:8px;font-size:12.5px' }, `${p.st.ap} maç ${p.st.g}g ${p.st.as}a`) : null)),
+        h('span', { class: 'mute' }, fmtMoney(p.value)))));
+      if (!rows.length) list.append(h('div', { class: 'empty', style: 'padding:16px' }, 'Oyuncu bulunamadı'));
+    };
+    const search = h('input', { type: 'search', placeholder: 'Oyuncu ara…', style: 'flex:1;min-width:120px', oninput: debounce(e => { q = e.target.value; drawList(); }, 80) });
+    const tabs = h('div', { class: 'seg' }, ...[['ALL', 'Tümü'], ['G', 'KL'], ['D', 'DF'], ['M', 'OS'], ['A', 'FV']].map(([k, l]) => h('button', { type: 'button', 'aria-pressed': String(filter === k), onclick: () => { filter = k; draw(); } }, l)));
+    drawList();
+    mount(root, bar, h('div', { class: 'grid', style: 'grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:start' },
+      pitch,
+      h('div', { class: 'sheet tight' }, h('div', { class: 'hd', style: 'gap:8px;flex-wrap:wrap' }, search, tabs), list)));
+  }
+  draw();
+  return { el: root, refresh: draw, setSquad: sq => { o.squad = sq; byId.clear(); sq.forEach(p => byId.set(p.id, p)); draw(); } };
+}

@@ -1,0 +1,40 @@
+// Teknik direktör yardımcıları: puan rozeti, seçim penceresi, sezonun hocası.
+import { h, fmtDate } from './util.js';
+import { pick } from './ui.js';
+import { mgrInfo, MGR_DAMP } from './data.js';
+
+export const eloText = r => `${r > 0 ? '+' : r < 0 ? '−' : '±'}${Math.abs(r)}`;
+const TIP = 'Hoca puanı: aynı kadro değerine sahip takımlardan beklenenin kaç puan/maç üstünde-altında topladığının Elo karşılığı (kısa görevler ortalamaya çekilir). Modele bunun %60’ı yansır.';
+export const eloChip = (r, { label = 'Elo' } = {}) => h('span', { class: `chip ${r >= 12 ? 'uecl' : r <= -12 ? 'rel' : ''}`, title: TIP }, `${eloText(r)} ${label}`);
+
+/** Kısa görev (vekil) mi? */
+export const isCaretaker = games => games <= 6;
+
+/** Bir sezonda kulübün en çok maça çıkan hocası (maç verisindeki hmgr/amgr alanlarından). */
+export function seasonManager(matches, clubId) {
+  const cnt = new Map();
+  for (const m of matches) {
+    const n = m.h === clubId ? m.hmgr : m.a === clubId ? m.amgr : null;
+    if (n) cnt.set(n, (cnt.get(n) || 0) + 1);
+  }
+  return [...cnt].sort((a, b) => b[1] - a[1])[0]?.[0] || null;
+}
+
+/** Aranabilir hoca seçimi: yalnızca değerlendirilebilecek kadar maçı olanlar. */
+export async function pickManager(ctx, M, { title = 'Teknik direktör seç', exclude = null, minGames = 40 } = {}) {
+  const items = Object.entries(M.m).filter(([n, r]) => r[1] >= minGames && n !== exclude)
+    .sort((a, b) => b[1][8].localeCompare(a[1][8]) || b[1][1] - a[1][1])
+    .map(([n, r]) => {
+      const last = r[9].map(c => ctx.clubs[c] && ctx.clubName(c)).find(Boolean);
+      return { id: n, label: n, sub: `${last || ''} · ${r[7].slice(0, 4)}–${r[8].slice(0, 4)} · ${r[1]} maç`, right: eloText(r[0]) };
+    });
+  return pick({ title, items, placeholder: 'Hoca ara… (ör. Mourinho)', limit: 100 });
+}
+
+/** Hocanın kısa künyesi: "Okan Buruk · 390 maç · 1,78 PPG". */
+export function mgrLine(M, name) {
+  const i = mgrInfo(M, name);
+  return i ? `${i.g} maç · ${i.ppg.toFixed(2)} puan/maç` : 'veri yok';
+}
+export const dampPct = Math.round(MGR_DAMP * 100);
+export { fmtDate };
