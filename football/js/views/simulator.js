@@ -1,11 +1,12 @@
 // Maç Simülatörü: iki takım, ilk 11, diziliş, taktik → binlerce kez simüle et.
-import { h, mount, setCrumbs, crest, fmtMoney, fmtPct, ageOn, seasonLabel, debounce, toast } from '../util.js';
-import { boot, pick, clubItems, select, field, seg, sheet, pageHead, crestFor } from '../ui.js';
+import { h, mount, setCrumbs, crest, fmtMoney, fmtPct, ageOn, seasonLabel, debounce, toast, clamp } from '../util.js';
+import { boot, pick, clubItems, select, field, seg, sheet, pageHead, crestFor, formStrip } from '../ui.js';
 import { loadPlayers, loadSquads, loadElo, loadUpcoming, loadIntlElo, loadCurrent, loadManagers, loadStints, mgrAD, mgrInfo, LAST_SEASON } from '../data.js';
 import { stintMap, chemistry, chemElo, monthNow, monthOfSeason, formFamiliarity, favouriteFormation, formElo, ovr } from '../strength.js';
 import { eloChip, eloText, pickManager } from '../mgr.js';
 import { tr, NAT_ALIAS } from '../nations.js';
-import { FORMATIONS, autoXI, teamRatings, matchLambdas, simulate, playOne } from '../matchsim.js';
+import { FORMATIONS, autoXI, teamRatings, matchLambdas, simulate, playOne, HEALTHY, availOf } from '../matchsim.js';
+import { teamContext, GOAL_ELO } from '../form.js';
 import { lineupEditor, lastName } from '../lineup.js';
 import { openLive } from '../liveview.js';
 import { Match2D } from '../match2d.js';
@@ -28,14 +29,14 @@ export async function render(app, argStr) {
     if (kind === 'nation') {
       const squad = buildNationSquad(P, clubId);
       const elo = (await natElo()).get(clubId) ?? teamEloFromSquad(squad);
-      return { kind, clubId, season: NOW, squad, baseSquad: [...squad], removed: [], elo, formation: '4-2-3-1', xi: autoXI(squad, '4-2-3-1'), tactics: DEFAULT_TACTICS() };
+      return { kind, clubId, season: NOW, squad, baseSquad: [...squad], removed: [], avail: new Map(), tc: null, elo, formation: '4-2-3-1', xi: autoXI(squad, '4-2-3-1'), tactics: DEFAULT_TACTICS() };
     }
     const squad = await buildSquad(ctx, P, clubId, season);
     const eloSnap = await loadElo(season === NOW ? LAST_SEASON + 1 : season);
     const elo = eloSnap?.[clubId] ?? teamEloFromSquad(squad);
-    const base = baseMgr(clubId, season);
+    const base = baseMgr(clubId, season), tc = await teamContext(ctx, clubId, season, NOW).catch(() => null);
     const formation = favouriteFormation(mgrInfo(M, base)?.forms) || '4-2-3-1';       // hocanın en çok kullandığı diziliş
-    return { kind, clubId, season, squad, baseSquad: [...squad], removed: [], elo, formation, xi: autoXI(squad, formation), tactics: DEFAULT_TACTICS(), mgr: { base, alt: null } };
+    return { kind, clubId, season, squad, baseSquad: [...squad], removed: [], avail: new Map(), tc, elo, formation, xi: autoXI(squad, formation), tactics: DEFAULT_TACTICS(), mgr: { base, alt: null } };
   }
   /** Seçilen dönemde kulübü çalıştıran hoca: güncel kadroda görevdeki, geçmiş sezonda o yılın ocak ayındaki. */
   function baseMgr(clubId, season) {
@@ -53,10 +54,12 @@ export async function render(app, argStr) {
   const chemOf = (s, xi = s.xi, formation = s.formation, squad = s.squad) => chemistry({ xi, formation, byId: new Map(squad.map(p => [p.id, p])), S: STINTS, ref: refOf(s), club: clubOf(s), compOf });
   /** Bir tarafın maça özgü hücum/savunma puanı: kadro farkı + kimya + hoca + diziliş uyumu + taktik. Canlı izlemede de bu kullanılır. */
   function rateSide(s, squad = s.squad, formation = s.formation, xi = s.xi, tactics = s.tactics) {
-    const c0 = chemOf(s, autoXI(s.baseSquad, formation), formation, s.baseSquad), c1 = chemOf(s, xi, formation, squad);
+    const c0 = chemOf(s, autoXI(s.baseSquad, formation, HEALTHY), formation, s.baseSquad), c1 = chemOf(s, xi, formation, squad);
     const [mA, mD] = s.mgr?.alt ? mgrAD(M, s.mgr.base, s.mgr.alt) : [0, 0];
     const name = s.mgr?.alt || s.mgr?.base, fam = name ? formFamiliarity(mgrInfo(M, name)?.forms, formation) : null;
-    const r = teamRatings({ baseElo: s.elo, squad, baseSquad: s.baseSquad, formation, xi, tactics, chemElo: chemElo(c1.team, c0.team), mgrA: mA, mgrD: mD, formElo: formElo(fam) });
+    const tc = s.tc;      // sezon içi gelişim + son maç formu + oyun tarzı (hücum/savunma eğilimi, açık/kapalı oyun)
+    const r = teamRatings({ baseElo: s.elo, squad, baseSquad: s.baseSquad, formation, xi, tactics, chemElo: chemElo(c1.team, c0.team), mgrA: mA, mgrD: mD, formElo: formElo(fam),
+      avail: s.avail, seasonElo: tc?.elo0 != null ? tc.elo1 - tc.elo0 : 0, recentElo: tc?.form || 0, tiltElo: tc ? clamp(GOAL_ELO * 0.45 * tc.tilt, -30, 30) : 0, tot: tc?.tot ?? null });
     return { ...r, chemTeam: c1.team, chemRef: c0.team, newcomers: c1.newcomers, fam };
   }
   async function changeMgr(side) {
@@ -65,13 +68,13 @@ export async function render(app, argStr) {
     if (!alt) return;
     s.mgr.alt = alt;
     const fav = favouriteFormation(mgrInfo(M, alt)?.forms);     // yeni hoca kendi sistemini kurar
-    if (fav) { s.formation = fav; s.xi = autoXI(s.squad, fav); }
+    if (fav) { s.formation = fav; s.xi = autoXI(s.squad, fav, s.avail); }
     editor = null; refresh();
   }
   function resetMgr(side) {
     const s = sides[side]; s.mgr.alt = null;
     const fav = favouriteFormation(mgrInfo(M, s.mgr.base)?.forms);
-    if (fav) { s.formation = fav; s.xi = autoXI(s.squad, fav); }
+    if (fav) { s.formation = fav; s.xi = autoXI(s.squad, fav, s.avail); }
     editor = null; refresh();
   }
   const nameOf = s => (s.kind === 'nation' ? tr(s.clubId) : ctx.clubName(s.clubId));
@@ -131,6 +134,17 @@ export async function render(app, argStr) {
       act('Hoca seç', () => changeMgr(side)), m?.alt ? act('Geri al', () => resetMgr(side)) : null);
   }
 
+  /** Kart içinde: son maç formu, oyun tarzı, sakat/şüpheli sayısı. */
+  function ctxRow(s) {
+    const tc = s.tc, hurt = s.squad.filter(p => availOf(p, s.avail) < 1);
+    if (!tc && !hurt.length) return null;
+    return h('div', { class: 'row center', style: 'gap:6px;margin-top:6px;font-size:13px;flex-wrap:wrap' },
+      tc?.last?.length ? [h('span', { class: 'cap' }, 'Form'), formStrip(tc.last)] : null,
+      tc?.played ? h('span', { class: `chip ${tc.form >= 8 ? 'uecl' : tc.form <= -8 ? 'rel' : ''}`, title: 'Son 6 maçın beklentiye göre puanı; takım gücüne en fazla ±25 Elo yansır' }, `${eloText(Math.round(tc.form))} Elo`) : null,
+      tc ? h('span', { class: 'chip', title: `Maç başına ${tc.gf?.toFixed(2) ?? '—'} gol atıyor, ${tc.ga?.toFixed(2) ?? '—'} yiyor (beklentiye göre hücum/savunma eğilimi ve maçlarındaki toplam gol)` }, `Tarz: ${tc.label}`) : null,
+      hurt.length ? h('span', { class: 'chip rel', title: hurt.map(p => `${p.name} (%${Math.round(availOf(p, s.avail) * 100)})`).join(', ') }, `${hurt.length} sakat/şüpheli`) : null);
+  }
+
   function drawTeamBar() {
     const seasons = [[NOW, 'Güncel kadro'], ...Array.from({ length: LAST_SEASON - 2004 + 1 }, (_, i) => LAST_SEASON - i).map(s => [s, seasonLabel(s)])];
     const teamCard = side => {
@@ -139,7 +153,7 @@ export async function render(app, argStr) {
         h('div', { class: 'row center', style: 'gap:12px;flex-wrap:nowrap' }, (s.kind === 'nation' ? crest(nameOf(s), 'lg') : crestFor(ctx, s.clubId, 'lg')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'cap' }, side === 'h' ? 'Ev sahibi' : 'Deplasman'), h('div', { style: 'font:600 22px var(--font-c);letter-spacing:.03em;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap' }, nameOf(s)),
             h('div', { class: 'dim', style: 'font-size:12.5px' }, `${s.kind === 'nation' ? 'Milli takım' : ctx.compName(ctx.clubs[s.clubId]?.c)} · Elo ${Math.round(effElo(s))} · ${s.squad.length} oyuncu`),
-            s.kind === 'nation' ? null : mgrRow(side, s)),
+            s.kind === 'nation' ? null : mgrRow(side, s), s.kind === 'nation' ? null : ctxRow(s)),
           h('span', { role: 'button', tabindex: 0, class: 'btn sm', onclick: e => { e.stopPropagation(); chooseClub(side); }, onkeydown: e => { if (e.key === 'Enter') { e.stopPropagation(); chooseClub(side); } } }, 'Değiştir')));
     };
     const ups = upcoming.fixtures.slice(0, 6);
@@ -163,22 +177,26 @@ export async function render(app, argStr) {
     const sg = x => `${x > 0 ? '+' : x < 0 ? '−' : '±'}${Math.abs(Math.round(x))}`;
     const pair = (a, d) => `${sg(a)} / ${sg(d)}`;
     const col = (r, s) => ({
-      base: Math.round(r.base), kadro: pair(r.dA, r.dD), kimya: `${sg(r.chem)}  (%${Math.round(r.chemTeam * 100)}${r.newcomers ? `, ${r.newcomers} yeni` : ''})`,
-      hoca: s.mgr?.alt || s.mgr?.base ? pair(r.mgrA, r.mgrD) : '—', form: r.fam == null ? '—' : sg(r.form), takt: pair(r.tactA, r.tactD), out: `${Math.round(r.att)} / ${Math.round(r.def)}`,
+      base: Math.round(r.base), sezon: sg(r.season), form: sg(r.recent), tarz: `${sg(r.tilt)} H / ${sg(-r.tilt)} S`, sak: pair(r.injA, r.injD), kadro: pair(r.sqA, r.sqD), kimya: `${sg(r.chem)}  (%${Math.round(r.chemTeam * 100)}${r.newcomers ? `, ${r.newcomers} yeni` : ''})`,
+      hoca: s.mgr?.alt || s.mgr?.base ? pair(r.mgrA, r.mgrD) : '—', dizi: r.fam == null ? '—' : sg(r.form), takt: pair(r.tactA, r.tactD), out: `${Math.round(r.att)} / ${Math.round(r.def)}`,
     });
     const H = col(hr, sides.h), A = col(ar, sides.a);
     const row = (label, k, tip, strong) => h('tr', null, h('td', { title: tip }, strong ? h('b', null, label) : label), h('td', { class: 'num' }, strong ? h('b', null, H[k]) : H[k]), h('td', { class: 'num' }, strong ? h('b', null, A[k]) : A[k]));
     mount(strengthBox, h('div', { class: 'cap', style: 'margin-bottom:6px' }, 'Neden bu olasılıklar? (Elo · hücum / savunma)'),
       h('table', { class: 'tbl' }, h('thead', null, h('tr', null, h('th', null, ''), h('th', { class: 'num' }, nameOf(sides.h)), h('th', { class: 'num' }, nameOf(sides.a)))),
         h('tbody', null,
-          row('Taban (sezon başı Elo)', 'base', 'Kulübün gerçek kadrosunun gücü'),
+          row('Taban (sezon başı Elo)', 'base', 'Kulübün gerçek (sağlıklı) kadrosunun gücü'),
+          row('Sezon içi gelişme', 'sezon', 'Bu sezon oynanan maçlarla güncellenen Elo − sezon başı Elo'),
+          row('Son 6 maç formu', 'form', 'Son maçların beklentiye göre puanı (en fazla ±25 Elo)'),
+          row('Oyun tarzı (hücum / savunma)', 'tarz', 'Gol atma/yeme eğiliminin beklentiden sapması; toplam gücü değiştirmez, hücum ve savunmaya ters yönde dağıtır'),
+          row('Sakatlık / ilk 11 seçimi', 'sak', 'Sakat ya da şüpheli oyuncuların yerine yedeğin oynaması ve en iyi 11’den elle yaptığın sapmalar; durumu slotta değiştirebilirsin'),
           row('Kadro farkı', 'kadro', 'İlk 11’in kulübün gerçek en iyi 11’ine göre farkı; oyuncu gücü piyasa değerinden ve yaştan, mevki uyumuyla'),
           row('Takım kimyası', 'kimya', 'Komşu mevkideki oyuncuların daha önce birlikte oynaması, ortak uyruk/lig, kulübe uyum süresi; gerçek ilk 11’e göre fark'),
           row('Teknik direktör', 'hoca', 'Değiştirilen hocanın hücum/savunma farkı (eski hoca − yeni hoca)'),
-          row('Diziliş uyumu', 'form', 'Hocanın bu dizilişi ne kadar sık kullandığı'),
+          row('Diziliş uyumu', 'dizi', 'Hocanın bu dizilişi ne kadar sık kullandığı'),
           row('Taktik', 'takt', 'Mentalite, pres ve kanat oyunu ayarları'),
           row('Sonuç (hücum / savunma)', 'out', '', true))),
-      h('div', { class: 'dim', style: 'font-size:12px;margin-top:6px' }, `Beklenen gol: ${lh.toFixed(2)} – ${la.toFixed(2)}`));
+      h('div', { class: 'dim', style: 'font-size:12px;margin-top:6px' }, `Beklenen gol: ${lh.toFixed(2)} – ${la.toFixed(2)} (maç toplamı ${(lh + la).toFixed(2)}${hr.tot && ar.tot ? '; iki takımın tarzından' : ''})`));
   }
 
   function drawResults() {
@@ -224,7 +242,7 @@ export async function render(app, argStr) {
   const toAdded = x => ({ id: x.id, name: x.name, line: x.line, pos: x.pos, value: x.value || 3e5, age: ageOn(x.dob), nat: x.nat, img: x.img, added: true });
 
   // ------------------------------------------------------------ paylaş / dışa aktar / içe aktar
-  const sideSnap = s => ({ kind: s.kind, id: s.clubId, season: s.season, f: s.formation, xi: s.xi, t: s.tactics, add: s.squad.filter(p => p.added).map(p => p.id), out: s.removed, alt: s.mgr?.alt || null });
+  const sideSnap = s => ({ kind: s.kind, id: s.clubId, season: s.season, f: s.formation, xi: s.xi, t: s.tactics, add: s.squad.filter(p => p.added).map(p => p.id), out: s.removed, alt: s.mgr?.alt || null, inj: [...s.avail] });
   function snapshot() {
     const r = res.sim;
     return { v: 1, app: 'what-if-football', at: new Date().toISOString(), mode: O.mode, neutral: O.neutral, knockout: O.knockout, n: O.n, h: sideSnap(sides.h), a: sideSnap(sides.a),
@@ -238,9 +256,10 @@ export async function render(app, argStr) {
     for (const id of sn.add || []) { const x = P.byId.get(id); if (x && !s.squad.some(q => q.id === id)) s.squad.push(toAdded(x)); }
     for (const id of sn.out || []) { s.squad = s.squad.filter(q => q.id !== id); s.removed.push(id); }
     if (sn.alt && M.m[sn.alt]) s.mgr.alt = sn.alt;
+    for (const [id, a] of sn.inj || []) if (typeof a === 'number') s.avail.set(id, a);
     if (FORMATIONS[sn.f]) s.formation = sn.f;
     const have = new Set(s.squad.map(q => q.id)), xi = (sn.xi || []).map(id => (have.has(id) ? id : null));
-    s.xi = xi.length === 11 && xi.some(Boolean) ? xi : autoXI(s.squad, s.formation);
+    s.xi = xi.length === 11 && xi.some(Boolean) ? xi : autoXI(s.squad, s.formation, s.avail);
     s.tactics = { ...DEFAULT_TACTICS(), ...(sn.t || {}) };
     return s;
   }
@@ -279,7 +298,7 @@ export async function render(app, argStr) {
       const items = P.list.filter(x => x.value >= 1e6 && (x.lastSeason ?? 0) >= LAST_SEASON && !have.has(x.id)).sort((x, y) => y.value - x.value).slice(0, 5000).map(x => ({ id: x.id, label: x.name, sub: `${x.club ? ctx.clubName(x.club) : ''} ${x.nat || ''}`, right: fmtMoney(x.value), tag: x.pos || x.line, tagCls: x.line }));
       const id = await pick({ title: 'Kadroya kim katılsın?', items, placeholder: 'Oyuncu ara… (ör. Haaland)' });
       const x = id && P.byId.get(id); return x ? toAdded(x) : null;
-    }, getChem: () => chemOf(s), ovr, onSell: pid => { s.squad = s.squad.filter(q => q.id !== pid); s.removed.push(pid); }, onChange: (xi, f) => { s.xi = xi; s.formation = f; rec(); } });
+    }, getChem: () => chemOf(s), avail: () => s.avail, setAvail: (pid, v) => { if (v >= 1) s.avail.delete(pid); else s.avail.set(pid, v); }, ovr, onSell: pid => { s.squad = s.squad.filter(q => q.id !== pid); s.removed.push(pid); }, onChange: (xi, f) => { s.xi = xi; s.formation = f; rec(); } });
     return editor.el;
   }
 
@@ -322,7 +341,7 @@ export async function buildSquad(ctx, P, clubId, season) {
     const cur = (await loadCurrent()).clubs[clubId];
     if (cur?.length >= 14) {
       const now = new Date();
-      return cur.map(c => ({ id: c.id || -c.e, name: c.n, line: c.l, pos: c.p || '', value: c.v || estimateValue(c, now), age: ageOn(c.dob, now), nat: c.nat || '', inj: c.inj, st: c.st, jersey: c.j, dob: c.dob, tm: !!c.id, img: P.byId.get(c.id)?.img, esp: c.e }));
+      return cur.map(c => ({ form: playerForm(c), id: c.id || -c.e, name: c.n, line: c.l, pos: c.p || '', value: c.v || estimateValue(c, now), age: ageOn(c.dob, now), nat: c.nat || '', inj: c.inj, st: c.st, jersey: c.j, dob: c.dob, tm: !!c.id, img: P.byId.get(c.id)?.img, esp: c.e }));
     }
   }
   let rows;
@@ -335,6 +354,16 @@ export async function buildSquad(ctx, P, clubId, season) {
   }
   const ref = season === NOW ? new Date() : new Date(`${season + 1}-01-01`);
   return rows.map(r => P.byId.get(r.pid) && ({ id: r.pid, name: P.byId.get(r.pid).name, line: P.byId.get(r.pid).line, pos: P.byId.get(r.pid).pos, value: r.v || P.byId.get(r.pid).value || 3e5, age: ageOn(P.byId.get(r.pid).dob, ref), nat: P.byId.get(r.pid).nat, img: P.byId.get(r.pid).img })).filter(Boolean);
+}
+/** Sezon istatistiklerinden küçük form düzeltmesi (ln): beklenenden çok gol+asist yapan hücum/orta saha oyuncusu +, az yapan −; en çok ±%10-15. */
+function playerForm(c) {
+  const st = c.st;
+  if (!st || st.ap < 4) return 0;
+  const base = { A: .42, M: .2, D: .06 }[c.l];
+  if (!base) return 0;
+  const exp = base * Math.exp(0.22 * Math.log(Math.max(c.v || 1e6, 3e5) / 1e7));      // değerli oyuncudan daha çok katkı beklenir
+  const rate = (st.g + 0.7 * st.as) / st.ap;
+  return 0.10 * clamp((rate - exp) / (exp + 0.1), -1, 1.5) * st.ap / (st.ap + 8);
 }
 // Transfermarkt'ta bulunmayan (yeni) oyuncu için kaba değer tahmini: yaşa göre
 const estimateValue = (c, now) => { const a = ageOn(c.dob, now) || 26; return a <= 21 ? 1.5e6 : a <= 30 ? 1e6 : 4e5; };

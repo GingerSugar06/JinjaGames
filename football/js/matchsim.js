@@ -34,7 +34,7 @@ export function ageAdj(age) {
   return AGE_ADJ[age] ?? 0;
 }
 /** Bugünkü oyun gücünün log-değer karşılığı (düz piyasa değerinden daha iyi bir yetenek ölçüsü). */
-export const abilityLn = p => clamp(Math.log(Math.max(p?.value || 0, 2e5)), V_LO, V_HI) + ageAdj(p?.age);
+export const abilityLn = p => clamp(Math.log(Math.max(p?.value || 0, 2e5)), V_LO, V_HI) + ageAdj(p?.age) + (p?.form || 0);   // form: sezon istatistiklerinden küçük düzeltme (ln)
 
 /** Oyuncunun bu mevkiye uygunluk çarpanı (0-1). */
 export function fit(player, role) {
@@ -50,8 +50,17 @@ export function fit(player, role) {
 /** Mevki uyumuyla düzeltilmiş log-yetenek: mevki dışındaki yıldız tam katkı vermez. */
 export const effLn = (p, f) => V_LO + f * (abilityLn(p) - V_LO);
 
+/** Oynama olasılığı (0-1): kullanıcının işaretlediği (avail) > veri kaynağındaki sakatlık (FPL) > sağlam. */
+export const HEALTHY = { get: () => 1 };
+export const availOf = (p, avail) => {
+  if (!p) return 0;
+  const a = avail?.get?.(p.id);
+  if (a != null) return a;
+  if (p.inj) return p.inj.c == null ? 0 : clamp(p.inj.c / 100, 0, 1);
+  return 1;
+};
 /** Sakat (belirsiz ya da %50 altı oynama şansı) oyuncu otomatik 11'e alınmaz. */
-export const isOut = p => !!p?.inj && (p.inj.c == null || p.inj.c <= 50);
+export const isOut = (p, avail) => !!p && availOf(p, avail) <= 0.5;
 
 /** Atama problemi (Macar yöntemi): cost[n][m], n <= m; satır başına seçilen sütunu verir. */
 function assign(cost) {
@@ -77,9 +86,9 @@ function assign(cost) {
 }
 
 /** Dizilişe göre en iyi 11: mevki uyumuyla ağırlıklı log-değeri en büyük yapan atama (kimse yanlış mevkiye "yıldız diye" konmaz). */
-export function autoXI(squad, formation) {
+export function autoXI(squad, formation, avail = null) {
   const slots = FORMATIONS[formation];
-  const pool = squad.filter(p => !isOut(p));
+  const pool = squad.filter(p => !isOut(p, avail));
   if (!pool.length) return Array(slots.length).fill(null);
   const m = Math.max(pool.length, slots.length);
   const cost = slots.map(s => Array.from({ length: m }, (_, j) => {
@@ -91,12 +100,18 @@ export function autoXI(squad, formation) {
 }
 
 /** İlk 11 → hücum/savunma KALİTESİ (ağırlıklı ortalama log-yetenek). Eksik oyuncu en düşük değerle sayılır. */
-export function lineupQuality(squadById, formation, xi) {
+export function lineupQuality(squadById, formation, xi, avail = null) {
   const slots = FORMATIONS[formation];
-  let A = 0, D = 0, wa = 0, wd = 0, n = 0;
+  let A = 0, D = 0, wa = 0, wd = 0, n = 0, bench = null;
   slots.forEach((s, i) => {
     const p = squadById.get(xi[i]);
-    const q = p ? effLn(p, fit(p, s.role)) : V_LO;
+    let q = p ? effLn(p, fit(p, s.role)) : V_LO;
+    const a = p ? availOf(p, avail) : 1;
+    if (p && a < 1) {                         // sakat/şüpheli: olasılıkla yerine kadrodaki en iyi yedek oynar
+      bench ??= [...squadById.values()].filter(x => !xi.includes(x.id) && availOf(x, avail) > 0.5);
+      const sub = bench.reduce((b, x) => (!b || effLn(x, fit(x, s.role)) > effLn(b, fit(b, s.role)) ? x : b), null);
+      q = a * q + (1 - a) * (sub ? effLn(sub, fit(sub, s.role)) : V_LO);
+    }
     A += W_ATT[s.role] * q; D += W_DEF[s.role] * q; wa += W_ATT[s.role]; wd += W_DEF[s.role]; if (p) n++;
   });
   return { A: A / wa, D: D / wd, n };
@@ -122,25 +137,31 @@ export function lineupStrength(squadById, formation, xi) {
  *              böylece kadroya alınan yıldızlar tabanı da yükseltip etkisiz kalmaz (eski sürümdeki hata).
  *  chemElo, mgrA, mgrD, formElo = kimya, hoca hücum/savunma farkı, diziliş uyumsuzluğu (strength.js).
  */
-export function teamRatings({ baseElo, squad, baseSquad, formation, xi, tactics, chemElo = 0, mgrA = 0, mgrD = 0, formElo = 0 }) {
+export function teamRatings({ baseElo, squad, baseSquad, formation, xi, tactics, chemElo = 0, mgrA = 0, mgrD = 0, formElo = 0, avail = null, seasonElo = 0, recentElo = 0, tiltElo = 0, tot = null }) {
   const byId = new Map(squad.map(p => [p.id, p]));
   const baseList = baseSquad || squad.filter(p => !p.added);
-  const best = lineupQuality(new Map(baseList.map(p => [p.id, p])), formation, autoXI(baseList, formation));
-  const cur = lineupQuality(byId, formation, xi);
+  const best = lineupQuality(new Map(baseList.map(p => [p.id, p])), formation, autoXI(baseList, formation, HEALTHY), HEALTHY);   // taban: sağlıklı kadro
+  const cur = lineupQuality(byId, formation, xi, avail), curH = lineupQuality(byId, formation, xi, HEALTHY);
+  // kadro değişikliği = sağlıklı en iyi 11 farkı; kalan (sakatlıklar, şüpheliler, elle yapılan 11 seçimi) ayrı gösterilir
+  const bestCur = lineupQuality(byId, formation, autoXI(squad, formation, HEALTHY), HEALTHY);
+  const sqA = ELO_PER_LN * (bestCur.A - best.A), sqD = ELO_PER_LN * (bestCur.D - best.D);
   const missing = 11 - cur.n;
   const dA = clamp(ELO_PER_LN * (cur.A - best.A), -320, 360), dD = clamp(ELO_PER_LN * (cur.D - best.D), -320, 360);
+  const injA = dA - sqA, injD = dD - sqD;
   const t = tactics || {};
   const m = (t.mentality ?? 50) / 50 - 1;        // -1 defansif … +1 hücumcu
   const press = (t.press ?? 50) / 50 - 1;
   const width = (t.width ?? 50) / 50 - 1;
   const common = chemElo + formElo - 40 * missing;
   const tA = 28 * m + 9 * press + 5 * width, tD = -28 * m * 0.9 - 3 * press;
-  const att = baseElo + dA + mgrA + common + tA;
-  const def = baseElo + dD + mgrD + common + tD;
-  return { att, def, base: baseElo, dA, dD, best, cur, chem: chemElo, mgrA, mgrD, form: formElo, missing, tactA: tA, tactD: tD, tempo: (t.tempo ?? 50) / 50 - 1, counter: (t.counter ?? 0) / 100 };
+  const sea = seasonElo + recentElo;
+  const att = baseElo + sea + dA + mgrA + common + tA + tiltElo;
+  const def = baseElo + sea + dD + mgrD + common + tD - tiltElo;
+  return { att, def, base: baseElo, season: seasonElo, recent: recentElo, tilt: tiltElo, injA, injD, sqA, sqD, tot, dA, dD, best, cur, chem: chemElo, mgrA, mgrD, form: formElo, missing, tactA: tA, tactD: tD, tempo: (t.tempo ?? 50) / 50 - 1, counter: (t.counter ?? 0) / 100 };
 }
 
-export function matchLambdas(home, away, { neutral = false, total = 2.65, ha: haValue = HOME_ADV } = {}) {
+export function matchLambdas(home, away, { neutral = false, total = null, ha: haValue = HOME_ADV } = {}) {
+  total ??= home.tot && away.tot ? Math.sqrt(home.tot * away.tot) : 2.65;      // takımların tarzından: açık oynayan iki takımın maçı daha golcü
   const ha = neutral ? 0 : haValue;
   const tempo = 1 + 0.10 * (home.tempo + away.tempo) / 2;
   const k = 0.85;

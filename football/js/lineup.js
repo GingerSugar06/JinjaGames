@@ -1,6 +1,6 @@
 // Yeniden kullanılabilir ilk 11 düzenleyici: saha + kadro listesi. Kulüpler ve milli takımlar için aynı bileşen.
 import { h, svg, mount, norm, debounce, fmtMoney } from './util.js';
-import { FORMATIONS, ROLE_LINE, autoXI, fit, isOut, effLn } from './matchsim.js';
+import { FORMATIONS, ROLE_LINE, autoXI, fit, isOut, effLn, availOf } from './matchsim.js';
 import { POS_LABEL, avatar } from './ui.js';
 
 export const lastName = n => { const p = String(n || '').trim().split(/\s+/); return p.length > 1 ? p.slice(-1)[0] : p[0] || '—'; };
@@ -52,11 +52,12 @@ export function lineupEditor(o) {
     const slots = FORMATIONS[o.formation];
     const used = new Set(o.xi.filter(Boolean));
     const chem = o.getChem?.() || null;
+    const avail = o.avail?.() || null;
     const pitch = h('div', { class: 'pitch-wrap' }, pitchLines(), chem ? linkLayer(chem, slots) : null,
       ...slots.map((s, i) => {
         const p = byId.get(o.xi[i]);
         const f = p ? fit(p, s.role) : 1;
-        const btn = h('button', { class: `slot ${p ? p.line : 'empty'} ${selected === i ? 'sel' : ''} ${f < .8 || p?.inj ? 'out' : ''}`, style: `left:${s.x}%;top:${s.y}%`, title: p ? `${p.name} · ${fmtMoney(p.value)}${f < .8 ? ' · mevki dışı' : ''}${p.inj ? ' · SAKAT: ' + p.inj.t : ''}` : `${s.role} seç`,
+        const btn = h('button', { class: `slot ${p ? p.line : 'empty'} ${selected === i ? 'sel' : ''} ${f < .8 || (p && availOf(p, avail) < 1) ? 'out' : ''}`, style: `left:${s.x}%;top:${s.y}%`, title: p ? `${p.name} · ${fmtMoney(p.value)}${f < .8 ? ' · mevki dışı' : ''}${p && availOf(p, avail) < 1 ? ` · ${availOf(p, avail) > .5 ? 'ŞÜPHELİ' : 'SAKAT'}${p.inj ? ': ' + p.inj.t : ''}` : ''}` : `${s.role} seç`,
           onclick: () => { selected = selected === i ? null : i; draw(); }, 'aria-label': `${s.role} ${p ? p.name : 'boş'}` },
           h('span', { class: 'disc' }, p ? (p.img || p.esp ? avatar(p) : s.role) : '+'), p && o.ovr ? h('span', { class: 'ov', title: 'Tahmini genel güç (piyasa değeri ve yaştan)' }, o.ovr(p)) : null,
           p && chem ? h('span', { class: `ch c${Math.min(3, Math.round(chem.per[i] * 3))}`, title: `Kimya ${Math.round(chem.per[i] * 100)}%` }, '●●●'.slice(0, Math.max(1, Math.round(chem.per[i] * 3)))) : null,
@@ -64,13 +65,15 @@ export function lineupEditor(o) {
         return btn;
       }));
 
-    const formSel = h('select', { 'aria-label': 'Diziliş', onchange: e => { const f = e.target.value; setXI(autoXI(o.squad, f), f); } },
+    const formSel = h('select', { 'aria-label': 'Diziliş', onchange: e => { const f = e.target.value; setXI(autoXI(o.squad, f, o.avail?.()), f); } },
       Object.keys(FORMATIONS).map(f => h('option', { value: f, selected: f === o.formation }, f)));
     const bar = h('div', { class: 'row center', style: 'justify-content:space-between' },
-      h('div', { class: 'row center' }, formSel, h('button', { class: 'btn sm', onclick: () => { selected = null; setXI(autoXI(o.squad, o.formation)); } }, 'En iyi 11'),
+      h('div', { class: 'row center' }, formSel, h('button', { class: 'btn sm', onclick: () => { selected = null; setXI(autoXI(o.squad, o.formation, o.avail?.())); } }, 'En iyi 11'),
         o.addPlayer ? h('button', { class: 'btn sm', onclick: async () => { const np = await o.addPlayer(); if (np) { o.squad.push(np); byId.set(np.id, np); autoPlace(np); } } }, '+ Oyuncu ekle (hayali transfer)') : null,
         selected != null && o.xi[selected] ? h('button', { class: 'btn sm', onclick: () => { const xi = [...o.xi]; xi[selected] = null; selected = null; setXI(xi); } }, 'Çıkar') : null,
         selected != null && o.xi[selected] && o.onSell ? h('button', { class: 'btn sm', title: 'Oyuncuyu kadrodan tamamen çıkarır (hayali satış)', onclick: () => { const pid = o.xi[selected]; o.onSell(pid); o.squad = o.squad.filter(q => q.id !== pid); byId.delete(pid); const xi = o.xi.map(x => (x === pid ? null : x)); const hole = xi.indexOf(null); selected = null; setXI(fillHole(xi, hole)); } }, 'Kadrodan sat') : null,
+        selected != null && o.xi[selected] && o.setAvail ? (() => { const pp = byId.get(o.xi[selected]), a = availOf(pp, avail), nx = a >= .99 ? .5 : a > .5 ? 0 : 1;
+          return h('button', { class: `btn sm ${a < 1 ? 'mk' : ''}`, title: 'Oyuncunun durumunu değiştir: sağlam → şüpheli (%50) → sakat. Veri kaynağı yalnızca Premier League sakatlıklarını bilir; diğerlerini sen işaretleyebilirsin.', onclick: () => { o.setAvail(pp.id, nx); const xi = [...o.xi]; if (nx === 0) { xi[selected] = null; const hole = selected; selected = null; setXI(fillHole(xi, hole)); } else setXI(xi); } }, `Durum: ${a >= .99 ? 'sağlam' : a > .5 ? 'şüpheli' : 'sakat'} → ${nx === 1 ? 'sağlam' : nx === .5 ? 'şüpheli' : 'sakat'}`); })() : null,
         chem ? h('span', { class: `chip ${chem.team >= .6 ? 'uecl' : chem.team < .35 ? 'rel' : ''}`, title: 'Takım kimyası: komşu mevkideki oyuncuların daha önce birlikte oynamış olması, ortak uyruk/lig ve kulübe uyum süresi' }, `Kimya %${Math.round(chem.team * 100)}`) : null),
       h('span', { class: 'dim', style: 'font-size:12px' }, selected != null ? `${slots[selected].role} için oyuncu seç` : 'Bir slota tıkla, sonra oyuncu seç'));
 
@@ -105,7 +108,7 @@ export function lineupEditor(o) {
   function fillHole(xi, i) {
     if (i < 0) return xi;
     const role = FORMATIONS[o.formation][i].role, taken = new Set(xi.filter(Boolean));
-    const cand = o.squad.filter(p => !taken.has(p.id) && !isOut(p)).sort((a, b) => effLn(b, fit(b, role)) - effLn(a, fit(a, role)))[0];
+    const cand = o.squad.filter(p => !taken.has(p.id) && !isOut(p, o.avail?.())).sort((a, b) => effLn(b, fit(b, role)) - effLn(a, fit(a, role)))[0];
     if (cand) xi[i] = cand.id;
     return xi;
   }
