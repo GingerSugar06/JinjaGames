@@ -1,8 +1,9 @@
 // Transfer What-If: bir transferi iptal et ya da yeni bir transfer yap; kadro değeri → takım gücü → sezon sonucu zinciri.
-import { h, svg, mount, setCrumbs, crest, fmtMoney, fmtPct, fmtDate, seasonLabel, norm, debounce, toast, go } from '../util.js';
-import { autoXI, fit, FORMATIONS } from '../matchsim.js';
+import { h, svg, mount, setCrumbs, crest, fmtMoney, fmtPct, fmtDate, seasonLabel, norm, debounce, toast, go, ageOn } from '../util.js';
+import { autoXI, lineupQuality, ELO_PER_LN } from '../matchsim.js';
+import { stintMap, chemistry, CHEM_PER_UNIT, monthOfSeason } from '../strength.js';
 import { boot, pick, clubItems, select, field, seg, sheet, pageHead, delta, moneyDelta, teamLink, crestFor, avatar } from '../ui.js';
-import { loadTransfers, loadPlayers, loadSquads, loadElo, loadMatches, LAST_SEASON, CURRENT_SEASON } from '../data.js';
+import { loadTransfers, loadPlayers, loadSquads, loadElo, loadMatches, loadStints, LAST_SEASON, CURRENT_SEASON } from '../data.js';
 import { simulateSeason, probIn, computeTable } from '../engine.js';
 import { defaultSlots, positionOutcome } from '../rules.js';
 import * as store from '../store.js';
@@ -146,7 +147,7 @@ export async function render(app, seasonArg) {
         hs ? h('div', null, h('div', { class: 'cap', style: 'margin:6px 0 2px' }, `${seasonLabel(head.season)} · sezon sonu sıra olasılığı (gri: gerçek, yeşil: değişiklikle)`), posChart(hs)) : null,
         h('div', { style: 'overflow:auto;margin:12px calc(var(--pad) * -1) 0' }, tb));
     });
-    return h('div', null, playerLines.length ? h('div', { style: 'margin-bottom:16px' }, ...playerLines) : null, ...blocks, h('div', { class: 'dim', style: 'font-size:13.5px' }, `Her sezon ${imp.n} kez yeniden oynatıldı. Takım gücü, en iyi dizilişteki ilk 11’in konuma göre hesaplanan hücum ve savunma değerinden bulunur; oyuncu gerçekte bir sonraki kulüp değişikliğine kadar yeni takımında kalıyor sayıldı.`));
+    return h('div', null, playerLines.length ? h('div', { style: 'margin-bottom:16px' }, ...playerLines) : null, ...blocks, h('div', { class: 'dim', style: 'font-size:13.5px' }, `Her sezon ${imp.n} kez yeniden oynatıldı. Takım gücü, en iyi dizilişteki ilk 11’in konuma ve yaşa göre hesaplanan hücum/savunma kalitesinden ve takım kimyasından (kim kiminle daha önce oynadı, yeni gelen kulübe ne kadar uyum sağladı) bulunur; oyuncu gerçekte bir sonraki kulüp değişikliğine kadar yeni takımında kalıyor sayıldı.`));
   }
   function posChart(sm) {
     const n = Math.min(sm.nC, 20), W = 620, Hh = 110, pl = 6, bw = (W - pl * 2) / n, max = Math.max(0.05, ...sm.pa.slice(0, n), ...sm.pb.slice(0, n));
@@ -170,25 +171,27 @@ export async function render(app, seasonArg) {
 // ------------------------------------------------------------------------------ hesap
 const FORMS = ['4-2-3-1', '4-3-3', '4-4-2'];
 /**
- * Kadronun konuma duyarlı gücü (Elo ölçeğinde). Yetenek, piyasa değerinin logaritmasıyla orantılıdır:
- * ilk 11'in her mevkisindeki oyuncunun (mevki uyumuyla çarpılmış) log-değeri toplanır; bir birim log-değer farkı, takım düzeyinde ≈170 Elo eder.
+ * Kadronun konuma duyarlı gücü (Elo ölçeğinde): ilk 11'in (mevki uyumlu, yaşa göre düzeltilmiş) hücum/savunma kalitesi
+ * + TAKIM KİMYASI (kim kiminle daha önce oynadı, yeni gelen kulübe ne kadar uyum sağladı). Üç dizilişten en iyisi alınır.
+ * Böylece yıldız alıp kimyayı bozmak da, derin kadrodan birini satmak da gerçekçi biçimde ölçülür.
  */
-const LN_LO = Math.log(2e5), LN_HI = Math.log(2e8);
-function power(list) {
+function power(list, { club, ref, S, compOf }) {
   const by = new Map(list.map(p => [p.id, p]));
-  let best = -1e9, bestXI = [];
+  let best = -1e9, bestXI = [], bestF = FORMS[0];
   for (const f of FORMS) {
-    const xi = autoXI(list, f), slots = FORMATIONS[f];
-    let sc = 0;
-    slots.forEach((sl, i) => { const p = by.get(xi[i]); sc += p ? LN_LO + fit(p, sl.role) * (Math.min(LN_HI, Math.max(LN_LO, Math.log(p.value || 3e5))) - LN_LO) : LN_LO; });
-    if (sc > best) { best = sc; bestXI = xi; }
+    const xi = autoXI(list, f), q = lineupQuality(by, f, xi);
+    const sc = ELO_PER_LN * 0.5 * (q.A + q.D);
+    if (sc > best) { best = sc; bestXI = xi; bestF = f; }
   }
-  return { score: best * 170 / 11, xi: bestXI };
+  const c = chemistry({ xi: bestXI, formation: bestF, byId: by, S, ref, club, compOf });
+  return { score: best + CHEM_PER_UNIT * c.team, xi: bestXI, chem: c.team };
 }
 
 async function computeImpact(ctx, P, season, edits) {
   const n = 1500;
-  const toPl = r => { const p = P.byId.get(r[0]); return { id: r[0], value: r[1] || p?.value || 3e5, line: p?.line || 'M', pos: p?.pos || '' }; };
+  const S = stintMap(await loadStints());
+  const compOf = c => ctx.clubs[c]?.c;
+  const toPl = (r, sn = season) => { const p = P.byId.get(r[0]); return { id: r[0], value: r[1] || p?.value || 3e5, line: p?.line || 'M', pos: p?.pos || '', age: ageOn(p?.dob, new Date(`${sn + 1}-01-01`)), nat: p?.nat || '' }; };
   const players = new Map();
   const squads = {};
   for (let k = 0; k <= YEARS_AHEAD; k++) squads[season + k] = season + k <= CURRENT_SEASON ? await loadSquads(season + k) : null;
@@ -230,7 +233,15 @@ async function computeImpact(ctx, P, season, edits) {
         if (m.altClub === c && !list.some(r => r[0] === m.pid)) list.push([m.pid, m.v]);
       }
       const top = a => a.map(r => r[1]).sort((x, y) => y - x).slice(0, 18).reduce((q, v) => q + v, 0);
-      const pb = power(base.map(toPl)), pa = power(list.map(toPl));
+      // kimya: gelen oyuncu bu kulübe ilk kez katılmış sayılır (cancel modunda gerçekte gittiği kulübe hiç gitmemiş = oradaki dönemi sürer)
+      const Sx = new Map(S);
+      for (const m of ms) if (m.altClub === c) {
+        const st = [...(S.get(m.pid) || [])], at = st.findIndex(x => x[0] === c);
+        if (at >= 0) st[at] = [c, st[at][1], 9999]; else st.push([c, monthOfSeason(season), 9999]);
+        Sx.set(m.pid, st);
+      }
+      const opt = { club: c, ref: monthOfSeason(s), compOf };
+      const pb = power(base.map(r => toPl(r, s)), { ...opt, S }), pa = power(list.map(r => toPl(r, s)), { ...opt, S: Sx });
       dElo.set(c, pa.score - pb.score); dV.set(c, top(list) - top(base));
       if (s === season) for (const m of ms) {
         const o = players.get(m.pid) || { pid: m.pid };

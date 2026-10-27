@@ -26,12 +26,14 @@ export async function render(app) {
   function draw() {
     const list = rows();
     mount(box, list.length ? sheet(null, h('div', { style: 'overflow:auto' }, h('table', { class: 'tbl' },
-      h('thead', null, h('tr', null, h('th', { class: 'num' }, '#'), h('th', null, 'Hoca'), h('th', null, S.view === 'act' ? 'Kulüp' : 'Son kulüp'), h('th', { class: 'num' }, 'Maç'), h('th', { class: 'num' }, 'G-B-M'), h('th', { class: 'num' }, 'Puan/maç'), h('th', { class: 'num' }, 'Beklenen'), h('th', { class: 'num' }, 'Hoca puanı'))),
+      h('thead', null, h('tr', null, h('th', { class: 'num' }, '#'), h('th', null, 'Hoca'), h('th', null, S.view === 'act' ? 'Kulüp' : 'Son kulüp'), h('th', { class: 'num' }, 'Maç'), h('th', { class: 'num' }, 'G-B-M'), h('th', { class: 'num' }, 'Puan/maç'), h('th', { class: 'num' }, 'Beklenen'), h('th', { class: 'num', title: 'Takımın hücum puanına etkisi (Elo)' }, 'Hücum'), h('th', { class: 'num', title: 'Takımın savunma puanına etkisi (Elo)' }, 'Savunma'), h('th', null, 'Tercih ettiği diziliş'), h('th', { class: 'num' }, 'Hoca puanı'))),
       h('tbody', null, list.map((x, k) => h('tr', null,
         h('td', { class: 'num dim' }, k + 1),
         h('td', null, h('b', null, x.n), x.now ? null : h('span', { class: 'dim', style: 'margin-left:6px;font-size:12.5px' }, `son maç ${x.i.last.slice(0, 4)}`)),
         h('td', null, x.club && ctx.clubs[x.club] ? h('a', { class: 'who', href: `#/takim/${x.club}` }, crestFor(ctx, x.club, 'sm'), ctx.clubName(x.club)) : h('span', { class: 'dim' }, '—')),
         h('td', { class: 'num' }, x.i.g), h('td', { class: 'num' }, `${x.i.w}-${x.i.d}-${x.i.l}`), h('td', { class: 'num' }, x.i.ppg.toFixed(2)), h('td', { class: 'num dim' }, x.i.xppg?.toFixed(2) ?? '—'),
+        h('td', { class: 'num' }, eloChip(x.i.att, { label: '' })), h('td', { class: 'num' }, eloChip(x.i.def, { label: '' })),
+        h('td', { class: 'dim' }, x.i.forms.slice(0, 2).map(([f, p]) => `${f.replace(/ (Attacking|Defending|double 6|flat)/, '')} %${Math.round(p * 100)}`).join(' · ') || '—'),
         h('td', { class: 'num' }, eloChip(x.i.elo, { label: '' })))))),
     ), { tight: true }) : h('div', { class: 'empty' }, h('h3', null, 'Hoca bulunamadı'), h('div', null, 'Aramayı ya da “en az maç” filtresini gevşet.')));
   }
@@ -42,6 +44,6 @@ export async function render(app) {
       seg([['act', 'Görevdekiler'], ['all', 'Tüm hocalar']], S.view, v => { S.view = v; draw(); }, 'mk'),
       field('Sırala', seg([['elo', 'Hoca puanı'], ['ppg', 'Puan/maç'], ['g', 'Maç']], S.sort, v => { S.sort = v; draw(); })), field('En az', minSel), field('Ara', search)),
     box,
-    h('div', { class: 'dim', style: 'font-size:12.5px;margin-top:14px;max-width:80ch' }, `Hoca puanı = (gerçek − beklenen) puan/maç farkının Elo karşılığı (1 puan/maç ≈ 240 Elo); az maçlı hocalar ortalamaya çekilir, ±70 ile sınırlıdır. Beklenen puan kadro piyasa değerinden hesaplandığı için pahalı kadro tek başına puan kazandırmaz; ama değer, oyun kalitesinin kusurlu bir göstergesidir (özellikle küçük liglerde), bu yüzden puan kaba bir ölçüdür. Simülasyona bunun %${dampPct}’i yansır. Veri: Transfermarkt (2006+), güncel görevler Wikidata (${M.asOf || '—'}).`));
+    h('div', { class: 'dim', style: 'font-size:12.5px;margin-top:14px;max-width:80ch' }, `Hoca puanı: kadro piyasa değerine göre beklenen golün üstünde attığı (hücum) ve altında yediği (savunma) gol, Elo’ya çevrilmiş hâli; "net etki" ikisinin ortalaması. Kulübün kendi etkisi ayrıştırılır (dev kulüp zaten fazla kazanır), böylece hocalar farklı kulüplerde karşılaştırılabilir; az maçlı hocalar ortalamaya çekilir, eski maçlar daha az sayılır. Simülasyona hücum/savunma ayrı ayrı yansır (%${dampPct}). Değer, oyun kalitesinin kusurlu bir göstergesidir (özellikle küçük liglerde), bu yüzden puan kaba bir ölçüdür. Veri: Transfermarkt (2006+), güncel görevler Wikidata (${M.asOf || '—'}).`));
   draw();
 }

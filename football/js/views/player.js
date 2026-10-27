@@ -1,6 +1,7 @@
 import { h, mount, setCrumbs, fmtMoney, fmtDate, seasonLabel, lineChart, ageOn } from '../util.js';
 import { boot, sheet, POS_LONG, avatar, crestFor } from '../ui.js';
-import { loadPlayers, loadValuations, loadTransfers, loadCurrent, monthIdxToDate, LAST_SEASON } from '../data.js';
+import { loadPlayers, loadValuations, loadTransfers, loadCurrent, loadStints, monthIdxToDate, LAST_SEASON } from '../data.js';
+import { stintMap, ovr, monthNow } from '../strength.js';
 
 export async function render(app, idArg) {
   const ctx = await boot();
@@ -14,6 +15,8 @@ export async function render(app, idArg) {
   const club = now?.club ?? p.club;
   const vals = await loadValuations(p.id);
   const trBox = h('div', null, h('div', { class: 'skel', style: 'height:80px' }));
+  const careerBox = h('div', null, h('div', { class: 'skel', style: 'height:80px' }));
+  const ageNow = ageOn(p.dob);
 
   const peak = vals.reduce((m, v) => (v.v > m.v ? v : m), { v: 0, mi: 0 });
   const chart = vals.length > 1 ? lineChart({ series: [{ pts: vals.map(v => [v.mi / 12 + 2000, v.v]), color: 'var(--brand)', w: 2.5 }], yFmt: v => fmtMoney(v), xFmt: v => Math.round(v), height: 240 }) : h('div', { class: 'empty' }, 'Değer geçmişi yok');
@@ -34,14 +37,33 @@ export async function render(app, idArg) {
         sheet(h('h2', null, 'Transfer geçmişi'), trBox, { tight: true })),
       h('div', { class: 'grid', style: 'align-content:start' },
         sheet(h('h2', null, 'Bilgiler'), h('dl', { class: 'kv' },
+          h('dt', null, 'Genel güç (OVR)'), h('dd', null, h('b', null, ovr({ value: p.value, age: ageNow })), h('span', { class: 'dim', title: 'Piyasa değeri ve yaştan tahmin; FIFA’daki OVR gibi ama resmî bir puan değildir' }, '  tahmini')),
           h('dt', null, 'Güncel değer'), h('dd', null, h('b', null, fmtMoney(p.value))),
           h('dt', null, 'Zirve değer'), h('dd', null, `${fmtMoney(p.peak)}${peak.v ? ` (${monthIdxToDate(peak.mi)})` : ''}`),
           h('dt', null, 'Doğum'), h('dd', null, p.dob ? fmtDate(p.dob) : '—'),
           h('dt', null, 'Boy / ayak'), h('dd', null, `${p.height ? p.height + ' cm' : '—'} · ${p.foot || '—'}`),
           h('dt', null, 'Sözleşme'), h('dd', null, p.contract ? fmtDate(p.contract) : '—'),
           h('dt', null, 'Milli maç'), h('dd', null, p.caps ?? '—'))),
+        sheet(h('h2', null, 'Kulüp kariyeri'), careerBox, { tight: true }),
         now ? sheet(h('h2', null, 'Bu sezon'), h('div', { class: 'row', style: 'gap:28px' },
           ...[['Maç', now.st.ap], ['Gol', now.st.g], ['Asist', now.st.as], ['Sarı', now.st.y], ['Kırmızı', now.st.r]].map(([l, v]) => h('div', { class: 'kpi' }, h('div', { class: 'v' }, v), h('div', { class: 'l' }, l))))) : null)));
+
+  // kulüp kariyeri + eski takım arkadaşları (kulüp dönemlerinden)
+  const S = stintMap(await loadStints()), mine = S.get(p.id) || [], ref = monthNow();
+  const mates = new Map();
+  for (const [pid, st] of S) if (pid !== p.id) {
+    let t = 0;
+    for (const [c, a, b] of mine) for (const [c2, a2, b2] of st) if (c === c2) t += Math.max(0, Math.min(b, b2, ref) - Math.max(a, a2));
+    if (t >= 12) mates.set(pid, t);
+  }
+  const top = [...mates].sort((a, b) => b[1] - a[1]).map(([pid, t]) => ({ q: P.byId.get(pid), t })).filter(x => x.q).sort((a, b) => b.q.value - a.q.value || b.t - a.t).slice(0, 6);
+  careerBox.replaceChildren(mine.length ? h('div', null,
+    h('table', { class: 'tbl' }, h('tbody', null, [...mine].reverse().map(([c, a, b]) => h('tr', null,
+      h('td', null, h('a', { class: 'who', href: `#/takim/${c}` }, crestFor(ctx, c, 'sm'), ctx.clubs[c] ? ctx.clubName(c) : `Kulüp #${c}`)),
+      h('td', { class: 'dim' }, `${monthIdxToDate(a)} – ${b >= ref ? 'şimdi' : monthIdxToDate(b)}`), h('td', { class: 'num dim' }, `${Math.max(1, Math.round((Math.min(b, ref) - a) / 12 * 10) / 10)} yıl`))))),
+    top.length ? h('div', { style: 'padding:12px 16px;border-top:1px solid var(--line)' }, h('div', { class: 'cap', style: 'margin-bottom:6px' }, 'Birlikte oynadığı değerli oyuncular (takım kimyası bağları)'),
+      h('div', { class: 'row', style: 'gap:6px' }, top.map(({ q, t }) => h('a', { class: 'chip', href: `#/oyuncu/${q.id}`, title: `${t} ay birlikte` }, `${q.name} · ${Math.round(t / 12 * 10) / 10} yıl`)))) : null)
+    : h('div', { class: 'empty' }, 'Kulüp geçmişi verisi yok.'));
 
   // transfer geçmişi: tüm dönemleri tara
   const rows = [];

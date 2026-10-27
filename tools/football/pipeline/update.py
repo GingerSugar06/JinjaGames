@@ -67,6 +67,7 @@ STEPS = [
     ("news", "news.py", None, None),
     ("current", "current.py", None, None),
     ("managers", "managers.py", None, None),
+    ("stints", "stints.py", None, None),            # oyuncu kulüp dönemleri (takım kimyası); güncel kadrolara ve değer geçmişine bakar
 ]
 
 

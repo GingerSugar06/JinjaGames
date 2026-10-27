@@ -4,8 +4,8 @@ import { pick } from './ui.js';
 import { mgrInfo, MGR_DAMP } from './data.js';
 
 export const eloText = r => `${r > 0 ? '+' : r < 0 ? '−' : '±'}${Math.abs(r)}`;
-const TIP = 'Hoca puanı: aynı kadro değerine sahip takımlardan beklenenin kaç puan/maç üstünde-altında topladığının Elo karşılığı (kısa görevler ortalamaya çekilir). Modele bunun %60’ı yansır.';
-export const eloChip = (r, { label = 'Elo' } = {}) => h('span', { class: `chip ${r >= 12 ? 'uecl' : r <= -12 ? 'rel' : ''}`, title: TIP }, `${eloText(r)} ${label}`);
+const TIP = 'Hoca puanı (net etki): hocanın kulüpten bağımsız olarak, kadro değerine göre beklenenin üstünde attığı ve altında yediği gol farkının Elo karşılığı. Kulüp etkisi ayrıştırılır, az maçlı hocalar ortalamaya çekilir, eski maçlar daha az sayılır. Modele %80’i yansır.';
+export const eloChip = (r, { label = 'Elo' } = {}) => h('span', { class: `chip ${r >= 8 ? 'uecl' : r <= -8 ? 'rel' : ''}`, title: TIP }, `${eloText(r)} ${label}`);
 
 /** Kısa görev (vekil) mi? */
 export const isCaretaker = games => games <= 6;

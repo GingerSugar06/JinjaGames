@@ -126,3 +126,13 @@ main#app { animation: enter .5s var(--ease) both; }
 .tile .ic svg.ico { width: 28px; height: 28px; }
 .tile:hover .ic { transform: scale(1.08) rotate(-4deg); }
 .tile .ic { transition: transform .3s var(--ease); }
+
+/* ---- kadro düzenleyici: kimya bağları, OVR, kimya noktaları */
+.pitch-wrap svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.pitch-wrap .slot { z-index: 2; }
+.slot .ov { position: absolute; top: -4px; left: 6px; min-width: 22px; padding: 1px 4px; border-radius: 6px; background: #0b1a12; color: #c8ff5a; font: 800 12px/1.2 var(--f-display); border: 1px solid rgba(200, 255, 90, .5); z-index: 2; }
+.slot .ch { display: block; font-size: 8px; letter-spacing: 1px; line-height: 1; margin: -2px 0 1px; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
+.slot .ch.c0 { color: #ff6b5b; } .slot .ch.c1 { color: #ff9f4a; } .slot .ch.c2 { color: #ffd24a; } .slot .ch.c3 { color: #5dff8a; }
+
+.site-foot { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; padding: 26px 16px 90px; color: var(--ink-3); font-size: 13px; }
+.site-foot a { color: var(--ink-2); }

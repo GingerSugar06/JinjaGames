@@ -63,16 +63,20 @@ export const loadCurrent = () => tryJSON('current.json', { asOf: null, clubs: {}
 /** Teknik direktörler ve kulüp yönetimi. { asOf, m:{ad:[elo,maç,G,B,M,ppg,beklenenPpg,ilk,son,[kulüpler]]}, c:{kulüp:{cur,chair,ceo,own,hist}} } */
 export const loadManagers = () => tryJSON('managers.json', { asOf: null, m: {}, c: {} });
 /** Hocanın Elo farkı modele bu oranla yansır: kısmı şans, kısmı kadro/kulüp etkisi olduğundan düşürülür. */
-export const MGR_DAMP = 0.6, MGR_CAP = 45;
+export const MGR_DAMP = 0.8, MGR_CAP = 55;
 export const mgrElo = (M, name) => { const r = M.m[name]?.[0]; return r == null ? 0 : r; };
 /** Hoca değişikliğinin takım gücüne etkisi (Elo): yeni hoca − eski hoca, küçültülmüş. */
 export const mgrDelta = (M, from, to) => Math.max(-MGR_CAP, Math.min(MGR_CAP, MGR_DAMP * (mgrElo(M, to) - mgrElo(M, from))));
-export const mgrInfo = (M, name) => { const r = M.m[name]; return r && { name, elo: r[0], g: r[1], w: r[2], d: r[3], l: r[4], ppg: r[5], xppg: r[6], first: r[7], last: r[8], clubs: r[9] }; };
+export const mgrInfo = (M, name) => { const r = M.m[name]; return r && { name, elo: r[0], g: r[1], w: r[2], d: r[3], l: r[4], ppg: r[5], xppg: r[6], first: r[7], last: r[8], clubs: r[9], att: r[10] ?? r[0], def: r[11] ?? r[0], forms: r[12] || [] }; };
+/** Hoca değişikliğinin takımın hücum ve savunma puanına etkisi (Elo, küçültülmüş): [hücum, savunma]. */
+export const mgrAD = (M, from, to) => { const a = mgrInfo(M, from), b = mgrInfo(M, to); const f = (x, y) => Math.max(-MGR_CAP, Math.min(MGR_CAP, MGR_DAMP * ((y ?? 0) - (x ?? 0)))); return [f(a?.att ?? 0, b?.att ?? 0), f(a?.def ?? 0, b?.def ?? 0)]; };
 /** Güncellemelerde fark edilen değişiklikler: { updated, prev, items:[[tarih, tür, kulüp, metin]] } */
 export const loadChanges = () => tryJSON('changes.json', { updated: null, prev: null, items: [] });
 /** Günün haberleri: indeks ve gün dosyası. */
 export const loadNewsIndex = () => tryJSON('news/index.json', { asOf: null, days: [] });
 export const loadNews = d => tryJSON(`news/${d}.json`, { d, leagues: [] });
+/** Oyuncu kulüp dönemleri (takım kimyası): { oyuncu: [kulüp, başlangıç_ay, bitiş_ay, ...] } */
+export const loadStints = () => tryJSON('stints.json', {});
 export const loadUpcoming = () => tryJSON('upcoming.json', { fixtures: [], asOf: null });
 
 // En güncel veri sezonu (ham veri bu sezonla bitiyor)

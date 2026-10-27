@@ -34,6 +34,10 @@ OUT = os.environ.get("WIF_BUILT") or os.path.join(ROOT, "data", "built")
 LAST = os.environ.get("WIF_LAST") or os.path.join(ROOT, "data", "last")
 WD = os.environ.get("WIF_LAST") or os.path.join(ROOT, "data", "last")   # önbellek durum klasöründe: depoda kalır, Actions önbelleği silinse de kaybolmaz
 PPG_TO_ELO = 240.0
+GOAL_TO_ELO = 362.0      # 1 gol/maç ≈ 362 Elo (sitedeki lambdas: dλ/λ = 0,85·Δ/400, λ≈1,3)
+LAM_M = 200.0           # hoca etkisi için ridge ağırlığı (≈ "ortalama hoca" önsel maç sayısı)
+LAM_C = 25.0            # kulüp-dönem etkisi için ridge ağırlığı
+HALF_LIFE = 6.0         # yıl: eski maçlar yarı yarıya sayılır
 SHRINK = 80.0           # bu kadar maçlık "ortalama hoca" önsel bilgi (az maçlı ya da yalnızca küçük bir ligde başarılı hocalar ortalamaya çekilir)
 MIN_GAMES = 12          # listeye girmek için en az maç
 
@@ -65,6 +69,8 @@ def build_history():
     vals = club_values()
     # --- beklenen puan regresyonu
     bycomp = defaultdict(lambda: ([], []))
+    gd_by = defaultdict(lambda: ([], []))
+    tot_by = defaultdict(list)
     keep = []
     for i, g in enumerate(games):
         s = season_of(g["date"])
@@ -73,8 +79,11 @@ def build_history():
             continue
         diff = np.sign(int(g["home_club_goals"]) - int(g["away_club_goals"]))
         key = g["competition_id"] if g["competition_type"] == "domestic_league" else "*"
+        hg0, ag0 = int(g["home_club_goals"]), int(g["away_club_goals"])
         for k in {key, "*"}:
             bycomp[k][0].append([1.0, vh - va]); bycomp[k][1].append(diff)
+            gd_by[k][0].append([1.0, vh - va]); gd_by[k][1].append(hg0 - ag0)
+            tot_by[k].append(hg0 + ag0)
         keep.append(i)
     # beklenen puan farkı, ln-değer farkının DOĞRUSAL olmayan eğrisi (dilimlenmiş ortalama): uçlarda (dev kulüpler) doğrusal model hata yapıyor
     def curve(X, Y):
@@ -87,6 +96,8 @@ def build_history():
         return cx, cy
 
     coefs = {k: curve(X, Y) for k, (X, Y) in bycomp.items() if k == "*" or len(Y) >= 1500}
+    gcoefs = {k: curve(X, Y) for k, (X, Y) in gd_by.items() if k == "*" or len(Y) >= 1500}
+    tmean = {k: float(np.mean(v)) for k, v in tot_by.items()}
     print(f"   beklenen puan modeli: {len(keep)} maç, genel eğri + {len(coefs) - 1} lig için ayrı", flush=True)
     keep_set = set(keep)
 
@@ -100,6 +111,17 @@ def build_history():
         D = 3 * float(np.interp(d, cx, cy))   # beklenen puan farkı (ev − dep)
         return float(np.clip(1.365 + D / 2, 0.15, 2.85)), float(np.clip(1.365 - D / 2, 0.15, 2.85))
 
+    def xg(i, g):
+        """ev sahibi için beklenen (atılan, yenilen) gol; deplasman tersi."""
+        s = season_of(g["date"])
+        d = vals[s][int(g["home_club_id"])] - vals[s][int(g["away_club_id"])]
+        k = g["competition_id"] if g["competition_type"] == "domestic_league" else "*"
+        cx, cy = gcoefs.get(k, gcoefs["*"])
+        gd = float(np.interp(d, cx, cy)); tot = tmean.get(k, tmean["*"])
+        return (tot + gd) / 2, (tot - gd) / 2
+
+    obs = []          # (kulüp-dönem, hoca, ağırlık, puan artığı, hücum artığı, savunma artığı)
+    forms = defaultdict(lambda: defaultdict(int))
     # --- maç maç hoca görevleri
     ten = defaultdict(list)       # kulüp -> [[ad, ilk, son, g, w, d, l, gf, ga]]
     mg = defaultdict(lambda: {"g": 0, "w": 0, "d": 0, "l": 0, "act": 0.0, "exp": 0.0, "n": 0, "first": "9999", "last": "0000", "clubs": {}})
@@ -125,9 +147,40 @@ def build_history():
             m["g"] += 1; m["w"] += pts == 3; m["d"] += pts == 1; m["l"] += pts == 0
             m["first"] = min(m["first"], g["date"]); m["last"] = max(m["last"], g["date"])
             m["clubs"][cid] = m["clubs"].get(cid, 0) + 1
+            f = (g[f"{side}_club_formation"] or "").strip()
+            if f:
+                forms[name][f] += 1
             if e:
                 m["act"] += pts; m["exp"] += e[0] if side == "home" else e[1]; m["n"] += 1
-    return ten, mg
+                exg = xg(i, g)
+                eg, ec = (exg[0], exg[1]) if side == "home" else (exg[1], exg[0])
+                yr = int(g["date"][:4]) + (int(g["date"][5:7]) - 1) / 12
+                obs.append((cid, season_of(g["date"]), name, 0.5 ** ((2026.5 - yr) / HALF_LIFE), pts - (e[0] if side == "home" else e[1]), own - eg, ec - opp))
+    return ten, mg, obs, forms
+
+
+def ridge_effects(obs):
+    """y = kulüp-dönem etkisi + hoca etkisi (ridge, dönüşümlü en küçük kareler). Kulüp etkisi "dev kulüp zaten fazla puan alır"ı emer;
+    hoca etkisi yalnızca hocanın kulüp değiştirmesi / kulüp içinde hoca değişimi üzerinden ayrışır. Döner: {hoca: (puan, hücum, savunma)} (maç başına)."""
+    ck = {}
+    mk = {}
+    ci = np.empty(len(obs), dtype=np.int64); mi = np.empty(len(obs), dtype=np.int64)
+    for n, (cid, season, name, *_r) in enumerate(obs):
+        ci[n] = ck.setdefault((cid, (season - 2006) // 4), len(ck))
+        mi[n] = mk.setdefault(name, len(mk))
+    w = np.array([o[3] for o in obs])
+    res = {}
+    out = np.zeros((len(mk), 3))
+    for col in range(3):
+        y = np.array([o[4 + col] for o in obs])
+        c = np.zeros(len(ck)); m = np.zeros(len(mk))
+        for _ in range(40):
+            m = np.bincount(mi, w * (y - c[ci]), len(mk)) / (np.bincount(mi, w, len(mk)) + LAM_M)
+            c = np.bincount(ci, w * (y - m[mi]), len(ck)) / (np.bincount(ci, w, len(ck)) + LAM_C)
+        out[:, col] = m
+    for name, k in mk.items():
+        res[name] = tuple(float(x) for x in out[k])
+    return res
 
 
 def wd_all():
@@ -168,7 +221,7 @@ def fingerprint():
     """Hoca geçmişinin girdileri (maç verisi, kadro dosyaları, bu betik) değişmedikçe geçmiş yeniden hesaplanmaz."""
     import hashlib
     h = hashlib.sha1()
-    for p in [os.path.join(RAW, "tm", "games.csv.gz"), __file__]:
+    for p in [os.path.join(RAW, "tm", "games.csv.gz"), __file__]:   # betik değişince geçmiş yeniden hesaplanır
         st = os.stat(p); h.update(f"{os.path.basename(p)}:{st.st_size}:{int(st.st_mtime)}".encode())
     d = os.path.join(OUT, "squads")
     for fn in sorted(os.listdir(d)):
@@ -178,7 +231,7 @@ def fingerprint():
 
 def history():
     """Maç verisinden hoca puanları ve kulüp başına görev geçmişi. Girdi değişmediyse önbellekten gelir."""
-    cache_p = os.path.join(LAST, "managers_hist.json")
+    cache_p = os.path.join(LAST, "managers_hist.json")   # v2: ridge + hücum/savunma + diziliş
     fp = fingerprint()
     if os.path.exists(cache_p):
         c = json.load(open(cache_p, encoding="utf-8"))
@@ -186,17 +239,22 @@ def history():
             print("-> hoca geçmişi: maç verisi değişmemiş, önbellekten", flush=True)
             return c["mgrs"], {int(k): v for k, v in c["hist"].items()}
     print("-> maç verisinden hoca geçmişi", flush=True)
-    ten, mg = build_history()
+    ten, mg, obs, forms = build_history()
+    eff = ridge_effects(obs)
     mgrs = {}
     for name, m in mg.items():
         if m["g"] < MIN_GAMES:
             continue
-        diff = (m["act"] - m["exp"]) / (m["n"] + SHRINK) if m["n"] else 0.0
-        elo = int(round(max(-70, min(70, PPG_TO_ELO * diff))))
+        _pts, a, d = eff.get(name, (0.0, 0.0, 0.0))
+        att = int(round(max(-60, min(60, GOAL_TO_ELO * a))))      # takım hücum puanına doğrudan eklenen Elo
+        dfn = int(round(max(-60, min(60, GOAL_TO_ELO * d))))      # takım savunma puanına doğrudan eklenen Elo
+        elo = int(round((att + dfn) / 2))                        # tek sayılık "net etki" (hücum+savunma ortalaması): sezon simülasyonundaki tek Elo ile aynı ölçek
+        fm = sorted(forms.get(name, {}).items(), key=lambda kv: -kv[1])[:3]
+        tot_f = sum(forms.get(name, {}).values()) or 1
         clubs = [c for c, _ in sorted(m["clubs"].items(), key=lambda kv: -kv[1])[:4]]
         ppg = round((3 * m["w"] + m["d"]) / m["g"], 2)
         xpg = round(m["exp"] / m["n"], 2) if m["n"] else None
-        mgrs[name] = [elo, m["g"], m["w"], m["d"], m["l"], ppg, xpg, m["first"], m["last"], clubs]
+        mgrs[name] = [elo, m["g"], m["w"], m["d"], m["l"], ppg, xpg, m["first"], m["last"], clubs, att, dfn, [[f, round(c / tot_f, 2)] for f, c in fm]]
     v = np.array([m[0] for m in mgrs.values()])
     print(f"   {len(mgrs)} hoca puanlandı · sd {v.std():.1f} Elo · |puan|>=60: {(abs(v) >= 60).sum()}", flush=True)
     hist = {cid: [r for r in t[-14:]] for cid, t in ten.items()}

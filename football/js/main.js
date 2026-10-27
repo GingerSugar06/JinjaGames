@@ -22,6 +22,7 @@ const ROUTES = [
   [/^\/degistir$/, () => import('./views/hub.js')],
   [/^\/takimlar$/, () => import('./views/teams.js')],
   [/^\/hocalar$/, () => import('./views/managers.js')],
+  [/^\/veri$/, () => import('./views/about.js')],
   [/^\/haberler(?:\/(\d{4}-\d{2}-\d{2}))?$/, () => import('./views/news.js')],
   [/^\/lig(?:\/([^/]+))?(?:\/(\d{4}))?$/, () => import('./views/league.js')],
   [/^\/kupa(?:\/([^/]+))?(?:\/(\d{4}))?$/, () => import('./views/cup.js')],

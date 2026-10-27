@@ -15,12 +15,12 @@ export function openLive({ names, sides, neutral = false, haValue }) {
   const fresh = () => {
     for (const k of ['h', 'a']) {
       const s = sides[k], byId = new Map(s.squad.map(p => [p.id, p]));
-      live[k] = { name: names[k], color: COLORS[k], formation: s.formation, squad: s.squad, elo: s.elo, tactics: { ...(live[k]?.tactics || s.tactics) }, xi: s.xi.map(id => byId.get(id) || null) };
+      live[k] = { name: names[k], color: COLORS[k], formation: s.formation, squad: s.squad, elo: s.elo, rate: s.rate, tactics: { ...(live[k]?.tactics || s.tactics) }, xi: s.xi.map(id => byId.get(id) || null) };
     }
   };
   fresh();
   const rates = () => {
-    const rt = k => teamRatings({ baseElo: live[k].elo, squad: live[k].squad, formation: live[k].formation, xi: live[k].xi.map(p => p?.id ?? null), tactics: live[k].tactics });
+    const rt = k => { const a = { squad: live[k].squad, formation: live[k].formation, xi: live[k].xi.map(p => p?.id ?? null), tactics: live[k].tactics }; return live[k].rate ? live[k].rate(a.squad, a.formation, a.xi, a.tactics) : teamRatings({ baseElo: live[k].elo, ...a }); };
     const [lh, la] = matchLambdas(rt('h'), rt('a'), { neutral, ha: haValue });
     return { lh, la };
   };

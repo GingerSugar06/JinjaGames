@@ -23,6 +23,18 @@ const W_ATT = { GK: 0, CB: .12, LB: .3, RB: .3, LWB: .45, RWB: .45, DM: .35, CM:
 const W_DEF = { GK: 1.5, CB: 1.1, LB: .8, RB: .8, LWB: .7, RWB: .7, DM: .9, CM: .5, AM: .2, LM: .3, RM: .3, LW: .15, RW: .15, ST: .1 };
 const LINES = ['G', 'D', 'M', 'A'];
 const V_LO = Math.log(2e5), V_HI = Math.log(2e8);
+/** İlk 11'in ortalama log-yeteneğinde 1 birim ≈ 170 Elo (kadro değerleri ve Elo geçmişinden kalibre). */
+export const ELO_PER_LN = 170;
+/** Yaşa göre log-değer düzeltmesi: genç oyuncunun değeri potansiyeli de içerir (bugünkü gücü daha düşük), yaşlıda tersi. */
+const AGE_ADJ = { 17: -.55, 18: -.55, 19: -.52, 20: -.48, 21: -.42, 22: -.34, 23: -.26, 24: -.17, 25: -.08, 30: .05, 31: .12, 32: .2, 33: .28 };
+export function ageAdj(age) {
+  if (age == null) return 0;
+  if (age <= 17) return -.55;
+  if (age >= 34) return .35;
+  return AGE_ADJ[age] ?? 0;
+}
+/** Bugünkü oyun gücünün log-değer karşılığı (düz piyasa değerinden daha iyi bir yetenek ölçüsü). */
+export const abilityLn = p => clamp(Math.log(Math.max(p?.value || 0, 2e5)), V_LO, V_HI) + ageAdj(p?.age);
 
 /** Oyuncunun bu mevkiye uygunluk çarpanı (0-1). */
 export function fit(player, role) {
@@ -35,7 +47,8 @@ export function fit(player, role) {
   if (d === 1) return 0.7;
   return 0.45;
 }
-const effValue = (v, f) => { const q = clamp((Math.log(Math.max(v, 2e5)) - V_LO) / (V_HI - V_LO), 0, 1) * f; return Math.exp(V_LO + q * (V_HI - V_LO)); };
+/** Mevki uyumuyla düzeltilmiş log-yetenek: mevki dışındaki yıldız tam katkı vermez. */
+export const effLn = (p, f) => V_LO + f * (abilityLn(p) - V_LO);
 
 /** Sakat (belirsiz ya da %50 altı oynama şansı) oyuncu otomatik 11'e alınmaz. */
 export const isOut = p => !!p?.inj && (p.inj.c == null || p.inj.c <= 50);
@@ -71,20 +84,32 @@ export function autoXI(squad, formation) {
   const m = Math.max(pool.length, slots.length);
   const cost = slots.map(s => Array.from({ length: m }, (_, j) => {
     const p = pool[j];
-    return p ? -(V_LO + fit(p, s.role) * (clamp(Math.log(Math.max(p.value, 2e5)), V_LO, V_HI) - V_LO)) : 0;
+    return p ? -effLn(p, fit(p, s.role)) : 0;
   }));
   const pick = assign(cost);
   return pick.map(j => (j >= 0 && pool[j] ? pool[j].id : null));
 }
 
-/** İlk 11 → hücum/savunma değer toplamları. */
+/** İlk 11 → hücum/savunma KALİTESİ (ağırlıklı ortalama log-yetenek). Eksik oyuncu en düşük değerle sayılır. */
+export function lineupQuality(squadById, formation, xi) {
+  const slots = FORMATIONS[formation];
+  let A = 0, D = 0, wa = 0, wd = 0, n = 0;
+  slots.forEach((s, i) => {
+    const p = squadById.get(xi[i]);
+    const q = p ? effLn(p, fit(p, s.role)) : V_LO;
+    A += W_ATT[s.role] * q; D += W_DEF[s.role] * q; wa += W_ATT[s.role]; wd += W_DEF[s.role]; if (p) n++;
+  });
+  return { A: A / wa, D: D / wd, n };
+}
+
+/** (eski) İlk 11 → hücum/savunma değer toplamları. */
 export function lineupStrength(squadById, formation, xi) {
   const slots = FORMATIONS[formation];
   let A = 0, D = 0, total = 0, n = 0;
   slots.forEach((s, i) => {
     const p = squadById.get(xi[i]);
     if (!p) return;
-    const v = effValue(p.value, fit(p, s.role));
+    const v = Math.exp(effLn(p, fit(p, s.role)));
     A += W_ATT[s.role] * v; D += W_DEF[s.role] * v; total += v; n++;
   });
   return { A, D, total, n };
@@ -92,22 +117,27 @@ export function lineupStrength(squadById, formation, xi) {
 
 /**
  * Bir takımın maça özgü hücum ve savunma "Elo" değeri.
- * baseElo = kulübün tam kadro gücü; lineup, kendi en iyi 11'ine kıyasla fark yaratır.
+ *  baseElo   = kulübün GERÇEK kadrosunun gücü (sezon başı Elo). Kadro değişikliği bunun üstüne fark olarak eklenir.
+ *  baseSquad = değişiklik yapılmadan önceki kadro (yoksa `added` işaretsiz oyuncular). Taban en iyi 11 buradan kurulur;
+ *              böylece kadroya alınan yıldızlar tabanı da yükseltip etkisiz kalmaz (eski sürümdeki hata).
+ *  chemElo, mgrA, mgrD, formElo = kimya, hoca hücum/savunma farkı, diziliş uyumsuzluğu (strength.js).
  */
-export function teamRatings({ baseElo, squad, formation, xi, tactics }) {
+export function teamRatings({ baseElo, squad, baseSquad, formation, xi, tactics, chemElo = 0, mgrA = 0, mgrD = 0, formElo = 0 }) {
   const byId = new Map(squad.map(p => [p.id, p]));
-  const best = lineupStrength(byId, formation, autoXI(squad, formation));
-  const cur = lineupStrength(byId, formation, xi);
+  const baseList = baseSquad || squad.filter(p => !p.added);
+  const best = lineupQuality(new Map(baseList.map(p => [p.id, p])), formation, autoXI(baseList, formation));
+  const cur = lineupQuality(byId, formation, xi);
   const missing = 11 - cur.n;
-  const dA = best.A > 0 ? 130 * Math.log(Math.max(cur.A, best.A * 0.05) / best.A) : 0;
-  const dD = best.D > 0 ? 130 * Math.log(Math.max(cur.D, best.D * 0.05) / best.D) : 0;
+  const dA = clamp(ELO_PER_LN * (cur.A - best.A), -320, 360), dD = clamp(ELO_PER_LN * (cur.D - best.D), -320, 360);
   const t = tactics || {};
   const m = (t.mentality ?? 50) / 50 - 1;        // -1 defansif … +1 hücumcu
   const press = (t.press ?? 50) / 50 - 1;
   const width = (t.width ?? 50) / 50 - 1;
-  const att = baseElo + dA + 28 * m + 9 * press + 5 * width - 40 * missing;
-  const def = baseElo + dD - 28 * m * 0.9 - 3 * press - 40 * missing;
-  return { att, def, dA, dD, best, cur, tempo: (t.tempo ?? 50) / 50 - 1, counter: (t.counter ?? 0) / 100 };
+  const common = chemElo + formElo - 40 * missing;
+  const tA = 28 * m + 9 * press + 5 * width, tD = -28 * m * 0.9 - 3 * press;
+  const att = baseElo + dA + mgrA + common + tA;
+  const def = baseElo + dD + mgrD + common + tD;
+  return { att, def, base: baseElo, dA, dD, best, cur, chem: chemElo, mgrA, mgrD, form: formElo, missing, tactA: tA, tactD: tD, tempo: (t.tempo ?? 50) / 50 - 1, counter: (t.counter ?? 0) / 100 };
 }
 
 export function matchLambdas(home, away, { neutral = false, total = 2.65, ha: haValue = HOME_ADV } = {}) {
