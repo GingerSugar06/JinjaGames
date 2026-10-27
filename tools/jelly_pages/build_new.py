@@ -185,7 +185,7 @@ GAMES['jellyseek'] = dict(
     lead=('This is a minesweeper deduction puzzle. Little jelly surprises hide under the tiles of every board. Open a tile and its number tells you how many surprises lurk right next to it. Use the clues to find every sweet without waking a single sour jelly.',
           'Bu bir mayın tarlası çıkarım bulmacası. Her tahtada karoların altında minik jöle sürprizler saklanır. Bir karoyu aç; sayısı yanında kaç sürpriz olduğunu söyler. İpuçlarıyla her şekeri bul, tek bir ekşi jöleyi bile uyandırma.'),
     twist_h=('New twists, <span class="hl">one at a time.</span>', 'Yeni sürprizler, <span class="hl">tek tek gelir.</span>'),
-    lab=[('lantern', 'tw_seek_lantern', 21, None), ('spyglass', 'tw_seek_spyglass', 101, None), ('scale', 'tw_seek_scale', 141, None),
+    lab=[('lantern', 'tw_seek_lantern', 21, None), ('camp', 'tw_seek_camp', 61, None), ('spyglass', 'tw_seek_spyglass', 101, None), ('scale', 'tw_seek_scale', 141, None),
          ('parity', 'seek_num_bg', 181, None), ('diag', 'seek_hex_open', 221, None), ('seal', 'seek_surprise', 261, None),
          ('zone', 'seek_board_frame', 301, None), ('range', 'seek_flag', 341, None), ('knight', 'seek_pop', 381, None),
          ('ring', 'seek_spyglass_zone', 421, None), ('twin', 'seek_tree', 461, None)],

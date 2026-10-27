@@ -430,5 +430,13 @@
  "twist.twin.desc": {
   "tr": "İple bağlı iki güvenli karo. Ortak sayı, ikisinin çevresindeki sürprizleri sayar.",
   "en": "Two safe tiles joined by a thread. The shared number counts surprises around both of them."
+ },
+ "twist.camp": {
+  "tr": "Kamp ateşi",
+  "en": "Campfire"
+ },
+ "twist.camp.desc": {
+  "tr": "Kamp ateşi baştan açık. Sayısı yalnız dört yanındaki karolardaki (üst, alt, sol, sağ) sürprizleri söyler; köşegenler sayılmaz.",
+  "en": "The campfire starts open. Its number counts surprises only in the four tiles beside it (up, down, left, right), not the diagonals."
  }
 }
