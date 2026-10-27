@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 3506,
+ "total": 3539,
  "projects": 24,
  "mods": {
   "all-irons": {
@@ -11,13 +11,13 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 164,
+   "dl": 172,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 174,
+   "dl": 176,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
@@ -29,7 +29,7 @@ window.BB_STATS={
   },
   "death-hand": {
    "name": "Death Hand",
-   "dl": 35,
+   "dl": 36,
    "created": "2026-10-12T09:46Z",
    "updated": "2026-10-24T10:11Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 286,
+   "dl": 287,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,31 +65,31 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 415,
+   "dl": 418,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-24T10:10Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 297,
+   "dl": 301,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-24T21:07Z"
   },
   "lodepulse": {
    "name": "Lodepulse",
-   "dl": 21,
+   "dl": 22,
    "created": "2026-10-23T08:51Z",
    "updated": "2026-10-23T08:51Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 449,
+   "dl": 454,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 57,
+   "dl": 58,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
@@ -101,13 +101,13 @@ window.BB_STATS={
   },
   "power-generators": {
    "name": "Power generators",
-   "dl": 174,
+   "dl": 176,
    "created": "2026-09-18T06:42Z",
    "updated": "2026-10-24T10:10Z"
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 317,
+   "dl": 319,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -119,13 +119,13 @@ window.BB_STATS={
   },
   "towers": {
    "name": "Towers",
-   "dl": 109,
+   "dl": 110,
    "created": "2026-10-05T11:47Z",
    "updated": "2026-10-05T11:47Z"
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 158,
+   "dl": 159,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -143,7 +143,7 @@ window.BB_STATS={
   },
   "vivacity": {
    "name": "Vivacity",
-   "dl": 10,
+   "dl": 11,
    "created": "2026-10-25T12:13Z",
    "updated": "2026-10-25T12:13Z"
   }
@@ -151,7 +151,7 @@ window.BB_STATS={
  "unlisted": [
   "vivacity"
  ],
- "updated": "2026-10-27T08:50Z",
+ "updated": "2026-10-27T15:16Z",
  "source": "profile",
- "datesAt": "2026-10-26T16:02Z"
+ "datesAt": "2026-10-27T15:16Z"
 };
