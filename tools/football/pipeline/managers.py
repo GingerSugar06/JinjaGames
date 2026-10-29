@@ -183,38 +183,61 @@ def ridge_effects(obs):
     return res
 
 
-def wd_all():
-    """Wikidata'dan tüm kulüpler için güncel hoca/başkan/genel müdür/sahipleri tek sorguda çeker (bitişi olmayan ifadeler). Önbelleğe alır.
-    Sunucu dakikada 1 istek sınırı koyabiliyor; başarısız olursa bekleyip tekrar dener, olmazsa önbelleği kullanır."""
-    os.makedirs(WD, exist_ok=True)
-    cache = os.path.join(WD, "wikidata_roles.json")
-    old = os.path.join(RAW, "wikidata", "roles.json")      # eski konum
-    if not os.path.exists(cache) and os.path.exists(old):
-        shutil.copy(old, cache)
-    q = """SELECT ?tm ?role ?pLabel ?start WHERE {
+WD_ROLES = [("coach", "P286"), ("chair", "P488"), ("ceo", "P169"), ("own", "P127")]
+
+
+def wd_role(role, prop):
+    """Bir rolün TÜM dönemlerini (başlangıç/bitiş tarihli) ve kişinin Commons fotoğraf dosya adını döndürür. Sorgu başına bir istek."""
+    q = f"""SELECT ?tm ?pLabel ?start ?end ?img WHERE {{
       ?c wdt:P7223 ?tm .
-      VALUES (?prop ?ps ?role) { (p:P286 ps:P286 "coach") (p:P488 ps:P488 "chair") (p:P169 ps:P169 "ceo") (p:P127 ps:P127 "own") }
-      ?c ?prop ?st . ?st ?ps ?p .
-      FILTER NOT EXISTS { ?st pq:P582 ?end }
-      OPTIONAL { ?st pq:P580 ?start }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "tr,en". }
-    }"""
+      ?c p:{prop} ?st . ?st ps:{prop} ?p .
+      OPTIONAL {{ ?st pq:P580 ?start }}
+      OPTIONAL {{ ?st pq:P582 ?end }}
+      OPTIONAL {{ ?p wdt:P18 ?img }}
+      FILTER(!BOUND(?end) || ?end >= "2006-01-01T00:00:00Z"^^xsd:dateTime)       # Transfermarkt maç verisi 2006'dan başlıyor: daha eski dönemler gereksiz
+      SERVICE wikibase:label {{ bd:serviceParam wikibase:language "tr,en". }}
+    }}"""
     url = "https://query.wikidata.org/sparql?" + urllib.parse.urlencode({"query": q, "format": "json"})
     for i in range(4):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "WhatIfFootball-pipeline/1.0 (personal project)", "Accept": "application/sparql-results+json"})
-            with urllib.request.urlopen(req, timeout=240) as r:
+            with urllib.request.urlopen(req, timeout=300) as r:
                 data = json.loads(r.read().decode("utf-8"))["results"]["bindings"]
-            out = [(int(b["tm"]["value"]), b["role"]["value"], b["pLabel"]["value"], (b.get("start", {}).get("value") or "")[:10]) for b in data if b["tm"]["value"].isdigit()]
-            json.dump(out, open(cache, "w", encoding="utf-8"), ensure_ascii=False)
-            return out
+            return [(int(b["tm"]["value"]), role, b["pLabel"]["value"], (b.get("start", {}).get("value") or "")[:10], (b.get("end", {}).get("value") or "")[:10],
+                     urllib.parse.unquote((b.get("img", {}).get("value") or "").rsplit("/", 1)[-1])) for b in data if b["tm"]["value"].isdigit()]
         except Exception as e:  # noqa: BLE001
-            print(f"   ! wikidata: {e}", flush=True)
+            print(f"   ! wikidata {role}: {e}", flush=True)
             time.sleep(70)
+    return None
+
+
+def wd_all():
+    """Wikidata'dan tüm kulüpler için hoca/başkan/genel müdür/sahip dönemlerini çeker (dakikada 1 istek sınırı için roller arası bekleme).
+    Başarısız rol için önceki önbellek kullanılır. Satır: (kulüp, rol, ad, başlangıç, bitiş, fotoğraf_dosyası)."""
+    os.makedirs(WD, exist_ok=True)
+    cache = os.path.join(WD, "wikidata_roles2.json")
+    prev = []
     if os.path.exists(cache):
-        print("   (Wikidata önbellekten)", flush=True)
-        return [tuple(x) for x in json.load(open(cache, encoding="utf-8"))]
-    return []
+        prev = [tuple(x) for x in json.load(open(cache, encoding="utf-8"))]
+    else:                                              # eski (yalnızca güncel, tarihsiz) önbelleği başlangıç olarak al
+        for old in (os.path.join(WD, "wikidata_roles.json"), os.path.join(RAW, "wikidata", "roles.json")):
+            if os.path.exists(old):
+                prev = [(r[0], r[1], r[2], r[3], "", "") for r in json.load(open(old, encoding="utf-8"))]
+                break
+    out, ok = [], 0
+    for k, (role, prop) in enumerate(WD_ROLES):
+        if k:
+            time.sleep(65)                              # sunucu: dakikada 1 istek
+        rows = wd_role(role, prop)
+        if rows is None:
+            print(f"   (Wikidata {role}: önceki önbellekten)", flush=True)
+            rows = [r for r in prev if r[1] == role]
+        else:
+            ok += 1
+        out += rows
+    if ok:
+        json.dump(out, open(cache, "w", encoding="utf-8"), ensure_ascii=False)
+    return out if (ok or out) else []
 
 
 def fingerprint():
@@ -231,7 +254,7 @@ def fingerprint():
 
 def history():
     """Maç verisinden hoca puanları ve kulüp başına görev geçmişi. Girdi değişmediyse önbellekten gelir."""
-    cache_p = os.path.join(LAST, "managers_hist.json")   # v2: ridge + hücum/savunma + diziliş
+    cache_p = os.path.join(LAST, "managers_hist.json")   # v3: tüm görevler
     fp = fingerprint()
     if os.path.exists(cache_p):
         c = json.load(open(cache_p, encoding="utf-8"))
@@ -257,7 +280,7 @@ def history():
         mgrs[name] = [elo, m["g"], m["w"], m["d"], m["l"], ppg, xpg, m["first"], m["last"], clubs, att, dfn, [[f, round(c / tot_f, 2)] for f, c in fm]]
     v = np.array([m[0] for m in mgrs.values()])
     print(f"   {len(mgrs)} hoca puanlandı · sd {v.std():.1f} Elo · |puan|>=60: {(abs(v) >= 60).sum()}", flush=True)
-    hist = {cid: [r for r in t[-14:]] for cid, t in ten.items()}
+    hist = {cid: [r for r in t] for cid, t in ten.items()}
     os.makedirs(os.path.dirname(cache_p), exist_ok=True)
     json.dump({"fp": fp, "mgrs": mgrs, "hist": hist}, open(cache_p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     return mgrs, hist
@@ -265,7 +288,7 @@ def history():
 
 def snapshot(clubs):
     """Değişiklik karşılaştırması için kulüp başına {hoca, başkan, genel müdür, sahipler}."""
-    return {str(k): [(v.get("cur") or {}).get("n"), (v.get("chair") or {}).get("n"), (v.get("ceo") or {}).get("n"), " · ".join(v.get("own") or [])] for k, v in clubs.items()}
+    return {str(k): [(v.get("cur") or {}).get("n"), (v.get("chair") or {}).get("n"), (v.get("ceo") or {}).get("n"), " · ".join(sorted(v.get("own") or []))] for k, v in clubs.items()}   # sahip sırası değişimi "sahip değişti" sayılmasın
 
 
 def diff_changes(prev, now):
@@ -294,40 +317,56 @@ def main():
 
     print("-> Wikidata: başkan, genel müdür, sahip, güncel hoca", flush=True)
     got = wd_all()
-    print(f"   {len(got)} kayıt", flush=True)
+    print(f"   {len(got)} kayıt (tüm dönemler)", flush=True)
     by = defaultdict(lambda: defaultdict(list))
-    for cid, role, name, start in got:
-        by[cid][role].append((start, name))
+    images = {}
+    for row in got:
+        cid, role, name, start, end = row[:5]
+        img = row[5] if len(row) > 5 else ""
+        by[cid][role].append((start, end, name, img))
+        if img and role in ("coach", "chair", "ceo"):
+            images.setdefault(name, img)
     for cid, roles in by.items():
         c = clubs.setdefault(cid, {"hist": [], "cur": None})
+        c["roles"] = {}
         for key, lst in roles.items():
-            lst.sort(reverse=True)
+            lst = sorted(set(lst), key=lambda x: (x[0] or "0000", x[1] or "9999"), reverse=True)
+            c["roles"][key] = [[n, st or None, en or None, im or None] for st, en, n, im in lst][:40]
+            now_l = [x for x in lst if not x[1]]                 # bitişi olmayanlar = güncel
             if key == "coach":
-                start, name = lst[0]
+                if not now_l:
+                    continue
+                start, _e, name, im = now_l[0]
                 cur = c["cur"]
                 # Wikidata, maç verisinin bittiği tarihten sonraki bir göreve işaret ediyorsa (ya da maç verisi yoksa) onu kullan
                 if cur is None or (start and start > (c["hist"][-1][2] if c["hist"] else "0000") and name != cur["n"]):
                     c["cur"] = {"n": name, "since": start or None, "src": "wikidata"}
             elif key == "own":
-                c["own"] = list(dict.fromkeys(n for _, n in lst))[:4]
-            else:
-                start, name = lst[0]
-                c[key] = {"n": name, "since": start or None}
+                names = list(dict.fromkeys(x[2] for x in now_l))[:4]
+                if names:
+                    c["own"] = names
+            elif now_l:
+                start, _e, name, im = now_l[0]
+                c[key] = {"n": name, "since": start or None, **({"img": im} if im else {})}
 
     prev_p = os.path.join(OUT, "managers.json")
     if not got and os.path.exists(prev_p):
         print("   ! Wikidata alınamadı: önceki başkan/sahip/hoca bilgileri korunuyor", flush=True)
-        for k, v in json.load(open(prev_p, encoding="utf-8")).get("c", {}).items():
+        _prev = json.load(open(prev_p, encoding="utf-8"))
+        images.update(_prev.get("I", {}))
+        for k, v in _prev.get("c", {}).items():
             c = clubs.setdefault(int(k), {"hist": [], "cur": None})
             for f in ("chair", "ceo", "own"):
                 if v.get(f):
                     c[f] = v[f]
+            if v.get("roles"):
+                c["roles"] = v["roles"]
             if (v.get("cur") or {}).get("src") == "wikidata":
                 c["cur"] = v["cur"]
 
     # kulüp değerleri: yalnızca en az bir bilgisi olanlar
     clubs = {str(k): v for k, v in clubs.items() if v.get("hist") or v.get("cur") or v.get("chair") or v.get("own")}
-    out = {"asOf": datetime.now(timezone.utc).strftime("%Y-%m-%d"), "m": mgrs, "c": clubs}
+    out = {"asOf": datetime.now(timezone.utc).strftime("%Y-%m-%d"), "m": mgrs, "c": clubs, "I": images}
     p = os.path.join(OUT, "managers.json")
     try:
         same = {k: v for k, v in json.load(open(p, encoding="utf-8")).items() if k != "asOf"} == {k: v for k, v in out.items() if k != "asOf"}

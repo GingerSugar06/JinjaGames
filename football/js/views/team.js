@@ -1,14 +1,15 @@
 // Takım sayfası: kadro, maçlar, transferler ve güç (Elo) geçmişi.
 import { h, mount, toast, norm, setCrumbs, crest, barChart, fmtMoney, fmtDate, fmtDay, seasonLabel, lineChart, ageOn, go } from '../util.js';
 import { boot, select, sheet, pageHead, delta, formStrip, POS_LONG, crestFor, avatar } from '../ui.js';
-import { loadMatches, loadSquads, loadTransfers, loadPlayers, loadElo, loadCurrent, loadManagers, mgrInfo, mgrDelta, LAST_SEASON } from '../data.js';
+import { loadMatches, loadSquads, loadTransfers, loadPlayers, loadElo, loadCurrent, loadManagers, mgrInfo, mgrAD, LAST_SEASON, CURRENT_SEASON } from '../data.js';
 import { eloChip, eloText, pickManager, seasonManager, isCaretaker, dampPct } from '../mgr.js';
 import { turningPoints, planTarget, TARGETS } from '../workshop.js';
 import { defaultSlots, positionOutcome, TIER_LABEL } from '../rules.js';
 import { computeTable, simulateSeason, probIn } from '../engine.js';
 import * as store from '../store.js';
 
-export async function render(app, idArg, seasonArg) {
+export async function render(app, idArg, seasonArg, tabArg) {
+  if (seasonArg === 'now') seasonArg = undefined;      // "Güncel" = varsayılan sezon (adreste /takim/36/now)
   const ctx = await boot();
   const [P, M] = await Promise.all([loadPlayers(), loadManagers()]);
   const id = +idArg;
@@ -21,18 +22,18 @@ export async function render(app, idArg, seasonArg) {
   const dflt = compId && ctx.idx[compId]?.[2026] ? 2026 : LAST_SEASON;   // güncel sezon verisi varsa varsayılan o
   setCrumbs('Takımlar', name);
 
+  const TABS = [['atolye', 'Senaryo atölyesi'], ['yonetim', 'Yönetim'], ['kadro', 'Kadro'], ['mac', 'Maçlar'], ['transfer', 'Transferler'], ['finans', 'Finans'], ['guc', 'Güç geçmişi']];
+  let tab = TABS.some(t => t[0] === tabArg) ? tabArg : 'atolye';
   const mcur = M.c[id]?.cur, mstale = mcur?.src === 'maç' && (M.c[id].hist.at(-1)?.[2] ?? '') < '2026-03-01';   // veri setindeki son maçı eskiyse bu "güncel" hoca değildir
   const head = pageHead(name, `${compId ? ctx.compFull(compId) : ''}${club?.st ? ' · ' + club.st : ''}${mcur?.n ? ` · ${mstale ? 'Son hoca' : 'Teknik direktör'}: ${mcur.n}` : ''}`,
     h('div', { style: 'align-self:center' }, crestFor(ctx, id, 'xl')),
-    select([['now', 'Güncel'], [2026, '2026/27'], ...Array.from({ length: LAST_SEASON - 2003 + 1 }, (_, i) => LAST_SEASON - i).map(s => [s, seasonLabel(s)])], seasonArg || LAST_SEASON, v => go(`/takim/${id}/${v}`)));
+    select([['now', 'Güncel'], [2026, '2026/27'], ...Array.from({ length: LAST_SEASON - 2003 + 1 }, (_, i) => LAST_SEASON - i).map(s => [s, seasonLabel(s)])], seasonArg || 'now', v => go(`/takim/${id}/${v}/${tab}`)));       // yıl değişince açık sekme korunur
   const body = h('div');
   mount(app, head, body);
 
-  let tab = 'atolye';
   const tabs = h('div', { class: 'tabs', role: 'tablist' });
   const content = h('div');
-  const TABS = [['atolye', 'Senaryo atölyesi'], ['yonetim', 'Yönetim'], ['kadro', 'Kadro'], ['mac', 'Maçlar'], ['transfer', 'Transferler'], ['finans', 'Finans'], ['guc', 'Güç geçmişi']];
-  const drawTabs = () => { tabs.replaceChildren(...TABS.map(([k, l]) => h('button', { role: 'tab', 'aria-selected': String(tab === k), onclick: () => { tab = k; drawTabs(); drawTab(); } }, l))); };
+  const drawTabs = () => { tabs.replaceChildren(...TABS.map(([k, l]) => h('button', { role: 'tab', 'aria-selected': String(tab === k), onclick: () => { tab = k; try { history.replaceState(null, '', `#/takim/${id}/${seasonArg || 'now'}/${k}`); } catch { /* adres güncellenemezse sorun değil */ } drawTabs(); drawTab(); } }, l))); };
   mount(body, tabs, content);
 
   async function drawTab() {
@@ -104,69 +105,119 @@ export async function render(app, idArg, seasonArg) {
   }
 
 
-  // ------------------------------------------------------------------ yönetim: teknik direktör, başkan, sahip + "ya başka hoca olsaydı?"
+  // ------------------------------------------------------------------ yönetim: seçilen sezonun teknik direktörleri, başkanı, sahipleri + "ya başka hoca olsaydı?"
   async function yonetimTab() {
     const mc = M.c[id] || {};
+    const s = seasonArg ? season : dflt;
+    const isCur = s >= CURRENT_SEASON;                                  // güncel sezon: maç verisinde hoca adı yok, Wikidata/güncel kayıt kullanılır
+    const from = `${s}-06-01`, to = `${s + 1}-05-31`;                 // haziran atamaları yeni sezona sayılır
+    const overlap = r => (!r[1] || r[1] <= to) && (!r[2] || r[2] >= from);       // [ad, başlangıç, bitiş, foto]
+    const L = await findLeague(s).catch(() => null);
     const cur = mc.cur, ci = cur && mgrInfo(M, cur.n);
-    const hist = [...(mc.hist || [])].reverse();
-    const stint = hist.find(r => r[0] === cur?.n);
-    const nm = norm(name), own = (mc.own || []).filter(o => { const k = norm(o); return !k.includes(nm) && !nm.includes(k); });   // "Galatasaray SK, Galatasaray’ın sahibi" gibi kendine gönderme yapanlar atılır
-    const person = (label, who, extra) => h('div', { class: 'mrow' }, h('div', { class: 'cap' }, label),
-      who ? h('div', { class: 'who-b' }, h('b', null, who), extra) : h('span', { class: 'dim' }, 'Veri yok'));
-    const since = x => (x?.since ? h('span', { class: 'dim' }, ` ${fmtDate(x.since)}’den beri`) : null);
-    const staff = sheet(h('h2', null, 'Kulüp yönetimi'), h('div', { class: 'mgmt' },
-      person(mstale ? 'Son bilinen hoca' : 'Teknik direktör', cur?.n, h('span', null, since(cur), ci ? ' ' : null, ci ? eloChip(ci.elo, { label: 'hoca puanı' }) : null, stint && isCaretaker(stint[3]) ? h('span', { class: 'chip' }, 'vekil') : null)),
-      person('Başkan', mc.chair?.n, since(mc.chair)),
-      mc.ceo ? person('Genel müdür / CEO', mc.ceo.n, since(mc.ceo)) : null,
-      person(own.length > 1 ? 'Sahipler / ortaklar' : 'Sahip', own.join(' · ')),
-      person('Stadyum', club?.st, club?.se ? h('span', { class: 'dim' }, ` ${club.se.toLocaleString('tr-TR')} kişilik`) : null)),
-      { actions: [h('a', { class: 'btn sm', href: '#/hocalar' }, 'Tüm hocalar')] });
-    const note = h('div', { class: 'dim', style: 'font-size:12.5px' }, `Hoca geçmişi Transfermarkt maç verisinden (2006+), başkan/sahip/genel müdür Wikidata’dan alınır (${M.asOf || '—'}); topluluk verisi olduğu için eksik ya da gecikmeli olabilir. Yardımcı hocalar, sportif direktör, doktor gibi kadro dışı personel için ücretsiz ve yapılandırılmış bir kaynak yok; bu yüzden yer almıyor.`);
+    const nm = norm(name), ownNow = (mc.own || []).filter(o => { const k = norm(o); return !k.includes(nm) && !nm.includes(k); });
+    const dl = d => (d ? fmtDate(d) : '?');
 
-    const hs = hist.length ? sheet(h('h2', null, 'Teknik direktör geçmişi'), h('div', null, h('div', { style: 'overflow:auto' }, h('table', { class: 'tbl' },
+    const photo = (n, img) => {
+      const f = img || M.I?.[n];
+      const ini = h('span', { class: 'ph-ini' }, (n || '?').split(/\s+/).map(x => x[0]).slice(0, 2).join('').toUpperCase());
+      if (!f) return h('span', { class: 'ph' }, ini);
+      return h('a', { class: 'ph', href: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}`, target: '_blank', rel: 'noopener', title: 'Fotoğraf: Wikimedia Commons (lisans ve atıf bilgisi için tıkla)' },
+        h('img', { src: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=96`, alt: n, loading: 'lazy', referrerpolicy: 'no-referrer', onerror: e => e.target.replaceWith(ini) }));
+    };
+    const person = (n, img, sub, chips) => h('div', { class: 'pp' }, photo(n, img), h('div', { class: 'pp-t' }, h('b', null, n), sub ? h('span', { class: 'ds' }, sub) : null), chips || null);
+
+    // ---- sezonun teknik direktörleri: önce maç verisi (hmgr/amgr), yoksa görev kayıtları, ayrıca Wikidata
+    const cm = new Map();
+    for (const m of L?.matches || []) {
+      if (m.hg == null) continue;
+      const side = m.h === id ? 'h' : m.a === id ? 'a' : null, n = side && (side === 'h' ? m.hmgr : m.amgr);
+      if (!n) continue;
+      const own = side === 'h' ? m.hg : m.ag, opp = side === 'h' ? m.ag : m.hg;
+      const o = cm.get(n) || { n, g: 0, w: 0, d: 0, l: 0, first: m.date, last: m.date };
+      o.g++; if (own > opp) o.w++; else if (own === opp) o.d++; else o.l++;
+      if (m.date < o.first) o.first = m.date; if (m.date > o.last) o.last = m.date;
+      cm.set(n, o);
+    }
+    let coaches = [...cm.values()];
+    let basis = coaches.length ? 'maç verisi' : '';
+    if (!coaches.length) {
+      coaches = (mc.hist || []).filter(r => r[1] <= to && r[2] >= from).map(r => ({ n: r[0], g: r[3], w: r[4], d: r[5], l: r[6], first: r[1] < from ? from : r[1], last: r[2], whole: true }));
+      if (coaches.length) basis = 'görev kayıtları';
+    }
+    for (const r of (mc.roles?.coach || []).filter(overlap)) {
+      if (!coaches.some(x => norm(x.n) === norm(r[0]))) coaches.push({ n: r[0], first: r[1] || from, last: r[2] || null, img: r[3], wd: true });
+    }
+    if (!coaches.length && isCur && cur) coaches.push({ n: cur.n, first: cur.since || from, last: null, wd: true });
+    coaches.sort((a, b) => (a.first || '').localeCompare(b.first || ''));
+    const coachRows = coaches.map(c => {
+      const i = mgrInfo(M, c.n), ppg = c.g ? ((3 * c.w + c.d) / c.g).toFixed(2) : null;
+      const sub = `${dl(c.first)} – ${c.last && !(isCur && !c.wd && c.n === cur?.n) ? dl(c.last) : 'sürüyor'}${c.g ? ` · ${c.g} maç ${c.w}-${c.d}-${c.l} · ${ppg} puan/maç${c.whole ? ' (tüm görev)' : ''}` : ''}`;
+      return person(c.n, c.img, sub, h('span', { class: 'row', style: 'gap:6px' }, (c.g != null && ((((mc.hist || []).find(r => r[0] === c.n && r[1] <= to && r[2] >= from) || [])[3]) ?? c.g) <= 6) ? h('span', { class: 'chip', title: 'Toplam görev süresi 6 maçı geçmeyen geçici hoca' }, 'vekil') : null, i ? eloChip(i.elo, { label: 'hoca puanı' }) : null, c.wd && c.g == null ? h('span', { class: 'chip', title: 'Maç verisinde yok; Wikidata kaydı' }, 'Wikidata') : null));
+    });
+    const change = coaches.length > 1 ? h('div', { class: 'note mk', style: 'margin-top:8px' }, h('b', null, `${seasonLabel(s)} sezonunda ${coaches.length} farklı teknik direktör görev yaptı: `),
+      coaches.map((c, i) => (i ? ` → ${c.n} (${dl(c.first)})` : `${c.n}`)).join('')) : null;
+
+    // ---- başkan / genel müdür / sahipler: sezonla kesişen dönemler; güncel sezonda güncel kayıt
+    const roleRows = (key, now) => {
+      const lst = (mc.roles?.[key] || []).filter(overlap);
+      if (!lst.length && isCur && now) return (Array.isArray(now) ? now.map(n => [n]) : [[now.n, now.since, null, now.img]]).map(r => person(r[0], r[3], r[1] ? `${dl(r[1])}’den beri` : null));
+      return lst.map(r => person(r[0], r[3], r[1] || r[2] ? `${dl(r[1])} – ${r[2] ? dl(r[2]) : 'sürüyor'}` : 'tarih belirtilmemiş'));
+    };
+    const empty = h('span', { class: 'dim', title: 'Wikidata’da çoğu kulübün yalnızca güncel başkan/sahip kaydı var; geçmiş dönemler için ücretsiz yapılandırılmış bir kaynak yok' }, 'Bu sezon için ücretsiz kaynakta kayıt yok');
+    const block = (label, rows) => h('div', { class: 'mrow' }, h('div', { class: 'cap' }, label), rows.length ? h('div', { class: 'pp-list' }, rows) : empty);
+    const staff = sheet(h('h2', null, `Kulüp yönetimi · ${seasonLabel(s)}`), h('div', { class: 'mgmt' },
+      block(coaches.length > 1 ? 'Teknik direktörler' : 'Teknik direktör', coachRows),
+      block('Başkan', roleRows('chair', mc.chair)),
+      (mc.roles?.ceo || []).some(overlap) || (isCur && mc.ceo) ? block('Genel müdür / CEO', roleRows('ceo', mc.ceo)) : null,
+      block(ownNow.length > 1 || (mc.roles?.own || []).filter(overlap).length > 1 ? 'Sahipler / ortaklar' : 'Sahip', roleRows('own', ownNow)),
+      block('Stadyum', club?.st ? [h('div', { class: 'pp' }, h('div', { class: 'pp-t' }, h('b', null, club.st), club?.se ? h('span', { class: 'ds' }, `${club.se.toLocaleString('tr-TR')} kişilik`) : null))] : [])),
+      { actions: [h('a', { class: 'btn sm', href: '#/hocalar' }, 'Tüm hocalar')] });
+    const note = h('div', { class: 'dim', style: 'font-size:12.5px' }, `${basis ? `Hocalar: ${basis}. ` : ''}Hoca geçmişi Transfermarkt maç verisinden (2006+), başkan/sahip/genel müdür dönemleri ve fotoğraflar Wikidata ve Wikimedia Commons’tan alınır (${M.asOf || '—'}); topluluk verisi olduğu için eksik, gecikmeli ya da tarihsiz olabilir. Fotoğrafa tıklayınca lisans ve atıf sayfası açılır. Yardımcı hocalar, sportif direktör, doktor gibi kadro dışı personel için ücretsiz ve yapılandırılmış bir kaynak yok; bu yüzden yer almıyor.`);
+
+    // ---- tüm görevler tablosu (seçili sezonla kesişenler vurgulu)
+    const hist = [...(mc.hist || [])].reverse();
+    const hs = hist.length ? sheet(h('h2', null, 'Teknik direktör geçmişi'), h('div', null, h('div', { style: 'overflow:auto;max-height:460px' }, h('table', { class: 'tbl' },
       h('thead', null, h('tr', null, h('th', null, 'Hoca'), h('th', null, 'Dönem'), h('th', { class: 'num' }, 'Maç'), h('th', { class: 'num' }, 'G-B-M'), h('th', { class: 'num' }, 'Puan/maç'), h('th', { class: 'num' }, 'Hoca puanı'))),
-      h('tbody', null, hist.map(r => { const i = mgrInfo(M, r[0]); return h('tr', null,
-        h('td', null, h('b', null, r[0]), isCaretaker(r[3]) ? h('span', { class: 'chip', style: 'margin-left:6px' }, 'vekil') : null),
+      h('tbody', null, hist.map(r => { const i = mgrInfo(M, r[0]), hit = r[1] <= to && r[2] >= from; return h('tr', { style: hit ? 'background:var(--brand-soft)' : null },
+        h('td', null, h('b', null, r[0]), isCaretaker(r[3]) ? h('span', { class: 'chip', style: 'margin-left:6px' }, 'vekil') : null, hit ? h('span', { class: 'chip mk', style: 'margin-left:6px' }, seasonLabel(s)) : null),
         h('td', { class: 'dim' }, `${fmtDate(r[1])} – ${cur?.n === r[0] && cur.src === 'maç' ? 'son maç ' : ''}${fmtDate(r[2])}`),
         h('td', { class: 'num' }, r[3]), h('td', { class: 'num' }, `${r[4]}-${r[5]}-${r[6]}`), h('td', { class: 'num' }, ((3 * r[4] + r[5]) / r[3]).toFixed(2)),
         h('td', { class: 'num' }, i ? eloChip(i.elo, { label: '' }) : h('span', { class: 'dim' }, '—'))); })))),
-      h('div', { class: 'dim', style: 'padding:10px 14px;font-size:13px' }, 'Son 14 görev; lig ve kupa maçları birlikte sayılır. Hoca puanı kariyerinin tamamına bakar, yalnızca bu kulübe değil.')), { tight: true }) : null;
+      h('div', { class: 'dim', style: 'padding:10px 14px;font-size:13px' }, 'Lig ve kupa maçları birlikte sayılır. Hoca puanı kariyerinin tamamına bakar, yalnızca bu kulübe değil.')), { tight: true }) : null;
 
     const box = h('div');
     const draw = res => {
-      if (!res) { mount(box, h('div', { class: 'dim' }, 'Bir hoca seç; seçtiğin hocanın bu takımı sezon boyunca çalıştırdığını varsayıp sezonu 1500 kez yeniden oynatırım.')); return; }
+      if (!res) { mount(box, h('div', { class: 'dim' }, `Bir hoca seç; seçtiğin hocanın ${seasonLabel(s)} sezonunda bu takımı çalıştırdığını varsayıp sezonu 1500 kez yeniden oynatırım.`)); return; }
       if (res.err) { mount(box, h('div', { class: 'note' }, res.err)); return; }
       const pc = x => `${(x * 100).toFixed(x < .1 && x > 0 ? 1 : 0)}%`;
       const pp = ([b, a]) => h('span', null, h('span', { class: 'dim' }, `${pc(b)} → `), h('span', { style: a > b + .005 ? 'color:var(--win)' : a < b - .005 ? 'color:var(--loss)' : '' }, pc(a)));
       mount(box, h('div', { class: 'grid' },
-        h('div', { class: 'note mk' }, h('b', null, `${res.from} yerine ${res.to}`), ` · ${seasonLabel(res.s)} · takım gücü ${eloText(Math.round(res.dElo))} Elo (hoca puanı farkının %${dampPct}’i)`),
+        h('div', { class: 'note mk' }, h('b', null, `${res.from} yerine ${res.to}`), ` · ${seasonLabel(res.s)} · takım gücü hücum ${eloText(Math.round(res.a))}, savunma ${eloText(Math.round(res.d))} Elo (hoca farkının %${dampPct}’i)`),
         h('div', { class: 'row center', style: 'gap:22px' },
           h('div', { class: 'kpi' }, h('div', { class: 'v' }, `${res.pos[0].toFixed(1)} → ${res.pos[1].toFixed(1)}`), h('div', { class: 'l' }, 'Beklenen sıra')),
           h('div', { class: 'kpi' }, h('div', { class: 'v' }, delta(res.pts[1] - res.pts[0], { digits: 1 })), h('div', { class: 'l' }, 'Beklenen puan')),
           h('div', { class: 'kpi' }, h('div', { class: 'v', style: 'font-size:20px' }, pp(res.title)), h('div', { class: 'l' }, 'Şampiyonluk')),
           h('div', { class: 'kpi' }, h('div', { class: 'v', style: 'font-size:20px' }, pp(res.euro)), h('div', { class: 'l' }, res.promo ? 'Yükselme' : 'Avrupa')),
           res.rel ? h('div', { class: 'kpi' }, h('div', { class: 'v', style: 'font-size:20px' }, pp(res.rel)), h('div', { class: 'l' }, 'Küme düşme')) : null),
-        h('div', { class: 'dim', style: 'font-size:12.5px' }, 'Aynı rastgele sayılarla karşılaştırıldığı için fark yalnızca hoca değişikliğinden gelir. Hocanın oyun anlayışı, kadroyla uyumu ve sezon içi görevden alınma ihtimali modelde yoktur.')));
+        h('div', { class: 'dim', style: 'font-size:12.5px' }, 'Aynı rastgele sayılarla karşılaştırıldığı için fark yalnızca hoca değişikliğinden gelir. Hocanın kadroyla uyumu ve sezon içi görevden alınma ihtimali modelde yoktur.')));
     };
     const run = async alt => {
-      const s = seasonArg ? season : dflt;
       mount(box, h('div', { class: 'skel', style: 'height:120px' }));
-      const L = await findLeague(s);
       if (!L) return draw({ err: 'Bu sezon için lig verisi yok; başka bir sezon seç.' });
       const base = seasonManager(L.matches, id) || cur?.n;
       if (!base) return draw({ err: 'Bu sezon için takımın hocası bilinmiyor.' });
       const eloRaw = (await loadElo(s)) || (await loadElo(LAST_SEASON + 1)) || {};
       const startElo = new Map(Object.entries(eloRaw).map(([a, b]) => [+a, b]));
-      const d = mgrDelta(M, base, alt);
+      const [da, dd] = mgrAD(M, base, alt), d = (da + dd) / 2;
       const n = 1500, a = simulateSeason({ matches: L.matches, startElo, n, seed: 7 + s }), b = simulateSeason({ matches: L.matches, startElo, ratingDelta: new Map([[id, d]]), n, seed: 7 + s });
       const A = a.teams.get(id), B = b.teams.get(id), nC = a.count, sl = defaultSlots(L.comp, s, nC);
       const top = sl.promo || sl.ucl + sl.el + sl.uecl;
-      draw({ s, from: base, to: alt, dElo: d, pos: [A.expPos, B.expPos], pts: [A.expPts, B.expPts], title: [probIn(A.posProb, 1, 1), probIn(B.posProb, 1, 1)], euro: [probIn(A.posProb, 1, top), probIn(B.posProb, 1, top)], promo: !!sl.promo, rel: sl.rel > 0 ? [probIn(A.posProb, nC - sl.rel + 1, nC), probIn(B.posProb, nC - sl.rel + 1, nC)] : null });
+      draw({ s, from: base, to: alt, a: da, d: dd, pos: [A.expPos, B.expPos], pts: [A.expPts, B.expPts], title: [probIn(A.posProb, 1, 1), probIn(B.posProb, 1, 1)], euro: [probIn(A.posProb, 1, top), probIn(B.posProb, 1, top)], promo: !!sl.promo, rel: sl.rel > 0 ? [probIn(A.posProb, nC - sl.rel + 1, nC), probIn(B.posProb, nC - sl.rel + 1, nC)] : null });
     };
     draw(null);
     const btn = h('button', { class: 'btn mk', onclick: async () => { const alt = await pickManager(ctx, M, { title: `${name} için teknik direktör`, exclude: cur?.n }); if (alt) run(alt); } }, 'Hoca seç ve sezonu yeniden oyna');
     const what = sheet(h('h2', null, 'Ya başka hoca olsaydı?'), h('div', { class: 'grid' }, box), { actions: [btn] });
-    return h('div', { class: 'grid' }, staff, note, what, hs);
+    return h('div', { class: 'grid' }, staff, change, note, what, hs);
   }
 
   // ------------------------------------------------------------------ güncel kadro (ESPN) + sakatlıklar

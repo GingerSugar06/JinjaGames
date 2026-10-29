@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  WIF_BUILT: football/data              # derlenmiş veri doğrudan sitenin klasörüne yazılır
-  WIF_LAST: tools/football/last         # güncellemeler arası durum depoda tutulur (önbellek silinse de kaybolmaz)
+  WIF_BUILT: ${{ github.workspace }}/football/data              # derlenmiş veri doğrudan sitenin klasörüne yazılır (MUTLAK yol: alt süreçler başka klasörde çalışır)
+  WIF_LAST: ${{ github.workspace }}/tools/football/last         # güncellemeler arası durum depoda tutulur (önbellek silinse de kaybolmaz)
   WIF_RAW: ${{ github.workspace }}/.football-raw   # indirilen ham veri (depoya girmez)
   PYTHONIOENCODING: utf-8
 
@@ -47,7 +47,9 @@ jobs:
           restore-keys: football-raw-v1-
 
       - name: Güncelle (artımlı)
+        id: upd
         run: python tools/football/pipeline/update.py
+        continue-on-error: true      # yazılabilen veri yine commit edilsin; hata aşağıda işi kırmızıya çevirir
 
       - name: Değiştiyse siteye işle
         run: |
@@ -63,3 +65,9 @@ jobs:
               sleep 5
             done
           fi
+
+      - name: Güncelleme adımı başarısızsa işi kırmızı bitir
+        if: steps.upd.outcome == 'failure'
+        run: |
+          echo "::error::Güncelleme betiği hata verdi; yukarıdaki 'Güncelle (artımlı)' günlüğüne bak. Başarısız adımlar bir sonraki çalışmada yeniden denenir."
+          exit 1

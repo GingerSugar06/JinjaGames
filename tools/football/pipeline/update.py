@@ -25,9 +25,11 @@ from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
-RAW = os.environ.get("WIF_RAW") or os.path.join(ROOT, "data", "raw")
-OUT = os.environ.get("WIF_BUILT") or os.path.join(ROOT, "data", "built")
-LAST = os.environ.get("WIF_LAST") or os.path.join(ROOT, "data", "last")
+# Yollar MUTLAK yapılır: alt süreçler farklı bir çalışma klasöründe (cwd=ROOT) başlar; "football/data" gibi göreli bir WIF_* değeri
+# onlarda başka bir klasöre çıkıyordu (GitHub Actions'ta güncellemeler sessizce hiçbir şey yazmıyordu).
+RAW = os.path.abspath(os.environ.get("WIF_RAW") or os.path.join(ROOT, "data", "raw"))
+OUT = os.path.abspath(os.environ.get("WIF_BUILT") or os.path.join(ROOT, "data", "built"))
+LAST = os.path.abspath(os.environ.get("WIF_LAST") or os.path.join(ROOT, "data", "last"))
 STATE = os.path.join(LAST, "state.json")
 
 
@@ -108,7 +110,7 @@ def main():
             fp = fp_files(inputs) if inputs is not None else None
         print(f"== {name}", flush=True)
         t0 = time.time()
-        r = subprocess.run([sys.executable, os.path.join(HERE, fn)], cwd=ROOT, env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+        r = subprocess.run([sys.executable, os.path.join(HERE, fn)], cwd=ROOT, env={**os.environ, "PYTHONIOENCODING": "utf-8", "WIF_RAW": RAW, "WIF_BUILT": OUT, "WIF_LAST": LAST})
         dt = time.time() - t0
         if r.returncode == 0:
             if fp is not None:
@@ -121,6 +123,8 @@ def main():
             st["fp"].pop(name, None)
             report.append((name, "HATA", dt))
             print(f"   ! {name} başarısız oldu (çıkış kodu {r.returncode}); diğer adımlar sürüyor", flush=True)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::error title=Football güncelleme::{name} adımı başarısız oldu (çıkış kodu {r.returncode}); ayrıntı için adımın günlüğüne bak")
 
     ok_current = all(s != "HATA" for n, s, _ in report if n in ("fixtures", "news", "current", "managers"))
     if ok_current and not only:
@@ -147,7 +151,8 @@ def main():
         print(f"    [{r[1]}] {r[3]}")
     if any(s == "HATA" for _, s, _ in report):
         print("  Not: hata veren adımlar bir sonraki güncellemede yeniden denenecek.")
-    return 0
+    # güncel veri adımlarından biri bile başarısızsa iş akışı KIRMIZI bitsin (sessizce eski veriyle yayınlanmasın); yazılabilen veri yine commit edilir
+    return 1 if any(s == "HATA" for _, s, _ in report) else 0
 
 
 if __name__ == "__main__":
