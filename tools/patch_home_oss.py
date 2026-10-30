@@ -37,7 +37,6 @@ REPOS = [
 
      'A small Python tool that shows information about an IP address, yours or someone else\'s.',
      'Kendi ya da başkasının IP adresi hakkında bilgi gösteren küçük bir Python aracı.',
-     'Python'),
 ]
 cards = ''
 for repo, name, kind_en, kind_tr, en, tr, tags in REPOS:
