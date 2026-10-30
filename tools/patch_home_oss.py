@@ -34,7 +34,7 @@ REPOS = [
      'Right-click a file, pick a format and it is converted on your own computer. Nothing is uploaded anywhere.',
      'Bir dosyaya sağ tıkla, formatı seç, dönüştürme kendi bilgisayarında yapılır. Hiçbir yere yükleme yok.',
      'Python · Windows'),
-    ('IP_Finder', 'IP Finder', 'Look up an IP address', 'Bir IP adresini sorgula',
+
      'A small Python tool that shows information about an IP address, yours or someone else\'s.',
      'Kendi ya da başkasının IP adresi hakkında bilgi gösteren küçük bir Python aracı.',
      'Python'),
