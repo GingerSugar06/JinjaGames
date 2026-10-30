@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 3861,
+ "total": 3888,
  "projects": 24,
  "mods": {
   "all-irons": {
@@ -11,19 +11,19 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 193,
+   "dl": 194,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
   "card-lootbags": {
    "name": "Card Loot bags",
-   "dl": 179,
+   "dl": 180,
    "created": "2026-09-17T09:00Z",
    "updated": "2026-10-03T21:47Z"
   },
   "chest-hauler": {
    "name": "Chest Hauler",
-   "dl": 43,
+   "dl": 45,
    "created": "2026-10-05T11:28Z",
    "updated": "2026-10-05T11:28Z"
   },
@@ -41,7 +41,7 @@ window.BB_STATS={
   },
   "every-last-bite": {
    "name": "Every Last Bite",
-   "dl": 28,
+   "dl": 29,
    "created": "2026-10-21T09:15Z",
    "updated": "2026-10-24T10:09Z"
   },
@@ -53,7 +53,7 @@ window.BB_STATS={
   },
   "frontier-structures": {
    "name": "Frontier Structures",
-   "dl": 316,
+   "dl": 320,
    "created": "2026-10-05T10:25Z",
    "updated": "2026-10-07T15:52Z"
   },
@@ -65,13 +65,13 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 445,
+   "dl": 451,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-24T10:10Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 350,
+   "dl": 351,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-24T21:07Z"
   },
@@ -83,7 +83,7 @@ window.BB_STATS={
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 535,
+   "dl": 540,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
@@ -95,7 +95,7 @@ window.BB_STATS={
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 133,
+   "dl": 135,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -107,7 +107,7 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 345,
+   "dl": 349,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
@@ -151,7 +151,7 @@ window.BB_STATS={
  "unlisted": [
   "vivacity"
  ],
- "updated": "2026-10-30T00:45Z",
+ "updated": "2026-10-30T09:51Z",
  "source": "profile",
  "datesAt": "2026-10-29T20:09Z"
 };
