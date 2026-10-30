@@ -21,6 +21,7 @@ env:
   WIF_BUILT: ${{ github.workspace }}/football/data              # derlenmiş veri doğrudan sitenin klasörüne yazılır (MUTLAK yol: alt süreçler başka klasörde çalışır)
   WIF_LAST: ${{ github.workspace }}/tools/football/last         # güncellemeler arası durum depoda tutulur (önbellek silinse de kaybolmaz)
   WIF_RAW: ${{ github.workspace }}/.football-raw   # indirilen ham veri (depoya girmez)
+  WIF_COMMIT_MSG: ${{ runner.temp }}/football_commit.txt   # update.py anlamlı bir commit mesajı yazar (kaç maç haberi, transfer, hoca değişikliği...)
   PYTHONIOENCODING: utf-8
 
 jobs:
@@ -59,7 +60,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Değişiklik yok."
           else
-            git commit -m "Football: günlük güncelleme $(date -u +%Y-%m-%d)"
+            if [ -s "$WIF_COMMIT_MSG" ]; then git commit -F "$WIF_COMMIT_MSG"; else git commit -m "Football: günlük güncelleme $(date -u +%Y-%m-%d)"; fi
             for i in 1 2 3; do
               git pull --rebase --autostash && git push && break
               sleep 5

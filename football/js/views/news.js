@@ -1,5 +1,5 @@
 // Günün haberleri: her lig için biten maçlar, skorlar; maça tıklayınca dakika dakika olaylar (gol türü, penaltı, kartlar).
-import { h, mount, setCrumbs, crest } from '../util.js';
+import { h, mount, setCrumbs, crest, norm, debounce } from '../util.js';
 import { boot, pageHead, crestFor } from '../ui.js';
 import { loadNewsIndex, loadNews } from '../data.js';
 import { icon } from '../icons.js';
@@ -40,7 +40,10 @@ export async function render(app, dayArg) {
   const all = leagues.flatMap(l => l.m.map(m => ({ ...m, c: l.c })));
   const name = (id, fallback) => (id > 0 && ctx.clubs[id] ? ctx.clubName(id) : fallback);
   const logo = (id, fallback, size = 'sm') => (id > 0 && ctx.clubs[id] ? crestFor(ctx, id, size) : crest(fallback, size));
-  const cName = c => (ctx.comps[c] ? ctx.compName(c) : c);
+  const cat = index.leagues || [], seen = index.seen || {};
+  const catById = new Map(cat.map(c => [c.id, c]));
+  const cName = c => catById.get(c)?.n || (ctx.comps[c] ? ctx.compName(c) : c);
+  const stLabel = m => (m.st === 'PEN' ? `Penaltılarla${m.ps ? ` (${m.ps[0]}-${m.ps[1]})` : ''}` : STATUS[m.st]);
 
   // ---------------------------------------------------------------- günün özeti
   const goalsOf = m => m.hg + m.ag;
@@ -57,7 +60,7 @@ export async function render(app, dayArg) {
   const focus = id => {
     const row = document.getElementById(`m-${id}`);
     if (!row) return;
-    if (S.comp !== 'all' && S.comp !== row.dataset.c) { S.comp = 'all'; drawLeagues(); }
+    if (S.grp !== 'all' || S.q) { S.grp = 'all'; S.q = ''; search.value = ''; drawLeagues(); }
     const r = document.getElementById(`m-${id}`);
     r.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
     if (r.querySelector('.nm-head').getAttribute('aria-expanded') !== 'true') r.querySelector('.nm-head').click();
@@ -85,9 +88,11 @@ export async function render(app, dayArg) {
   requestAnimationFrame(() => strip.querySelector('[aria-selected="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' }));
 
   // ---------------------------------------------------------------- lig bölümleri
-  const S = { comp: 'all' };
+  const S = { grp: 'all', q: '', empty: true };
   const chips = h('div', { class: 'nm-chips' });
   const box = h('div', { class: 'nm-leagues' });
+  const search = h('input', { type: 'search', placeholder: 'Takım ara…', 'aria-label': 'Takım ara', style: 'width:min(240px,100%)', oninput: debounce(e => { S.q = e.target.value; drawLeagues(); }, 120) });
+  const emptyToggle = h('label', { class: 'row center', style: 'gap:6px;font-size:14px' }, h('input', { type: 'checkbox', checked: true, onchange: e => { S.empty = e.target.checked; drawLeagues(); } }), 'Maçı olmayan ligleri de göster');
 
   function timeline(m) {
     let sh = 0, sa = 0;
@@ -118,7 +123,7 @@ export async function render(app, dayArg) {
       if (open && !built) {
         built = true;
         panel.append(timeline(m),
-          h('div', { class: 'nm-foot' }, h('span', { class: 'dim' }, [m.v, m.att ? `${m.att.toLocaleString('tr-TR')} seyirci` : null, STATUS[m.st]].filter(Boolean).join(' · ')),
+          h('div', { class: 'nm-foot' }, h('span', { class: 'dim' }, [m.v, m.att ? `${m.att.toLocaleString('tr-TR')} seyirci` : null, m.st !== 'FT' ? stLabel(m) : null].filter(Boolean).join(' · ')),
             h('span', { class: 'row' },
               m.h > 0 && ctx.clubs[m.h] ? h('a', { class: 'btn sm', href: `#/takim/${m.h}` }, name(m.h, m.hn)) : null,
               m.a > 0 && ctx.clubs[m.a] ? h('a', { class: 'btn sm', href: `#/takim/${m.a}` }, name(m.a, m.an)) : null,
@@ -131,7 +136,7 @@ export async function render(app, dayArg) {
       h('span', { class: `nm-team h ${hw ? 'w' : ''}` }, h('span', { class: 'nm-name' }, name(m.h, m.hn)), logo(m.h, m.hn)),
       h('span', { class: 'nm-score' }, h('b', null, m.hg), h('i', null, '–'), h('b', null, m.ag)),
       h('span', { class: `nm-team a ${aw ? 'w' : ''}` }, logo(m.a, m.an), h('span', { class: 'nm-name' }, name(m.a, m.an))),
-      h('span', { class: 'nm-flags' }, flags.map(([ic, t]) => h('span', { class: 'ev-ic', title: t, html: icon(ic) })), m.st !== 'FT' ? h('span', { class: 'chip' }, STATUS[m.st]) : null),
+      h('span', { class: 'nm-flags' }, flags.map(([ic, t]) => h('span', { class: 'ev-ic', title: t, html: icon(ic) })), m.st !== 'FT' ? h('span', { class: 'chip' }, stLabel(m)) : null),
       h('span', { class: 'nm-chev', html: icon('chevr') }));
     const row = h('li', { class: 'nm-match', id: `m-${m.id}`, 'data-c': m.c }, head, panel);
     return row;
@@ -147,20 +152,49 @@ export async function render(app, dayArg) {
     return `${parts.join(' · ')} · ${g} gol (maç başı ${(g / l.m.length).toFixed(1)})`;
   }
 
+  /** Bir lig bölümü: başlık, özet, maçlar. Maçı olmayan ligler tek satırlık başlık olarak gösterilir. */
+  const leagueBlock = l => h('section', { class: 'nm-league', id: `lg-${l.c}` },
+    h('header', null, h('h2', null, cName(l.c)), h('span', { class: 'dim' }, leagueSummary(l)),
+      ctx.comps[l.c]?.type === 'league' && ctx.idx[l.c]?.[2026] ? h('a', { class: 'btn sm', href: `#/lig/${l.c}/2026` }, 'Puan durumu') : null),
+    h('ul', { class: 'nm-list' }, l.m.map(matchRow)));
+  const emptyRow = id => h('div', { class: 'nm-lg0' }, h('b', null, cName(id)), h('span', { class: 'dim' }, seen[id] ? `Bugün maç yok · son maç ${dayShort(seen[id])}` : 'Bugün maç yok'),
+    ctx.comps[id]?.type === 'league' && ctx.idx[id]?.[2026] ? h('a', { class: 'btn sm', href: `#/lig/${id}/2026` }, 'Puan durumu') : null);
+
   function drawLeagues() {
-    chips.replaceChildren(h('button', { type: 'button', 'aria-pressed': String(S.comp === 'all'), onclick: () => { S.comp = 'all'; drawLeagues(); } }, 'Tümü', h('em', null, all.length)),
-      ...leagues.map(l => h('button', { type: 'button', 'aria-pressed': String(S.comp === l.c), onclick: () => { S.comp = l.c; drawLeagues(); } }, cName(l.c), h('em', null, l.m.length))));
-    const shown = leagues.filter(l => S.comp === 'all' || l.c === S.comp);
-    mount(box, ...(shown.length ? shown.map(l => h('section', { class: 'nm-league' },
-      h('header', null, h('h2', null, cName(l.c)), h('span', { class: 'dim' }, leagueSummary(l)),
-        ctx.comps[l.c]?.type === 'league' ? h('a', { class: 'btn sm', href: `#/lig/${l.c}/2026` }, 'Puan durumu') : null),
-      h('ul', { class: 'nm-list' }, l.m.map(matchRow)))) : [h('div', { class: 'empty' }, h('h3', null, 'Bu gün maç yok'))]));
+    const q = norm(S.q).trim();
+    // günün maçları (arama filtresiyle)
+    const today = new Map(leagues.map(l => [l.c, q ? { ...l, m: l.m.filter(m => norm(`${name(m.h, m.hn)} ${name(m.a, m.an)}`).includes(q)) } : l]));
+    for (const [k, v] of today) if (!v.m.length) today.delete(k);
+    // gruplar: katalog sırasıyla; katalogda olmayan (eski günler) "Diğer"e
+    const groups = new Map();
+    const put = (g, e) => (groups.get(g) || groups.set(g, []).get(g)).push(e);
+    for (const c of cat) put(c.g, c.id);
+    for (const id of today.keys()) if (!catById.has(id)) put('Diğer', id);
+    const info = [...groups].map(([g, ids]) => {
+      const withM = ids.filter(id => today.has(id)), idle = ids.filter(id => !today.has(id) && seen[id]), off = ids.filter(id => !today.has(id) && !seen[id]);
+      return { g, withM, idle, off, n: withM.reduce((s, id) => s + today.get(id).m.length, 0), total: ids.length };
+    });
+    chips.replaceChildren(h('button', { type: 'button', 'aria-pressed': String(S.grp === 'all'), onclick: () => { S.grp = 'all'; drawLeagues(); } }, 'Tümü', h('em', null, [...today.values()].reduce((s, l) => s + l.m.length, 0))),
+      ...info.map(x => h('button', { type: 'button', 'aria-pressed': String(S.grp === x.g), onclick: () => { S.grp = x.g; drawLeagues(); } }, x.g, h('em', null, x.n))));
+    const shown = info.filter(x => S.grp === 'all' || x.g === S.grp);
+    const out = [];
+    for (const x of shown) {
+      if (q && !x.withM.length) continue;                                    // arama: yalnızca eşleşen maçı olan ligler
+      const idleRows = S.empty && !q ? x.idle : [];
+      if (!x.withM.length && !idleRows.length && !(S.empty && !q && x.off.length && S.grp !== 'all')) continue;
+      out.push(h('section', { class: 'nm-group' },
+        h('h3', { class: 'nm-gh' }, x.g, h('span', null, x.n ? `${x.withM.length} ligde ${x.n} maç` : 'bugün maç yok')),
+        ...x.withM.map(id => leagueBlock(today.get(id))),
+        idleRows.length ? h('div', { class: 'nm-idle' }, idleRows.map(emptyRow)) : null,
+        S.empty && !q && x.off.length ? h('details', { class: 'nm-off' }, h('summary', null, `${x.off.length} lig şu an maç oynamıyor (sezon arası / veri yok)`), h('div', { class: 'dim' }, x.off.map(cName).join(' · '))) : null));
+    }
+    mount(box, ...(out.length ? out : [h('div', { class: 'empty' }, h('h3', null, q ? 'Bu takımın bugün biten maçı yok' : 'Bu gün biten maç yok'))]));
   }
 
   mount(app,
     pageHead('Günün haberleri', dayLong(day),
       h('div', { class: 'row center' }, nav(days[idx + 1], 'chevl', 'Önceki gün'), nav(days[idx - 1], 'chevr', 'Sonraki gün'))),
-    strip, summary, chips, box,
-    h('div', { class: 'dim', style: 'font-size:12.5px;margin-top:18px' }, `Veri: ESPN, ${index.asOf ? index.asOf.slice(0, 10) : ''}. Günler Türkiye saatine göre; haberler her gece 00.00’da güncellenir. Maça tıklayınca gol dakikaları, penaltılar ve kartlar açılır.`));
+    strip, summary, h('div', { class: 'row center', style: 'margin:0 0 12px;gap:14px' }, search, emptyToggle), chips, box,
+    h('div', { class: 'dim', style: 'font-size:12.5px;margin-top:18px' }, `Veri: ESPN, ${index.asOf ? index.asOf.slice(0, 10) : ''}. ${cat.length} lig ve kupa izleniyor; günler Türkiye saatine göre, haberler her gece 00.05’te güncellenir. Yalnızca biten maçlar gösterilir; Türkiye Kupası, TFF 1. Lig ve Türkiye’nin alt ligleri ESPN’de olmadığı için yer almıyor. Maça tıklayınca gol dakikaları, penaltılar ve kartlar açılır.`));
   drawLeagues();
 }

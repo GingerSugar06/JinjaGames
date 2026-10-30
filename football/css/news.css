@@ -84,3 +84,15 @@ button.nm-hl-i:hover { transform: translateY(-2px); border-color: var(--brand); 
   .nm-panel { padding: 4px 8px 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .nm-panel { animation: none; } }
+
+/* grup başlıkları ve boş ligler */
+.nm-group { margin: 0 0 34px; }
+.nm-gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--line-2); font: 800 24px/1 var(--f-display); text-transform: uppercase; letter-spacing: .06em; color: var(--brand); }
+.nm-gh span { font: 600 13.5px var(--f-body); letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+.nm-idle { display: grid; gap: 6px; margin-bottom: 10px; }
+.nm-lg0 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 9px 14px; border: 1px dashed var(--line-2); border-radius: 12px; color: var(--ink-2); }
+.nm-lg0 b { font: 700 18px var(--f-display); letter-spacing: .02em; text-transform: uppercase; color: var(--ink); }
+.nm-lg0 .dim { flex: 1; font-size: 13.5px; }
+.nm-off { margin: 8px 0 0; color: var(--ink-3); font-size: 13.5px; }
+.nm-off summary { cursor: pointer; }
+.nm-off div { padding: 6px 0 0; }

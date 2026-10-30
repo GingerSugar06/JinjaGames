@@ -80,6 +80,57 @@ def load_state():
         return {"last": None, "fp": {}}
 
 
+KIND_TR = {"haber": "haber günü", "mac": "lig güncellemesi", "transfer": "transfer", "sakat": "sakatlık", "hoca": "hoca değişikliği", "baskan": "başkan değişikliği", "ceo": "genel müdür değişikliği", "sahip": "sahip değişikliği"}
+
+
+def news_today():
+    """En son haber gününün (maç sayısı, lig sayısı, gün)."""
+    try:
+        idx = json.load(open(os.path.join(OUT, "news", "index.json"), encoding="utf-8"))
+        d = idx["days"][0]
+        day = json.load(open(os.path.join(OUT, "news", f"{d}.json"), encoding="utf-8"))
+        return d, sum(len(l["m"]) for l in day["leagues"]), len(day["leagues"])
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def write_reports(report, news, doc, last):
+    """GitHub Actions için: iş özeti (Summary sekmesi) ve anlamlı commit mesajı. Yerelde yalnızca ortam değişkenleri varsa yazılır."""
+    nt = news_today()
+    cnt = {}
+    for r in news:
+        cnt[r[1]] = cnt.get(r[1], 0) + 1
+    parts = []
+    if nt:
+        parts.append(f"{nt[1]} maç haberi ({nt[0]}, {nt[2]} lig)")
+    for k in ("transfer", "hoca", "baskan", "ceo", "sahip", "sakat"):
+        if cnt.get(k):
+            parts.append(f"{cnt[k]} {KIND_TR[k]}")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    subject = f"Football: günlük güncelleme {today}" + (f" · {', '.join(parts[:4])}" if parts else "")
+    failed = [n for n, s, _ in report if s == "HATA"]
+    body = ["Adımlar: " + ", ".join(f"{n} {s}" for n, s, _ in report)]
+    if failed:
+        body.append("BAŞARISIZ: " + ", ".join(failed) + " (bir sonraki çalışmada yeniden denenecek)")
+    if last:
+        body.append(f"Önceki güncelleme: {last[:16].replace('T', ' ')} UTC")
+    body += [f"- [{r[1]}] {r[3]}" for r in news[:12]]
+    msg = os.environ.get("WIF_COMMIT_MSG")
+    if msg:
+        open(msg, "w", encoding="utf-8").write(subject + "\n\n" + "\n".join(body) + "\n")
+    sm = os.environ.get("GITHUB_STEP_SUMMARY")
+    if sm:
+        lines = ["## Football günlük güncelleme", "", f"**{subject.split(': ', 1)[1]}**", "", "| Adım | Durum | Süre |", "|---|---|---|"]
+        for n, s, dt in report:
+            icon_ = {"tamam": "✅", "atlandı": "⏭️", "HATA": "❌"}.get(s, s)
+            lines.append(f"| {n} | {icon_} {s} | {'' if s == 'atlandı' else f'{dt:.0f} sn'} |")
+        if news:
+            lines += ["", f"### Son güncellemeden beri {len(news)} değişiklik", ""] + [f"- `{r[1]}` {r[3]}" for r in news[:40]]
+        if failed:
+            lines += ["", f"> ❌ Başarısız adımlar: **{', '.join(failed)}** — günlükte ayrıntı var; bir sonraki çalışmada yeniden denenecek."]
+        open(sm, "a", encoding="utf-8").write("\n".join(lines) + "\n")
+
+
 def main():
     args = sys.argv[1:]
     force = "--force" in args
@@ -151,6 +202,7 @@ def main():
         print(f"    [{r[1]}] {r[3]}")
     if any(s == "HATA" for _, s, _ in report):
         print("  Not: hata veren adımlar bir sonraki güncellemede yeniden denenecek.")
+    write_reports(report, news, doc, last)
     # güncel veri adımlarından biri bile başarısızsa iş akışı KIRMIZI bitsin (sessizce eski veriyle yayınlanmasın); yazılabilen veri yine commit edilir
     return 1 if any(s == "HATA" for _, s, _ in report) else 0
 

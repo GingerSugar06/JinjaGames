@@ -299,7 +299,7 @@ def diff_changes(prev, now):
     out = []
     for cid, row in now.items():
         old = prev.get(cid)
-        if old is None:
+        if old is None or cid not in names:       # önceden bilinmeyen ya da adı olmayan kulüp: karşılaştırma yapılmaz
             continue
         for i, (kind, label) in enumerate(LAB):
             if row[i] and row[i] != old[i]:
