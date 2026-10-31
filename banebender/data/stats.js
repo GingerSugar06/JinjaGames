@@ -1,6 +1,6 @@
 /* Otomatik: tools/update_stats.py (6 saatte bir, GitHub Actions). Elle düzenleme. */
 window.BB_STATS={
- "total": 3949,
+ "total": 3977,
  "projects": 24,
  "mods": {
   "all-irons": {
@@ -11,7 +11,7 @@ window.BB_STATS={
   },
   "board-games": {
    "name": "Board Games",
-   "dl": 200,
+   "dl": 202,
    "created": "2026-10-16T07:48Z",
    "updated": "2026-10-16T07:48Z"
   },
@@ -35,7 +35,7 @@ window.BB_STATS={
   },
   "elemental-arcana": {
    "name": "Elemental Arcana",
-   "dl": 109,
+   "dl": 110,
    "created": "2026-09-30T08:22Z",
    "updated": "2026-10-03T21:48Z"
   },
@@ -65,37 +65,37 @@ window.BB_STATS={
   },
   "hard-mobs-and-bosses": {
    "name": "Hard Mobs and bosses",
-   "dl": 455,
+   "dl": 460,
    "created": "2026-09-18T05:55Z",
    "updated": "2026-10-24T10:10Z"
   },
   "hearthly": {
    "name": "Hearthly",
-   "dl": 356,
+   "dl": 359,
    "created": "2026-10-12T12:44Z",
    "updated": "2026-10-24T21:07Z"
   },
   "lodepulse": {
    "name": "Lodepulse",
-   "dl": 28,
+   "dl": 30,
    "created": "2026-10-23T08:51Z",
    "updated": "2026-10-23T08:51Z"
   },
   "ore-elemental-golems": {
    "name": "Ore & Elemental Golems",
-   "dl": 556,
+   "dl": 561,
    "created": "2026-10-12T11:21Z",
    "updated": "2026-10-12T11:21Z"
   },
   "pale-contagion": {
    "name": "Pale Contagion",
-   "dl": 66,
+   "dl": 69,
    "created": "2026-10-11T12:42Z",
    "updated": "2026-10-11T12:42Z"
   },
   "pantheon-of-legends": {
    "name": "Pantheon of Legends",
-   "dl": 137,
+   "dl": 138,
    "created": "2026-10-05T11:54Z",
    "updated": "2026-10-05T11:54Z"
   },
@@ -107,13 +107,13 @@ window.BB_STATS={
   },
   "real-animals": {
    "name": "Real Animals",
-   "dl": 354,
+   "dl": 356,
    "created": "2026-10-09T10:52Z",
    "updated": "2026-10-09T10:52Z"
   },
   "seraph": {
    "name": "Seraph",
-   "dl": 168,
+   "dl": 169,
    "created": "2026-10-05T11:03Z",
    "updated": "2026-10-24T10:11Z"
   },
@@ -125,7 +125,7 @@ window.BB_STATS={
   },
   "uncraft-and-unfurnace": {
    "name": "Uncraft and Unfurnace",
-   "dl": 172,
+   "dl": 174,
    "created": "2026-09-17T08:53Z",
    "updated": "2026-10-03T21:50Z"
   },
@@ -143,7 +143,7 @@ window.BB_STATS={
   },
   "vivacity": {
    "name": "Vivacity",
-   "dl": 24,
+   "dl": 25,
    "created": "2026-10-25T12:13Z",
    "updated": "2026-10-25T12:13Z"
   }
@@ -151,7 +151,7 @@ window.BB_STATS={
  "unlisted": [
   "vivacity"
  ],
- "updated": "2026-10-30T19:53Z",
+ "updated": "2026-10-31T00:37Z",
  "source": "profile",
  "datesAt": "2026-10-30T19:53Z"
 };
